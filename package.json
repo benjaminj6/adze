@@ -6,6 +6,10 @@
   "author": "Benjamin Johnson <benjamin.d.johnson@icloud.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
+    "babel-register": "^6.23.0",
     "eslint": "^3.15.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.1",
@@ -13,9 +17,19 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "koa": "^1.2.5"
+    "bunyan": "^1.8.5",
+    "koa": "2",
+    "koa-body": "^1.6.0",
+    "koa-bunyan": "^1.0.0",
+    "koa-router": "^5.4.0"
   },
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon tasks/dev | bunyan -o short"
+  },
+  "babel": {
+    "plugins": [
+      "transform-async-to-generator",
+      "transform-es2015-modules-commonjs"
+    ]
   }
 }
