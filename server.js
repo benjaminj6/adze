@@ -28,7 +28,8 @@ async function start () {
       log.info(`Server started and listening for connections on port ${PORT}`)
     })
   } catch (err) {
-    log.error(`Server failed to start -- Reason: ${err.message}`)
+    log.info(err)
+    log.fatal(`Server failed to start -- Reason: ${err.message}`)
   }
 }
 
