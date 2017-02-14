@@ -1,0 +1,17 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "Server to handle blog posts creation/management",
+  "main": "index.js",
+  "author": "Benjamin Johnson <benjamin.d.johnson@icloud.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+  "dependencies": {
+    "koa": "^1.2.5"
+  }
+}
