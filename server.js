@@ -6,11 +6,12 @@ import koaLogger from 'koa-bunyan'
 const app = new Koa()
 
 // Setup logger instance
-const logger = bunyan.createLogger({ name: 'blog-api' })
+const log = bunyan.createLogger({ name: 'blog-api' })
 
-app.use(koaLogger(logger, { timeLimit: 100 }))
+// Middleware
+app.use(koaLogger(log, { timeLimit: 100 }))
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
-  console.log(`Server started and listening for connections on port ${PORT}`)
+  log.info(`Server started and listening for connections on port ${PORT}`)
 })
