@@ -6,7 +6,10 @@ import koaLogger from 'koa-bunyan'
 const app = new Koa()
 
 // Setup logger instance
-const log = bunyan.createLogger({ name: 'blog-api' })
+const log = bunyan.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  name: process.env.NAME || 'blog-api'
+})
 
 // Middleware
 app.use(koaLogger(log, { timeLimit: 100 }))
