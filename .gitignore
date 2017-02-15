@@ -4,5 +4,10 @@ node_modules
 # environment
 *.env
 
+# coverage
+coverage
+.nyc_output
+
 # misc
 .todo
+npm-debug.log
