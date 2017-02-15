@@ -32,7 +32,8 @@
   },
   "scripts": {
     "dev": "nodemon tasks/dev | bunyan -o short",
-    "test": "node tasks/test"
+    "test": "node tasks/test",
+    "coverage": "nyc --reporter=lcov --reporter=text npm test -w"
   },
   "babel": {
     "plugins": [
