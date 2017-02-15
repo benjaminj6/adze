@@ -1,5 +1,12 @@
-import { Post } from '../'
+import mongoose from 'mongoose'
+
+import { Post } from '..'
 import { expect } from 'chai'
+
+after(() => {
+  mongoose.models = {}
+  mongoose.modelSchemas = {}
+})
 
 describe('Post', () => {
   it('should be invalid if title is empty', done => {
