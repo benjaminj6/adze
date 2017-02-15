@@ -2,6 +2,10 @@ import bunyan from 'bunyan'
 import Koa from 'koa'
 import koaLogger from 'koa-bunyan'
 import mongoose from 'mongoose'
+import Router from 'koa-router'
+
+import { Post } from './models'
+import routes from './routes'
 
 // Setup app instance
 const app = new Koa()
@@ -14,12 +18,14 @@ const log = bunyan.createLogger({
 
 // Middleware
 app.use(koaLogger(log, { timeLimit: 100 }))
+app.use(routes)
 
 // Database
 mongoose.Promise = global.Promise
 
 async function start () {
   try {
+    log.info('Starting server')
     await mongoose.connect(process.env.DB_URL)
     log.info(`Connected to the database ${process.env.DB_URL}`)
 
