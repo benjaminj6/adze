@@ -2,9 +2,7 @@ import bunyan from 'bunyan'
 import Koa from 'koa'
 import koaLogger from 'koa-bunyan'
 import mongoose from 'mongoose'
-import Router from 'koa-router'
 
-import { Post } from './models'
 import routes from './routes'
 
 // Setup app instance
