@@ -1,7 +1,5 @@
 import { Post } from '../../models'
-import log from '../../config/logger'
 import { createError } from '../../utils'
-
 
 export async function getPosts (ctx, next) {
   try {
