@@ -1,5 +1,5 @@
 import Koa from 'koa'
-import koaLogger from 'koa-bunyan'
+import koaLogger from 'koa-bunyan-logger'
 import mongoose from 'mongoose'
 import api from './api'
 import log from './config/logger'
@@ -8,12 +8,20 @@ import log from './config/logger'
 const app = new Koa()
 
 // Middleware
-app.use(koaLogger(log, { timeLimit: 100 }))
+app.use(koaLogger(log))
+app.use(async ({ request, response }, next) => {
+  const started = new Date()
+  log.info(`[REQ] ${request.method} ${request.url}`)
+  await next()
+  const ms = new Date() - started
+  log.info(`[RES] ${request.method} ${request.url} (${response.status}) took ${ms}ms`)
+})
 
 app.use(api.routes())
 
+// Error logging
 app.on('error', err => {
-  log.error(`[ERR] ${err.name}: ${err.message}`)
+  log.warn(`[ERR] ${err.name}: ${err.message}`)
 })
 
 // Database
