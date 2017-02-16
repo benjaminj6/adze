@@ -9,7 +9,12 @@ const app = new Koa()
 
 // Middleware
 app.use(koaLogger(log, { timeLimit: 100 }))
+
 app.use(api.routes())
+
+app.on('error', err => {
+  log.error(`[ERR] ${err.name}: ${err.message}`)
+})
 
 // Database
 mongoose.Promise = global.Promise
