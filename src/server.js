@@ -21,7 +21,8 @@ app.use(api.routes())
 
 // Error logging
 app.on('error', err => {
-  log.warn(`[ERR] ${err.name}: ${err.message}`)
+  err.message = `[ERR] ${err.message}`
+  log.error(err)
 })
 
 // Database
