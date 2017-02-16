@@ -25,9 +25,8 @@ export async function addPost (ctx, next) {
     ctx.body = newPost
     next()
   } catch (err) {
-    ctx.status = 400
-    ctx.body = Object.assign(err, { status: ctx.status })
-    ctx.app.emit('error', err)
+    err.status = err.status || 400
+    ctx.app.emit('error', err, ctx)
   }
 }
 

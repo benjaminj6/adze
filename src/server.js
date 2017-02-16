@@ -19,10 +19,11 @@ app.use(async ({ request, response }, next) => {
 
 app.use(api.routes())
 
-// Error logging
-app.on('error', err => {
+// Error handling
+app.on('error', (err, ctx) => {
   err.message = `[ERR] ${err.message}`
   log.error(err)
+  ctx.body = err
 })
 
 // Database
