@@ -15,13 +15,15 @@ export function deletePost (ctx, next) {
 
 export async function addPost (ctx, next) {
   try {
+    const { post, title } = JSON.parse(ctx.request.body)
+
     const newPost = await Post.create({
-      title: [],
-      html: 'something else'
+      title,
+      html: post
     })
 
-    log.debug(`The html reads -- ${newPost.html}`)
-    ctx.body = 'This will add a post in the user\'s posts'
+    ctx.body = newPost
+    next()
   } catch (err) {
     ctx.status = 400
     ctx.body = Object.assign(err, { status: ctx.status })
