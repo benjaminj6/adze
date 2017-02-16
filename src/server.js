@@ -1,17 +1,11 @@
-import bunyan from 'bunyan'
 import Koa from 'koa'
 import koaLogger from 'koa-bunyan'
 import mongoose from 'mongoose'
 import api from './api'
+import log from './config/logger'
 
 // Setup app instance
 const app = new Koa()
-
-// Setup logger instance
-const log = bunyan.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
-  name: process.env.NAME || 'blog-api'
-})
 
 // Middleware
 app.use(koaLogger(log, { timeLimit: 100 }))
