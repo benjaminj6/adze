@@ -1,4 +1,5 @@
 import Router from 'koa-router'
+import { Post } from '../models'
 
 const posts = new Router()
 

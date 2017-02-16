@@ -5,4 +5,4 @@ const api = new Router()
 
 api.use('/posts', postsRouter.routes())
 
-export default api
+export default api.routes

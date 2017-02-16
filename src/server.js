@@ -2,7 +2,7 @@ import bunyan from 'bunyan'
 import Koa from 'koa'
 import koaLogger from 'koa-bunyan'
 import mongoose from 'mongoose'
-import routes from './routes'
+import api from './api'
 
 // Setup app instance
 const app = new Koa()
@@ -15,7 +15,7 @@ const log = bunyan.createLogger({
 
 // Middleware
 app.use(koaLogger(log, { timeLimit: 100 }))
-app.use(routes)
+app.use(api)
 
 // Database
 mongoose.Promise = global.Promise
