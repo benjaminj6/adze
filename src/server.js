@@ -15,7 +15,7 @@ const log = bunyan.createLogger({
 
 // Middleware
 app.use(koaLogger(log, { timeLimit: 100 }))
-app.use(api)
+app.use(api.routes())
 
 // Database
 mongoose.Promise = global.Promise

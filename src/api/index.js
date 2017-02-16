@@ -1,8 +1,8 @@
 import Router from 'koa-router'
-import postsRouter from './posts'
+import postsRouter from './posts/posts-router'
 
 const api = new Router()
 
-api.use('/posts', postsRouter.routes())
+api.use('/api/posts', postsRouter.routes())
 
-export default api.routes
+export default api
