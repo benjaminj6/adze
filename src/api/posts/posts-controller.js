@@ -20,12 +20,12 @@ export async function addPost (ctx, next) {
       html: 'something else'
     })
 
-    log.debug()
     log.debug(`The html reads -- ${newPost.html}`)
     ctx.body = 'This will add a post in the user\'s posts'
   } catch (err) {
-    log.debug(`[ERR] ${err.name}: ${err.message}`)
-    next(err)
+    ctx.status = 400
+    ctx.body = Object.assign(err, { status: ctx.status })
+    ctx.app.emit('error', err)
   }
 }
 
