@@ -3,8 +3,7 @@ import { createError } from '../../utils'
 
 export async function getPosts (ctx, next) {
   try {
-    const posts = await Post.find().sort({ date: -1 })
-
+    const posts = await Post.find().sort('-date')
     ctx.status = 200
     ctx.body = posts
     next()
