@@ -66,6 +66,7 @@ export async function addPost (ctx, next) {
       html: post
     })
 
+    ctx.status = 201
     ctx.body = newPost
     next()
   } catch (err) {
