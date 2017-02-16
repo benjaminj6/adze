@@ -6,6 +6,8 @@ import 'sinon-as-promised'
 import { Post } from '../../../models'
 import { createPosts } from './test-utils'
 import * as controller from '../posts-controller'
+import { createError } from '../../../utils'
+
 
 describe('posts-controller', () => {
   let ctx = {}
@@ -149,6 +151,57 @@ describe('posts-controller', () => {
       expect(spyEmitter.calledOnce).to.be.true
       expect(spyEmitter.args[0][1].status).to.equal(404)
       expect(spyEmitter.args[0][1].message).to.have.string('No posts with this id were found')
+    })
+  })
+
+  describe('addPost()', () => {
+    beforeEach(() => {
+      mockQuery = sinon.mock(Post)
+      next = sinon.spy()
+    })
+
+    afterEach(() => {
+      ctx = {}
+      mockQuery.restore()
+      next.reset()
+    })
+
+    it('should return new post if valid', async () => {
+      ctx.request = { body: JSON.stringify({ title: 'title', post: 'html' }) }
+      mockQuery
+        .expects('create').withArgs({ title: 'title', html: 'html' })
+        .resolves(createPosts(1))
+
+      await controller.addPost(ctx, next)
+      expect(ctx.status).to.equal(201)
+      expect(ctx.body).to.have.length(1)
+      expect(next.calledOnce).to.be.true
+    })
+
+    it('should throw if invalid JSON is supplied (400)', async () => {
+      ctx.request = { body: 'I am a string' }
+      ctx.app = { emit: () => {} }
+      const spyEmitter = sinon.spy(ctx.app, 'emit')
+
+      await controller.addPost(ctx, next)
+      expect(spyEmitter.calledOnce).to.equal(true)
+      expect(spyEmitter.args[0][1].status).to.equal(400)
+      expect(spyEmitter.args[0][1].message).to.match(/(Unexpected token)|(JSON)/)
+    })
+
+    it('should throw if Post is not created', async () => {
+      const mockError = createError(500, 'test error')
+      ctx.request = { body: JSON.stringify({ title: 'title', post: 'html' }) }
+      ctx.app = { emit: () => {} }
+      const spyEmitter = sinon.spy(ctx.app, 'emit')
+      mockQuery
+        .expects('create').withArgs({ title: 'title', html: 'html' })
+        .rejects(mockError)
+
+      await controller.addPost(ctx, next)
+      expect(spyEmitter.calledOnce).to.be.true
+      expect(spyEmitter.args[0][1].message).to.equal(mockError.message)
+      expect(spyEmitter.args[0][1].status).to.equal(mockError.status)
     })
   })
 })
