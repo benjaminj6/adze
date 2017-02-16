@@ -25,7 +25,7 @@ export async function getLimitedPosts (ctx, next) {
     }
 
     const posts = await Post.find()
-      .sort({ date: -1 })
+      .sort('-date')
       .limit(numberOfPosts)
 
     ctx.status = 200
