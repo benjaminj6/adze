@@ -1,5 +1,7 @@
 import { Post } from '../../models'
 import log from '../../config/logger'
+import { createError } from '../../utils'
+
 
 export async function getPosts (ctx, next) {
   try {
@@ -33,13 +35,26 @@ export async function getLimitedPosts (ctx, next) {
     ctx.body = posts
     next()
   } catch (err) {
-    err.status = err.status || 404
+    err.status = err.status || 500
     ctx.app.emit('error', err, ctx)
   }
 }
 
-export function deletePost (ctx, next) {
-  ctx.body = `This will delete a post with the id ${ctx.params.id}`
+export async function deletePost (ctx, next) {
+  try {
+    const deletedPost = await Post.findByIdAndRemove(ctx.params.id)
+
+    if (!deletedPost) {
+      const err = createError(404, 'No posts with this id were found. Please use a valid id')
+      throw err
+    }
+
+    ctx.status = 200
+    ctx.body = { status: ctx.status, message: 'Post removed successfully' }
+  } catch (err) {
+    err.status = err.status || 500
+    ctx.app.emit('error', err, ctx)
+  }
 }
 
 export async function addPost (ctx, next) {
