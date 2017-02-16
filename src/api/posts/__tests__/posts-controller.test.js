@@ -8,7 +8,6 @@ import { createPosts } from './test-utils'
 import * as controller from '../posts-controller'
 import { createError } from '../../../utils'
 
-
 describe('posts-controller', () => {
   let ctx = {}
   let next
@@ -202,6 +201,67 @@ describe('posts-controller', () => {
       expect(spyEmitter.calledOnce).to.be.true
       expect(spyEmitter.args[0][1].message).to.equal(mockError.message)
       expect(spyEmitter.args[0][1].status).to.equal(mockError.status)
+    })
+  })
+
+  describe('editPost()', () => {
+    beforeEach(() => {
+      mockQuery = sinon.mock(Post)
+      next = sinon.spy()
+    })
+
+    afterEach(() => {
+      ctx = {}
+      mockQuery.restore()
+      next.reset()
+    })
+
+    it('should return the edited post', async () => {
+      ctx.params = { id: 2 }
+      ctx.request = { body: JSON.stringify({ title: 'new title' }) }
+      mockQuery
+        .expects('findByIdAndUpdate').withArgs(2)
+        .chain('exec')
+        .resolves(createPosts(1))
+
+      await controller.editPost(ctx, next)
+      expect(ctx.status).to.equal(200)
+      expect(ctx.body).to.have.length(1)
+      expect(next.calledOnce).to.be.true
+    })
+
+    it('should propagate error with default status if status not specified', async () => {
+      ctx.params = { id: 'foo' }
+      ctx.request = { body: JSON.stringify({ title: 'new title' }) }
+
+      ctx.app = { emit: () => {} }
+      const spyEmitter = sinon.spy(ctx.app, 'emit')
+
+      mockQuery
+        .expects('findByIdAndUpdate').withArgs('foo')
+        .chain('exec')
+        .rejects(new Error('test error'))
+
+      await controller.editPost(ctx, next)
+      expect(spyEmitter.calledOnce).to.be.true
+      expect(spyEmitter.args[0][1].status).to.equal(400)
+    })
+
+    it('should propagate with error status if status is specified', async () => {
+      ctx.params = { id: 'foo' }
+      ctx.request = { body: JSON.stringify({ title: 'new title' }) }
+
+      ctx.app = { emit: () => {} }
+      const spyEmitter = sinon.spy(ctx.app, 'emit')
+
+      mockQuery
+        .expects('findByIdAndUpdate').withArgs('foo')
+        .chain('exec')
+        .rejects(createError(500, 'test error'))
+
+      await controller.editPost(ctx, next)
+      expect(spyEmitter.calledOnce).to.be.true
+      expect(spyEmitter.args[0][1].status).to.equal(500)
     })
   })
 })

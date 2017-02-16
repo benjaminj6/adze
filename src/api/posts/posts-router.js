@@ -11,6 +11,6 @@ posts
   .get('/:number', controller.getLimitedPosts)
   .del('/delete/:id', controller.deletePost)
   .post('/add', bodyParser, controller.addPost)
-  .put('/edit/:id', controller.editPost)
+  .put('/edit/:id', bodyParser, controller.editPost)
 
 export default posts

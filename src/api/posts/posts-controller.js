@@ -1,5 +1,6 @@
 import { Post } from '../../models'
 import { createError } from '../../utils'
+import log from '../../config/logger.js'
 
 export async function getPosts (ctx, next) {
   try {
@@ -75,6 +76,19 @@ export async function addPost (ctx, next) {
   }
 }
 
-export function editPost (ctx, next) {
-  ctx.body = `This will update a post with id ${ctx.params.id}`
+export async function editPost (ctx, next) {
+  try {
+    const id = ctx.params.id
+    const update = JSON.parse(ctx.request.body)
+    const opts = { runValidators: true, new: true }
+
+    const updatedPost = await Post.findByIdAndUpdate(id, update, opts).exec()
+
+    ctx.status = 200
+    ctx.body = updatedPost
+    next()
+  } catch (err) {
+    err.status = err.status || 400
+    ctx.app.emit('error', err, ctx)
+  }
 }
