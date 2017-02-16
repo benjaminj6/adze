@@ -7,7 +7,6 @@ export async function getPosts (ctx, next) {
 
     ctx.status = 200
     ctx.body = posts
-
     next()
   } catch (err) {
     err.status = err.status || 404
@@ -15,8 +14,28 @@ export async function getPosts (ctx, next) {
   }
 }
 
-export function getLimitedPosts (ctx, next) {
-  ctx.body = `This will serve ${ctx.params.number} most recent posts in the db`
+export async function getLimitedPosts (ctx, next) {
+  try {
+    const numberOfPosts = parseInt(ctx.params.number)
+
+    if (!numberOfPosts || numberOfPosts <= 0) {
+      const err = new Error()
+      err.message = 'Posts must be a whole number above 0'
+      err.status = 400
+      throw err
+    }
+
+    const posts = await Post.find()
+      .sort({ date: -1 })
+      .limit(numberOfPosts)
+
+    ctx.status = 200
+    ctx.body = posts
+    next()
+  } catch (err) {
+    err.status = err.status || 404
+    ctx.app.emit('error', err, ctx)
+  }
 }
 
 export function deletePost (ctx, next) {
