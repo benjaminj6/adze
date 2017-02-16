@@ -3,7 +3,7 @@ import Router from 'koa-router'
 const posts = new Router()
 
 posts.get('/', (ctx, next) => {
-  ctx.body = 'This will serve ALL of the posts in teh db'
+  ctx.body = 'This will serve ALL of the posts in the db'
 })
 
 posts.get('/:number', (ctx, next) => {
