@@ -53,7 +53,7 @@ export async function deletePost (ctx, next) {
     ctx.body = 'Post removed successfully'
     next()
   } catch (err) {
-    err.status = err.status || 500
+    err.status = err.status
     ctx.app.emit('error', err, ctx)
   }
 }

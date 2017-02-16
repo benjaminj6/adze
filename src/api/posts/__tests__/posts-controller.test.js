@@ -111,6 +111,20 @@ describe('posts-controller', () => {
       expect(spyEmitter.args[0][1].status).to.equal(400)
       expect(spyEmitter.args[0][1].message).to.equal('Posts must be a whole number above 0')
     })
+
+    it('should throw with default error status if error status is not given (500)', async () => {
+      ctx.app = { emit: () => {} }
+      ctx.params = { number: 2 }
+      const spyEmitter = sinon.spy(ctx.app, 'emit')
+
+      mockQuery
+        .chain('limit').withArgs(2)
+        .rejects(new Error('test error'))
+
+      await controller.getLimitedPosts(ctx, next)
+      expect(spyEmitter.calledOnce).to.be.true
+      expect(spyEmitter.args[0][1].status).to.equal(500)
+    })
   })
 
   describe('deletePost()', () => {
