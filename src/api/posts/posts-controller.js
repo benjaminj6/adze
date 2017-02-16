@@ -39,6 +39,8 @@ export async function getLimitedPosts (ctx, next) {
 
 export async function deletePost (ctx, next) {
   try {
+    // TODO -- add validation for ctx.params
+
     const deletedPost = await Post.findByIdAndRemove(ctx.params.id)
 
     if (!deletedPost) {
@@ -47,7 +49,8 @@ export async function deletePost (ctx, next) {
     }
 
     ctx.status = 200
-    ctx.body = { status: ctx.status, message: 'Post removed successfully' }
+    ctx.body = 'Post removed successfully'
+    next()
   } catch (err) {
     err.status = err.status || 500
     ctx.app.emit('error', err, ctx)

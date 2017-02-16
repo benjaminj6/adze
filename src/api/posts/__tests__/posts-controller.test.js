@@ -111,4 +111,44 @@ describe('posts-controller', () => {
       expect(spyEmitter.args[0][1].message).to.equal('Posts must be a whole number above 0')
     })
   })
+
+  describe('deletePost()', () => {
+    beforeEach(() => {
+      mockQuery = sinon.mock(Post)
+      next = sinon.spy()
+    })
+
+    afterEach(() => {
+      ctx = {}
+      mockQuery.restore()
+      next.reset()
+    })
+
+    it('should return the deleted item', async () => {
+      ctx.params = { id: 2 }
+      mockQuery
+        .expects('findByIdAndRemove').withArgs(2)
+        .resolves(createPosts(1))
+
+      await controller.deletePost(ctx, next)
+      expect(ctx.status).to.equal(200)
+      expect(ctx.body).to.equal('Post removed successfully')
+      expect(next.calledOnce).to.be.true
+    })
+
+    it('should throw if deleted post query returns nothing', async () => {
+      ctx.params = { id: 3 }
+      ctx.app = { emit: () => {} }
+      const spyEmitter = sinon.spy(ctx.app, 'emit')
+
+      mockQuery
+        .expects('findByIdAndRemove').withArgs(3)
+        .resolves(undefined)
+
+      await controller.deletePost(ctx, next)
+      expect(spyEmitter.calledOnce).to.be.true
+      expect(spyEmitter.args[0][1].status).to.equal(404)
+      expect(spyEmitter.args[0][1].message).to.have.string('No posts with this id were found')
+    })
+  })
 })
