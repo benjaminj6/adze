@@ -1,8 +1,18 @@
 import { Post } from '../../models'
 import log from '../../config/logger'
 
-export function getPosts (ctx, next) {
-  ctx.body = 'This will serve ALL of the posts in the db'
+export async function getPosts (ctx, next) {
+  try {
+    const posts = await Post.find().sort({ date: -1 })
+
+    ctx.status = 200
+    ctx.body = posts
+
+    next()
+  } catch (err) {
+    err.status = err.status || 404
+    ctx.app.emit('error', err, ctx)
+  }
 }
 
 export function getLimitedPosts (ctx, next) {
