@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import { Post } from '..'
 import { expect } from 'chai'
 
+mongoose.Promise = global.Promise
+
 after(() => {
   mongoose.models = {}
   mongoose.modelSchemas = {}
