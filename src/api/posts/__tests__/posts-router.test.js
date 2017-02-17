@@ -72,10 +72,15 @@ describe('posts-router', () => {
         request
           .post('/api/posts/add/')
           .send({ title: 'title', post: 'html' })
-          .expect(200)
+          .expect(201)
           .end((err, { body }) => {
             expect(err).to.be.null
-            expect(body).to.be.a(Object)
+            expect(body).to.be.a('object')
+            expect(body).to.have.property('title')
+            expect(body.title).to.equal('title')
+            expect(body).to.have.property('html')
+            expect(body.html).to.equal('html')
+            done()
           })
       })
     })
