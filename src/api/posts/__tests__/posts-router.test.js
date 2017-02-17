@@ -19,12 +19,12 @@ describe('posts-router', () => {
   })
 
   afterEach(async () => {
-    clearDB()
+    await clearDB()
   })
 
-  after(() => {
-    mongoose.disconnect()
-    server.close()
+  after(async () => {
+    await mongoose.disconnect()
+    await server.close()
   })
 
   describe('posts-router', () => {
