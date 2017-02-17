@@ -59,7 +59,7 @@ export async function deletePost (ctx, next) {
 
 export async function addPost (ctx, next) {
   try {
-    const { post, title } = JSON.parse(ctx.request.body)
+    const { post, title } = ctx.request.body
 
     const newPost = await Post.create({
       title,
@@ -78,10 +78,9 @@ export async function addPost (ctx, next) {
 export async function editPost (ctx, next) {
   try {
     const id = ctx.params.id
-    const update = JSON.parse(ctx.request.body)
     const opts = { runValidators: true, new: true }
 
-    const updatedPost = await Post.findByIdAndUpdate(id, update, opts).exec()
+    const updatedPost = await Post.findByIdAndUpdate(id, ctx.request.body, opts).exec()
 
     ctx.status = 200
     ctx.body = updatedPost

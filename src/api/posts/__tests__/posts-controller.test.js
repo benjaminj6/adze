@@ -180,7 +180,7 @@ describe('posts-controller', () => {
     })
 
     it('should return new post if valid', async () => {
-      ctx.request = { body: JSON.stringify({ title: 'title', post: 'html' }) }
+      ctx.request = { body: { title: 'title', post: 'html' } }
       mockQuery
         .expects('create').withArgs({ title: 'title', html: 'html' })
         .resolves(createPosts(1))
@@ -199,12 +199,12 @@ describe('posts-controller', () => {
       await controller.addPost(ctx, next)
       expect(spyEmitter.calledOnce).to.equal(true)
       expect(spyEmitter.args[0][1].status).to.equal(400)
-      expect(spyEmitter.args[0][1].message).to.match(/(Unexpected token)|(JSON)/)
+      expect(spyEmitter.args[0][1].message).to.equal('Post validation failed')
     })
 
     it('should throw if Post is not created', async () => {
       const mockError = createError(500, 'test error')
-      ctx.request = { body: JSON.stringify({ title: 'title', post: 'html' }) }
+      ctx.request = { body: { title: 'title', post: 'html' } }
       ctx.app = { emit: () => {} }
       const spyEmitter = sinon.spy(ctx.app, 'emit')
       mockQuery

@@ -3,6 +3,7 @@ import koaLogger from 'koa-bunyan-logger'
 import mongoose from 'mongoose'
 import api from './api'
 import log from './config/logger'
+// import body from 'koa-bodyparser'
 
 // Setup app instance
 const app = new Koa()
@@ -17,6 +18,7 @@ app.use(async ({ request, response }, next) => {
   log.info(`[RES] ${request.method} ${request.url} (${response.status}) took ${ms}ms`)
 })
 
+// app.use(body())
 app.use(api.routes())
 
 // Error handling

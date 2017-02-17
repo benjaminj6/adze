@@ -19,6 +19,7 @@ export function createPosts (number) {
 export async function populateDB (number) {
   const posts = createPosts(number)
   const inDB = await Post.create(posts)
+  return inDB
 }
 
 export async function clearDB () {
