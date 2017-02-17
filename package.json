@@ -25,8 +25,6 @@
     "bunyan": "^1.8.5",
     "dotenv": "^4.0.0",
     "koa": "2",
-    "koa-better-body": "^3.0.2",
-    "koa-body": "2",
     "koa-bodyparser": "next",
     "koa-bunyan-logger": "2.0.0-pre1",
     "koa-router": "next",
