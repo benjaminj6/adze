@@ -84,5 +84,21 @@ describe('posts-router', () => {
           })
       })
     })
+
+    describe('PUT /api/edit/:id', () => {
+      it('should return the edited post (200)', done => {
+        request
+          .put(`/api/posts/edit/${postID}`)
+          .send({ title: 'new title' })
+          .expect(200)
+          .end((err, { body }) => {
+            expect(err).to.be.null
+            expect(body).to.have.property('title')
+            expect(body.title).to.equal('new title')
+            expect(body).to.have.property('html')
+            done()
+          })
+      })
+    })
   })
 })
