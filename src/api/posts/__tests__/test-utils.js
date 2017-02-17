@@ -1,4 +1,6 @@
-export function createPosts (number, title, html) {
+import { Post } from '../../../models'
+
+export function createPosts (number) {
   const posts = []
 
   for (let i = 0; i < number; i++) {
@@ -12,4 +14,13 @@ export function createPosts (number, title, html) {
   }
 
   return posts
+}
+
+export async function populateDB (number) {
+  const posts = createPosts(number)
+  const inDB = await Post.create(posts)
+}
+
+export async function clearDB () {
+  await Post.remove({})
 }
