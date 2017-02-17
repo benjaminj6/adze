@@ -1,3 +1,5 @@
 require('dotenv').config()
 require('babel-register')
-require('../src/server')
+const { start } = require('../src/server')
+
+start()

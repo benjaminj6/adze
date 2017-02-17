@@ -29,14 +29,14 @@ app.on('error', (err, ctx) => {
 // Database
 mongoose.Promise = global.Promise
 
-async function start () {
+export async function start () {
   try {
     log.info('Starting server')
     await mongoose.connect(process.env.DB_URL)
     log.info(`Connected to the database ${process.env.DB_URL}`)
 
     const PORT = process.env.PORT || 8080
-    app.listen(PORT, () => {
+    return app.listen(PORT, () => {
       log.info(`Server started and listening for connections on port ${PORT}`)
     })
   } catch (err) {
@@ -45,4 +45,4 @@ async function start () {
   }
 }
 
-start()
+export default app
