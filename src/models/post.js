@@ -10,6 +10,10 @@ const PostSchema = new Schema({
     required: true,
     type: String
   },
+  md: {
+    required: true,
+    type: String
+  },
   tags: {
     type: [ Schema.Types.ObjectId ],
     default: []

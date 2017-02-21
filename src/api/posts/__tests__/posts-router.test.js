@@ -79,7 +79,7 @@ describe('posts-router', () => {
             expect(body).to.have.property('title')
             expect(body.title).to.equal('title')
             expect(body).to.have.property('html')
-            expect(body.html).to.equal('html')
+            expect(body.html).to.match(/<p>html<\/p>/)
             done()
           })
       })

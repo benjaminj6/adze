@@ -182,7 +182,7 @@ describe('posts-controller', () => {
     it('should return new post if valid', async () => {
       ctx.request = { body: { title: 'title', post: 'html' } }
       mockQuery
-        .expects('create').withArgs({ title: 'title', html: 'html' })
+        .expects('create').withArgs({ title: 'title', html: `<p>html</p>\n`, md: 'html' })
         .resolves(createPosts(1))
 
       await controller.addPost(ctx, next)
@@ -199,7 +199,8 @@ describe('posts-controller', () => {
       await controller.addPost(ctx, next)
       expect(spyEmitter.calledOnce).to.equal(true)
       expect(spyEmitter.args[0][1].status).to.equal(400)
-      expect(spyEmitter.args[0][1].message).to.equal('Post validation failed')
+      expect(spyEmitter.args[0][1].message).to.match(/Cannot read property/)
+      expect(spyEmitter.args[0][1].message).to.match(/undefined/)
     })
 
     it('should throw if Post is not created', async () => {
@@ -208,7 +209,7 @@ describe('posts-controller', () => {
       ctx.app = { emit: () => {} }
       const spyEmitter = sinon.spy(ctx.app, 'emit')
       mockQuery
-        .expects('create').withArgs({ title: 'title', html: 'html' })
+        .expects('create').withArgs({ title: 'title', html: '<p>html</p>\n', md: 'html' })
         .rejects(mockError)
 
       await controller.addPost(ctx, next)

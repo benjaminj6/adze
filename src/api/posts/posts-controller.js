@@ -1,3 +1,5 @@
+import marked from 'marked'
+
 import { Post } from '../../models'
 import { createError } from '../../utils'
 
@@ -60,10 +62,12 @@ export async function deletePost (ctx, next) {
 export async function addPost (ctx, next) {
   try {
     const { post, title } = ctx.request.body
+    const html = await marked(post)
 
     const newPost = await Post.create({
       title,
-      html: post
+      html,
+      md: post
     })
 
     ctx.status = 201

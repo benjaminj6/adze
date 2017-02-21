@@ -45,4 +45,17 @@ describe('Post', () => {
       done()
     })
   })
+
+  it('should be invalid if md is empty', done => {
+    const post = new Post({
+      title: 'test',
+      html: 'test html'
+    })
+
+    post.validate(err => {
+      expect(err).to.exist
+      expect(err.name).to.equal('ValidationError')
+      done()
+    })
+  })
 })
