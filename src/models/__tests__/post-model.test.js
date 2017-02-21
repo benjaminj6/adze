@@ -1,61 +1,35 @@
-import mongoose from 'mongoose'
-
+import test from 'ava'
 import { Post } from '..'
-import { expect } from 'chai'
 
-after(() => {
-  mongoose.models = {}
-  mongoose.modelSchemas = {}
-})
+async function validationErrorTest (t, input) {
+  const post = new Post(input)
 
-describe('Post', () => {
-  it('should be invalid if title is empty', done => {
-    const post = new Post({
-      html: 'testing'
-    })
+  const err = await t.throws(post.validate())
+  t.is(err.name, 'ValidationError')
+}
 
-    post.validate(err => {
-      expect(err).to.exist
-      expect(err.name).to.equal('ValidationError')
-      done()
-    })
-  })
+validationErrorTest.title = (message) => `post-model -- ${message}`
 
-  it('should be invalid if title is not a string', done => {
-    const post = new Post({
-      title: [],
-      html: 'Yay for type checking!'
-    })
+test(
+  'fails validation if empty title',
+  validationErrorTest,
+  { html: 'testing' }
+)
 
-    post.validate(err => {
-      expect(err).to.exist
-      expect(err.name).to.equal('ValidationError')
-      done()
-    })
-  })
+test(
+  'fails validation if title not string',
+  validationErrorTest,
+  { title: [], html: 'Yay for type checking!' }
+)
 
-  it('should be invalid if html is empty', done => {
-    const post = new Post({
-      title: 'Test'
-    })
+test(
+  'fails validation if empty html',
+  validationErrorTest,
+  { title: 'test' }
+)
 
-    post.validate(err => {
-      expect(err).to.exist
-      expect(err.name).to.equal('ValidationError')
-      done()
-    })
-  })
-
-  it('should be invalid if md is empty', done => {
-    const post = new Post({
-      title: 'test',
-      html: 'test html'
-    })
-
-    post.validate(err => {
-      expect(err).to.exist
-      expect(err.name).to.equal('ValidationError')
-      done()
-    })
-  })
-})
+test(
+  'fails validation if no md',
+  validationErrorTest,
+  { title: 'test', html: 'test' }
+)
