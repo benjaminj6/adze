@@ -1,6 +1,6 @@
 import body from 'koa-bodyparser'
 import Router from 'koa-router'
-import * as controller from './posts-controller'
+import * as controller from '../controller'
 
 const posts = new Router()
 
