@@ -25,6 +25,7 @@ app.use(api.routes())
 app.on('error', (err, ctx) => {
   err.message = `[ERR] ${err.message}`
   log.error(err)
+  ctx.status = err.status || 500
   ctx.body = err
 })
 
