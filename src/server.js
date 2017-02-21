@@ -1,6 +1,8 @@
 import Koa from 'koa'
 import koaLogger from 'koa-bunyan-logger'
 import mongoose from 'mongoose'
+mongoose.Promise = global.Promise
+
 import api from './api'
 import log from './config/logger'
 
@@ -28,7 +30,6 @@ app.on('error', (err, ctx) => {
 })
 
 // Database
-mongoose.Promise = global.Promise
 
 export async function start () {
   try {
