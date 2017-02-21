@@ -1,11 +1,14 @@
 {
   "plugins": [
+    [ "babel-plugin-root-import", {
+      "rootPathSuffix": "src"
+    }],
     "transform-async-to-generator",
     "transform-es2015-modules-commonjs"
   ],
   "env": {
-    "test": {
-      "plugins": [ "istanbul" ]
+    "development": {
+      "sourceMaps": "inline"
     }
   }
 }
