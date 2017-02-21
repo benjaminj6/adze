@@ -6,6 +6,8 @@ mongoose.Promise = global.Promise
 import api from './api'
 import log from './config/logger'
 
+import { User } from './models'
+
 // Setup app instance
 const app = new Koa()
 

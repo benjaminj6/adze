@@ -2,5 +2,7 @@
   "reporter": [ "lcov", "text" ],
   "include": [ "src/server.js", "src/**/*.js" ],
   "require": [ "babel-register" ],
-  "all": true
+  "all": true,
+  "sourceMap": false,
+  "instrument": false
 }
