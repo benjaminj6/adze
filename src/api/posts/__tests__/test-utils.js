@@ -7,7 +7,7 @@ export function createPosts (number) {
     const content = `test-${i}`
     posts.push({
       title: content,
-      html: content,
+      html: `<p>${content}</p>`,
       md: content,
       id: i,
       date: new Date(0 + (i * 1000 * 60 * 60 * 24)) // each entry 1 day apart

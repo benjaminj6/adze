@@ -84,7 +84,22 @@ export async function editPost (ctx, next) {
     const id = ctx.params.id
     const opts = { runValidators: true, new: true }
 
-    const updatedPost = await Post.findByIdAndUpdate(id, ctx.request.body, opts).exec()
+    const updates = {}
+    const { post, title } = ctx.request.body
+
+    if (title) {
+      updates.title = title
+    }
+
+    let html
+    if (post) {
+      html = await marked(post)
+
+      updates.md = post
+      updates.html = html
+    }
+
+    const updatedPost = await Post.findByIdAndUpdate(id, updates, opts).exec()
 
     ctx.status = 200
     ctx.body = updatedPost

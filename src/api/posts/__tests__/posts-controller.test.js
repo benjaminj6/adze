@@ -233,21 +233,26 @@ describe('posts-controller', () => {
 
     it('should return the edited post', async () => {
       ctx.params = { id: 2 }
-      ctx.request = { body: JSON.stringify({ title: 'new title' }) }
+      ctx.request = { body: { title: 'new title', post: 'html' } }
       mockQuery
         .expects('findByIdAndUpdate').withArgs(2)
         .chain('exec')
-        .resolves(createPosts(1))
+        .resolves(createPosts(1)[0])
 
       await controller.editPost(ctx, next)
       expect(ctx.status).to.equal(200)
-      expect(ctx.body).to.have.length(1)
+      expect(ctx.body).to.have.property('title')
+      expect(ctx.body.title).to.equal('test-0')
+      expect(ctx.body).to.have.property('md')
+      expect(ctx.body.md).to.equal('test-0')
+      expect(ctx.body).to.have.property('html')
+      expect(ctx.body.html).to.equal('<p>test-0</p>')
       expect(next.calledOnce).to.be.true
     })
 
     it('should propagate error with default status if status not specified', async () => {
       ctx.params = { id: 'foo' }
-      ctx.request = { body: JSON.stringify({ title: 'new title' }) }
+      ctx.request = { body: { title: 'new title' } }
 
       ctx.app = { emit: () => {} }
       const spyEmitter = sinon.spy(ctx.app, 'emit')
