@@ -14,10 +14,7 @@ const PostSchema = new Schema({
     required: true,
     type: String
   },
-  tags: {
-    type: [ Schema.Types.ObjectId ],
-    default: []
-  },
+  tags: [{ type: Schema.types.ObjectId, ref: 'tags' }],
   date: {
     type: Date,
     default: Date.now()
