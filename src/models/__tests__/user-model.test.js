@@ -60,12 +60,43 @@ test(
   { email: 'test@test.com', password: [] }
 )
 
-test('User.hashPassword() -- should hash password', async t => {
+test('hashPassword() -- should hash password', async t => {
   const hash = await User.hashPassword('string')
   t.not(hash, 'string')
 })
 
-test('User.hashPassword() -- should return error', async t => {
+test('hashPassword() -- should return error', async t => {
   const err = await t.throws(User.hashPassword())
   t.is(err.message, 'Encryption failed')
 })
+
+test('validatePassword() -- should return password', async t => {
+  const user = await setupValidationTest('test')
+  const validated = await user.validatePassword('test')
+  t.is(validated.true)
+})
+
+test('validatePassword() -- should throw if wrong password', async t => {
+  const user = await setupValidationTest('test')
+  const err = await t.throws(user.validatePassword('foo'))
+  t.is(err.status, 401)
+  t.is(err.message, 'Passwords do not match')
+})
+
+test('validatePassword() -- should throw if no password', async t => {
+  const user = await setupValidationTest('test')
+  const err = await t.throws(user.validatePassword())
+  t.is(err.status, 500)
+  t.regex(err.message, /Illegal arguments/)
+})
+
+async function setupValidationTest (password) {
+  const hash = await User.hashPassword(password)
+
+  const user = new User({
+    email: 'test@test.com',
+    password: hash
+  })
+
+  return user
+}

@@ -26,7 +26,24 @@ UserSchema.statics.hashPassword = async password => {
     const hash = await bcrypt.hash(password, 10)
     return hash
   } catch (err) {
-    throw createError(400, 'Encryption failed')
+    throw createError(500, 'Encryption failed')
+  }
+}
+
+UserSchema.methods.validatePassword = async function (password) {
+  const correct = this.password
+
+  try {
+    const isSame = await bcrypt.compare(password, correct)
+
+    if (!isSame) {
+      throw createError(401, 'Passwords do not match')
+    }
+
+    return isSame
+  } catch (err) {
+    err.status = err.status || 500
+    throw err
   }
 }
 
