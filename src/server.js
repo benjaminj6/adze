@@ -6,8 +6,6 @@ mongoose.Promise = global.Promise
 import api from './api'
 import log from './config/logger'
 
-import { User } from './models'
-
 // Setup app instance
 const app = new Koa()
 
@@ -32,7 +30,6 @@ app.on('error', (err, ctx) => {
 })
 
 // Database
-
 export async function start () {
   try {
     log.info('Starting server')
