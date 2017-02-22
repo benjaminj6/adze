@@ -59,3 +59,13 @@ test(
   errorTest,
   { email: 'test@test.com', password: [] }
 )
+
+test('User.hashPassword() -- should hash password', async t => {
+  const hash = await User.hashPassword('string')
+  t.not(hash, 'string')
+})
+
+test('User.hashPassword() -- should return error', async t => {
+  const err = await t.throws(User.hashPassword())
+  t.is(err.message, 'Encryption failed')
+})
