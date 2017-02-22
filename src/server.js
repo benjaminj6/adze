@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 mongoose.Promise = global.Promise
 
 import api from './api'
-import log from './config/logger'
+import log from './middleware/logger'
 
 // Setup app instance
 const app = new Koa()
