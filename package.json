@@ -34,6 +34,7 @@
     "koa-generic-session": "^1.11.5",
     "koa-passport": "next",
     "koa-router": "next",
+    "koa-session-minimal": "^3.0.3",
     "marked": "^0.3.6",
     "mongoose": "^4.8.2",
     "passport-local": "^1.0.0",
