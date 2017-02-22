@@ -1,8 +1,6 @@
 import { Strategy } from 'passport-local'
 import { User } from '~/models'
 
-import log from './logger'
-
 export default (passport) => {
   passport.serializeUser((user, done) => {
     done(null, user._id)

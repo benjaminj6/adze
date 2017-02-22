@@ -35,11 +35,6 @@ UserSchema.methods.validatePassword = async function (password) {
 
   try {
     const isSame = await bcrypt.compare(password, correct)
-
-    if (!isSame) {
-      throw createError(401, 'Passwords do not match')
-    }
-
     return isSame
   } catch (err) {
     err.status = err.status || 500

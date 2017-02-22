@@ -76,11 +76,11 @@ test('validatePassword() -- should return password', async t => {
   t.is(validated.true)
 })
 
-test('validatePassword() -- should throw if wrong password', async t => {
+test('validatePassword() -- should return false if wrong password', async t => {
   const user = await setupValidationTest('test')
-  const err = await t.throws(user.validatePassword('foo'))
-  t.is(err.status, 401)
-  t.is(err.message, 'Passwords do not match')
+  const validated = await user.validatePassword('foo')
+  t.is(validated, false)
+  // t.is(err.message, 'Passwords do not match')
 })
 
 test('validatePassword() -- should throw if no password', async t => {
