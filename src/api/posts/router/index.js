@@ -1,4 +1,3 @@
-import body from 'koa-bodyparser'
 import Router from 'koa-router'
 import * as controller from '../controller'
 
@@ -8,7 +7,7 @@ posts
   .get('/', controller.getPosts)
   .get('/:number', controller.getLimitedPosts)
   .del('/delete/:id', controller.deletePost)
-  .post('/add', body(), controller.addPost)
-  .put('/edit/:id', body(), controller.editPost)
+  .post('/add', controller.addPost)
+  .put('/edit/:id', controller.editPost)
 
 export default posts
