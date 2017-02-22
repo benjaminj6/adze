@@ -22,13 +22,17 @@ mongoose.connect(process.env.DB_URL)
     if (!user) {
       log('gray', 'db', 'No admin user found. Creating one from your config files...', 'mongoose')
 
-      return User.create({
-        email: process.env.ADMIN_EMAIL,
-        password: process.env.PASSWORD
-      }).then(user => {
-        log('gray', 'db', 'Successfully created an admin user based off of your config files!', 'mongoose')
-        return
-      })
+      return User.hashPassword(process.env.PASSWORD)
+        .then(password => {
+          return User.create({
+            email: process.env.ADMIN_EMAIL,
+            password
+          })
+        })
+        .then(user => {
+          log('gray', 'db', 'Successfully created an admin user based off of your config files!', 'mongoose')
+          return
+        })
     } else {
       log('gray', 'db', 'Using the admin from your previous configuration...', 'mongoose')
     }
@@ -43,7 +47,9 @@ mongoose.connect(process.env.DB_URL)
       restartable: 'rs',
       ignore: [
         '.git',
-        'node_modules/**'
+        'node_modules/**',
+        'helpers',
+        '**/__tests__/**'
       ],
       script: path.resolve(__dirname, './dev-startup')
     })
@@ -54,6 +60,8 @@ mongoose.connect(process.env.DB_URL)
         if (type === 'status') {
           type = 'state'
           color = 'yellow'
+        } else if (type === 'fail') {
+          color = 'red'
         }
 
         log(color, type, msg)
@@ -68,11 +76,11 @@ mongoose.connect(process.env.DB_URL)
   })
 
 process.on('exit', () => {
-  log('gray', 'exit', 'shuttind down...')
+  log('red', 'exit', 'shuttind down...')
 })
 
 process.on('SIGINT', () => {
-  log('gray', 'exit', 'shutting down...')
+  log('red', 'exit', 'shutting down...')
   process.exit(0)
 })
 
