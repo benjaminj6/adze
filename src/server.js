@@ -1,24 +1,14 @@
 import Koa from 'koa'
-import koaLogger from 'koa-bunyan-logger'
 import mongoose from 'mongoose'
 mongoose.Promise = global.Promise
 
 import api from './api'
-import log from './middleware/logger'
+import { log, middleware } from './config'
 
 // Setup app instance
 const app = new Koa()
 
-// Middleware
-app.use(koaLogger(log))
-app.use(async ({ request, response }, next) => {
-  const started = new Date()
-  log.info(`[REQ] ${request.method} ${request.url}`)
-  await next()
-  const ms = new Date() - started
-  log.info(`[RES] ${request.method} ${request.url} (${response.status}) took ${ms}ms`)
-})
-
+middleware(app)
 app.use(api.routes())
 
 // Error handling
