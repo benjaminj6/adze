@@ -50,6 +50,6 @@
   "scripts": {
     "dev": "node helpers/dev-setup.js | bunyan -o short",
     "test": "ava",
-    "coverage": "nyc --all npm test"
+    "cov": "nyc --all npm test"
   }
 }
