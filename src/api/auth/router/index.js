@@ -4,7 +4,11 @@ import Router from 'koa-router'
 const auth = new Router()
 
 auth
-  .post('/login', passport.authenticate('local', {
+  .post('/login',
+  (ctx, next) => {
+    return next()
+  },
+  passport.authenticate('local', {
     successRedirect: '/api/posts/',
     failureRedirect: '/' // Will give anything right now...no file served from here
   }))
