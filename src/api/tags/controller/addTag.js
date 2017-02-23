@@ -10,7 +10,7 @@ export default async (ctx, next) => {
 
     ctx.status = 201
     ctx.body = newTag
-    return next()
+    next()
   } catch (err) {
     err.status = err.status || 404
     ctx.app.emit('error', err, ctx)
