@@ -48,7 +48,7 @@
   },
   "scripts": {
     "dev": "node helpers/dev-setup.js | bunyan -o short",
-    "test": "ava",
+    "test": "node helpers/pre-test.js && ava",
     "coverage": "nyc --all npm test"
   }
 }
