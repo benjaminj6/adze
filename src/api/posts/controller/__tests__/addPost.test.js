@@ -2,7 +2,6 @@ import test from 'ava'
 import sinon from 'sinon'
 import 'sinon-mongoose'
 import 'sinon-as-promised'
-28
 
 import { Post } from '~/models'
 import { createPosts } from '~/utils/test-utils'

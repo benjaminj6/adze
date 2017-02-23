@@ -2,7 +2,7 @@ import test from 'ava'
 import mongoose from 'mongoose'
 mongoose.Promise = global.Promise
 
-import supertest from 'supertest'
+import session from 'supertest-session'
 
 import { start } from '~/server'
 import { populateDB, clearDB } from '~/utils/test-utils'
@@ -12,7 +12,10 @@ let req
 
 test.before(async t => {
   server = await start()
-  req = supertest(server)
+  req = session(server)
+
+  await req.post('/api/auth/login')
+    .send({ email: 'test@test.com', password: 'test' })
 })
 
 test.beforeEach(async t => {
