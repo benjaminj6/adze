@@ -24,7 +24,7 @@ test.afterEach.always(async t => {
   await clearDB()
 })
 
-test.after(async t => {
+test.after.always(async t => {
   await mongoose.disconnect()
   await server.close()
 })
