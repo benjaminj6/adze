@@ -3,8 +3,6 @@ import { createError } from '~/utils'
 
 export default async (ctx, next) => {
   try {
-    // TODO -- add validation for ctx.params
-
     const deletedPost = await Post.findByIdAndRemove(ctx.params.id)
 
     if (!deletedPost) {
