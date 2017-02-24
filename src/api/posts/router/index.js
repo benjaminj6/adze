@@ -9,7 +9,7 @@ posts
   .get('/', controller.getPosts)
   .get('/:number', controller.getLimitedPosts)
   .del('/:id', isLoggedIn, controller.deletePost)
-  .post('/add', isLoggedIn, controller.addPost)
+  .post('/', isLoggedIn, controller.addPost)
   .patch('/:id', isLoggedIn, controller.editPost)
 
 export default posts

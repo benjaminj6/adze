@@ -42,13 +42,13 @@ test.serial('GET /api/posts/:number -- should return number of posts', async t =
   t.is(body.length, 2)
 })
 
-test.serial.only('DELETE /api/posts/:id -- should return confirmation message', async t => {
+test.serial('DELETE /api/posts/:id -- should return confirmation message', async t => {
   const { text } = await req.delete(`/api/posts/${t.context.postId}`).expect(200)
   t.is(text, 'Post removed successfully')
 })
 
-test.serial('POST /api/posts/add -- should return added item', async t => {
-  const { body } = await req.post('/api/posts/add')
+test.serial('POST /api/posts -- should return added item', async t => {
+  const { body } = await req.post('/api/posts')
     .send({ title: 'test', post: 'test' })
     .expect(201)
 
@@ -58,7 +58,7 @@ test.serial('POST /api/posts/add -- should return added item', async t => {
   t.is(body.md, 'test')
 })
 
-test.serial.only('PATCH /api/edit/:id -- should return the edited item', async t => {
+test.serial('PATCH /api/edit/:id -- should return the edited item', async t => {
   const { body } = await req.patch(`/api/posts/${t.context.postId}`)
     .send({ title: 'something new test' })
     .expect(200)
