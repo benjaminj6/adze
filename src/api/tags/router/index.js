@@ -8,6 +8,7 @@ const tags = new Router()
 tags
   .get('/', controller.getTags)
   .post('/add', isLoggedIn, controller.addTag)
-  .put('/edit/:id', controller.editTag)
+  .patch('/:id', controller.editTag)
+  .del('/:id', controller.deleteTag)
 
 export default tags
