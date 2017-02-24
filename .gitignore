@@ -9,6 +9,6 @@ coverage
 .nyc_output
 
 # misc
-.todo
+**.todo**
 npm-debug.log
 yarn-error.log
