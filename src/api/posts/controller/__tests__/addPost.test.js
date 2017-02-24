@@ -36,6 +36,7 @@ test.serial('addPost() -- should return the newly created post (201)', async t =
       html: '<p>test</p>\n',
       md: 'test'
     })
+    .chain('populate').withArgs('tags')
     .resolves(createPosts(1))
 
   await addPost(ctx, next)
@@ -68,6 +69,7 @@ test.serial('addTest() -- should propagate err if post not created', async t => 
       html: '<p>test</p>\n',
       md: 'test'
     })
+    .chain('populate').withArgs('tags')
     .rejects(createError(500, 'test'))
 
   await addPost(ctx, next)
@@ -77,4 +79,17 @@ test.serial('addTest() -- should propagate err if post not created', async t => 
   t.false(next.calledOnce)
   t.is(err.status, 500)
   t.is(err.message, 'test')
+})
+
+test.serial('should propagate error if tags are not an array', async t => {
+  const { ctx, next, emitter } = t.context
+  ctx.request = { body: { title: 'test', post: 'test', tags: '[arraystring]' } }
+
+  await addPost(ctx, next)
+  const err = emitter.args[0][1]
+
+  t.true(emitter.calledOnce)
+  t.false(next.calledOnce)
+  t.is(err.status, 400)
+  t.is(err.message, 'Tags must be an array')
 })

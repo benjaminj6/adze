@@ -17,12 +17,13 @@ export default async (ctx, next) => {
       newPost.tags = tags
     }
 
-    const created = await Post.create(newPost)
+    const created = await Post.create(newPost).then(doc => doc.populate('tags'))
 
     ctx.status = 201
     ctx.body = created
     next()
   } catch (err) {
+    console.log(err)
     err.status = err.status || 400
     ctx.app.emit('error', err, ctx)
   }
