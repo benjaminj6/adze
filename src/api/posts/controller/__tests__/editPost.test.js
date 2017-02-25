@@ -27,12 +27,13 @@ test.afterEach(t => {
 test.serial('editPost() -- should return the edited post (200)', async t => {
   const { ctx, query, next, emitter } = t.context
   ctx.params = { id: 2 }
-  ctx.request = { body: { title: 'test', post: 'test' } }
+  ctx.request = { body: { title: 'test', post: 'test', tags: ['12345'] } }
   query
     .withArgs(2, {
       title: 'test',
       html: '<p>test</p>\n',
-      md: 'test'
+      md: 'test',
+      tags: ['12345']
     })
     .chain('exec')
     .resolves(createPosts(1))
@@ -54,6 +55,7 @@ test.serial('editPost() -- should propagate err with default status (400)', asyn
     .withArgs('foo', {
       title: 'test'
     })
+    .chain('populate').withArgs('tags')
     .chain('exec')
     .rejects(new Error('test'))
 
@@ -69,11 +71,13 @@ test.serial('editPost() -- should propagate err with default status (400)', asyn
 test.serial('editPost() -- should propagate err with specified error status', async t => {
   const { ctx, query, next, emitter } = t.context
   ctx.params = { id: 'foo' }
-  ctx.request = { body: { title: 'test' } }
+  ctx.request = { body: { post: 'test' } }
   query
     .withArgs('foo', {
-      title: 'test'
+      html: '<p>test</p>\n',
+      md: 'test'
     })
+    .chain('populate').withArgs('tags')
     .chain('exec')
     .rejects(createError(500, 'test'))
 
@@ -85,3 +89,5 @@ test.serial('editPost() -- should propagate err with specified error status', as
   t.is(err.status, 500)
   t.is(err.message, 'test')
 })
+
+test.todo('should propagate error if tags are not an array')
