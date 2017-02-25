@@ -9,7 +9,8 @@ import { addPost } from '..'
 import { createError } from '~/utils'
 
 test.beforeEach(t => {
-  t.context.query = sinon.mock(Post).expects('create')
+  t.context.create = sinon.mock(Post).expects('create')
+  t.context.query = sinon.mock(Post).expects('populate').resolves(createPosts(1))
   t.context.next = sinon.spy()
   t.context.ctx = {
     app: {
@@ -21,6 +22,7 @@ test.beforeEach(t => {
 
 test.afterEach.always(t => {
   Post.create.restore()
+  Post.populate.restore()
   t.context.ctx.app.emit.restore()
   t.context.next.reset()
   t.context.emitter.reset()
@@ -28,15 +30,14 @@ test.afterEach.always(t => {
 })
 
 test.serial('addPost() -- should return the newly created post (201)', async t => {
-  const { ctx, query, next, emitter } = t.context
+  const { ctx, create, next, emitter } = t.context
   ctx.request = { body: { title: 'test', post: 'test' } }
-  query
+  create
     .withArgs({
       title: 'test',
       html: '<p>test</p>\n',
       md: 'test'
     })
-    .chain('populate').withArgs('tags')
     .resolves(createPosts(1))
 
   await addPost(ctx, next)
@@ -61,15 +62,14 @@ test.serial('addPost() -- should propagate err if invalid JSON (400)', async t =
 })
 
 test.serial('addTest() -- should propagate err if post not created', async t => {
-  const { ctx, query, next, emitter } = t.context
+  const { ctx, create, next, emitter } = t.context
   ctx.request = { body: { title: 'test', post: 'test' } }
-  query
+  create
     .withArgs({
       title: 'test',
       html: '<p>test</p>\n',
       md: 'test'
     })
-    .chain('populate').withArgs('tags')
     .rejects(createError(500, 'test'))
 
   await addPost(ctx, next)
