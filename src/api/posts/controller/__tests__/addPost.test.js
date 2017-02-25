@@ -47,6 +47,26 @@ test.serial('addPost() -- should return the newly created post (201)', async t =
   t.false(emitter.calledOnce)
 })
 
+test.serial('should return newly created Posts with tags if tags provided', async t => {
+  const { ctx, create, next, emitter } = t.context
+  const tags = ['12345']
+  ctx.request = { body: { title: 'test', post: 'test', tags } }
+
+  create
+    .withArgs({
+      title: 'test',
+      html: '<p>test</p>\n',
+      'md': 'test',
+      tags
+    })
+    .resolves(createPosts(1))
+
+  await addPost(ctx, next)
+  t.is(ctx.status, 201)
+  t.true(next.calledOnce)
+  t.false(emitter.calledOnce)
+})
+
 test.serial('addPost() -- should propagate err if invalid JSON (400)', async t => {
   const { ctx, next, emitter } = t.context
   ctx.request = { body: 'test string' }
