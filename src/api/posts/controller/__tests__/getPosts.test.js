@@ -17,6 +17,7 @@ test.beforeEach(() => {
   query = sinon.mock(Post)
     .expects('find')
     .chain('sort').withArgs('-date')
+    .chain('populate').withArgs('tags')
   next = sinon.spy()
 })
 
@@ -46,3 +47,5 @@ test.serial('getPosts() -- should propagate error (404)', async t => {
   t.is(err.message, 'test')
   t.true(emitter.calledOnce)
 })
+
+test.todo('should propagate error if tags are not an array')

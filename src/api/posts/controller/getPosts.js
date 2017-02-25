@@ -2,7 +2,7 @@ import { Post } from '~/models'
 
 export default async (ctx, next) => {
   try {
-    const posts = await Post.find().sort('-date')
+    const posts = await Post.find().sort('-date').populate('tags')
     ctx.status = 200
     ctx.body = posts
     next()
