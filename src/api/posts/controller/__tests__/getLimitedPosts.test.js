@@ -23,6 +23,7 @@ test('getLimitedPosts() -- should return number of posts requested', async t => 
     .expects('find')
     .chain('sort').withArgs('-date')
     .chain('limit').withArgs(3)
+    .chain('populate').withArgs('tags')
     .resolves(createPosts(3))
 
   await getLimitedPosts(ctx, next)
@@ -56,3 +57,5 @@ test('getLimitedPosts() -- should propagate error if ctx.params.number === 0', a
   t.is(err.status, 400)
   t.is(err.message, 'Posts must be a whole number above 0')
 })
+
+test.todo('should propagate error if tags are not an array')
