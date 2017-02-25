@@ -14,12 +14,12 @@ export default async (ctx, next) => {
     const posts = await Post.find()
       .sort('-date')
       .limit(numberOfPosts)
+      .populate('tags')
 
     ctx.status = 200
     ctx.body = posts
     next()
   } catch (err) {
-    err.status = err.status || 500
     ctx.app.emit('error', err, ctx)
   }
 }
