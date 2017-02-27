@@ -8,27 +8,34 @@
   "devDependencies": {
     "ava": "^0.18.2",
     "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
     "babel-plugin-istanbul": "^4.0.0",
     "babel-plugin-root-import": "^5.0.0",
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.23.0",
     "eslint": "^3.15.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.1",
     "eslint-plugin-standard": "^2.0.1",
+    "hyperx": "^2.0.5",
     "nodemon": "^1.11.0",
     "nyc": "^10.1.2",
     "sinon": "^1.17.7",
     "supertest": "^3.0.0",
-    "supertest-session": "^3.0.0"
+    "supertest-session": "^3.0.0",
+    "transform-loader": "^0.2.4",
+    "webpack": "^2.2.1"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "bunyan": "^1.8.5",
     "chalk": "^1.1.3",
     "dotenv": "^4.0.0",
-    "hyperapp": "^0.0.13",
+    "hyperapp": "^0.5.0",
     "koa": "2",
     "koa-bodyparser": "next",
     "koa-bunyan-logger": "2.0.0-pre1",
@@ -45,11 +52,11 @@
     "validator": "^6.2.1"
   },
   "ava": {
-    "require": "./helpers/test-setup.js",
+    "require": "./helpers/test-server.js",
     "babel": "inherit"
   },
   "scripts": {
-    "dev": "node helpers/dev-setup.js | bunyan -o short",
+    "dev": "node helpers/dev-server.js | bunyan -o short",
     "test": "ava",
     "cov": "nyc --all npm test"
   }
