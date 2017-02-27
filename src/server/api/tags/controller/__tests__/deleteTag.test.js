@@ -3,8 +3,8 @@ import sinon from 'sinon'
 import 'sinon-mongoose'
 import 'sinon-as-promised'
 
-import { Tag } from '~/models'
-import { createTags } from '~/utils/test-utils'
+import { Tag } from '~/server/models'
+import { createTags } from '~/server/utils/test-utils'
 import { deleteTag } from '..'
 
 test.beforeEach(t => {

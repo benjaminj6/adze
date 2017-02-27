@@ -1,5 +1,5 @@
-import { Tag } from '~/models'
-import { createError } from '~/utils'
+import { Tag } from '~/server/models'
+import { createError } from '~/server/utils'
 
 export default async (ctx, next) => {
   try {

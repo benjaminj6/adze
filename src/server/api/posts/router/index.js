@@ -3,7 +3,7 @@ import * as controller from '../controller'
 
 const posts = new Router()
 
-import { isLoggedIn } from '~/utils'
+import { isLoggedIn } from '~/server/utils'
 
 posts
   .get('/', controller.getPosts)

@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose'
 mongoose.Promise = global.Promise
 
 import { isEmail } from 'validator'
-import { createError } from '~/utils'
+import { createError } from '~/server/utils'
 
 const UserSchema = new Schema({
   email: {

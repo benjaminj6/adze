@@ -1,4 +1,4 @@
-import { Tag } from '~/models'
+import { Tag } from '~/server/models'
 
 export default async (ctx, next) => {
   try {

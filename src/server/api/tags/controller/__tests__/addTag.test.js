@@ -3,10 +3,10 @@ import sinon from 'sinon'
 import 'sinon-mongoose'
 import 'sinon-as-promised'
 
-import { Tag } from '~/models'
+import { Tag } from '~/server/models'
 import { addTag } from '..'
-import { createTags } from '~/utils/test-utils'
-import { createError } from '~/utils'
+import { createTags } from '~/server/utils/test-utils'
+import { createError } from '~/server/utils'
 
 test.beforeEach(t => {
   t.context.create = sinon.mock(Tag)

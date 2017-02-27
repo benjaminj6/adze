@@ -4,9 +4,9 @@ import 'sinon-mongoose'
 import 'sinon-as-promised'
 
 import { editTag } from '..'
-import { Tag } from '~/models'
-import { createTags } from '~/utils/test-utils'
-import { createError } from '~/utils'
+import { Tag } from '~/server/models'
+import { createTags } from '~/server/utils/test-utils'
+import { createError } from '~/server/utils'
 
 test.beforeEach(t => {
   t.context = {

@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 
 import * as controller from '../controller'
-import { isLoggedIn } from '~/utils'
+import { isLoggedIn } from '~/server/utils'
 
 const tags = new Router()
 

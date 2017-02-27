@@ -1,4 +1,4 @@
-import { Post } from '~/models'
+import { Post } from '~/server/models'
 
 export function createPosts (number) {
   const posts = []

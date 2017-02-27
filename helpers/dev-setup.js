@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise
 const path = require('path')
 const chalk = require('chalk')
 
-const { User } = require(path.resolve(__dirname, '../src/models'))
+const { User } = require(path.resolve(__dirname, '../src/server/models'))
 
 chalk.enabled = true
 

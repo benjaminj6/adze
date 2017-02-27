@@ -4,9 +4,9 @@ import 'sinon-mongoose'
 import 'sinon-as-promised'
 
 import { editPost } from '..'
-import { Post } from '~/models'
-import { createPosts } from '~/utils/test-utils'
-import { createError } from '~/utils'
+import { Post } from '~/server/models'
+import { createPosts } from '~/server/utils/test-utils'
+import { createError } from '~/server/utils'
 
 test.beforeEach(t => {
   t.context.query = sinon.mock(Post).expects('findByIdAndUpdate')

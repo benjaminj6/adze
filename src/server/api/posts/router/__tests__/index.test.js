@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise
 import session from 'supertest-session'
 
 import { start } from '~/server'
-import { populateDB, clearDB } from '~/utils/test-utils'
+import { populateDB, clearDB } from '~/server/utils/test-utils'
 
 let server
 let req

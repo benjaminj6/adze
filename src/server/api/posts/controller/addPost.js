@@ -1,6 +1,6 @@
 import marked from 'marked'
-import { Post } from '~/models'
-import { validateTagArray } from '~/utils'
+import { Post } from '~/server/models'
+import { validateTagArray } from '~/server/utils'
 
 export default async (ctx, next) => {
   try {

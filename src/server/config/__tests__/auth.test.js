@@ -4,7 +4,7 @@ import 'sinon-mongoose'
 import 'sinon-as-promised'
 
 import { validate } from '../auth'
-import { User } from '~/models'
+import { User } from '~/server/models'
 
 const email = 'test@test.com'
 const testPassword = 'test'

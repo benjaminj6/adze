@@ -1,5 +1,5 @@
-import { Post } from '../../../models'
-import { createError } from '~/utils'
+import { Post } from '~/server/models'
+import { createError } from '~/server/utils'
 
 export default async (ctx, next) => {
   try {
