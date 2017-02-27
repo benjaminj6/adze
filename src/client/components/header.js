@@ -5,6 +5,6 @@ const html = hyperx(h)
 
 export default () => html`
   <header>
-    this is a header
+    header
   </header>
 `
