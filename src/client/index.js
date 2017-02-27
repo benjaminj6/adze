@@ -1,3 +1,5 @@
+import './index.scss'
+
 import { h, app } from 'hyperapp'
 import hyperx from 'hyperx'
 
