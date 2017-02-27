@@ -1,6 +1,15 @@
 @import '~sanitize.css/sanitize';
+@import 'styles/vars';
 @import 'components/header';
+@import 'components/sidebar';
 
-body {
+#app {
   color: red;
+  height: 100%;
+  height: 100vh;
+}
+
+main {
+  height: $main-height;
+  display: flex;
 }

@@ -1,0 +1,17 @@
+// base height
+$base: 16px;
+
+// header
+$header-height: 2 * $base;
+$header-width: 100%;
+$header-border: 1px solid green;
+$header-color: #000;
+
+// main
+$main-height: calc(100% - #{$header-height});
+
+// sidebar
+$sidebar-border: 1px solid blue;
+$sidebar-height: 100%;
+$sidebar-width: 30%;
+$sidebar-bg: rgba(#000, 0.1);

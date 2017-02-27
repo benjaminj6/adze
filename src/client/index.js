@@ -4,14 +4,20 @@ import { h, app } from 'hyperapp'
 import hyperx from 'hyperx'
 
 import header from './components/header'
+import sidebar from './components/sidebar'
+import editor from './components/editor'
 
 const html = hyperx(h)
 
 app({
   model: 'Hey.',
   view: model => html`
-    <div class="app">
+    <div id="app">
       ${header()}
+      <main>
+        ${sidebar()}
+        ${editor()}
+      </main>
       <h1>${model}</h1>
     </div>
   `
