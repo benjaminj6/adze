@@ -55,6 +55,12 @@
     "require": "./helpers/test-server.js",
     "babel": "inherit"
   },
+  "eslintConfig": {
+    "extends": ["standard"],
+    "env": {
+      "node": true
+    }
+  },
   "scripts": {
     "dev": "node helpers/dev-server.js | bunyan -o short",
     "test": "ava",
