@@ -51,7 +51,7 @@ mongoose.connect(process.env.DB_URL)
         'helpers',
         '**/__tests__/**'
       ],
-      script: path.resolve(__dirname, './dev-startup')
+      script: path.resolve(__dirname, './dev-run-server')
     })
 
     nodemon
@@ -76,7 +76,7 @@ mongoose.connect(process.env.DB_URL)
   })
 
 process.on('exit', () => {
-  log('red', 'exit', 'shuttind down...')
+  log('red', 'exit', 'shutting down...')
 })
 
 process.on('SIGINT', () => {

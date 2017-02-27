@@ -29,5 +29,6 @@ mongoose.connect(process.env.DB_URL)
     return mongoose.disconnect()
   })
   .catch(err => {
+    console.log(err)
     mongoose.disconnect()
   })
