@@ -3,16 +3,20 @@ import { Tag } from '~/models'
 export default async (ctx, next) => {
   try {
     const { name, color } = ctx.request.body
-    const newTag = await Tag.create({
-      name,
-      color
-    })
+
+    const newTag = { name }
+
+    if (color) {
+      newTag.color = color
+    }
+
+    const created = await Tag.create(newTag)
 
     ctx.status = 201
-    ctx.body = newTag
+    ctx.body = created
     next()
   } catch (err) {
-    err.status = err.status || 404
+    err.status = err.status || 400
     ctx.app.emit('error', err, ctx)
   }
 }
