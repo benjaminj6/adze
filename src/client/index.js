@@ -1,16 +1,14 @@
-/* eslint-disable */
-import './index.scss'
-
+// /* eslint-disable */
 import { h, app } from 'hyperapp' // eslint-disable-line
-/** @jsx h */
 
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Editor from './components/Editor'
 
-// temporary
-import { Ex } from './components/Icons'
+import './index.scss'
 
+// temporary
+import { Ex, Info, Save } from './components/Icons'
 // Will be removed
 const testItems = [
   {
@@ -42,12 +40,13 @@ const menu = [
 
 const buttons = [
   {
-    content: <Ex />
+    content: <Save />
   },
   {
-    content: <Ex />
+    content: <Info />
   }
 ]
+// end temporary
 
 app({
   model: {
