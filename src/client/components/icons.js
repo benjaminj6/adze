@@ -8,6 +8,7 @@ const defaultIconProps = {
   xmlns: 'http://www.w3.org/2000/svg'
 }
 
+// TODO: remove this icon if not used
 export const done = (props = defaultIconProps) => html`
   <svg
     class="done"
