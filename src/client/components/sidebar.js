@@ -21,7 +21,6 @@ const MenuList = ({ heading, items }) =>
 export default props =>
   <nav id='sidebar'>
     <Search />
-    { console.log(props.menu[0]) }
     {
       props.menu.map(item => <MenuList {...item} />)
     }
