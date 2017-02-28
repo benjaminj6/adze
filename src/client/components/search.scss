@@ -1,0 +1,14 @@
+.search input {
+  padding: 0 (0.5 * $base);
+  line-height: $header-height;
+  border-bottom: 1px solid rgba(#000, 0.1);
+  transition: all $transition;
+  background: rgba($bg-default, 0.9);
+  width: 100%;
+  color: rgba(#000, 0.5);
+
+  &:focus {
+    outline: none;
+    color: #000;
+  }
+}

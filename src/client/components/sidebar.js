@@ -1,7 +1,9 @@
 import { html } from '../utils'
 
-export default () => html`
+import search from './search'
+
+export default (props = {}) => html`
   <nav>
-    nav
+    ${search()}
   </nav>
 `
