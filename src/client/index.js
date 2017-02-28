@@ -1,4 +1,4 @@
-
+/* eslint-disable */
 import './index.scss'
 
 import { h, app } from 'hyperapp' // eslint-disable-line
@@ -40,14 +40,28 @@ const menu = [
   }
 ]
 
+const buttons = [
+  {
+    content: <Ex />
+  },
+  {
+    content: <Ex />
+  }
+]
+
 app({
-  model: 'Hey.',
+  model: {
+    menu,
+    header: {
+      buttons
+    }
+  },
   view: model =>
     <div id='app'>
-      {Sidebar(menu)}
+      <Sidebar menu={model.menu} />
       <main>
-        {Header()}
-        {Editor()}
+        <Header {...model.header} />
+        <Editor />
       </main>
     </div>
 })

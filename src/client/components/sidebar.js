@@ -1,39 +1,28 @@
-import { html } from '../utils'
-
+import { h } from 'hyperapp' // eslint-disable-line
 import Search from './Search'
 
-const iconSpan = props => html`
-  <span>${props.icon}${props.text}</span>
-`
-
-const menuItem = ({ href, className, icon, text }) => html`
+const MenuListItem = ({ className, href, text }) =>
   <li>
     <a
-      href="${href}"
-      class="${className || ''}">
-      ${text}
+      className={className || ''}
+      href={href}>
+      {text}
     </a>
   </li>
-`
 
-const menuHeading = props => html`
-  <h4>${iconSpan(props)}</h4>
-`
-
-const menuList = props => html`
-  <div class="menu-list">
-    ${menuHeading(props.heading)}
+const MenuList = ({ heading, items }) =>
+  <div className='menu-list'>
+    <h4>{heading.icon}{heading.text}</h4>
     <ul>
-    ${
-      props.items.map(item => menuItem(item))
-    }
+      {items.map(item => <MenuListItem {...item} />)}
     </ul>
   </div>
-`
 
-export default (props = {}) => html`
-  <nav id="sidebar">
-    ${Search()}
-    ${props.map(h => menuList(h))}
+export default props =>
+  <nav id='sidebar'>
+    <Search />
+    { console.log(props.menu[0]) }
+    {
+      props.menu.map(item => <MenuList {...item} />)
+    }
   </nav>
-`

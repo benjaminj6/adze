@@ -1,9 +1,8 @@
-import { html } from '../utils'
+import { h } from 'hyperapp' // eslint-disable-line
 
-export default (props = {}) => html`
-  <form action="" class="search">
+export default props =>
+  <form action='' class='search'>
     <input
-      type="text"
-      placeholder="Type to search" />
+      type='text'
+      placeholder='Type to search' />
   </form>
-`
