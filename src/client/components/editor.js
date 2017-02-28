@@ -18,15 +18,15 @@ const textarea = (props) => html`
 const buttons = ['a', 'b']
 const saveBtn = ['save']
 
+// ${textarea({
+//   name: 'title',
+//   id: 'editor-title',
+//   placeholder: 'title...',
+//   resize: autoSize
+// })}
 export default () => html`
   <section id="editor">
     <form action="">
-      ${textarea({
-        name: 'title',
-        id: 'editor-title',
-        placeholder: 'title...',
-        resize: autoSize
-      })}
       ${textarea({
         name: 'post',
         id: 'editor-post',
@@ -34,20 +34,20 @@ export default () => html`
         resize: autoSize
       })}
       <fieldset class="form-btns">
-        ${
-          buttons.map(btn => html`${button({
-            content: btn
-          })}`)
-        }
-        ${button({
-          content: saveBtn,
-          class: 'btn-accent'
-        })}
       </fieldset>
     </form>
   </section>
 `
 
+// ${
+//   buttons.map(btn => html`${button({
+//     content: btn
+//   })}`)
+// }
+// ${button({
+//   content: saveBtn,
+//   class: 'btn-accent'
+// })}
 // TODO: display editor conditionally -- only if there is a file shown
 // TODO: make editor smoother on newlines -- this has to do with the autosize...still needs to be accessible though
 

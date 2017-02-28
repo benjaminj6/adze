@@ -5,22 +5,40 @@
   background: $sidebar-bg;
   border-right: 1px solid rgba(#000, 0.1);
 
+  h4 {
+    padding-left: .5 * $base;
+    margin: 0;
+    line-height: 2.5 * $base;
+  }
+
   ul {
-    padding: 0 (0.5 * $base);
+    margin: 0;
+
+    li {
+      height: 2 * $base;
+    }
 
     a {
       width: 100%;
       display: inline-block;
       white-space: nowrap;
       overflow-x: hidden;
-      // height: 2.5 * $base;
+      padding-left: 1.5 * $base;
       text-overflow: ellipsis;
+      transition: all $transition-short;
+      line-height: 2 * $base;
+      color: rgba($text-default-color, 0.8);
+
+      &:hover {
+        // background: rgba($accent, 0.1);
+        color: $accent;
+      }
     }
 
-    svg {
-      height: $base;
-      width: $base;
-    }
   }
 
+  svg {
+    height: $base;
+    width: $base;
+  }
 }

@@ -3,30 +3,60 @@ import { html } from '../utils'
 import search from './search'
 import { done } from './icons'
 
-const menuItem = (props) => html`
+const iconSpan = props => html`
+  <span>${props.icon}${props.text}</span>
+`
+
+const menuItem = ({ href, className, icon, text }) => html`
   <li>
     <a
-      href="${props.href}"
-      class="${props.class || ''}">
-      ${done()} ${props.content}
+      href="${href}"
+      class="${className || ''}">
+      ${text}
     </a>
   </li>
 `
 
-const test = {
-  nav: ['some really long sentance...what will happen if I do this', 'bar', 'baz']
+const menuList = props => html`
+  <div class="menu-list">
+    <h4>${iconSpan(props.heading)}</h4>
+    <ul>
+    ${
+      props.items.map(item => menuItem(item))
+    }
+    </ul>
+  </div>
+`
+
+const testItems = [
+  {
+    href: 'foo.com',
+    text: 'blaksjljasdf',
+    icon: done()
+  },
+  {
+    href: 'bar.com',
+    text: 'ajsdlfkjalksdjfa',
+    icon: done()
+  },
+  {
+    href: 'baz.com',
+    text: 'ajsdljfla d',
+    icon: done()
+  }
+]
+
+const menu = {
+  items: testItems,
+  heading: {
+    icon: done(),
+    text: 'Recent Posts'
+  }
 }
 
-export default (props = test) => html`
+export default (props = menu) => html`
   <nav id="sidebar">
     ${search()}
-    <ul>
-      ${
-        props.nav.map(link => menuItem({
-          href: link,
-          content: link
-        }))
-      }
-    </ul>
+    ${menuList(menu)}
   </nav>
 `
