@@ -4,12 +4,12 @@ import './index.scss'
 import { h, app } from 'hyperapp' // eslint-disable-line
 /** @jsx h */
 
-import header from './components/header'
-import sidebar from './components/sidebar'
-import editor from './components/editor'
+import Header from './components/Header'
+import Sidebar from './components/Sidebar'
+import Editor from './components/Editor'
 
 // temporary
-import { Ex } from './components/icons'
+import { Ex } from './components/Icons'
 
 // Will be removed
 const testItems = [
@@ -44,10 +44,10 @@ app({
   model: 'Hey.',
   view: model =>
     <div id='app'>
-      {sidebar(menu)}
+      {Sidebar(menu)}
       <main>
-        {header()}
-        {editor()}
+        {Header()}
+        {Editor()}
       </main>
     </div>
 })

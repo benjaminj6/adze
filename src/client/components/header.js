@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import Button from './Button'
-import { Menu, MoreVert, Save } from './icons'
+import { Menu, MoreVert, Save } from './Icons'
 
 const buttons = [
   {

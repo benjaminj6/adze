@@ -1,6 +1,6 @@
 import { html } from '../utils'
 
-import search from './search'
+import Search from './Search'
 
 const iconSpan = props => html`
   <span>${props.icon}${props.text}</span>
@@ -33,7 +33,7 @@ const menuList = props => html`
 
 export default (props = {}) => html`
   <nav id="sidebar">
-    ${search()}
+    ${Search()}
     ${props.map(h => menuList(h))}
   </nav>
 `

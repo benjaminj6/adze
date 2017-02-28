@@ -1,10 +1,10 @@
 @import '~sanitize.css/sanitize';
 @import 'styles/vars';
 @import 'styles/base';
-@import 'components/header';
-@import 'components/sidebar';
-@import 'components/editor';
-@import 'components/search';
+@import 'components/Header';
+@import 'components/Sidebar';
+@import 'components/Editor';
+@import 'components/Search';
 
 #app {
   color: $text-default-color;
