@@ -16,7 +16,7 @@ $header-width: 100%;
 
 // main
 $main-height: 100%;
-$main-children-pad: $base;
+$main-children-pad: 0.5 * $base;
 
 // sidebar
 $sidebar-border: 1px solid blue;

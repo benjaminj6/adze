@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { html } from '../utils'
 
-import button from './button'
+// import Button from './Button'
 
 const textarea = (props) => html`
   <textarea

@@ -9,24 +9,24 @@ import sidebar from './components/sidebar'
 import editor from './components/editor'
 
 // temporary
-import { Done } from './components/icons'
+import { Ex } from './components/icons'
 
 // Will be removed
 const testItems = [
   {
     href: 'foo.com',
     text: 'blaksjljasdf',
-    icon: Done()
+    icon: Ex()
   },
   {
     href: 'bar.com',
     text: 'ajsdlfkjalksdjfa',
-    icon: Done()
+    icon: Ex()
   },
   {
     href: 'baz.com',
     text: 'ajsdljfla d',
-    icon: Done()
+    icon: Ex()
   }
 ]
 
@@ -34,7 +34,7 @@ const menu = [
   {
     heading: {
       text: 'Posts',
-      icon: Done()
+      icon: Ex()
     },
     items: testItems
   }
@@ -43,7 +43,7 @@ const menu = [
 app({
   model: 'Hey.',
   view: model =>
-    <div id="app">
+    <div id='app'>
       {sidebar(menu)}
       <main>
         {header()}

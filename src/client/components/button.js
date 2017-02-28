@@ -1,9 +1,9 @@
-import { html } from '../utils'
+import { h } from 'hyperapp' // eslint-disable-line
 
-export default (props = {}) => html`
+export default (props, children) => (
   <button
-    style=${props.style}
-    class='${props.class || 'btn-default'}'>
-    ${props.content}
+    style={props.style || ''}
+    className={props.className || 'btn-default'}>
+    {children}
   </button>
-`
+)

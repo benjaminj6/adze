@@ -10,11 +10,17 @@ button {
   padding: 0;
   align-items: center;
   justify-content: center;
-  transition: background $transition-short;
+  transition: all $transition-short;
 
   &:hover {
     cursor: pointer;
-    background: rgba(#000, 0.05);
+    // background: rgba(#000, 0.05);
+    // color: darken($accent, 10%);
+  }
+
+  // TODO: think of something to do with outline....really faint though
+  &:focus {
+    outline: none;
   }
 }
 

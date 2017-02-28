@@ -1,20 +1,32 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { html } from '../utils'
-import { Menu, MoreVert, Tag } from './icons'
-import button from './button'
+import Button from './Button'
+import { Menu, MoreVert, Tag, Save } from './icons'
 
-const buttons = [<MoreVert />, Tag(), MoreVert()]
+const buttons = [
+  {
+    content: <Save />
+  },
+  {
+    content: <Tag />
+  },
+  {
+    content: <MoreVert />
+  }
+]
 
-export default () => html`
+export default (props = { buttons }) =>
   <header>
-    ${button({
-      content: Menu()
-    })}
-    <div class="settings">
-      ${
-        buttons.map(btn => button({ content: btn }))
+    <Button>
+      <Menu />
+    </Button>
+    <div class='settings'>
+      {
+        props.buttons.map(({ style, content }) =>
+          <Button style={style}>
+            {content}
+          </Button>
+        )
       }
     </div>
   </header>
-`
