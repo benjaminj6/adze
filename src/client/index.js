@@ -1,33 +1,32 @@
+
 import './index.scss'
 
-import { h, app } from 'hyperapp'
-import hyperx from 'hyperx'
+import { h, app } from 'hyperapp' // eslint-disable-line
+/** @jsx h */
 
 import header from './components/header'
 import sidebar from './components/sidebar'
 import editor from './components/editor'
 
 // temporary
-import { done } from './components/icons'
-
-const html = hyperx(h)
+import { Done } from './components/icons'
 
 // Will be removed
 const testItems = [
   {
     href: 'foo.com',
     text: 'blaksjljasdf',
-    icon: done()
+    icon: Done()
   },
   {
     href: 'bar.com',
     text: 'ajsdlfkjalksdjfa',
-    icon: done()
+    icon: Done()
   },
   {
     href: 'baz.com',
     text: 'ajsdljfla d',
-    icon: done()
+    icon: Done()
   }
 ]
 
@@ -35,7 +34,7 @@ const menu = [
   {
     heading: {
       text: 'Posts',
-      icon: done()
+      icon: Done()
     },
     items: testItems
   }
@@ -43,13 +42,12 @@ const menu = [
 
 app({
   model: 'Hey.',
-  view: model => html`
+  view: model =>
     <div id="app">
-      ${sidebar(menu)}
+      {sidebar(menu)}
       <main>
-        ${header()}
-        ${editor()}
+        {header()}
+        {editor()}
       </main>
     </div>
-  `
 })

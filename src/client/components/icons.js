@@ -1,49 +1,35 @@
-import { html } from '../utils'
+/* eslint-disable */
+import { h } from 'hyperapp' //eslint-disable-line
 
-const defaultIconProps = {
-  fill: '#000',
-  height: '24',
-  width: '24',
-  viewBox: '0 0 24 24',
-  xmlns: 'http://www.w3.org/2000/svg'
-}
-
-// TODO: remove this icon if not used
-export const done = (props = defaultIconProps) => html`
+const Svg = (props = {}, children) =>
   <svg
-    class="done"
-    fill=${props.fill}
-    height=${props.height}
-    viewBox=${props.viewBox}
-    width=${props.width}
-    xmlns=${props.xmlns}>
+    className="done"
+    fill={props.fill || '#000'}
+    height={props.height || 24}
+    width={props.width || 24}
+    viewBox={props.viewBox || '0 0 24 24'}>
+    {children}
+  </svg>
+
+export const Done = (props) =>
+  <Svg {...props}>
     <path d="M0 0h24v24H0z" fill="none" />
-    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
-  </svg>
-`
+    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+  </Svg>
 
-export const menu = (props = defaultIconProps) => html`
-  <svg
-    class="menu"
-    fill=${props.fill}
-    height=${props.height}
-    viewBox=${props.viewBox}
-    width=${props.height}
-    xmlns=${props.xmlns}>
-    <path d="M0 0h24v24H0z" fill="none"/>
-    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-  </svg>
-`
+export const Menu = props =>
+  <Svg {...props}>
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+  </Svg>
 
-export const moreVert = (props = defaultIconProps) => html`
-  <svg
-    class="more-vertical"
-    fill=${props.fill}
-    height=${props.height}
-    viewBox=${props.viewBox}
-    width=${props.height}
-    xmlns=${props.xmlns}>
+export const MoreVert = props =>
+  <Svg {...props}>
       <path d="M0 0h24v24H0z" fill="none"/>
       <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-  </svg>
-`
+  </Svg>
+
+export const Tag = props =>
+  <Svg {...props}>
+      <path fill="#000000" d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.6,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2.3,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z" />
+  </Svg>

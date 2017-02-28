@@ -1,20 +1,20 @@
+import { h } from 'hyperapp' // eslint-disable-line
+
 import { html } from '../utils'
-import { menu, moreVert } from './icons'
+import { Menu, MoreVert, Tag } from './icons'
 import button from './button'
 
-const buttons = ['a', '2', '4']
+const buttons = [<MoreVert />, Tag(), MoreVert()]
 
 export default () => html`
   <header>
     ${button({
-      content: menu()
+      content: Menu()
     })}
     <div class="settings">
-      ${buttons.map(btn => button(
-        {
-          content: moreVert()
-        }
-      ))}
+      ${
+        buttons.map(btn => button({ content: btn }))
+      }
     </div>
   </header>
 `
