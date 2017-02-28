@@ -7,6 +7,7 @@ button {
   min-width: 1.5 * $base;
   height: 1.5 * $base;
   display: flex;
+  padding: 0;
   align-items: center;
   justify-content: center;
   transition: background $transition-short;
@@ -35,6 +36,12 @@ fieldset {
   padding: 0;
   margin: 0;
   border: none;
+}
+
+input, textarea {
+  &:focus {
+    outline: none;
+  }
 }
 
 // lists

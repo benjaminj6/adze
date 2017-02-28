@@ -9,6 +9,14 @@
     padding-left: $sb-parent-pad;
     margin: 0;
     line-height: 3 * $base;
+    transition: all $transition-short;
+    cursor: pointer;
+  }
+
+  h4, a {
+    &:hover {
+      background: rgba($text-default-color, 0.1);
+    }
   }
 
   ul {
@@ -28,13 +36,8 @@
       transition: all $transition-short;
       line-height: 2 * $base;
       color: rgba($text-default-color, 0.8);
-
-      &:hover {
-        // background: rgba($accent, 0.1);
-        color: $accent;
-      }
+      border-left: $sb-child-bd solid transparent;
     }
-
   }
 
   svg {

@@ -7,8 +7,8 @@ const textarea = (props) => html`
   <textarea
     name=${props.name}
     id=${props.id}
-    cols=${props.size ? props.size.cols : 30}
-    rows=${props.size ? props.size.rows : 1}
+    cols=${props.cols || 30}
+    rows=${props.rows || 3}
     placeholder=${props.placeholder || 'Input here...'}
     onkeyup=${props.resize || ''}
     onkeydown=${props.resize || ''}
@@ -18,19 +18,13 @@ const textarea = (props) => html`
 const buttons = ['a', 'b']
 const saveBtn = ['save']
 
-// ${textarea({
-//   name: 'title',
-//   id: 'editor-title',
-//   placeholder: 'title...',
-//   resize: autoSize
-// })}
 export default () => html`
   <section id="editor">
     <form action="">
       ${textarea({
         name: 'post',
         id: 'editor-post',
-        placeholder: 'post goes here...',
+        placeholder: '# my new blog post...',
         resize: autoSize
       })}
       <fieldset class="form-btns">

@@ -34,14 +34,7 @@ const testItems = [
 const menu = [
   {
     heading: {
-      text: 'Recent Posts',
-      icon: done()
-    },
-    items: testItems
-  },
-  {
-    heading: {
-      text: 'Categories',
+      text: 'Posts',
       icon: done()
     },
     items: testItems

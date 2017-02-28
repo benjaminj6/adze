@@ -5,12 +5,7 @@ header {
   padding: 0 $main-children-pad;
   color: $text-default-color;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   height: $header-height;
-
-  .menu {
-    align-self: flex-start;
-  }
 }

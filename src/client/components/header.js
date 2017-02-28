@@ -1,8 +1,14 @@
 import { html } from '../utils'
-import { menu } from './icons'
+import { menu, moreVert } from './icons'
+import button from './button'
 
 export default () => html`
   <header>
-    ${menu()}
+    ${button({
+      content: menu()
+    })}
+    ${button({
+      content: moreVert()
+    })}
   </header>
 `
