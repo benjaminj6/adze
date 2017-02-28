@@ -36,11 +36,12 @@ export default () => html`
 `
 
 // TODO: display editor conditionally -- only if there is a file shown
-// TODO: add a handler to increase the size of textarea on newlines
-// TODO: find way to make form input DRY-er
+// TODO: make editor smoother on newlines -- this has to do with the autosize...still needs to be accessible though
 
-function autoSize ({ target }) {
+function autoSize (e) {
+  const { target } = e
   target.style.height = 'auto'
+  target.focus()
   if (target.scrollHeight > (target.clientHeight + 16)) {
     target.style.height = `${target.scrollHeight + 16}px`
   }
