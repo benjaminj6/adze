@@ -1,6 +1,26 @@
-nav {
+#sidebar {
   height: $sidebar-height;
   width: $sidebar-width;
+  max-width: $sidebar-width;
   background: $sidebar-bg;
   border-right: 1px solid rgba(#000, 0.1);
+
+  ul {
+    padding: 0 (0.5 * $base);
+
+    a {
+      width: 100%;
+      display: inline-block;
+      white-space: nowrap;
+      overflow-x: hidden;
+      // height: 2.5 * $base;
+      text-overflow: ellipsis;
+    }
+
+    svg {
+      height: $base;
+      width: $base;
+    }
+  }
+
 }

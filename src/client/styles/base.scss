@@ -36,3 +36,15 @@ fieldset {
   margin: 0;
   border: none;
 }
+
+// lists
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+// links
+a {
+  text-decoration: none;
+  color: $accent;
+}
