@@ -1,8 +1,7 @@
 /* eslint-disable */
-import { h } from 'hyperapp'
-import hyperx from 'hyperx'
+import { html } from '../utils'
 
-const html = hyperx(h)
+import button from './button'
 
 const textarea = (props) => html`
   <textarea
@@ -15,6 +14,9 @@ const textarea = (props) => html`
     onkeydown=${props.resize || ''}
     value=${props.value || ''}></textarea>
 `
+
+const buttons = ['a', 'b']
+const saveBtn = ['save']
 
 export default () => html`
   <section id="editor">
@@ -31,6 +33,17 @@ export default () => html`
         placeholder: 'post goes here...',
         resize: autoSize
       })}
+      <fieldset class="form-btns">
+        ${
+          buttons.map(btn => html`${button({
+            content: btn
+          })}`)
+        }
+        ${button({
+          content: saveBtn,
+          class: 'btn-accent'
+        })}
+      </fieldset>
     </form>
   </section>
 `

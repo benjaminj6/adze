@@ -1,0 +1,38 @@
+// Base UI and html element stylings
+
+// buttons
+button {
+  background: transparent;
+  color: $text-default-color;
+  min-width: 1.5 * $base;
+  height: 1.5 * $base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background $transition-short;
+
+  &:hover {
+    cursor: pointer;
+    background: rgba(#000, 0.05);
+  }
+}
+
+.btn-accent {
+  background: $accent;
+  color: $text-accent-bg;
+
+  & + .btn-accent {
+    border-left: 1px inset rgba($text-accent-bg, 0.5);
+  }
+
+  &:hover {
+    background: darken($accent, 10%);
+  }
+}
+
+// form control
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}

@@ -1,7 +1,4 @@
-import { h } from 'hyperapp'
-import hyperx from 'hyperx'
-
-const html = hyperx(h)
+import { html } from '../utils'
 
 export default () => html`
   <header>

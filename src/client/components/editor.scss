@@ -5,17 +5,23 @@ $editor-bd: 1px solid rgba(#000, 0.1);
   overflow-y: auto;
   height: calc(100% - #{$header-height});
 
+  form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   textarea {
     width: 100%;
-    height: auto;
-    max-height: 100%;
     resize: none;
-    border: none;
+    order: 2;
 
     &#editor-title {
+      order: 1;
       border-bottom: $editor-bd;
-      width: 80%;
+      width: 50%;
+      flex-grow: 1;
       transition: border-bottom $transition;
+
       &:focus {
         border-bottom: 1px solid $accent;
       }
@@ -23,6 +29,15 @@ $editor-bd: 1px solid rgba(#000, 0.1);
 
     &:focus {
       outline: none;
+    }
+  }
+
+  fieldset {
+    order: 1;
+    margin-left: 0.5 * $base;
+
+    button {
+      display: inline;
     }
   }
 }
