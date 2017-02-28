@@ -6,9 +6,9 @@
   border-right: 1px solid rgba(#000, 0.1);
 
   h4 {
-    padding-left: .5 * $base;
+    padding-left: $sb-parent-pad;
     margin: 0;
-    line-height: 2.5 * $base;
+    line-height: 3 * $base;
   }
 
   ul {
@@ -23,7 +23,7 @@
       display: inline-block;
       white-space: nowrap;
       overflow-x: hidden;
-      padding-left: 1.5 * $base;
+      padding-left: $sb-child-pad;
       text-overflow: ellipsis;
       transition: all $transition-short;
       line-height: 2 * $base;
@@ -38,7 +38,8 @@
   }
 
   svg {
-    height: $base;
-    width: $base;
+    height: $sb-icon-w;
+    width: $sb-icon-w;
+    margin-right: $sb-icon-margin;
   }
 }

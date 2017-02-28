@@ -1,7 +1,7 @@
 $editor-bd: 1px solid rgba(#000, 0.1);
 
 #editor {
-  padding: (0.5 * $base) $main-children-pad;
+  padding: (0.75 * $base) $main-children-pad;
   overflow-y: auto;
   height: calc(100% - #{$header-height});
 

@@ -39,15 +39,6 @@ export default () => html`
   </section>
 `
 
-// ${
-//   buttons.map(btn => html`${button({
-//     content: btn
-//   })}`)
-// }
-// ${button({
-//   content: saveBtn,
-//   class: 'btn-accent'
-// })}
 // TODO: display editor conditionally -- only if there is a file shown
 // TODO: make editor smoother on newlines -- this has to do with the autosize...still needs to be accessible though
 
