@@ -1,0 +1,23 @@
+$editor-bd: 1px solid rgba(#000, 0.1);
+
+#editor {
+  padding: $main-children-pad;
+  overflow-y: auto;
+  height: calc(100% - #{$header-height});
+
+  textarea {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    resize: none;
+    border: none;
+
+    &#editor-title {
+      border-bottom: $editor-bd;
+    }
+
+    &:focus {
+      outline: red;
+    }
+  }
+}

@@ -2,14 +2,18 @@
 @import 'styles/vars';
 @import 'components/header';
 @import 'components/sidebar';
+@import 'components/editor';
 
 #app {
-  color: red;
+  color: $text-default-color;
   height: 100%;
   height: 100vh;
+  display: flex;
 }
 
 main {
   height: $main-height;
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

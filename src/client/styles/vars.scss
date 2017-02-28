@@ -1,17 +1,21 @@
-// base height
+// colors
+$text-default-color: #222;
+$bg-default-color: #fff;
+
+// base
 $base: 16px;
+$shadow: 0 1px 2px -1px rgba(#000, 0.2);
 
 // header
-$header-height: 2 * $base;
+$header-height: 2.5 * $base;
 $header-width: 100%;
-$header-border: 1px solid green;
-$header-color: #000;
 
 // main
-$main-height: calc(100% - #{$header-height});
+$main-height: 100%;
+$main-children-pad: $base;
 
 // sidebar
 $sidebar-border: 1px solid blue;
 $sidebar-height: 100%;
 $sidebar-width: 30%;
-$sidebar-bg: rgba(#000, 0.1);
+$sidebar-bg: darken($bg-default-color, 10%);

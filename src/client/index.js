@@ -13,12 +13,11 @@ app({
   model: 'Hey.',
   view: model => html`
     <div id="app">
-      ${header()}
+      ${sidebar()}
       <main>
-        ${sidebar()}
+        ${header()}
         ${editor()}
       </main>
-      <h1>${model}</h1>
     </div>
   `
 })
