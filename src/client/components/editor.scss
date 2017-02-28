@@ -14,10 +14,15 @@ $editor-bd: 1px solid rgba(#000, 0.1);
 
     &#editor-title {
       border-bottom: $editor-bd;
+      width: 80%;
+      transition: border-bottom $transition;
+      &:focus {
+        border-bottom: 1px solid $accent;
+      }
     }
 
     &:focus {
-      outline: red;
+      outline: none;
     }
   }
 }

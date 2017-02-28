@@ -12,7 +12,8 @@ const textarea = (props) => html`
     rows=${props.size ? props.size.rows : 1}
     placeholder=${props.placeholder || 'Input here...'}
     onkeyup=${props.resize || ''}
-    onkeydown=${props.resize || ''}></textarea>
+    onkeydown=${props.resize || ''}
+    value=${props.value || ''}></textarea>
 `
 
 export default () => html`
