@@ -15,11 +15,14 @@ header {
 
   .settings {
     display: flex;
-
   }
 
   button {
     color: rgba($text-default-color, 0.6);
+
+    & + button {
+      margin-left: 0.5 * $base;
+    }
 
     &:hover {
       color: $text-default-color;
