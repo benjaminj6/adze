@@ -76,7 +76,6 @@
     }
   },
   "scripts": {
-    "watcher": "webpack-dev-server --open",
     "dev-server": "node helpers/dev-server.js | bunyan -o short",
     "test": "ava",
     "cov": "nyc --all npm test",
