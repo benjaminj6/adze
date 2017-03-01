@@ -1,14 +1,11 @@
 // /* eslint-disable */
 import { h, app } from 'hyperapp' // eslint-disable-line
 
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
-import Editor from './components/Editor'
-
+import view from './view'
 import './index.scss'
 
 // temporary
-import { Ex } from './components/Icons'
+import { Ex } from './view/Icons'
 // Will be removed
 const testItems = [
   {
@@ -40,12 +37,5 @@ app({
   model: {
     menu
   },
-  view: model =>
-    <div id='app'>
-      <Sidebar menu={model.menu} />
-      <main>
-        <Header />
-        <Editor />
-      </main>
-    </div>
+  view
 })
