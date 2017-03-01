@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import Button from './Button'
-import { Menu, Info, Save } from './Icons' // eslint-disable-line
+import { Menu, Info, Save, Gears } from './Icons' // eslint-disable-line
 
 const Settings = ({ buttons }) =>
   <div className='settings'>
@@ -23,6 +23,7 @@ export default ({ buttons }) =>
     <Settings
       buttons={[
         { content: <Save />, title: 'Save' },
-        { content: <Info />, title: 'Info' }
+        { content: <Info />, title: 'Info' },
+        { content: <Gears />, title: 'More' }
       ]} />
   </header>
