@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
@@ -35,10 +37,11 @@ compiler.plugin('done', stats => {
   }
 })
 
-// console.clear()
+// copy static html file
 fs.createReadStream(path.resolve(__dirname, '../src/client/index.html'))
   .pipe(fs.createWriteStream(path.resolve(__dirname, '../dist/index.html')))
 
+// Dev server
 const server = new WebpackDevServer(compiler, {
   contentBase: path.join(__dirname, '../dist'),
   historyApiFallback: true,
@@ -49,12 +52,14 @@ const server = new WebpackDevServer(compiler, {
   stats: 'none'
 })
 
-// TODO: set server port based on .env config
+// TODO: Find way for better route matching...set up koa server perhaps?
 function startServer (stats) {
-  server.listen(3001, 'localhost', () => {
+  const PORT = process.env.CLIENT_PORT
+  const HOST = process.env.HOST
+  server.listen(PORT, HOST, () => {
     console.clear()
 
-    const msg = 'Listening for connections at http://localhost:3001'
+    const msg = `Listening for connections at http://${HOST}:${PORT}`
     console.log(`${chalk.bgGreen.black('SUCCESS:')} ${chalk.green(msg)}`)
     console.log()
 
