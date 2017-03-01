@@ -8,23 +8,20 @@ import Editor from './components/Editor'
 import './index.scss'
 
 // temporary
-import { Ex, Info, Save } from './components/Icons'
+import { Ex } from './components/Icons'
 // Will be removed
 const testItems = [
   {
     href: 'foo.com',
-    text: 'blaksjljasdf',
-    icon: Ex()
+    text: 'blaksjljasdf'
   },
   {
     href: 'bar.com',
-    text: 'ajsdlfkjalksdjfa',
-    icon: Ex()
+    text: 'ajsdlfkjalksdjfa'
   },
   {
     href: 'baz.com',
-    text: 'ajsdljfla d',
-    icon: Ex()
+    text: 'ajsdljfla d'
   }
 ]
 
@@ -37,29 +34,17 @@ const menu = [
     items: testItems
   }
 ]
-
-const buttons = [
-  {
-    content: <Save />
-  },
-  {
-    content: <Info />
-  }
-]
 // end temporary
 
 app({
   model: {
-    menu,
-    header: {
-      buttons
-    }
+    menu
   },
   view: model =>
     <div id='app'>
       <Sidebar menu={model.menu} />
       <main>
-        <Header {...model.header} />
+        <Header />
         <Editor />
       </main>
     </div>
