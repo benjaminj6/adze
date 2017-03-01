@@ -38,7 +38,8 @@
     "supertest": "^3.0.0",
     "supertest-session": "^3.0.0",
     "transform-loader": "^0.2.4",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -75,6 +76,7 @@
     }
   },
   "scripts": {
+    "watcher": "webpack-dev-server --open",
     "dev-server": "node helpers/dev-server.js | bunyan -o short",
     "test": "ava",
     "cov": "nyc --all npm test",

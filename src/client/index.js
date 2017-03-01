@@ -1,5 +1,5 @@
 // /* eslint-disable */
-import { h, app } from 'hyperapp' // eslint-disable-line
+import { h, app, router } from 'hyperapp' // eslint-disable-line
 
 import view from './view'
 import './index.scss'
@@ -34,8 +34,13 @@ const menu = [
 // end temporary
 
 app({
+  router,
   model: {
     menu
   },
-  view
+  view: {
+    '/': view,
+    '/testRouter': view
+  },
+  root: document.getElementById('root')
 })
