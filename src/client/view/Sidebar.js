@@ -1,5 +1,5 @@
 import { h } from 'hyperapp' // eslint-disable-line
-import Search from './Search'
+import { User as UserIcon } from './Icons'
 
 const MenuListItem = ({ className, href, text }) =>
   <li>
@@ -18,10 +18,20 @@ const MenuList = ({ heading, items }) =>
     </ul>
   </div>
 
+const User = props =>
+  <span className='user'>
+    <UserIcon />
+    {props.user}
+  </span>
+
 export default props =>
-  <nav id='sidebar'>
-    <Search />
-    {
-      props.menu.map(item => <MenuList {...item} />)
-    }
-  </nav>
+  <aside id='sidebar'>
+    <header>
+      <User user='test@test.com' />
+    </header>
+    <nav>
+      {
+        props.menu.map(item => <MenuList {...item} />)
+      }
+    </nav>
+  </aside>

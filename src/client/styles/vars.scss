@@ -26,6 +26,6 @@ $sidebar-bg: darken($bg-default, 10%);
 
 $sb-parent-pad: 0.5 * $base;
 $sb-icon-margin: 0.25 * $base;
-$sb-icon-w: $base;
+$sb-icon-w: 1.5 * $base;
 $sb-child-bd: 0.25 * $base;
 $sb-child-pad: $sb-parent-pad + $sb-icon-w + $sb-icon-margin - $sb-child-bd;
