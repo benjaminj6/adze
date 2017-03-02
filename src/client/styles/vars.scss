@@ -1,21 +1,14 @@
-@import './test.json';
+@import './foundation.json';
 
-// TODO: MOVE ALL VARIABLES INTO JSON FORMAT
 // colors
-$text-default-color: #222;
-// TODO: find a better variable name for this
-$text-accent-bg: #fff;
-$bg-default: #fff;
-$accent: blue;
 $accent-darker: darken($accent, 10%);
 $accent-lighter: lighten($accent, 10%);
 
 // base
-$base: $foo;
 $shadow: 0 1px 2px -1px rgba(#000, 0.2);
-$transition-short: 0.25s ease-in;
 $transition: 0.5s ease-in;
-$bd-rad: 2px;
+$transition-short: 0.25s ease-in;
+
 
 // header
 $header-height: 2.5 * $base;
