@@ -2,7 +2,7 @@ import { h } from 'hyperapp' // eslint-disable-line
 
 // import Button from './Button'
 
-const TextArea = (props) =>
+const TextArea = props =>
   <textarea
     name={props.name}
     id={props.id}
@@ -13,7 +13,7 @@ const TextArea = (props) =>
     onkeydown={props.resize || ''}
     value={props.value || ''} />
 
-export default () =>
+export default props =>
   <section id='editor'>
     <form action=''>
       <TextArea
