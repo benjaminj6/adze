@@ -1,14 +1,15 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { Info } from './Icons'
+import { Logo } from './Icons'
 
 export default props =>
   <main id='login-view'>
     <div className='login'>
-      <Info id='logo' />
+      <Logo id='logo' />
       <form
         action=''
         id='login-form'>
+        <h4>Sign in to {process.env.NAME}</h4>
         <input
           placeholder='Email'
           id='login-email'
@@ -20,6 +21,7 @@ export default props =>
           name='Password'
           type='password' />
         <button
+          className='btn-accent'
           type='submit'>
           Log in
         </button>
