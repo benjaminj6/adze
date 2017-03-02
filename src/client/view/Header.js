@@ -18,12 +18,12 @@ const Settings = ({ buttons }) =>
 
 // TODO: Will need to abstract out current buttons into a prop
 
-export default ({ current }) =>
+export default ({ left, right }) =>
   <header>
     <Button title='Menu'>
-      <Menu />
+      {left}
     </Button>
     {
-      current ? <Settings buttons={current.buttons} /> : ''
+      right ? <Settings buttons={right} /> : ''
     }
   </header>

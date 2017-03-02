@@ -1,9 +1,11 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
+import Header from './Header'
 import { Logo } from './Icons'
 
 export default props =>
   <main id='login-view'>
+    <Header left={<Logo />} />
     <div className='login'>
       <Logo id='logo' />
       <form

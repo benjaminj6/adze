@@ -23,7 +23,7 @@ export const Dashboard = model =>
   <div id='app'>
     <Sidebar menu={model.menu} />
     <main>
-      <Header {...model} />
+      <Header {...model.current} />
       {model.selected ? <Editor /> : <Prompt />}
     </main>
   </div>
