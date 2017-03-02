@@ -6,6 +6,7 @@
 @import 'view/Editor';
 @import 'view/Search';
 @import 'view/Login';
+@import 'view/Prompt';
 
 #app {
   color: $text-default-color;
@@ -19,4 +20,5 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  position: relative;
 }
