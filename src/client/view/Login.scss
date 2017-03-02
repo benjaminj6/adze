@@ -1,0 +1,59 @@
+#login-view {
+  justify-content: center;
+}
+
+.login {
+  background: #fff;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+
+  #logo {
+    width: 10 * $base;
+    height: 10 * $base;
+    fill: $accent;
+  }
+
+  h4 {
+    margin-top: 0;
+    font-weight: lighter;
+    color: rgba($text-default-color, 0.8);
+    text-align: center;
+  }
+
+  form {
+    padding: 2 * $base;
+    border: 1px solid rgba(#000, 0.1);
+    border-radius: $bd-rad;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    border: 1px solid $text-default-color;
+    background: $bg-default;
+    border-radius: $bd-rad $bd-rad 0 0;
+
+    & + input {
+      position: relative;
+      top: -1px;
+      border-radius: 0 0 $bd-rad $bd-rad;
+    }
+
+    &:hover, &:focus {
+      border: 1px solid $accent;
+      box-shadow: inset 0 0 2px $accent-lighter;
+      z-index: 5;
+    }
+  }
+
+  button {
+    height: 2.5 * $base;
+    padding: 0.5 * $base;
+    margin-top: 0.5 * $base;
+  }
+}

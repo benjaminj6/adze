@@ -40,7 +40,8 @@
     "supertest-session": "^3.0.0",
     "transform-loader": "^0.2.4",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.4.1",
+    "webpack-dotenv-plugin": "^2.0.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -33,9 +33,9 @@ button {
     border-left: 1px inset rgba($text-accent-bg, 0.5);
   }
 
-  &:hover {
+  &:hover, &:focus {
     color: $text-accent-bg;
-    background: $accent-lighter;
+    background: $accent-darker;
   }
 }
 
