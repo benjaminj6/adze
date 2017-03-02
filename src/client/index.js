@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import { h, app, router } from 'hyperapp' // eslint-disable-line
 
 import { Dashboard, Test, Login } from './view'
@@ -41,13 +41,19 @@ const buttons = [
     className: 'btn-text'
   }
 ]
+
+const promptButtons = [
+  { content: 'New +', title: 'New', className: 'btn-accent btn-text'}
+]
 // end temporary
 
 app({
   router,
   model: {
     menu,
-    buttons
+    current: {
+      buttons: promptButtons
+    }
   },
   view: {
     '/': model => <Login {...model} />,

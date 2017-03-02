@@ -3,6 +3,7 @@ import { h } from 'hyperapp' // eslint-disable-line
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Editor from './Editor'
+import Prompt from './Prompt'
 import LoginComponents from './Login'
 
 const App = (props, children) => <div id='app'>{children}</div>
@@ -23,6 +24,6 @@ export const Dashboard = model =>
     <Sidebar menu={model.menu} />
     <main>
       <Header {...model} />
-      <Editor />
+      {model.selected ? <Editor /> : <Prompt />}
     </main>
   </div>

@@ -1,0 +1,26 @@
+#prompt {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: $main-children-pad;
+
+  h3 {
+    display: block;
+    color: rgba($text-default-color, 0.3);
+    text-align: center;
+  }
+
+  span {
+    text-decoration: underline;
+    transition: all $transition-short;
+
+    &:hover {
+      cursor: pointer;
+      color: rgba($text-default-color, 0.35);
+    }
+  }
+}
