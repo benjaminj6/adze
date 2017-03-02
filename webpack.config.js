@@ -1,6 +1,7 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const jsonImporter = require('node-sass-json-importer')
+const DotEnvPlugin = require('webpack-dotenv-plugin')
 
 const extractSass = new ExtractTextPlugin({
   filename: 'bundle.css',
@@ -55,6 +56,10 @@ module.exports = {
     ]
   },
   plugins: [
-    extractSass
+    extractSass,
+    new DotEnvPlugin({
+      sample: './.env',
+      path: './.env'
+    })
   ]
 }
