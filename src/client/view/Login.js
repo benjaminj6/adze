@@ -1,13 +1,28 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { Ex } from './Icons'
+import { Info } from './Icons'
 
 export default props =>
-  <main className='login-main'>
-    <Ex />
-    <form
-      action=''
-      id='login'>
-      {process.env.DEMO ? 'foo' : 'bar'}
-    </form>
+  <main id='login-view'>
+    <div className='login'>
+      <Info id='logo' />
+      <form
+        action=''
+        id='login-form'>
+        <input
+          placeholder='Email'
+          id='login-email'
+          name='Email'
+          type='email' />
+        <input
+          placeholder='Password'
+          id='login-password'
+          name='Password'
+          type='password' />
+        <button
+          type='submit'>
+          Log in
+        </button>
+      </form>
+    </div>
   </main>
