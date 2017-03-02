@@ -1,7 +1,7 @@
 // /* eslint-disable */
 import { h, app, router } from 'hyperapp' // eslint-disable-line
 
-import { Dashboard, Test } from './view'
+import { Dashboard, Test, Login } from './view'
 import './index.scss'
 
 // temporary
@@ -50,6 +50,7 @@ app({
     buttons
   },
   view: {
+    '/': model => <Login {...model} />,
     '/dashboard': model => <Dashboard {...model} />,
     '/test': model => <Test {...model} />
   },
