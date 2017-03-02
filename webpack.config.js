@@ -1,5 +1,6 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const jsonImporter = require('node-sass-json-importer')
 
 const extractSass = new ExtractTextPlugin({
   filename: 'bundle.css',
@@ -39,12 +40,14 @@ module.exports = {
         exclude: /node_modules/,
         use: extractSass.extract({
           loader: [
-
             {
               loader: 'css-loader'
             },
             {
-              loader: 'sass-loader'
+              loader: 'sass-loader',
+              options: {
+                importer: jsonImporter
+              }
             }
           ]
         })

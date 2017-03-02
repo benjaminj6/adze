@@ -1,13 +1,14 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import Button from './Button'
-import { Menu, Info, Save, Gears } from './Icons' // eslint-disable-line
+import { Menu } from './Icons' // eslint-disable-line
 
 const Settings = ({ buttons }) =>
   <div className='settings'>
-    {buttons &&
+    {
       buttons.map(btn =>
         <Button
+          className={btn.className}
           title={btn.title}
           style={btn.style}>
           {btn.content}
@@ -15,15 +16,17 @@ const Settings = ({ buttons }) =>
     }
   </div>
 
+// TODO: Will need to abstract out current buttons into a prop
+
 export default ({ buttons }) =>
   <header>
     <Button title='Menu'>
       <Menu />
     </Button>
-    <Settings
-      buttons={[
-        { content: <Save />, title: 'Save' },
-        { content: <Info />, title: 'Info' },
-        { content: <Gears />, title: 'More' }
-      ]} />
+    {
+      buttons
+        ? <Settings
+          buttons={buttons} />
+        : ''
+    }
   </header>

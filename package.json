@@ -29,6 +29,7 @@
     "extract-text-webpack-plugin": "^2.0.0",
     "hyperx": "^2.0.5",
     "node-sass": "^4.5.0",
+    "node-sass-json-importer": "^3.0.1",
     "nodemon": "^1.11.0",
     "nyc": "^10.1.2",
     "sanitize.css": "^4.1.0",

@@ -11,6 +11,7 @@ button {
   align-items: center;
   justify-content: center;
   transition: all $transition-short;
+  border-radius: $bd-rad;
 
   &:hover {
     cursor: pointer;
@@ -33,8 +34,13 @@ button {
   }
 
   &:hover {
-    background: darken($accent, 10%);
+    color: $text-accent-bg;
+    background: $accent-lighter;
   }
+}
+
+.btn-text {
+  padding: 0 (0.5 * $base);
 }
 
 // form control

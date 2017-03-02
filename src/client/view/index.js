@@ -14,7 +14,7 @@ export const Dashboard = model =>
   <div id='app'>
     <Sidebar menu={model.menu} />
     <main>
-      <Header />
+      <Header {...model} />
       <Editor />
     </main>
   </div>

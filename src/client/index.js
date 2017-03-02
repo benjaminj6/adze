@@ -5,7 +5,7 @@ import { Dashboard, Test } from './view'
 import './index.scss'
 
 // temporary
-import { Ex } from './view/Icons'
+import { Ex, Info, Edit } from './view/Icons'
 // Will be removed
 const testItems = [
   {
@@ -31,12 +31,23 @@ const menu = [
     items: testItems
   }
 ]
+
+const buttons = [
+  { content: <Edit />, title: 'Edit' },
+  { content: <Info />, title: 'Info' },
+  {
+    content: 'Publish',
+    title: 'More',
+    className: 'btn-text'
+  }
+]
 // end temporary
 
 app({
   router,
   model: {
-    menu
+    menu,
+    buttons
   },
   view: {
     '/dashboard': model => <Dashboard {...model} />,
