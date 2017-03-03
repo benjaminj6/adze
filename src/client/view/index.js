@@ -6,7 +6,10 @@ import Editor from './Editor'
 import Prompt from './Prompt'
 import LoginComponents from './Login'
 
-const App = (props, children) => <div id='app'>{children}</div>
+import { Logo } from './Icons'
+import styles from '../styles/foundation.json' // eslint-disable-line
+
+const App = (props, children) => <div id='app' {...props}>{children}</div>
 
 export const Test = model =>
   <App>
@@ -14,8 +17,11 @@ export const Test = model =>
     <main />
   </App>
 
-export const Login = model =>
+export const LoginView = model =>
   <App>
+    <Header
+      left={<Logo />}
+      style={{ background: styles.accent, color: styles.accent }} />
     <LoginComponents {...model} />
   </App>
 
@@ -23,7 +29,7 @@ export const Dashboard = model =>
   <div id='app'>
     <Sidebar menu={model.menu} />
     <main>
-      <Header {...model} />
+      <Header {...model.current} />
       {model.selected ? <Editor /> : <Prompt />}
     </main>
   </div>
