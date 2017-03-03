@@ -4,7 +4,8 @@ import { h } from 'hyperapp' // eslint-disable-line
 import Header from '../components/Header'
 import Prompt from '../components/Prompt'
 import Editor from '../components/Editor'
-import { Menu, Edit, Info } from '../components/Icons'
+import Info from '../components/Info'
+import { Menu, Edit, Info as InfoSvg } from '../components/Icons'
 import Sidebar from '../components/Sidebar'
 
 const NoneSelected = model =>
@@ -23,13 +24,14 @@ const PostSelected = model =>
       left={<Menu />}
       right={[
         { content: <Edit />, title: 'Edit' },
-        { content: <Info />, title: 'Info' },
+        { content: <InfoSvg />, title: 'Info' },
         {
           content: 'Publish',
-          title: 'More',
+          title: 'Publish',
           className: 'btn-text'
         }
       ]} />
+    {model.info ? <Info /> : ''}
     <Editor {...model} />
   </main>
 
