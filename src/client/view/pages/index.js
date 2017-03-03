@@ -29,6 +29,6 @@ export const DashboardView = model =>
     <Sidebar menu={model.menu} />
     <main>
       <Header {...model.current} />
-      {model.selected ? <Editor /> : <Prompt />}
+      {model.editMode ? <Editor /> : <Prompt />}
     </main>
   </App>
