@@ -12,24 +12,23 @@ import styles from '../../styles/foundation.json' // eslint-disable-line
 const App = (props, children) => <div id='app' {...props}>{children}</div>
 
 export const Test = model =>
-  <App>
+  <App className='test-view'>
     <Sidebar menu={model.menu} />
     <main />
   </App>
 
 export const LoginView = model =>
-  <App>
+  <App className='login-view'>
     <Header
-      left={<Logo />}
-      style={{ background: styles.accent, color: styles.accent }} />
+      left={<Logo />} />
     <LoginComponents {...model} />
   </App>
 
-export const Dashboard = model =>
-  <div id='app'>
+export const DashboardView = model =>
+  <App>
     <Sidebar menu={model.menu} />
     <main>
       <Header {...model.current} />
       {model.selected ? <Editor /> : <Prompt />}
     </main>
-  </div>
+  </App>
