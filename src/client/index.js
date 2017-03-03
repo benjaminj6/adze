@@ -59,6 +59,10 @@ app({
   view: {
     '/': model => <LoginView {...model} />,
     '/dashboard': model => <DashboardView {...model} />,
+    '/dashboard/create': model =>
+      <DashboardView
+        editMode={true}
+        {...model} />,
     '/test': model => <Test {...model} />
   },
   root: document.getElementById('root')
