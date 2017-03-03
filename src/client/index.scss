@@ -3,14 +3,14 @@
 @import 'styles/base';
 
 // UI Component defaults
-@import 'view/Button';
+@import 'view/components/Button';
 
-@import 'view/Header';
-@import 'view/Sidebar';
-@import 'view/Editor';
-@import 'view/Search';
-@import 'view/Login';
-@import 'view/Prompt';
+@import 'view/components/Header';
+@import 'view/components/Sidebar';
+@import 'view/components/Editor';
+@import 'view/components/Search';
+@import 'view/components/Login';
+@import 'view/components/Prompt';
 
 #app {
   color: $text-default-color;

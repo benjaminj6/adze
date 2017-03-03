@@ -5,7 +5,7 @@ import { Dashboard, Test, LoginView } from './view'
 import './index.scss'
 
 // temporary
-import { Ex, Info, Edit, Menu } from './view/Icons'
+import { Ex, Info, Edit, Menu } from './view/components/Icons'
 // Will be removed
 const testItems = [
   {
