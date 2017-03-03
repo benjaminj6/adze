@@ -18,8 +18,8 @@ const Settings = ({ buttons }) =>
 
 // TODO: Will need to abstract out current buttons into a prop
 
-export default ({ left, right }) =>
-  <header>
+export default ({ left, right, style }) =>
+  <header style={style || ''}>
     <Button title='Menu'>
       {left}
     </Button>
