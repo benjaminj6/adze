@@ -1,12 +1,19 @@
 @import '~sanitize.css/sanitize';
 @import 'styles/vars';
 @import 'styles/base';
-@import 'view/Header';
-@import 'view/Sidebar';
-@import 'view/Editor';
-@import 'view/Search';
-@import 'view/Login';
-@import 'view/Prompt';
+
+// UI Component defaults
+@import 'view/components/Button';
+
+@import 'view/components/Header';
+@import 'view/components/Sidebar';
+@import 'view/components/Editor';
+@import 'view/components/Search';
+@import 'view/components/Login';
+@import 'view/components/Prompt';
+
+// Views (overrides of UI components per view)
+@import 'view/pages/index';
 
 #app {
   color: $text-default-color;

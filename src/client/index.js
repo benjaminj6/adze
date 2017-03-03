@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { h, app, router } from 'hyperapp' // eslint-disable-line
 
-import { Dashboard, Test, LoginView } from './view'
+import { DashboardView, Test, LoginView } from './view'
 import './index.scss'
 
 // temporary
-import { Ex, Info, Edit, Menu } from './view/Icons'
+import { Ex, Info, Edit, Menu } from './view/components/Icons'
 // Will be removed
 const testItems = [
   {
@@ -58,7 +58,7 @@ app({
   },
   view: {
     '/': model => <LoginView {...model} />,
-    '/dashboard': model => <Dashboard {...model} />,
+    '/dashboard': model => <DashboardView {...model} />,
     '/test': model => <Test {...model} />
   },
   root: document.getElementById('root')
