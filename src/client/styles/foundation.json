@@ -2,7 +2,7 @@
   "text-default-color": "#222",
   "text-accent-bg": "#fff",
   "bg-default": "#fff",
-  "accent": "green",
+  "accent": "#1b5e20",
   "base": "16px",
   "bd-rad": "2px"
 }
