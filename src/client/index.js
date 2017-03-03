@@ -32,16 +32,6 @@ const menu = [
   }
 ]
 
-const buttons = [
-  { content: <Edit />, title: 'Edit' },
-  { content: <Info />, title: 'Info' },
-  {
-    content: 'Publish',
-    title: 'More',
-    className: 'btn-text'
-  }
-]
-
 const promptButtons = [
   { content: 'New +', title: 'New', className: 'btn-accent btn-text'}
 ]
@@ -51,18 +41,13 @@ app({
   router,
   model: {
     menu,
-    current: {
-      left: <Menu />,
-      right: promptButtons
-    }
+    posts: testItems
   },
   view: {
     '/': model => <LoginView {...model} />,
-    '/dashboard': model => <DashboardView {...model} />,
-    '/dashboard/create': model =>
-      <DashboardView
-        editMode={true}
-        {...model} />,
+    '/dashboard': model => <DashboardView noneSelected={true} {...model} />,
+    '/dashboard/create': model => <DashboardView {...model} />,
+    '/dashboard/posts/:id': model => <DashboardView {...model} />,
     '/test': model => <Test {...model} />
   },
   root: document.getElementById('root')

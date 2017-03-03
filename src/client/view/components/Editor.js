@@ -7,11 +7,13 @@ const TextArea = props =>
     name={props.name}
     id={props.id}
     cols={props.cols || 30}
-    rows={props.rows || 3}
+    rows={props.rows || 2}
     placeholder={props.placeholder || 'Input here...'}
     onkeyup={props.resize || ''}
     onkeydown={props.resize || ''}
-    value={props.value || ''} />
+    value={props.value || ''}
+    oncreate={getInitialSize}
+  />
 
 export default props =>
   <section id='editor'>
@@ -20,7 +22,9 @@ export default props =>
         name='post'
         id='editor-post'
         placeholder='# your post begins here...'
-        resize={autoSize} />
+        value={props.post || ''}
+        resize={autoSize}
+      />
     </form>
   </section>
 
@@ -33,5 +37,11 @@ function autoSize (e) {
   target.focus()
   if (target.scrollHeight > (target.clientHeight + 16)) {
     target.style.height = `${target.scrollHeight + 16}px`
+  }
+}
+
+function getInitialSize (el) {
+  if (el.rows * 16 < el.scrollHeight) {
+    el.rows = Math.ceil(el.scrollHeight / 16)
   }
 }
