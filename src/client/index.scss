@@ -1,6 +1,10 @@
 @import '~sanitize.css/sanitize';
 @import 'styles/vars';
 @import 'styles/base';
+
+// UI Component defaults
+@import 'view/Button';
+
 @import 'view/Header';
 @import 'view/Sidebar';
 @import 'view/Editor';
