@@ -43,7 +43,13 @@ app({
     menu,
     posts: testItems,
     selected: {
-      tags: ['a', 'b', 'c',' d']
+      created: 'xx-xx-xxxx',
+      updated: 'xx-xx-xxxx',
+      tags: [
+        { name: 'travel', color: 'green' },
+        { name: 'food', color: 'blue' },
+        { name: 'programming', color: 'purple' }
+      ]
     }
   },
   view: {

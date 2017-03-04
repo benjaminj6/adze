@@ -1,14 +1,14 @@
-/* eslint-disable */
 import { h } from 'hyperapp' // eslint-disable-line
 
 import Header from '../components/Header'
 import Prompt from '../components/Prompt'
 import Editor from '../components/Editor'
-import Info from '../components/Info'
 import Dropdown from '../components/Dropdown'
 
 import { Menu, Edit, Info as InfoSvg } from '../components/Icons'
 import Sidebar from '../components/Sidebar'
+
+import styles from '../../styles/foundation.json'
 
 const NoneSelected = model =>
   <main>
@@ -31,12 +31,25 @@ const PostSelected = model =>
           title: 'Info',
           menu: <Dropdown direction='right'>
             <ul>
-              <li>Created on: xx-xx-xxxx</li>
-              <li>Updated on: xx-xx-xxxx</li>
-              <li>Tags:
+              <li>Created on: {model.selected.created || ''}</li>
+              <li>Updated on: {model.selected.updated || ''}</li>
+              <li>
+                <span>Tags:</span>
                 <ul>
-                  {model.selected.tags.map(t => <li>{t}</li>)}
+                  {model.selected.tags.map(t =>
+                    <li
+                      style={{
+                        background: t.color || '#eee'
+                      }}
+                      className='tag'>
+                      {t.name}
+                    </li>)}
                 </ul>
+                <form id='new-tag' action=''>
+                  <input name='name' type='text' placeholder='New tag...' />
+                  <input name='color' type='color' value={styles.accent} />
+                  <button type='submit'><InfoSvg /></button>
+                </form>
               </li>
             </ul>
           </Dropdown>
@@ -47,12 +60,11 @@ const PostSelected = model =>
           className: 'btn-text'
         }
       ]} />
-    {model.info ? <Info /> : ''}
     <Editor {...model} />
   </main>
 
 export default model =>
-  <div id='app'>
+  <div id='app' className='dashboard-view'>
     <Sidebar menu={model.menu} />
     {
       model.noneSelected ? <NoneSelected {...model} /> : <PostSelected {...model} />
