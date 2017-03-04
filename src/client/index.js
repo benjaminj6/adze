@@ -41,13 +41,16 @@ app({
   router,
   model: {
     menu,
-    posts: testItems
+    posts: testItems,
+    selected: {
+      tags: ['a', 'b', 'c',' d']
+    }
   },
   view: {
     '/': model => <LoginView {...model} />,
     '/dashboard': model => <DashboardView noneSelected={true} {...model} />,
     '/dashboard/create': model => <DashboardView {...model} />,
-    '/dashboard/posts/:id': model => <DashboardView info={true} {...model} />
+    '/dashboard/posts/:id': model => <DashboardView {...model} />
   },
   root: document.getElementById('root')
 })

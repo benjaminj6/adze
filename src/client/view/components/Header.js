@@ -4,17 +4,21 @@ import Button from './Button'
 import { Menu } from './Icons' // eslint-disable-line
 
 const Settings = ({ buttons }) =>
-  <div className='settings'>
+  <ul className='settings'>
     {
       buttons.map(btn =>
-        <Button
-          className={btn.className}
-          title={btn.title}
-          style={btn.style}>
-          {btn.content}
-        </Button>)
+        <li className='settings-item'>
+          <Button
+            className={btn.className}
+            title={btn.title}
+            style={btn.style}>
+            {btn.content}
+          </Button>
+          {btn.menu ? btn.menu : ''}
+        </li>
+      )
     }
-  </div>
+  </ul>
 
 // TODO: Will need to abstract out current buttons into a prop
 

@@ -5,6 +5,8 @@ import Header from '../components/Header'
 import Prompt from '../components/Prompt'
 import Editor from '../components/Editor'
 import Info from '../components/Info'
+import Dropdown from '../components/Dropdown'
+
 import { Menu, Edit, Info as InfoSvg } from '../components/Icons'
 import Sidebar from '../components/Sidebar'
 
@@ -24,7 +26,21 @@ const PostSelected = model =>
       left={<Menu />}
       right={[
         { content: <Edit />, title: 'Edit' },
-        { content: <InfoSvg />, title: 'Info' },
+        {
+          content: <InfoSvg />,
+          title: 'Info',
+          menu: <Dropdown direction='right'>
+            <ul>
+              <li>Created on: xx-xx-xxxx</li>
+              <li>Updated on: xx-xx-xxxx</li>
+              <li>Tags:
+                <ul>
+                  {model.selected.tags.map(t => <li>{t}</li>)}
+                </ul>
+              </li>
+            </ul>
+          </Dropdown>
+        },
         {
           content: 'Publish',
           title: 'Publish',

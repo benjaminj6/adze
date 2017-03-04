@@ -1,6 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 export default props =>
-  <section className='info'>
+  <div id='post-info'>
     <h1>Hi</h1>
-  </section>
+  </div>
