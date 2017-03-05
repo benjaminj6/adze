@@ -26,18 +26,20 @@ const model = {
     { title: 'foo', color: 'green' },
     { title: 'bar', color: 'blue' }
   ],
+  selected: parseInt(window.location.pathname.split('id=')[1]) || null,
   writing: true
 }
 // end temporary
 
 app({
-  router,
   model,
+  router,
   view: {
     '/': model => <LoginView {...model} />,
     '/dashboard': model => <DashboardView {...model} />,
     '/dashboard/create': model => <DashboardView {...model} />,
-    '/dashboard/posts/:id': model => <DashboardView {...model} />
+    '/dashboard/posts/id=:id': model => <DashboardView {...model} />
   },
+  plugins: [router],
   root: document.getElementById('root')
 })
