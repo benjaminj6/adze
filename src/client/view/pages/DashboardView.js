@@ -7,24 +7,9 @@ export default model =>
       hidden
       id='nav-toggler'
       type='checkbox' />
-    <nav style={{
-      position: 'relative',
-      width: '25%',
-      zIndex: 5,
-      float: 'left',
-      height: '100%'
-     }}>
-     <button style={{
-        position: 'absolute',
-        right: '-1.5rem',
-        paddingLeft: '0.5rem',
-        top: '0.5rem',
-        lineHeight: '1.5rem',
-        transform: 'translateZ(40)'
-      }}>
-       <label
-         id='nav-toggler-btn'
-         for='nav-toggler'>@</label>
+    <nav id='nav'>
+      <button id='nav-toggler-btn'>
+       <label for='nav-toggler'>@</label>
      </button>
       <div
         className="sidebar"
@@ -147,7 +132,6 @@ export default model =>
           <h1 style={{
             color: 'rgba(0, 0, 0, 0.4)',
             textAlign: 'center'
-
           }}>
             Choose a post on the left to edit it.
             <br />

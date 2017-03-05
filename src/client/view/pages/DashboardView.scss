@@ -1,71 +1,83 @@
-#app.dashboard-view {
-  .tag {
-    color: $text-accent-bg;
-    opacity: 0.5;
-    margin: 2px 0;
-    padding: (0.25 * $base);
-    transition: all $transition-short;
+// #app.dashboard-view {
+//   .tag {
+//     color: $text-accent-bg;
+//     opacity: 0.5;
+//     margin: 2px 0;
+//     padding: (0.25 * $base);
+//     transition: all $transition-short;
+//
+//     &:hover {
+//       opacity: 1;
+//     }
+//   }
+//
+//   #new-tag {
+//     display: flex;
+//
+//     input[name='name'] {
+//       width: 66%;
+//     }
+//
+//     input[name='color'] {
+//       height: 1.5 * $base;
+//       width: 1.5 * $base;
+//     }
+//   }
+//
+//   .remove-tag {
+//     float: right;
+//     color: $text-accent-bg;
+//     opacity: 0.8;
+//
+//     &:hover {
+//       opacity: 1;
+//     }
+//   }
+// }
 
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  #new-tag {
-    display: flex;
-
-    input[name='name'] {
-      width: 66%;
-    }
-
-    input[name='color'] {
-      height: 1.5 * $base;
-      width: 1.5 * $base;
-    }
-  }
-
-  .remove-tag {
-    float: right;
-    color: $text-accent-bg;
-    opacity: 0.8;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
+#nav {
+  float: left;
+  height: 100%;
+  position: relative;
+  width: 25%;
+  z-index: 5;
 }
 
-#nav-toggler + nav {
-  transform: translateX(0);
-  transition: transform $transition;
+// Handles open and closed states of menu
+#nav-toggler {
+  & + #nav {
+   transform: translateX(0);
+   transition: $transition;
+  }
+
+ &:checked + #nav {
+   transform: translateX(-100%);
+
+   & + main {
+     left: 0;
+   }
+ }
 }
 
-#nav-toggler:checked + nav {
-  width: 0;
-  transform: translateX(-100%);
+#nav-toggler-btn {
+  color: rgba(#000, 0.6);
+  line-height: 1.5rem;
+  padding-left: 0.5rem;
+  position: absolute;
+  right: -1.5rem;
+  top: 0.5rem;
+  transition: all $transition-short;
+  z-index: 40;
 
-  .sidebar {
-    overflow: hidden;
+  &:hover, &:focus, label:hover, label:focus {
+    color: #000;
+    cursor: pointer;
   }
 }
 
 main {
   left: 25%;
   transition: left $transition;
-}
-
-#nav-toggler:checked + nav + main {
-  left: 0;
-}
-
-#nav-toggler-btn {
-  color: rgba(#000, 0.6);
-  transition: all $transition-short;
-
-  &:hover, &:focus {
-    color: #000;
-    cursor: pointer;
-  }
 }
 
 #info-toggler + #info-menu {
