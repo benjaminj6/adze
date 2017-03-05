@@ -30,24 +30,16 @@ const PostSelected = model =>
         {
           content: <InfoSvg />,
           title: 'Info',
-          style: {
-            border: '1px solid rgba(0, 0, 0, 0.1)',
-            borderBottom: 'none',
-            borderRadius: 0,
-            height: styles.base + 1
-          },
           menu: <Dropdown direction='right'>
             <ul>
-              <li>Created on: {model.selected.created || ''}</li>
-              <li>Updated on: {model.selected.updated || ''}</li>
+              <li>Created: {model.selected.created || ''}</li>
+              <li>Last updated: {model.selected.updated || ''}</li>
               <li>
                 <span>Tags:</span>
                 <ul>
                   {model.selected.tags.map(t =>
                     <li
-                      style={{
-                        background: t.color || '#eee'
-                      }}
+                      style={{ background: t.color || '#eee' }}
                       className='tag'>
                       {t.name}
                       <Button className='remove-tag'>
