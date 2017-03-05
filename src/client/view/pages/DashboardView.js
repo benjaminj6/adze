@@ -71,12 +71,7 @@ export default model =>
               el.rows = height / 16
             }} />
         </section>
-        : <section className='prompt' style={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center'
-        }}>
+        : <section className='prompt'>
           <h1>
             Choose a post on the left to edit it.
             <br />
