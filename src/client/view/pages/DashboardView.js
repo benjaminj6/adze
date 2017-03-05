@@ -9,7 +9,7 @@ export default model =>
       type='checkbox' />
     <nav style={{
       position: 'relative',
-      width: '40%',
+      width: '25%',
       zIndex: 5,
       float: 'left',
       height: '100%'
@@ -29,12 +29,13 @@ export default model =>
       <div
         className="sidebar"
         style={{
-          background: 'steelblue',
-          height: '100%',
-          padding: '0 0.5rem'
+          background: '#ccc',
+          height: '100%'
         }}>
         <header style={{
-          justifyContent: 'flex-start'
+          justifyContent: 'flex-start',
+          padding: '0 0.5rem',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
         }}>
           <button>
             @ email
@@ -45,14 +46,19 @@ export default model =>
             { title: 'Posts', icon: '@', items: model.posts },
             { title: 'Tags', icon: '@', items: model.tags }
           ].map(i =>
-            <ul>
+            <ul style={{
+              margin: 0
+            }}>
               <h3
                 style={{
-                  margin: 0
+                  margin: 0,
+                  lineHeight: '2.5rem',
+                  paddingLeft: '0.5rem'
                 }}>{i.icon} {i.title}</h3>
               {i.items.map(item =>
                 <li style={{
-                  paddingLeft: '1.5em'
+                  paddingLeft: '2em',
+                  lineHeight: '2rem'
                 }}>{item.title}</li>
               )}
             </ul>
@@ -70,7 +76,7 @@ export default model =>
       <header style={{
         background: '#fff',
         right: 0,
-        width: '60%',
+        width: '75%',
         padding: '0.5rem',
         position: 'fixed',
         zIndex: 0,
@@ -104,7 +110,10 @@ export default model =>
         ? <section style={{
           marginTop: '40px',
           overflowY: 'visible',
-          scroll: 'none'
+          scroll: 'none',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center'
         }}>
           <textarea
             name='editor'
@@ -123,10 +132,29 @@ export default model =>
             style={{
               resize: 'none',
               width: '100%',
-              overflowY: 'scroll'
+              maxWidth: '30rem',
+              overflowY: 'scroll',
+              position: 'absolute'
             }}
           />
         </section>
-        : <section>bar</section>}
+        : <section style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}>
+          <h1 style={{
+            color: 'rgba(0, 0, 0, 0.4)',
+            textAlign: 'center'
+
+          }}>
+            Choose a post on the left to edit it.
+            <br />
+            Or you can start a <span style={{
+              textDecoration: 'underline'
+            }}>new one today</span>.
+          </h1>
+        </section>}
     </main>
   </div>

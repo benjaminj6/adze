@@ -15,7 +15,7 @@
     display: flex;
 
     input[name='name'] {
-      width: 70%;
+      width: 66%;
     }
 
     input[name='color'] {
@@ -50,7 +50,7 @@
 }
 
 main {
-  left: 40%;
+  left: 25%;
   transition: left $transition;
 }
 
