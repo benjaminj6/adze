@@ -7,54 +7,35 @@ import './index.scss'
 // temporary
 import { Ex, Info, Edit, Menu } from './view/components/Icons'
 // Will be removed
-const testItems = [
-  {
-    href: 'foo.com',
-    text: 'blaksjljasdf'
-  },
-  {
-    href: 'bar.com',
-    text: 'ajsdlfkjalksdjfa'
-  },
-  {
-    href: 'baz.com',
-    text: 'ajsdljfla d'
-  }
-]
-
-const menu = [
-  {
-    heading: {
-      text: 'Posts',
-      icon: Ex()
+const model = {
+  posts: [
+    {
+      title: 'foo',
+      md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
+      date: 'xx-xx-xxxx',
+      id: 1
     },
-    items: testItems
-  }
-]
-
-const promptButtons = [
-  { content: 'New +', title: 'New', className: 'btn-accent btn-text'}
-]
+    {
+      title: 'bar',
+      md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
+      date: 'xx-xx-xxxx',
+      id: 2
+    }
+  ],
+  tags: [
+    { name: 'foo', color: 'green' },
+    { name: 'bar', color: 'blue' }
+  ],
+  selected: null
+}
 // end temporary
 
 app({
   router,
-  model: {
-    menu,
-    posts: testItems,
-    selected: {
-      created: 'xx-xx-xxxx',
-      updated: 'xx-xx-xxxx',
-      tags: [
-        { name: 'travel', color: 'green' },
-        { name: 'food', color: 'blue' },
-        { name: 'programming', color: 'purple' }
-      ]
-    }
-  },
+  model,
   view: {
     '/': model => <LoginView {...model} />,
-    '/dashboard': model => <DashboardView noneSelected={true} {...model} />,
+    '/dashboard': model => <DashboardView {...model} />,
     '/dashboard/create': model => <DashboardView {...model} />,
     '/dashboard/posts/:id': model => <DashboardView {...model} />
   },
