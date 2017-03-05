@@ -80,9 +80,7 @@ export default model =>
           <h1>
             Choose a post on the left to edit it.
             <br />
-            Or you can start a <span style={{
-              textDecoration: 'underline'
-            }}>new one today</span>.
+            Or you can start a <span>new one today</span>.
           </h1>
         </section>}
     </main>

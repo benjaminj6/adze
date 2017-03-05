@@ -163,8 +163,12 @@ main section {
     flex-direction: column;
 
     h1 {
-      color: rgba(#000, 0.5);
+      color: rgba(#000, 0.3);
       text-align: center;
+    }
+
+    span {
+      text-decoration: underline;
     }
   }
 }
