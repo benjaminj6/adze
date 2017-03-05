@@ -23,4 +23,14 @@
       width: 1.5 * $base;
     }
   }
+
+  .remove-tag {
+    float: right;
+    color: $text-accent-bg;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }

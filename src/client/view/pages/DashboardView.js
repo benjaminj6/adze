@@ -6,6 +6,7 @@ import Editor from '../components/Editor'
 import Dropdown from '../components/Dropdown'
 
 import { Menu, Edit, Info as InfoSvg } from '../components/Icons'
+import Button from '../components/Button'
 import Sidebar from '../components/Sidebar'
 
 import styles from '../../styles/foundation.json'
@@ -49,9 +50,9 @@ const PostSelected = model =>
                       }}
                       className='tag'>
                       {t.name}
-                      <InfoSvg style={{
-                        float: 'right'
-                      }} />
+                      <Button className='remove-tag'>
+                        <InfoSvg />
+                      </Button>
                     </li>)}
                 </ul>
                 <form id='new-tag' action=''>
