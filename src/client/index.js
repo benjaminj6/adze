@@ -26,7 +26,6 @@ const model = {
     { title: 'foo', color: 'green' },
     { title: 'bar', color: 'blue' }
   ],
-  selected: 2,
   writing: true
 }
 // end temporary
