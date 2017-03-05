@@ -49,6 +49,9 @@ const PostSelected = model =>
                       }}
                       className='tag'>
                       {t.name}
+                      <InfoSvg style={{
+                        float: 'right'
+                      }} />
                     </li>)}
                 </ul>
                 <form id='new-tag' action=''>

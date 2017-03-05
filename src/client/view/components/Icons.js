@@ -7,7 +7,8 @@ const Svg = (props = {}, children) =>
     fill={props.fill || '#000'}
     height={props.height || 24}
     width={props.width || 24}
-    viewBox={props.viewBox || '0 0 24 24'}>
+    viewBox={props.viewBox || '0 0 24 24'}
+    {...props}>
     {children}
   </svg>
 
