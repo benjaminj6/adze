@@ -3,7 +3,7 @@
     color: $text-accent-bg;
     opacity: 0.5;
     margin: 2px 0;
-    padding: 2px (0.25 * $base);
+    padding: (0.25 * $base);
     transition: all $transition-short;
 
     &:hover {

@@ -29,6 +29,12 @@ const PostSelected = model =>
         {
           content: <InfoSvg />,
           title: 'Info',
+          style: {
+            border: '1px solid rgba(0, 0, 0, 0.1)',
+            borderBottom: 'none',
+            borderRadius: 0,
+            height: styles.base + 1
+          },
           menu: <Dropdown direction='right'>
             <ul>
               <li>Created on: {model.selected.created || ''}</li>

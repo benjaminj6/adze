@@ -1,9 +1,9 @@
 .dropdown-menu {
   position: absolute;
   border: 1px solid rgba($text-default-color, 0.1);
-  box-shadow: 0 0 4px rgba(#000, 0.2);
-  padding: 0.25 * $base;
-  width: 150px;
+  padding: 0.75 * $base;
+  width: 200px;
   font-size: 0.8 * $base;
   color: rgba($text-default-color, 0.5);
+  line-height: 1.5 * $base;
 }
