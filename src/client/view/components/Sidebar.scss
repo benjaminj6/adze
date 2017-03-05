@@ -1,55 +1,55 @@
-#sidebar {
-  height: $sidebar-height;
-  width: $sidebar-width;
-  max-width: $sidebar-width;
-  background: $sidebar-bg;
-  border-right: 1px solid rgba(#000, 0.1);
-
-  header {
-    border-bottom: 1px solid rgba($text-default-color, 0.1);
-  }
-
-  nav {
-    h4 {
-      padding-left: $sb-parent-pad;
-      margin: 0;
-      line-height: 3 * $base;
-      transition: all $transition-short;
-      cursor: pointer;
-    }
-
-    h4, a {
-      &:hover {
-        background: rgba($text-default-color, 0.1);
-      }
-    }
-
-    ul {
-      margin: 0;
-
-      li {
-        height: 2 * $base;
-      }
-
-      a {
-        width: 100%;
-        display: inline-block;
-        white-space: nowrap;
-        overflow-x: hidden;
-        padding-left: $sb-child-pad;
-        text-overflow: ellipsis;
-        transition: all $transition-short;
-        line-height: 2 * $base;
-        color: rgba($text-default-color, 0.8);
-        border-left: $sb-child-bd solid transparent;
-      }
-    }
-
-  }
-
-  svg {
-    height: $sb-icon-w;
-    width: $sb-icon-w;
-    margin-right: $sb-icon-margin;
-  }
-}
+// #sidebar {
+//   height: $sidebar-height;
+//   width: $sidebar-width;
+//   max-width: $sidebar-width;
+//   background: $sidebar-bg;
+//   border-right: 1px solid rgba(#000, 0.1);
+//
+//   header {
+//     border-bottom: 1px solid rgba($text-default-color, 0.1);
+//   }
+//
+//   nav {
+//     h4 {
+//       padding-left: $sb-parent-pad;
+//       margin: 0;
+//       line-height: 3 * $base;
+//       transition: all $transition-short;
+//       cursor: pointer;
+//     }
+//
+//     h4, a {
+//       &:hover {
+//         background: rgba($text-default-color, 0.1);
+//       }
+//     }
+//
+//     ul {
+//       margin: 0;
+//
+//       li {
+//         height: 2 * $base;
+//       }
+//
+//       a {
+//         width: 100%;
+//         display: inline-block;
+//         white-space: nowrap;
+//         overflow-x: hidden;
+//         padding-left: $sb-child-pad;
+//         text-overflow: ellipsis;
+//         transition: all $transition-short;
+//         line-height: 2 * $base;
+//         color: rgba($text-default-color, 0.8);
+//         border-left: $sb-child-bd solid transparent;
+//       }
+//     }
+//
+//   }
+//
+//   svg {
+//     height: $sb-icon-w;
+//     width: $sb-icon-w;
+//     margin-right: $sb-icon-margin;
+//   }
+// }

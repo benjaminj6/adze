@@ -55,6 +55,10 @@
 
    & + main {
      left: 0;
+
+     #editor {
+       padding: 0.5rem 10%;
+     }
    }
  }
 }
@@ -75,9 +79,54 @@
   }
 }
 
+#sidebar {
+  background: #ccc;
+  height: 100%;
+
+  header {
+    justify-content: flex-start;
+    padding: 0 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  h3 {
+    margin: 0;
+    line-height: 2.5rem;
+    padding-left: 0.5rem;
+  }
+
+  li {
+    padding-left: 2rem;
+    line-height: 2rem;
+  }
+}
+
 main {
+  height: 100%;
   left: 25%;
+  bottom: 0;
+  overflow-y: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
   transition: left $transition;
+
+  header {
+    background: #fff;
+    right: 0;
+    width: 75%;
+    padding: 0.5rem;
+    position: fixed;
+    z-index: 0;
+
+    ul {
+      display: flex;
+    }
+  }
 }
 
 #info-toggler + #info-menu {
@@ -87,4 +136,35 @@ main {
 #info-toggler:checked + #info-menu {
   display: flex;
   position: absolute;
+}
+
+main section {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+
+  &.editor-section {
+    padding-top: 40px;
+    overflow-y: visible;
+    -webkit-scroll: none;
+
+    textarea {
+      resize: none;
+      width: 100%;
+      box-sizing: content-box;
+      // max-width: 40rem;
+      padding: 0.5rem 5%;
+      overflow-y: scroll;
+      // position: absolute;
+    }
+  }
+
+  &.prompt {
+    flex-direction: column;
+
+    h1 {
+      color: rgba(#000, 0.5);
+      text-align: center;
+    }
+  }
 }

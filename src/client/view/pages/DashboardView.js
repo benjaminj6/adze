@@ -11,17 +11,8 @@ export default model =>
       <button id='nav-toggler-btn'>
        <label for='nav-toggler'>@</label>
      </button>
-      <div
-        className="sidebar"
-        style={{
-          background: '#ccc',
-          height: '100%'
-        }}>
-        <header style={{
-          justifyContent: 'flex-start',
-          padding: '0 0.5rem',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
-        }}>
+      <div id="sidebar">
+        <header>
           <button>
             @ email
           </button>
@@ -31,46 +22,20 @@ export default model =>
             { title: 'Posts', icon: '@', items: model.posts },
             { title: 'Tags', icon: '@', items: model.tags }
           ].map(i =>
-            <ul style={{
-              margin: 0
-            }}>
-              <h3
-                style={{
-                  margin: 0,
-                  lineHeight: '2.5rem',
-                  paddingLeft: '0.5rem'
-                }}>{i.icon} {i.title}</h3>
+            <ul>
+              <h3>{i.icon} {i.title}</h3>
               {i.items.map(item =>
-                <li style={{
-                  paddingLeft: '2em',
-                  lineHeight: '2rem'
-                }}>{item.title}</li>
+                <li>{item.title}</li>
               )}
             </ul>
           )
         }</section>
       </div>
     </nav>
-    <main style={{
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      overflowY: 'hidden'
-    }}>
-      <header style={{
-        background: '#fff',
-        right: 0,
-        width: '75%',
-        padding: '0.5rem',
-        position: 'fixed',
-        zIndex: 0,
-      }}>
-        <ul>
+    <main>
+      <header>
           {model.writing
-            ? <ul style={{
-              display: 'flex'
-            }}>
+            ? <ul>
               <li>
                 <button>@</button>
               </li>
@@ -82,28 +47,19 @@ export default model =>
                   hidden
                   id='info-toggler'
                   type='checkbox' />
-                <div
-                  id='info-menu'>foo</div>
+                <div id='info-menu'>foo</div>
               </li>
               <li>
                 <button>submit</button>
               </li>
             </ul> : <div>new</div>}
-        </ul>
       </header>
-      {(model.writing)
-        ? <section style={{
-          marginTop: '40px',
-          overflowY: 'visible',
-          scroll: 'none',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center'
-        }}>
+      {model.writing
+        ? <section className='editor-section'>
           <textarea
             name='editor'
             id='editor'
-            cols='30'
+            cols='50'
             rows='30'
             placeholder='# your header here...'
             value={model.selected
@@ -113,26 +69,15 @@ export default model =>
             oncreate={el => {
               const height = window.innerHeight - 40
               el.rows = height / 16
-            }}
-            style={{
-              resize: 'none',
-              width: '100%',
-              maxWidth: '30rem',
-              overflowY: 'scroll',
-              position: 'absolute'
-            }}
-          />
+            }} />
         </section>
-        : <section style={{
+        : <section className='prompt' style={{
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center'
         }}>
-          <h1 style={{
-            color: 'rgba(0, 0, 0, 0.4)',
-            textAlign: 'center'
-          }}>
+          <h1>
             Choose a post on the left to edit it.
             <br />
             Or you can start a <span style={{

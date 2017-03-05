@@ -1,39 +1,39 @@
 $editor-bd: 1px solid rgba(#000, 0.1);
 
-#editor {
-  padding: (0.75 * $base) $main-children-pad;
-  overflow-y: auto;
-  height: $main-section-height;
-
-  form {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  textarea {
-    width: 100%;
-    resize: none;
-    order: 2;
-
-    &#editor-title {
-      order: 1;
-      border-bottom: $editor-bd;
-      width: 50%;
-      flex-grow: 1;
-      transition: border-bottom $transition;
-
-      &:focus {
-        border-bottom: 1px solid $accent;
-      }
-    }
-  }
-
-  fieldset {
-    order: 1;
-    margin-left: 0.5 * $base;
-
-    button {
-      display: inline;
-    }
-  }
-}
+// #editor {
+//   padding: (0.75 * $base) $main-children-pad;
+//   overflow-y: auto;
+//   height: $main-section-height;
+//
+//   form {
+//     display: flex;
+//     flex-wrap: wrap;
+//   }
+//
+//   textarea {
+//     width: 100%;
+//     resize: none;
+//     order: 2;
+//
+//     &#editor-title {
+//       order: 1;
+//       border-bottom: $editor-bd;
+//       width: 50%;
+//       flex-grow: 1;
+//       transition: border-bottom $transition;
+//
+//       &:focus {
+//         border-bottom: 1px solid $accent;
+//       }
+//     }
+//   }
+//
+//   fieldset {
+//     order: 1;
+//     margin-left: 0.5 * $base;
+//
+//     button {
+//       display: inline;
+//     }
+//   }
+// }
