@@ -23,10 +23,11 @@ const model = {
     }
   ],
   tags: [
-    { name: 'foo', color: 'green' },
-    { name: 'bar', color: 'blue' }
+    { title: 'foo', color: 'green' },
+    { title: 'bar', color: 'blue' }
   ],
-  selected: null
+  selected: null,
+  writing: true
 }
 // end temporary
 

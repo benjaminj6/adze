@@ -17,11 +17,14 @@
 // Views (overrides of UI components per view)
 @import 'view/pages/index';
 
+html {
+  font-size: 16px;
+}
+
 #app {
   color: $text-default-color;
   height: 100%;
   height: 100vh;
-  display: flex;
 }
 
 main {
