@@ -1,7 +1,15 @@
 import { h } from 'hyperapp' // eslint-disable-line
 import styles from '../../styles/foundation.json'
 
-import { User, AngleDown } from '../components/Icons'
+import {
+  AngleDown,
+  Menu,
+  More,
+  Paint,
+  Plus,
+  Save,
+  User
+} from '../components/Icons'
 
 export default model =>
   <div id='app' className='dashboard-view'>
@@ -11,7 +19,7 @@ export default model =>
       type='checkbox' />
     <nav id='nav'>
       <button id='nav-toggler-btn'>
-        <label for='nav-toggler'>@</label>
+        <label for='nav-toggler'><Menu /></label>
       </button>
       <div id='sidebar'>
         <header>
@@ -63,23 +71,74 @@ export default model =>
           model.writing
           ? <ul>
             <li>
-              <button>
-                <label for='info-toggler'>@</label>
-              </button>
-              <input
-                hidden
-                id='info-toggler'
-                type='checkbox' />
-              <div id='info-menu'>foo</div>
+              <button><Save /></button>
             </li>
             <li>
-              <button>#</button>
+              <input
+                hidden
+                checked
+                id='info-toggler'
+                type='checkbox' />
+              <button id='info-toggler-btn'>
+                <label for='info-toggler'><More /></label>
+              </button>
+              <div id='info-menu'>
+                <ul>
+                  {
+                    model.selected
+                    ? <li>
+                      Created: {model.posts.find(p => p.id === model.selected).date}
+                    </li> : ''
+                  }
+                  <li>
+                    <span>Tags:</span>
+                    <ul className='tags'>
+                      {
+                        model.current
+                        ? model.current.tags.map(t =>
+                          <li style={{ background: t.color }}>{t.title}</li>
+                        )
+                        : ''
+                      }
+                    </ul>
+                    <form
+                      id='add-tag'
+                      action=''>
+                      <input
+                        placeholder='add a tag'
+                        type='text' />
+                      <input
+                        id='color-picker'
+                        type='color'
+                        defaultValue='#eeeeee'
+                        oninput={e => {
+                          const color = e.target.value
+                          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = color
+                          console.log(color)
+                        }} />
+                      <label
+                        id='color-picker-btn'
+                        htmlFor='color-picker'>
+                        <Paint height='1rem' width='1rem' />
+                      </label>
+                      <button type='submit'>
+                        <Plus />
+                      </button>
+                    </form>
+                  </li>
+                  <li>Delete post</li>
+                </ul>
+              </div>
             </li>
-          </ul> : <div>+</div>
+          </ul> : <div><Plus /></div>
         }
       </header>
       {model.writing
         ? <section className='editor-section'>
+          <input
+            name='title'
+            placeholder='My post'
+            type='text' />
           <textarea
             name='editor'
             id='editor'

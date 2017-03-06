@@ -1,3 +1,16 @@
+button {
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
 #nav {
   float: left;
   height: 100%;
@@ -29,10 +42,11 @@
 #nav-toggler-btn {
   color: rgba(#000, 0.6);
   line-height: 1.5rem;
-  padding-left: 0.5rem;
+  padding: 0;
   position: absolute;
-  right: -1.5rem;
-  top: 0.5rem;
+  right: -1.75rem;
+  top: 0;
+  height: 40px;
   transition: all $transition-short;
   z-index: 40;
 
@@ -50,6 +64,10 @@
     justify-content: flex-start;
     padding: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    button {
+      padding: 0;
+    }
   }
 
   h3 {
@@ -124,13 +142,64 @@ main {
   }
 }
 
-#info-toggler + #info-menu {
-  display: none;
+
+#info-toggler-btn {
+  label {
+    cursor: inherit;
+  }
 }
 
-#info-toggler:checked + #info-menu {
-  display: flex;
-  position: absolute;
+#info-toggler {
+  & + #info-toggler-btn + #info-menu {
+    display: none;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+#info-toggler:checked {
+  & + #info-toggler-btn {
+    background: rgba(#000, 0.1);
+  }
+
+  & + #info-toggler-btn + #info-menu {
+    display: flex;
+    right: 0.5rem;
+    background: #fff;
+    position: absolute;
+    border: 1px solid rgba(#000, 0.1);
+    padding: 1rem;
+
+  }
+}
+
+.tags {
+  li {
+    color: rgba(#fff, 0.8);
+    margin: 1px;
+    border-radius: $bd-rad;
+    padding: 0 0.5rem;
+    line-height: 2;
+  }
+
+}
+
+#add-tag {
+  margin-top: 1px;
+  line-height: 2;
+  padding: 0 0.5rem;
+  border: 1px solid rgba(#000, 0.1);
+  border-radius: $bd-rad;
+
+  input[type="color"] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+  }
 }
 
 main section {
@@ -142,6 +211,13 @@ main section {
     padding-top: 40px;
     overflow-y: visible;
     -webkit-scroll: none;
+
+    input[name='title'] {
+      position: absolute;
+      top: 0;
+      text-align: center;
+      height: 40px;
+    }
 
     textarea {
       resize: none;

@@ -11,7 +11,8 @@ const model = {
       title: 'foo',
       md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
       date: 'xx-xx-xxxx',
-      id: 1
+      id: 1,
+      tags: [3, 4]
     },
     {
       title: 'bar',
@@ -21,10 +22,41 @@ const model = {
     }
   ],
   tags: [
-    { title: 'foo', color: 'green' },
-    { title: 'bar', color: 'blue' }
+    {
+      title: 'foo',
+      color: 'green',
+      id: 3
+    },
+    {
+      title: 'bar',
+      color: 'blue',
+      id: 4
+    },
+    {
+      title: 'baz',
+      color: 'red',
+      id: 5
+    }
   ],
   selected: parseInt(window.location.pathname.split('id=')[1]) || null,
+  current: {
+    title: 'foo',
+    md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
+    date: 'xx-xx-xxxx',
+    id: 1,
+    tags: [
+      {
+        title: 'foo',
+        color: 'green',
+        id: 3
+      },
+      {
+        title: 'bar',
+        color: 'blue',
+        id: 4
+      },
+    ]
+  },
   writing: /posts|create/.test(window.location.pathname)
 }
 // end temporary
