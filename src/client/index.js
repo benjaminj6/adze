@@ -25,7 +25,7 @@ const model = {
     { title: 'bar', color: 'blue' }
   ],
   selected: parseInt(window.location.pathname.split('id=')[1]) || null,
-  writing: true
+  writing: /posts|create/.test(window.location.pathname)
 }
 // end temporary
 

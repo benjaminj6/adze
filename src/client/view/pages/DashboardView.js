@@ -1,6 +1,7 @@
-/* eslint-disable */
 import { h } from 'hyperapp' // eslint-disable-line
 import styles from '../../styles/foundation.json'
+
+import { User } from '../components/Icons'
 
 export default model =>
   <div id='app' className='dashboard-view'>
@@ -10,18 +11,18 @@ export default model =>
       type='checkbox' />
     <nav id='nav'>
       <button id='nav-toggler-btn'>
-       <label for='nav-toggler'>@</label>
-     </button>
-      <div id="sidebar">
+        <label for='nav-toggler'>@</label>
+      </button>
+      <div id='sidebar'>
         <header>
           <button>
-            @ email
+            <User /><span>email</span>
           </button>
         </header>
         <section>{
           [
-            { title: 'Posts', icon: '@', items: model.posts },
-            { title: 'Tags', icon: '@', items: model.tags }
+            { title: 'Posts', items: model.posts },
+            { title: 'Tags', items: model.tags }
           ].map(i =>
             <div
               className='menu-list'>
@@ -29,11 +30,11 @@ export default model =>
                 hidden
                 checked={isSelected(i)}
                 id={`${i.title}-toggler`}
-                type='radio'
+                type='checkbox'
                 name='menu-item-toggler' />
               <h3>
                 <label htmlFor={`${i.title}-toggler`}>
-                  {i.icon} {i.title}
+                  {i.title}
                 </label>
               </h3>
               <ul>
