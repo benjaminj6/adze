@@ -43,7 +43,7 @@
 }
 
 #sidebar {
-  background: #ccc;
+  background: rgba(#000, 0.1);
   height: 100%;
 
   header {
@@ -65,6 +65,27 @@
   li {
     padding-left: 2rem;
     line-height: 2rem;
+    transition: all $transition-short;
+    border-left: 0.25rem solid transparent;
+
+    &:hover {
+      cursor: pointer;
+      background: rgba(#fff, 0.4);
+      border-left: 0.25rem solid rgba($accent, 0.3);
+    }
+  }
+}
+
+.menu-list {
+  ul {
+    height: 0;
+    overflow-y: hidden;
+  }
+
+  input[name='menu-item-toggler']:checked {
+    + h3 + ul {
+      height: auto;
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { h } from 'hyperapp' // eslint-disable-line
+import styles from '../../styles/foundation.json'
 
 export default model =>
   <div id='app' className='dashboard-view'>
@@ -22,37 +23,59 @@ export default model =>
             { title: 'Posts', icon: '@', items: model.posts },
             { title: 'Tags', icon: '@', items: model.tags }
           ].map(i =>
-            <ul>
-              <h3>{i.icon} {i.title}</h3>
-              {i.items.map(item =>
-                <li>{item.title}</li>
-              )}
-            </ul>
+            <div
+              className='menu-list'>
+              <input
+                hidden
+                checked={isSelected(i)}
+                id={`${i.title}-toggler`}
+                type='radio'
+                name='menu-item-toggler' />
+              <h3>
+                <label htmlFor={`${i.title}-toggler`}>
+                  {i.icon} {i.title}
+                </label>
+              </h3>
+              <ul>
+                {i.items.map(item =>
+                  <li
+                    style={{
+                      background: model.selected === item.id ? '#fff' : '',
+                      borderLeft: model.selected === item.id ? `0.25rem solid ${styles.accent}` : ''
+                    }}
+                    oncreate={el => { console.log(model, item.id) }}>
+                    {item.title}
+                  </li>
+                )}
+              </ul>
+            </div>
           )
         }</section>
       </div>
     </nav>
     <main>
       <header>
-          {model.writing
-            ? <ul>
-              <li>
-                <button>@</button>
-              </li>
-              <li>
-                <button>
-                  <label for='info-toggler'>@</label>
-                </button>
-                <input
-                  hidden
-                  id='info-toggler'
-                  type='checkbox' />
-                <div id='info-menu'>foo</div>
-              </li>
-              <li>
-                <button>submit</button>
-              </li>
-            </ul> : <div>new</div>}
+        {
+          model.writing
+          ? <ul>
+            <li>
+              <button>@</button>
+            </li>
+            <li>
+              <button>
+                <label for='info-toggler'>@</label>
+              </button>
+              <input
+                hidden
+                id='info-toggler'
+                type='checkbox' />
+              <div id='info-menu'>foo</div>
+            </li>
+            <li>
+              <button>submit</button>
+            </li>
+          </ul> : <div>new</div>
+        }
       </header>
       {model.writing
         ? <section className='editor-section'>
@@ -80,3 +103,7 @@ export default model =>
         </section>}
     </main>
   </div>
+
+function isSelected (el) {
+  return window.location.pathname.includes(el.title.toLowerCase())
+}
