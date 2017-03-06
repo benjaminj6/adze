@@ -4,8 +4,6 @@ import { h, app, router } from 'hyperapp' // eslint-disable-line
 import { DashboardView, LoginView } from './view'
 import './index.scss'
 
-// temporary
-import { Ex, Info, Edit, Menu } from './view/components/Icons'
 // Will be removed
 const model = {
   posts: [

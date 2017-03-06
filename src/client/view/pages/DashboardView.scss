@@ -77,6 +77,10 @@
 }
 
 .menu-list {
+  h3 {
+    text-transform: uppercase;
+  }
+
   ul {
     height: 0;
     overflow-y: hidden;
