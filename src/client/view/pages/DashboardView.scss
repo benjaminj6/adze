@@ -7,7 +7,7 @@ button {
   }
 
   &:focus {
-    outline: none;
+    outline: 1px dotted rgba(#000, 0.3);
   }
 }
 
@@ -191,14 +191,48 @@ main {
   margin-top: 1px;
   line-height: 2;
   padding: 0 0.5rem;
-  border: 1px solid rgba(#000, 0.1);
   border-radius: $bd-rad;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
 
-  input[type="color"] {
+  input[name='title'] {
+    border: 1px solid rgba(#000, 0.1);
+    bottom: 0;
+    left: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem + (1.5rem * 2);
+    position: absolute;
+    top: 0;
+    transition: border $transition-short;
+    width: 100%;
+
+    &:focus {
+      border: 1px solid rgba($accent, 0.4);
+    }
+  }
+
+  #color-picker {
     width: 0;
     height: 0;
     opacity: 0;
     padding: 0;
+
+    + #color-picker-btn {
+      padding: 2px;
+      opacity: 0.6;
+      transition: all $transition-short;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+
+    &:focus + #color-picker-btn {
+      border: 1px dotted rgba(#000, 0.3);
+    }
   }
 }
 

@@ -105,6 +105,7 @@ export default model =>
                       id='add-tag'
                       action=''>
                       <input
+                        name='title'
                         placeholder='add a tag'
                         type='text' />
                       <input
@@ -112,9 +113,7 @@ export default model =>
                         type='color'
                         defaultValue='#eeeeee'
                         oninput={e => {
-                          const color = e.target.value
-                          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = color
-                          console.log(color)
+                          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
                         }} />
                       <label
                         id='color-picker-btn'
