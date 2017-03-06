@@ -1,6 +1,9 @@
 /* eslint-disable */
 import { h, app, Router } from 'hyperapp' // eslint-disable-line
 
+import actions from './actions'
+import subscriptions from './subscriptions'
+
 import { DashboardView, LoginView } from './view'
 import './index.scss'
 
@@ -64,6 +67,8 @@ const model = {
 
 app({
   model,
+  actions,
+  subscriptions,
   view: {
     '/': model => <LoginView {...model} />,
     '/dashboard': model => <DashboardView {...model} />,
