@@ -5,8 +5,8 @@ const Svg = (props, children) =>
     id={props.id || ''}
     className={props.className || ''}
     fill={props.fill || '#000'}
-    height={props.height || 24}
-    width={props.width || 24}
+    height={props.size || 24}
+    width={props.size || 24}
     viewBox={props.viewBox || '0 0 24 24'}
     {...props}>
     {children}
@@ -20,6 +20,18 @@ const Svg = (props, children) =>
 export const AngleDown = props =>
   <Svg {...props}>
     <path d='M7 10l5 5 5-5z' />
+    <path d='M0 0h24v24H0z' fill='none' />
+  </Svg>
+
+export const Calendar = props =>
+  <Svg {...props}>
+    <path d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z' />
+    <path d='M0 0h24v24H0z' fill='none' />
+  </Svg>
+
+export const Close = props =>
+  <Svg {...props}>
+    <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' />
     <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
 
@@ -40,12 +52,6 @@ export const More = props =>
     <path d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
   </Svg>
 
-// export const Tag = props =>
-//   <Svg {...props}>
-//     <path d='M0 0h24v24H0z' fill='none' />
-//     <path d='M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z' />
-//   </Svg>
-
 export const Paint = props =>
   <Svg {...props}>
     <path d='M0 0h24v24H0z' fill='none' />
@@ -63,6 +69,17 @@ export const Save = props =>
   <Svg {...props}>
     <path d='M0 0h24v24H0z' fill='none' />
     <path d='M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z' />
+  </Svg>
+
+export const Tag = props =>
+  <Svg {...props}>
+    <path d='M5.5,7A1.5,1.5 0 0,0 7,5.5A1.5,1.5 0 0,0 5.5,4A1.5,1.5 0 0,0 4,5.5A1.5,1.5 0 0,0 5.5,7M21.41,11.58C21.77,11.94 22,12.44 22,13C22,13.55 21.78,14.05 21.41,14.41L14.41,21.41C14.05,21.77 13.55,22 13,22C12.45,22 11.95,21.77 11.58,21.41L2.59,12.41C2.22,12.05 2,11.55 2,11V4C2,2.89 2.89,2 4,2H11C11.55,2 12.05,2.22 12.41,2.58L21.41,11.58M13,20L20,13L11.5,4.5L4.5,11.5L13,20Z' />
+  </Svg>
+
+export const Trash = props =>
+  <Svg {...props}>
+    <path d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z' />
+    <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
 
 export const User = props =>

@@ -1,13 +1,18 @@
+/* eslint-disable */
 import { h } from 'hyperapp' // eslint-disable-line
 import styles from '../../styles/foundation.json'
 
 import {
   AngleDown,
+  Close,
+  Calendar,
   Menu,
   More,
   Paint,
   Plus,
   Save,
+  Tag,
+  Trash,
   User
 } from '../components/Icons'
 
@@ -86,17 +91,19 @@ export default model =>
                 <ul>
                   {
                     model.selected
-                    ? <li>
-                      Created: {model.posts.find(p => p.id === model.selected).date}
+                    ? <li className='info-menu-item'>
+                      <h3><i><Calendar size='1rem' /></i> Created: {model.posts.find(p => p.id === model.selected).date}</h3>
                     </li> : ''
                   }
-                  <li>
-                    <span>Tags:</span>
+                  <li className='info-menu-item'>
+                    <h3><i><Tag size='1rem' /></i> Tags:</h3>
                     <ul className='tags'>
                       {
                         model.current
                         ? model.current.tags.map(t =>
-                          <li style={{ background: t.color }}>{t.title}</li>
+                          <li style={{ background: t.color }}>
+                            {t.title} <button><Close height='1em' /></button>
+                          </li>
                         )
                         : ''
                       }
@@ -125,7 +132,9 @@ export default model =>
                       </button>
                     </form>
                   </li>
-                  <li>Delete post</li>
+                  <li className='info-menu-item'>
+                    <h3><i><Trash size='1rem' /></i> Delete Post</h3>
+                  </li>
                 </ul>
               </div>
             </li>
