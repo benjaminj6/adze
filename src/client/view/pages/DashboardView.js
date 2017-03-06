@@ -57,8 +57,8 @@ export default model =>
                 {i.items.map(item =>
                   <li
                     style={{
-                      background: model.selected === item.id ? '#fff' : '',
-                      borderLeft: model.selected === item.id ? `0.25rem solid ${styles.accent}` : ''
+                      background: model.current.id === item.id ? '#fff' : '',
+                      borderLeft: model.current.id === item.id ? `0.25rem solid ${styles.accent}` : ''
                     }}
                     oncreate={el => { console.log(model, item.id) }}>
                     {item.title}
@@ -90,9 +90,9 @@ export default model =>
               <div id='info-menu'>
                 <ul>
                   {
-                    model.selected
+                    model.current
                     ? <li className='info-menu-item'>
-                      <h3><i><Calendar size='1rem' /></i> Created: {model.posts.find(p => p.id === model.selected).date}</h3>
+                      <h3><i><Calendar size='1rem' /></i> Created: {model.current.date}</h3>
                     </li> : ''
                   }
                   <li className='info-menu-item'>
@@ -146,17 +146,15 @@ export default model =>
           <input
             name='title'
             placeholder='My post'
+            value={model.current.title || ''}
             type='text' />
           <textarea
             name='editor'
             id='editor'
             cols='50'
             rows='30'
-            placeholder='# your header here...'
-            value={model.selected
-              ? model.posts.find(p => p.id === model.selected).md
-              : ''
-            }
+            placeholder='# your post goes here...'
+            value={model.current.md || ''}
             oncreate={el => {
               const height = window.innerHeight - 40
               el.rows = height / 16
