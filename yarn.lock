@@ -3017,9 +3017,9 @@ https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
-hyperapp@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/hyperapp/-/hyperapp-0.6.0.tgz#c99a9ee9ace0893467bcaae7d7682708814996a9"
+hyperapp@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/hyperapp/-/hyperapp-0.7.0.tgz#eaaf281d1afa09d716080c0fca46389bf1ebc6f2"
 
 hyperscript-attribute-to-property@^1.0.0:
   version "1.0.0"

@@ -29,7 +29,7 @@ export default model =>
       <div id='sidebar'>
         <header>
           <button>
-            <User /><span>email</span>
+            <User /><span>{model.email}</span>
           </button>
         </header>
         <section>{
@@ -55,13 +55,16 @@ export default model =>
               </h3>
               <ul>
                 {i.items.map(item =>
-                  <li
-                    style={{
-                      background: model.current.id === item.id ? '#fff' : '',
-                      borderLeft: model.current.id === item.id ? `0.25rem solid ${styles.accent}` : ''
-                    }}
-                    oncreate={el => { console.log(model, item.id) }}>
-                    {item.title}
+                  <li>
+                    <a
+                      oncreate={el => {
+                        console.log(window.location.href === el.href)
+                        if (el.href === window.location.href) {
+                          el.style.background = '#fff'
+                          el.style.borderLeft = `0.25rem solid ${styles.accent}`
+                        }
+                      }}
+                      href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}>{item.title}</a>
                   </li>
                 )}
               </ul>
@@ -70,6 +73,7 @@ export default model =>
         }</section>
       </div>
     </nav>
+    {/* Separate into own module */}
     <main>
       <header>
         {
@@ -81,7 +85,6 @@ export default model =>
             <li>
               <input
                 hidden
-                checked
                 id='info-toggler'
                 type='checkbox' />
               <button id='info-toggler-btn'>
@@ -92,11 +95,11 @@ export default model =>
                   {
                     model.current
                     ? <li className='info-menu-item'>
-                      <h3><i><Calendar size='1rem' /></i> Created: {model.current.date}</h3>
+                      <h3><i><Calendar size='1rem' /></i>Created: {model.current.date}</h3>
                     </li> : ''
                   }
                   <li className='info-menu-item'>
-                    <h3><i><Tag size='1rem' /></i> Tags:</h3>
+                    <h3><i><Tag size='1rem' /></i>Tags</h3>
                     <ul className='tags'>
                       {
                         model.current
@@ -133,7 +136,11 @@ export default model =>
                     </form>
                   </li>
                   <li className='info-menu-item'>
-                    <h3><i><Trash size='1rem' /></i> Delete Post</h3>
+                    <button>
+                      <h3>
+                        <i><Trash size='1rem' /></i>Delete Post
+                      </h3>
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -154,7 +161,9 @@ export default model =>
             cols='50'
             rows='30'
             placeholder='# your post goes here...'
-            value={model.current.md || ''}
+            value={
+              model.current.md || ''
+            }
             oncreate={el => {
               const height = window.innerHeight - 40
               el.rows = height / 16

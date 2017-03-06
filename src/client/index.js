@@ -1,11 +1,12 @@
 /* eslint-disable */
-import { h, app, router } from 'hyperapp' // eslint-disable-line
+import { h, app, Router } from 'hyperapp' // eslint-disable-line
 
 import { DashboardView, LoginView } from './view'
 import './index.scss'
 
 // Will be removed
 const model = {
+  email: 'test@test.com',
   posts: [
     {
       title: 'foo',
@@ -63,13 +64,13 @@ const model = {
 
 app({
   model,
-  router,
   view: {
     '/': model => <LoginView {...model} />,
     '/dashboard': model => <DashboardView {...model} />,
+    '/dashboard/tags/id=:id': model => <DashboardView {...model} />,
     '/dashboard/create': model => <DashboardView {...model} />,
     '/dashboard/posts/id=:id': model => <DashboardView {...model} />
   },
-  plugins: [router],
+  plugins: [Router],
   root: document.getElementById('root')
 })

@@ -1,16 +1,26 @@
 import { h } from 'hyperapp' //eslint-disable-line
 
-const Svg = (props, children) =>
-  <svg
-    id={props.id || ''}
-    className={props.className || ''}
-    fill={props.fill || '#000'}
-    height={props.size || 24}
-    width={props.size || 24}
-    viewBox={props.viewBox || '0 0 24 24'}
+const Svg = (props, children) => {
+  if (props === null) {
+    props = {
+      id: '',
+      className: '',
+      fill: '#000',
+      size: 24
+    }
+  }
+
+  return (<svg
+    id={props.id}
+    className={props.className}
+    fill={props.fill}
+    height={props.size}
+    width={props.size}
+    viewBox='0 0 24 24'
     {...props}>
     {children}
-  </svg>
+  </svg>)
+}
 //
 // export const Document = props =>
 //   <Svg {...props}>

@@ -48,7 +48,7 @@
     "bunyan": "^1.8.5",
     "chalk": "^1.1.3",
     "dotenv": "^4.0.0",
-    "hyperapp": "^0.6.0",
+    "hyperapp": "^0.7.0",
     "koa": "2",
     "koa-bodyparser": "next",
     "koa-bunyan-logger": "2.0.0-pre1",

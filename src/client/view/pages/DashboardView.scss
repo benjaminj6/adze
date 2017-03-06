@@ -77,15 +77,21 @@ button {
   }
 
   li {
-    padding-left: 1.5rem;
-    line-height: 2rem;
-    transition: all $transition-short;
-    border-left: 0.25rem solid transparent;
+    // padding-left: 1.5rem;
 
-    &:hover {
-      cursor: pointer;
-      background: rgba(#fff, 0.4);
-      border-left: 0.25rem solid rgba($accent, 0.3);
+
+    a {
+      line-height: 2rem;
+      border-left: 0.25rem solid transparent;
+      padding-left: 1.5rem;
+      transition: all $transition-short;
+      display: block;
+
+      &:hover {
+        cursor: pointer;
+        border-left: 0.25rem solid rgba($accent, 0.3);
+        background: rgba(#fff, 0.4);
+      }
     }
   }
 }
@@ -194,6 +200,7 @@ main {
 
 
     h3 {
+      color: rgba(#000, 0.6);
       margin: 0;
     }
   }
