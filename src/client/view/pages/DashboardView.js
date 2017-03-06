@@ -59,9 +59,6 @@ export default model =>
           model.writing
           ? <ul>
             <li>
-              <button>@</button>
-            </li>
-            <li>
               <button>
                 <label for='info-toggler'>@</label>
               </button>
@@ -72,9 +69,9 @@ export default model =>
               <div id='info-menu'>foo</div>
             </li>
             <li>
-              <button>submit</button>
+              <button>#</button>
             </li>
-          </ul> : <div>new</div>
+          </ul> : <div>+</div>
         }
       </header>
       {model.writing
