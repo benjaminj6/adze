@@ -48,22 +48,18 @@
 
   header {
     justify-content: flex-start;
-    padding: 0 0.5rem;
+    padding: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  ul {
-    margin: 0;
   }
 
   h3 {
     margin: 0;
     line-height: 2.5rem;
-    padding-left: 0.5rem;
+    padding: 0;
   }
 
   li {
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     line-height: 2rem;
     transition: all $transition-short;
     border-left: 0.25rem solid transparent;
@@ -81,13 +77,24 @@
     text-transform: uppercase;
   }
 
+  .icon-toggle {
+    padding: 0;
+    transform: rotate(-90deg);
+    display: inline-block;
+  }
+
   ul {
     height: 0;
     overflow-y: hidden;
+    margin: 0;
   }
 
   input[name='menu-item-toggler']:checked {
-    + h3 + ul {
+    & + h3 .icon-toggle {
+      transform: none;
+    }
+
+    & + h3 + ul {
       height: auto;
     }
   }

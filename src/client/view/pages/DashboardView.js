@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 import styles from '../../styles/foundation.json'
 
-import { User } from '../components/Icons'
+import { User, AngleDown } from '../components/Icons'
 
 export default model =>
   <div id='app' className='dashboard-view'>
@@ -28,12 +28,15 @@ export default model =>
               className='menu-list'>
               <input
                 hidden
-                checked={isSelected(i)}
+                checked
                 id={`${i.title}-toggler`}
                 type='checkbox'
                 name='menu-item-toggler' />
               <h3>
                 <label htmlFor={`${i.title}-toggler`}>
+                  <i className='icon-toggle'>
+                    <AngleDown />
+                  </i>
                   {i.title}
                 </label>
               </h3>
@@ -101,7 +104,3 @@ export default model =>
         </section>}
     </main>
   </div>
-
-function isSelected (el) {
-  return window.location.pathname.includes(el.title.toLowerCase())
-}
