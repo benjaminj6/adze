@@ -8,7 +8,7 @@ const Svg = (props, children) => {
     fill: '#000',
     size: 24
   }
-  console.log(props, defaults)
+
   props = {...props, ...defaults}
 
   return (<svg

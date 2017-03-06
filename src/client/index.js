@@ -65,17 +65,21 @@ const model = {
 }
 // end temporary
 
-app({
+const page = app({
   model,
-  actions,
+  actions: {
+    foo: model => ({ email: 'foo@foo.com' })
+  },
   subscriptions,
   view: {
-    '/': model => <LoginView {...model} />,
-    '/dashboard': model => <DashboardView {...model} />,
-    '/dashboard/tags/id=:id': model => <DashboardView {...model} />,
-    '/dashboard/create': model => <DashboardView {...model} />,
-    '/dashboard/posts/id=:id': model => <DashboardView {...model} />
+    '/': LoginView,
+    '/dashboard': DashboardView,
+    '/dashboard/tags/id=:id': DashboardView,
+    '/dashboard/create': DashboardView,
+    '/dashboard/posts/id=:id': DashboardView
   },
   plugins: [Router],
   root: document.getElementById('root')
 })
+
+console.log(page)

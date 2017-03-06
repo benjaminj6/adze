@@ -16,7 +16,7 @@ import {
   User
 } from '../components/Icons'
 
-export default model =>
+export default (model, actions, q) =>
   <div id='app' className='dashboard-view'>
     <input
       hidden
@@ -64,7 +64,13 @@ export default model =>
                           el.style.borderLeft = `0.25rem solid ${styles.accent}`
                         }
                       }}
-                      href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}>{item.title}</a>
+                      href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}onclick={ev => {
+                        console.log(ev.target.href)
+                        ev.preventDefault()
+                        console.log(actions)
+                      }}>
+                      {item.title}
+                    </a>
                   </li>
                 )}
               </ul>
