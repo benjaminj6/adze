@@ -94,62 +94,50 @@ export default (model, actions, q) =>
                 id='info-toggler'
                 type='checkbox' />
               <button id='info-toggler-btn'>
-                <label for='info-toggler'><More /></label>
+                <label for='info-toggler'><Tag /></label>
               </button>
               <div id='info-menu'>
-                <ul>
+                <h3>Tags</h3>
+                <ul className='tags'>
                   {
                     model.current
-                    ? <li className='info-menu-item'>
-                      <h3><i><Calendar size='1rem' /></i>Created: {model.current.date}</h3>
-                    </li> : ''
+                    ? model.current.tags.map(t =>
+                      <li style={{ background: t.color }}>
+                        {t.title} <button><Close height='1em' /></button>
+                      </li>
+                    )
+                    : ''
                   }
-                  <li className='info-menu-item'>
-                    <h3><i><Tag size='1rem' /></i>Tags</h3>
-                    <ul className='tags'>
-                      {
-                        model.current
-                        ? model.current.tags.map(t =>
-                          <li style={{ background: t.color }}>
-                            {t.title} <button><Close height='1em' /></button>
-                          </li>
-                        )
-                        : ''
-                      }
-                    </ul>
-                    <form
-                      id='add-tag'
-                      action=''>
-                      <input
-                        name='title'
-                        placeholder='add a tag'
-                        type='text' />
-                      <input
-                        id='color-picker'
-                        type='color'
-                        defaultValue='#eeeeee'
-                        oninput={e => {
-                          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
-                        }} />
-                      <label
-                        id='color-picker-btn'
-                        htmlFor='color-picker'>
-                        <Paint height='1rem' width='1rem' />
-                      </label>
-                      <button type='submit'>
-                        <Plus />
-                      </button>
-                    </form>
-                  </li>
-                  <li className='info-menu-item'>
-                    <button>
-                      <h3>
-                        <i><Trash size='1rem' /></i>Delete Post
-                      </h3>
-                    </button>
-                  </li>
                 </ul>
+                <form
+                  id='add-tag'
+                  action=''>
+                  <input
+                    name='title'
+                    placeholder='add a tag'
+                    type='text' />
+                  <input
+                    id='color-picker'
+                    type='color'
+                    defaultValue='#eeeeee'
+                    oninput={e => {
+                      document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
+                    }} />
+                  <label
+                    id='color-picker-btn'
+                    htmlFor='color-picker'>
+                    <Paint height='1rem' width='1rem' />
+                  </label>
+                  <button type='submit'>
+                    <Plus />
+                  </button>
+                </form>
               </div>
+            </li>
+            <li>
+              <button>
+                <Trash />
+              </button>
             </li>
           </ul> : <div><Plus /></div>
         }
