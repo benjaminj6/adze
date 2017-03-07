@@ -20,6 +20,7 @@ const Editor = ({ post }) => (
       placeholder='my new post'
       value={post ? post.title : ''}
       type='text' />
+    <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
     <textarea
       name='editor'
       id='editor'
@@ -142,14 +143,19 @@ export default (model, actions) =>
         </header>
         <section>
           <div className='new-post'>
-            <h3>
-              <a href='/dashboard/create'><Plus height='1rem' />New Post</a>
+            <h3 style={{
+              background: /create/.test(model.router.match) ? '#fff' : ''
+            }}>
+              <a href='/dashboard/create'>
+                <Plus height='1rem' />
+                New Post
+              </a>
             </h3>
           </div>
           {
             [
-              { title: 'Recent Posts', icon: <Menu height='1rem' />, items: model.posts },
-              { title: 'Categories', icon: <Tag height='1rem' />, items: model.tags }
+              { title: 'Recent Posts', href: 'posts', icon: <Menu height='1rem' />, items: model.posts },
+              { title: 'Categories', href: 'tags', icon: <Tag height='1rem' />, items: model.tags }
             ].map(i =>
               <div
                 className='menu-list'>
@@ -180,7 +186,7 @@ export default (model, actions) =>
                           borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
                           color: model.router.params.id === item.id ? styles.accent : ''
                         }}
-                        href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}onclick={ev => {
+                        href={`/dashboard/${i.href}/id=${item.id}`}onclick={ev => {
                           console.log(ev.target.pathname)
                           ev.preventDefault()
                           actions.router.go(ev.target.pathname)

@@ -36,9 +36,13 @@ a {
    & + main {
      left: 0;
 
-     #editor {
-       padding: 1rem 20%;
-     }
+    header {
+      width: 100%;
+    }
+
+    #editor {
+      padding: 1rem 20%;
+    }
    }
  }
 }
@@ -322,6 +326,7 @@ main {
 
 main section {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100%;
 
@@ -331,15 +336,20 @@ main section {
     -webkit-scroll: none;
 
     input[name='title'] {
-      position: absolute;
-      top: 0;
       text-align: center;
       height: 40px;
+      font-size: 1.25rem;
+    }
+
+    h6 {
+      margin: 0;
+      text-align: center;
+      color: rgba(#000, 0.3);
     }
 
     textarea {
       resize: none;
-      width: 100%;
+      // width: 100%;
       box-sizing: content-box;
       // max-width: 40rem;
       padding: 1rem 5%;
