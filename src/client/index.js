@@ -55,7 +55,7 @@ const model = {
     }
   ],
   saved: false,
-  newContent: { foo: 'bar' }
+  newContent: { post: 'ajsfjaklsjldkfa' }
 }
 // end temporary
 

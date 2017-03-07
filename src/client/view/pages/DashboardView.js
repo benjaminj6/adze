@@ -141,7 +141,7 @@ const PromptView = ({ model }) => (
 )
 
 export default (model, actions) =>
-  <div id='app' className='dashboard-view' oncreate={() => { actions.clearNewContent() }}>
+  <div id='app' className='dashboard-view' oncreate={() => { actions.clearPost() }}>
     <input
       hidden
       id='nav-toggler'

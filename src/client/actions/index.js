@@ -30,6 +30,15 @@ export const updatePost = ({ newContent }, post) => ({
   }
 })
 
+export const clearPost = ({ newContent }) => {
+  let content = Object.create(newContent)
+  delete content.post
+
+  return {
+    newContent: content
+  }
+}
+
 export const updateTitle = ({ newContent }, title) => ({
   saved: false,
   newContent: {
