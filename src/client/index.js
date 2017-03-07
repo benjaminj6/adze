@@ -53,9 +53,7 @@ const model = {
       color: 'red',
       id: '5'
     }
-  ],
-  selected: parseInt(window.location.pathname.split('id=')[1]) || null,
-  writing: false
+  ]
 }
 // end temporary
 
