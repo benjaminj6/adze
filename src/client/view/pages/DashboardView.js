@@ -92,7 +92,7 @@ const EditorView = ({ model, selected }, children) => (
               model.saved
               ? <SaveCheck />
               : <Save style={{
-                color: Object.getOwnPropertyNames(model.newContent).length > 0
+                color: model.newContent.title && model.newContent.post
                   ? ''
                   : 'rgba(0, 0, 0, 0.05)'
               }} />
@@ -127,21 +127,19 @@ const EditorView = ({ model, selected }, children) => (
 
 const PromptView = ({ model }) => (
   <main>
-    <header>
-      <button><Plus /></button>
-    </header>
+    <header />
     <section className='prompt'>
       <h2>
-        Choose a post on the left to edit it.
+        You can select posts and categories on the left.
         <br />
-        Or you can start a <span>new one today</span>.
+        Or you can start a <a href='/dashboard/create'>new one today</a>.
       </h2>
     </section>
   </main>
 )
 
 export default (model, actions) =>
-  <div id='app' className='dashboard-view' oncreate={() => { actions.clearPost() }}>
+  <div id='app' className='dashboard-view'>
     <input
       hidden
       id='nav-toggler'

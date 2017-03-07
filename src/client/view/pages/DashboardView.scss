@@ -394,10 +394,16 @@ main section {
     h2 {
       color: rgba(#000, 0.3);
       text-align: center;
+      padding: 2rem;
     }
 
-    span {
-      text-decoration: underline;
+    a {
+      color: rgba(#000, 0.4);
+      transition: all $transition-short;
+
+      &:hover {
+        color: rgba(#000, 0.5);
+      }
     }
   }
 }
