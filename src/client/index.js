@@ -15,31 +15,31 @@ const model = {
       title: 'foo',
       md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
       date: 'xx-xx-xxxx',
-      id: 1,
-      tags: [3, 4]
+      id: '1',
+      tags: ['3', '4']
     },
     {
       title: 'bar',
       md: '# FOOOOOOOOOOOOO \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate! \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate! \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate! \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
       date: 'xx-xx-xxxx',
-      id: 2
+      id: '2'
     }
   ],
   tags: [
     {
       title: 'foo',
       color: 'green',
-      id: 3
+      id: '3'
     },
     {
       title: 'bar',
       color: 'blue',
-      id: 4
+      id: '4'
     },
     {
       title: 'baz',
       color: 'red',
-      id: 5
+      id: '5'
     }
   ],
   selected: parseInt(window.location.pathname.split('id=')[1]) || null,
@@ -67,9 +67,7 @@ const model = {
 
 const page = app({
   model,
-  actions: {
-    foo: model => ({ email: 'foo@foo.com' })
-  },
+  actions,
   subscriptions,
   view: {
     '/': LoginView,

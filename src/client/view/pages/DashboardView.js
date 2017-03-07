@@ -16,7 +16,7 @@ import {
   User
 } from '../components/Icons'
 
-export default (model, actions, q) =>
+export default (model, actions) =>
   <div id='app' className='dashboard-view'>
     <input
       hidden
@@ -57,17 +57,14 @@ export default (model, actions, q) =>
                 {i.items.map(item =>
                   <li>
                     <a
-                      oncreate={el => {
-                        console.log(window.location.href === el.href)
-                        if (el.href === window.location.href) {
-                          el.style.background = '#fff'
-                          el.style.borderLeft = `0.25rem solid ${styles.accent}`
-                        }
+                      style={{
+                        background: model.router.params.id === item.id ? '#fff' : '',
+                        borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : ''
                       }}
                       href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}onclick={ev => {
-                        console.log(ev.target.href)
+                        console.log(ev.target.pathname)
                         ev.preventDefault()
-                        console.log(actions)
+                        actions.router.go(ev.target.pathname)
                       }}>
                       {item.title}
                     </a>
