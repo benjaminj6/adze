@@ -25,7 +25,12 @@ const Editor = ({ post, actions }) => (
         name='title'
         placeholder='my new post'
         value={post ? post.title : ''}
-        type='text' />
+        type='text'
+        oninput={
+          debounce(({ target }) => {
+            actions.updateTitle(target.value)
+          }, 500)
+        } />
       <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
     </header>
     <textarea

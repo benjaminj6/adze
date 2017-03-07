@@ -55,7 +55,10 @@ const model = {
     }
   ],
   saved: false,
-  newContent: { title: 'bar' }
+  newContent: {
+    title: 'bar',
+    post: 'aksdfjlkjas'
+  }
 }
 // end temporary
 
