@@ -201,6 +201,7 @@ main {
     padding: 0.5rem;
     position: absolute;
     right: 0;
+    width: 150px;
 
     i {
       margin-right: 0.25rem;
@@ -226,7 +227,6 @@ main {
     border-radius: $bd-rad;
     padding: 0 0.25rem;
     line-height: 2;
-    width: 150px;
     transition: opacity $transition-short;
     display: flex;
     align-items: center;
@@ -240,6 +240,7 @@ main {
   button {
     color: inherit;
     margin: 0;
+    padding: 0;
 
     &:hover {
       color: inherit;
@@ -296,6 +297,7 @@ main {
 
   button[type="submit"] {
     z-index: 10;
+    padding: 0;
   }
 }
 

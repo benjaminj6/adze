@@ -16,6 +16,110 @@ import {
   User
 } from '../components/Icons'
 
+const Editor = ({ post }) => (
+  <section className='editor-section'>
+    <input
+      name='title'
+      placeholder='my new post'
+      value={post ? post.title : ''}
+      type='text' />
+    <textarea
+      name='editor'
+      id='editor'
+      cols='50'
+      rows='30'
+      placeholder='start your post right here...'
+      value={
+        post ? post.md : ''
+      }
+      oncreate={el => {
+        const height = window.innerHeight - 40
+        el.rows = height / 16
+      }} />
+  </section>
+)
+
+const AddTagsMenu = ({ post }) => (
+  <div id='info-menu'>
+    <h3>Tags</h3>
+    <ul className='tags'>
+      {
+        post ? post.tags.map(t =>
+          <li
+            oncreate={el => { console.log(t) }}
+            style={{ background: t.color }}>
+            {t.title} <button><Close height='1em' /></button>
+          </li>
+        ) : ''
+      }
+    </ul>
+    <form
+      id='add-tag'
+      action=''>
+      <input
+        name='title'
+        placeholder='add a tag'
+        type='text' />
+      <input
+        id='color-picker'
+        type='color'
+        defaultValue='#eeeeee'
+        oninput={e => {
+          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
+        }} />
+      <label
+        id='color-picker-btn'
+        htmlFor='color-picker'>
+        <Paint height='1rem' width='1rem' />
+      </label>
+      <button type='submit'>
+        <Plus />
+      </button>
+    </form>
+  </div>
+)
+
+const EditorView = ({ model }) => (
+  <main>
+    <header>
+      {
+        model.writing
+        ? <ul>
+          <li>
+            <button><Save /></button>
+          </li>
+          <li>
+            <input
+              hidden
+              id='info-toggler'
+              type='checkbox' />
+            <button id='info-toggler-btn'>
+              <label for='info-toggler'><Tag /></label>
+            </button>
+            <AddTagsMenu
+              oncreate={ev => { console.log(ev) }}
+              post={model.posts.find(p => p.id === model.router.params.id)} />
+          </li>
+          <li>
+            <button>
+              <Trash />
+            </button>
+          </li>
+        </ul> : <div><Plus /></div>
+      }
+    </header>
+    {/posts|create/.test(model.router.match)
+      ? <Editor post={model.posts.find(p => p.id === model.router.params.id)} />
+      : <section className='prompt'>
+        <h1>
+          Choose a post on the left to edit it.
+          <br />
+          Or you can start a <span>new one today</span>.
+        </h1>
+      </section>}
+  </main>
+)
+
 export default (model, actions) =>
   <div id='app' className='dashboard-view'>
     <input
@@ -77,95 +181,5 @@ export default (model, actions) =>
       </div>
     </nav>
     {/* Separate into own module */}
-    <main>
-      <header>
-        {
-          model.writing
-          ? <ul>
-            <li>
-              <button><Save /></button>
-            </li>
-            <li>
-              <input
-                hidden
-                id='info-toggler'
-                type='checkbox' />
-              <button id='info-toggler-btn'>
-                <label for='info-toggler'><Tag /></label>
-              </button>
-              <div id='info-menu'>
-                <h3>Tags</h3>
-                <ul className='tags'>
-                  {
-                    model.current
-                    ? model.current.tags.map(t =>
-                      <li style={{ background: t.color }}>
-                        {t.title} <button><Close height='1em' /></button>
-                      </li>
-                    )
-                    : ''
-                  }
-                </ul>
-                <form
-                  id='add-tag'
-                  action=''>
-                  <input
-                    name='title'
-                    placeholder='add a tag'
-                    type='text' />
-                  <input
-                    id='color-picker'
-                    type='color'
-                    defaultValue='#eeeeee'
-                    oninput={e => {
-                      document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
-                    }} />
-                  <label
-                    id='color-picker-btn'
-                    htmlFor='color-picker'>
-                    <Paint height='1rem' width='1rem' />
-                  </label>
-                  <button type='submit'>
-                    <Plus />
-                  </button>
-                </form>
-              </div>
-            </li>
-            <li>
-              <button>
-                <Trash />
-              </button>
-            </li>
-          </ul> : <div><Plus /></div>
-        }
-      </header>
-      {model.writing
-        ? <section className='editor-section'>
-          <input
-            name='title'
-            placeholder='My post'
-            value={model.current.title || ''}
-            type='text' />
-          <textarea
-            name='editor'
-            id='editor'
-            cols='50'
-            rows='30'
-            placeholder='# your post goes here...'
-            value={
-              model.current.md || ''
-            }
-            oncreate={el => {
-              const height = window.innerHeight - 40
-              el.rows = height / 16
-            }} />
-        </section>
-        : <section className='prompt'>
-          <h1>
-            Choose a post on the left to edit it.
-            <br />
-            Or you can start a <span>new one today</span>.
-          </h1>
-        </section>}
-    </main>
+    <EditorView model={{...model}} />
   </div>

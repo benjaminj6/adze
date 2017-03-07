@@ -16,13 +16,25 @@ const model = {
       md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
       date: 'xx-xx-xxxx',
       id: '1',
-      tags: ['3', '4']
+      tags: [
+        {
+          title: 'foo',
+          color: 'green',
+          id: '3'
+        },
+        {
+          title: 'bar',
+          color: 'blue',
+          id: '4'
+        }
+      ]
     },
     {
       title: 'bar',
       md: '# FOOOOOOOOOOOOO \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate! \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate! \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate! \n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
       date: 'xx-xx-xxxx',
-      id: '2'
+      id: '2',
+      tags: []
     }
   ],
   tags: [
@@ -43,24 +55,6 @@ const model = {
     }
   ],
   selected: parseInt(window.location.pathname.split('id=')[1]) || null,
-  current: {
-    title: 'foo',
-    md: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quia! Reprehenderit, qui non. Excepturi dignissimos facere incidunt sequi laudantium, tenetur tempora obcaecati culpa enim totam, illo odio vitae at voluptate!',
-    date: 'xx-xx-xxxx',
-    id: 1,
-    tags: [
-      {
-        title: 'foo',
-        color: 'green',
-        id: 3
-      },
-      {
-        title: 'bar',
-        color: 'blue',
-        id: 4
-      },
-    ]
-  },
   writing: /posts|create/.test(window.location.pathname)
 }
 // end temporary
