@@ -55,8 +55,7 @@ const model = {
     }
   ],
   saved: false,
-  newContent: {
-  }
+  newContent: {}
 }
 // end temporary
 

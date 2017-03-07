@@ -26,7 +26,13 @@ export const updatePost = ({ newContent }, post) => ({
     post
   }
 })
-// new title
 
+// new title
+export const updateTitle = ({ newContent }, title) => ({
+  newContent: {
+    ...newContent,
+    title
+  }
+})
 // select a post to edit
 // wipe newContent
