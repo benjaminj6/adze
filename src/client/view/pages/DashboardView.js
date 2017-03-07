@@ -83,7 +83,7 @@ const AddTagsMenu = ({ post }) => (
 )
 
 const EditorView = ({ model, selected }, children) => (
-  <main oncreate={el => { console.log(model) }}>
+  <main>
     <header>
       <ul>
         <li>
@@ -92,7 +92,9 @@ const EditorView = ({ model, selected }, children) => (
               model.saved
               ? <SaveCheck />
               : <Save style={{
-                color: model.newContent ? '' : 'rgba(0, 0, 0, 0.05)'
+                color: model.newContent.title && model.newContent.post
+                  ? ''
+                  : 'rgba(0, 0, 0, 0.05)'
               }} />
             }
           </button>
@@ -125,14 +127,12 @@ const EditorView = ({ model, selected }, children) => (
 
 const PromptView = ({ model }) => (
   <main>
-    <header>
-      <button><Plus /></button>
-    </header>
+    <header />
     <section className='prompt'>
       <h2>
-        Choose a post on the left to edit it.
+        You can select posts and categories on the left.
         <br />
-        Or you can start a <span>new one today</span>.
+        Or you can start a <a href='/dashboard/create'>new one today</a>.
       </h2>
     </section>
   </main>
@@ -145,7 +145,7 @@ export default (model, actions) =>
       id='nav-toggler'
       type='checkbox' />
     <nav id='nav'>
-      <button id='nav-toggler-btn'>
+      <button id='nav-toggler-btn' onclick={ev => { console.log(model.newContent) }}>
         <label for='nav-toggler'><Menu /></label>
       </button>
       <div id='sidebar'>

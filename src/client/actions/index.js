@@ -1,3 +1,58 @@
-const foo = model => ({ email: 'ben@example' })
+export const addTag = (model, tag) => {
+  const tags = model.newContent.tags || []
 
-export default { foo }
+  return {
+    saved: false,
+    newContent: {
+      ...model.newContent,
+      tags: tags.slice().concat([tag])
+    }
+  }
+}
+
+export const removeTag = ({ newContent }, tagId) => {
+  if (newContent.tags) {
+    return {
+      saved: false,
+      newContent: {
+        ...newContent,
+        tags: newContent.tags.slice().filter(t => t.id !== tagId)
+      }
+    }
+  }
+}
+
+export const updatePost = ({ newContent }, post) => ({
+  saved: false,
+  newContent: {
+    ...newContent,
+    post
+  }
+})
+
+export const updateTitle = ({ newContent }, title) => ({
+  saved: false,
+  newContent: {
+    ...newContent,
+    title
+  }
+})
+
+export const selectPost = ({ newContent, posts }, postId) => {
+  const post = posts.find(p => p.id === postId)
+  if (post) {
+    return {
+      saved: true,
+      newContent: {
+        post: post.md,
+        tags: post.tags,
+        title: post.title
+      }
+    }
+  }
+}
+
+export const clearNewContent = ({ newContent }) => ({
+  saved: false,
+  newContent: {}
+})

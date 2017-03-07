@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { h, app, Router } from 'hyperapp' // eslint-disable-line
 
-import actions from './actions'
+import * as actions from './actions'
 import subscriptions from './subscriptions'
 
 import { DashboardView, LoginView } from './view'
@@ -55,11 +55,11 @@ const model = {
     }
   ],
   saved: false,
-  newContent: true
+  newContent: { post: '', title: '' }
 }
 // end temporary
 
-const page = app({
+app({
   model,
   actions,
   subscriptions,
@@ -73,5 +73,3 @@ const page = app({
   plugins: [Router],
   root: document.getElementById('root')
 })
-
-console.log(page)
