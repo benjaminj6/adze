@@ -92,7 +92,9 @@ const EditorView = ({ model, selected }, children) => (
               model.saved
               ? <SaveCheck />
               : <Save style={{
-                color: model.newContent ? '' : 'rgba(0, 0, 0, 0.05)'
+                color: Object.getOwnPropertyNames(model.newContent).length > 0
+                  ? ''
+                  : 'rgba(0, 0, 0, 0.05)'
               }} />
             }
           </button>
