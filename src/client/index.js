@@ -55,7 +55,7 @@ const model = {
     }
   ],
   selected: parseInt(window.location.pathname.split('id=')[1]) || null,
-  writing: /posts|create/.test(window.location.pathname)
+  writing: false
 }
 // end temporary
 

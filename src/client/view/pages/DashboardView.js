@@ -79,44 +79,51 @@ const AddTagsMenu = ({ post }) => (
   </div>
 )
 
-const EditorView = ({ model }) => (
-  <main>
+const EditorView = ({ model, selected }, children) => (
+  <main oncreate={el => { console.log(model) }}>
     <header>
-      {
-        model.writing
-        ? <ul>
-          <li>
-            <button><Save /></button>
-          </li>
-          <li>
-            <input
-              hidden
-              id='info-toggler'
-              type='checkbox' />
-            <button id='info-toggler-btn'>
-              <label for='info-toggler'><Tag /></label>
-            </button>
-            <AddTagsMenu
-              oncreate={ev => { console.log(ev) }}
-              post={model.posts.find(p => p.id === model.router.params.id)} />
-          </li>
-          <li>
+      <ul>
+        <li>
+          <button><Save /></button>
+        </li>
+        <li>
+          <input
+            hidden
+            id='info-toggler'
+            type='checkbox' />
+          <button id='info-toggler-btn'>
+            <label for='info-toggler'><Tag /></label>
+          </button>
+          <AddTagsMenu
+            oncreate={ev => { console.log(ev) }}
+            post={selected || ''} />
+        </li>
+        {selected
+          ? <li>
             <button>
               <Trash />
             </button>
           </li>
-        </ul> : <div><Plus /></div>
-      }
+          : ''
+        }
+      </ul>
     </header>
-    {/posts|create/.test(model.router.match)
-      ? <Editor post={model.posts.find(p => p.id === model.router.params.id)} />
-      : <section className='prompt'>
-        <h1>
-          Choose a post on the left to edit it.
-          <br />
-          Or you can start a <span>new one today</span>.
-        </h1>
-      </section>}
+    <Editor post={selected} />
+  </main>
+)
+
+const PromptView = ({ model }) => (
+  <main>
+    <header>
+      <button><Plus /></button>
+    </header>
+    <section className='prompt'>
+      <h2>
+        Choose a post on the left to edit it.
+        <br />
+        Or you can start a <span>new one today</span>.
+      </h2>
+    </section>
   </main>
 )
 
@@ -180,6 +187,8 @@ export default (model, actions) =>
         }</section>
       </div>
     </nav>
-    {/* Separate into own module */}
-    <EditorView model={{...model}} />
+    <EditorView
+      model={model}
+      selected={model.posts.find(p => p.id === model.router.params.id)}
+    />
   </div>
