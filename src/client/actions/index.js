@@ -51,4 +51,8 @@ export const selectPost = ({ newContent, posts }, postId) => {
     }
   }
 }
-// wipe newContent
+
+export const clearNewContent = ({ newContent }) => ({
+  saved: false,
+  newContent: {}
+})
