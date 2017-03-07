@@ -20,7 +20,12 @@ export const removeTag = ({ newContent }, tagId) => {
   }
 }
 
-// new text content
+export const updatePost = ({ newContent }, post) => ({
+  newContent: {
+    ...newContent,
+    post
+  }
+})
 // new title
 
 // select a post to edit
