@@ -2,6 +2,7 @@ export const addTag = (model, tag) => {
   const tags = model.newContent.tags || []
 
   return {
+    saved: false,
     newContent: {
       ...model.newContent,
       tags: tags.slice().concat([tag])
@@ -12,6 +13,7 @@ export const addTag = (model, tag) => {
 export const removeTag = ({ newContent }, tagId) => {
   if (newContent.tags) {
     return {
+      saved: false,
       newContent: {
         ...newContent,
         tags: newContent.tags.slice().filter(t => t.id !== tagId)
@@ -21,18 +23,32 @@ export const removeTag = ({ newContent }, tagId) => {
 }
 
 export const updatePost = ({ newContent }, post) => ({
+  saved: false,
   newContent: {
     ...newContent,
     post
   }
 })
 
-// new title
 export const updateTitle = ({ newContent }, title) => ({
+  saved: false,
   newContent: {
     ...newContent,
     title
   }
 })
-// select a post to edit
+
+export const selectPost = ({ newContent, posts }, postId) => {
+  const post = posts.find(p => p.id === postId)
+  if (post) {
+    return {
+      saved: true,
+      newContent: {
+        post: post.md,
+        tags: post.tags,
+        title: post.title
+      }
+    }
+  }
+}
 // wipe newContent

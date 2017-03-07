@@ -141,7 +141,7 @@ const PromptView = ({ model }) => (
 )
 
 export default (model, actions) =>
-  <div id='app' className='dashboard-view' oncreate={() => { actions.updateTitle('askfjlaksjdlfkjalsdjflasjdlfkjalsdkjf') }}>
+  <div id='app' className='dashboard-view' oncreate={() => { actions.updatePost('1') }}>
     <input
       hidden
       id='nav-toggler'
