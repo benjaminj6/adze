@@ -141,13 +141,13 @@ const PromptView = ({ model }) => (
 )
 
 export default (model, actions) =>
-  <div id='app' className='dashboard-view' oncreate={() => { actions.addTag({ title: 'yay', color: 'purple', id: 20 }) }}>
+  <div id='app' className='dashboard-view' oncreate={() => { actions.removeTag(5) }}>
     <input
       hidden
       id='nav-toggler'
       type='checkbox' />
     <nav id='nav'>
-      <button id='nav-toggler-btn' onclick={ev => { console.log(model) }}>
+      <button id='nav-toggler-btn' onclick={ev => { console.log(model.newContent) }}>
         <label for='nav-toggler'><Menu /></label>
       </button>
       <div id='sidebar'>
