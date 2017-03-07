@@ -15,12 +15,14 @@ import {
 
 const Editor = ({ post }) => (
   <section className='editor-section'>
-    <input
-      name='title'
-      placeholder='my new post'
-      value={post ? post.title : ''}
-      type='text' />
-    <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
+    <header>
+      <input
+        name='title'
+        placeholder='my new post'
+        value={post ? post.title : ''}
+        type='text' />
+      <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
+    </header>
     <textarea
       name='editor'
       id='editor'

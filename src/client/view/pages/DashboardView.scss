@@ -160,8 +160,8 @@ main {
   top: 0;
   transition: left $transition;
 
-  header {
-    background: #fff;
+  > header {
+    // background: #fff;
     right: 0;
     width: 66%;
     padding: 0.5rem;
@@ -327,40 +327,61 @@ main {
 main section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%;
 
   &.editor-section {
-    padding-top: 40px;
+    padding: 3rem 5% 0.5rem;
+    box-sizing: border-box;
     overflow-y: visible;
     -webkit-scroll: none;
 
-    input[name='title'] {
-      text-align: center;
-      height: 40px;
-      font-size: 1.25rem;
-    }
+    header {
+      display: block;
+      height: auto;
+      position: relative;
 
-    h6 {
-      margin: 0;
-      text-align: center;
-      color: rgba(#000, 0.3);
+      input[name='title'] {
+        text-align: center;
+        width: 100%;
+        padding: 0.5rem 0 1.75rem;
+        font-size: 1.25rem;
+        transition: border $transition-short;
+        border: 1px solid rgba(#000, 0.05);
+
+        &:focus {
+          border: 1px solid rgba($accent, 0.5);
+        }
+      }
+
+      h6 {
+        // display: none;
+        margin: 0;
+        position: absolute;
+        bottom: 0.5rem;
+        width: 100%;
+        text-align: center;
+        color: rgba(#000, 0.3);
+      }
     }
 
     textarea {
       resize: none;
-      // width: 100%;
       box-sizing: content-box;
-      // max-width: 40rem;
       padding: 1rem 5%;
       overflow-y: scroll;
-      // position: absolute;
+      border: 1px solid rgba(#000, 0.05);
+      background: #fff;
+      transition: border $transition-short;
+
+      &:focus {
+        border: 1px solid rgba($accent, 0.5);
+      }
     }
   }
 
   &.prompt {
     flex-direction: column;
-
+    justify-content: center;
     h2 {
       color: rgba(#000, 0.3);
       text-align: center;
