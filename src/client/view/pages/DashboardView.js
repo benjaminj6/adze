@@ -142,27 +142,33 @@ export default (model, actions) =>
         </header>
         <section>
           <div className='new-post'>
-            <h3><a href='/dashboard/create'><Plus />New Post</a></h3>
+            <h3>
+              <a href='/dashboard/create'><Plus height='1rem' />New Post</a>
+            </h3>
           </div>
           {
             [
-              { title: 'Posts', items: model.posts },
-              { title: 'Tags', items: model.tags }
+              { title: 'Posts', icon: <Menu height='1rem' />, items: model.posts },
+              { title: 'Tags', icon: <Tag height='1rem' />, items: model.tags }
             ].map(i =>
               <div
                 className='menu-list'>
                 <input
                   hidden
                   checked
-                  id={`${i.title}-toggler`}
+                  id={`${i.title.toLowerCase()}-toggler`}
                   type='checkbox'
                   name='menu-item-toggler' />
                 <h3>
-                  <label htmlFor={`${i.title}-toggler`}>
-                    <i className='icon-toggle'>
+                  <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
+                    <i>{i.icon}</i>
+                    {i.title}
+                    <i className='icon-toggle open'>
                       <AngleDown />
                     </i>
-                    {i.title}
+                    <i className='icon-toggle closed'>
+                      <Close height='1rem' />
+                    </i>
                   </label>
                 </h3>
                 <ul>
@@ -171,7 +177,8 @@ export default (model, actions) =>
                       <a
                         style={{
                           background: model.router.params.id === item.id ? '#fff' : '',
-                          borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : ''
+                          borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
+                          color: model.router.params.id === item.id ? styles.accent : ''
                         }}
                         href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}onclick={ev => {
                           console.log(ev.target.pathname)

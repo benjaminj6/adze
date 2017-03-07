@@ -110,8 +110,15 @@ a {
 
   .icon-toggle {
     padding: 0;
-    transform: rotate(-90deg);
-    display: inline-block;
+    float: right;
+
+    &.closed {
+      display: none;
+    }
+
+    &.open {
+      display: inline-block;
+    }
   }
 
   ul {
@@ -121,8 +128,16 @@ a {
   }
 
   input[name='menu-item-toggler']:checked {
-    & + h3 .icon-toggle {
-      transform: none;
+    & + h3 {
+      .icon-toggle {
+        &.closed {
+          display: inline-block;
+        }
+
+        &.open {
+          display: none;
+        }
+      }
     }
 
     & + h3 + ul {
