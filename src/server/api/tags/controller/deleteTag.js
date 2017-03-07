@@ -9,6 +9,8 @@ export default async (ctx, next) => {
       throw createError(404, 'No tags with the specified id were found')
     }
 
+    // TODO: Need to remove tag from ALL posts with this tag
+
     ctx.status = 200
     ctx.body = deletedTag
     next()
