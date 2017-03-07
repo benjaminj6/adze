@@ -1,3 +1,10 @@
-const foo = model => ({ email: 'ben@example' })
+export const addTag = (model, tag) => {
+  const tags = model.newContent.tags || []
 
-export default { foo }
+  return {
+    newContent: {
+      ...model.newContent,
+      tags: tags.slice().concat([tag])
+    }
+  }
+}

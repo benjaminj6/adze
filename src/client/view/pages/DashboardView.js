@@ -83,7 +83,7 @@ const AddTagsMenu = ({ post }) => (
 )
 
 const EditorView = ({ model, selected }, children) => (
-  <main oncreate={el => { console.log(model) }}>
+  <main>
     <header>
       <ul>
         <li>
@@ -141,13 +141,13 @@ const PromptView = ({ model }) => (
 )
 
 export default (model, actions) =>
-  <div id='app' className='dashboard-view'>
+  <div id='app' className='dashboard-view' oncreate={() => { actions.addTag({ title: 'yay', color: 'purple', id: 20 }) }}>
     <input
       hidden
       id='nav-toggler'
       type='checkbox' />
     <nav id='nav'>
-      <button id='nav-toggler-btn'>
+      <button id='nav-toggler-btn' onclick={ev => { console.log(model) }}>
         <label for='nav-toggler'><Menu /></label>
       </button>
       <div id='sidebar'>
