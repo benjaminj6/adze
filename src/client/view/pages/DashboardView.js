@@ -38,7 +38,7 @@ const Editor = ({ post, actions }) => (
       id='editor'
       cols='50'
       rows='30'
-      placeholder='start your post right here...'
+      placeholder='your content here...'
       value={
         post ? post.md : ''
       }
