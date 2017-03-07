@@ -18,7 +18,7 @@ import {
   User
 } from '../components/Icons'
 
-const Editor = ({ post }) => (
+const Editor = ({ post, actions }) => (
   <section className='editor-section'>
     <header>
       <input
@@ -37,7 +37,9 @@ const Editor = ({ post }) => (
       value={
         post ? post.md : ''
       }
-      oninput={debounce((ev) => { console.log(ev.target.value) }, 500)}
+      oninput={
+        debounce(({ target }) => { actions.updatePost(target.value) }, 500)
+      }
       oncreate={el => {
         const height = window.innerHeight - 40
         el.rows = height / 16
@@ -85,7 +87,7 @@ const AddTagsMenu = ({ post }) => (
   </div>
 )
 
-const EditorView = ({ model, selected }, children) => (
+const EditorView = ({ model, selected, actions }, children) => (
   <main>
     <header>
       <ul>
@@ -124,7 +126,7 @@ const EditorView = ({ model, selected }, children) => (
         }
       </ul>
     </header>
-    <Editor post={selected} />
+    <Editor post={selected} actions={actions} />
   </main>
 )
 
@@ -232,6 +234,7 @@ export default (model, actions) =>
       /posts|create/.test(model.router.match)
       ? <EditorView
         model={model}
+        actions={actions}
         selected={model.posts.find(p => p.id === model.router.params.id)} />
       : <PromptView model={model} />
     }
