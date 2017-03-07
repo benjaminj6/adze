@@ -55,7 +55,19 @@ const Editor = ({ post, actions }) => (
 const AddTagsMenu = ({ post, actions }) => (
   <div id='info-menu'>
     <h3>Tags</h3>
-    <ul className='tags'>
+    <ul
+      className='tags'
+      onsubmit={
+        ev => {
+          ev.preventDefault()
+          if (/tag-applied/.test(ev.target.id)) {
+            console.log('got it')
+            const id = ev.target.id.split(/tag-applied-/)[1]
+            console.log(id)
+            actions.removeTag(id)
+          }
+        }
+      }>
       {
         post ? post.tags.map(t =>
           <li
@@ -63,17 +75,8 @@ const AddTagsMenu = ({ post, actions }) => (
             style={{ background: t.color }}>
             <form
               id={`tag-applied-${t.id}`}
-              action=''
-              onsubmit={ev => {
-                ev.preventDefault()
-                actions.removeTag(ev.target.querySelector('input').value)
-              }}>
-              <input
-                type='text'
-                hidden
-                disabled
-                value={t.id} />
-              {t.title}
+              action=''>
+              <span>{t.title}</span>
               <button type='submit'>
                 <Close height='1em' />
               </button>
@@ -84,7 +87,24 @@ const AddTagsMenu = ({ post, actions }) => (
     </ul>
     <form
       id='add-tag'
-      action=''>
+      action=''
+      onsubmit={ev => {
+        ev.preventDefault()
+        const form = ev.target
+        const title = form.querySelector(`[name='title']`)
+        const color = form.querySelector(`[name='color']`)
+
+        actions.addTag({
+          title: title.value,
+          color: color.value,
+          id: Date.now().toString()
+        })
+
+        title.value = ''
+        color.value = styles.accent
+        form.style.background = '#fff'
+        form.style.color = '#000'
+      }}>
       <input
         name='title'
         placeholder='add a tag'
@@ -92,9 +112,12 @@ const AddTagsMenu = ({ post, actions }) => (
       <input
         id='color-picker'
         type='color'
-        defaultValue='#eeeeee'
+        name='color'
+        defaultValue={styles.accent}
         oninput={e => {
-          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
+          const form = document.getElementById('add-tag')
+          form.style.background = e.target.value
+          form.style.color = '#fff'
         }} />
       <label
         id='color-picker-btn'
