@@ -1,4 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
+import debounce from 'lodash.debounce' // eslint-disable-line
+
 import styles from '../../styles/foundation.json'
 
 import {
@@ -35,6 +37,7 @@ const Editor = ({ post }) => (
       value={
         post ? post.md : ''
       }
+      oninput={debounce((ev) => { console.log(ev.target.value) }, 500)}
       oncreate={el => {
         const height = window.innerHeight - 40
         el.rows = height / 16
