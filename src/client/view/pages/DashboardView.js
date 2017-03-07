@@ -148,8 +148,8 @@ export default (model, actions) =>
           </div>
           {
             [
-              { title: 'Posts', icon: <Menu height='1rem' />, items: model.posts },
-              { title: 'Tags', icon: <Tag height='1rem' />, items: model.tags }
+              { title: 'Recent Posts', icon: <Menu height='1rem' />, items: model.posts },
+              { title: 'Categories', icon: <Tag height='1rem' />, items: model.tags }
             ].map(i =>
               <div
                 className='menu-list'>
