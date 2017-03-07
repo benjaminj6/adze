@@ -31,7 +31,7 @@ export const updatePost = ({ newContent }, post) => ({
 })
 
 export const clearPost = ({ newContent }) => {
-  let content = Object.create(newContent)
+  let content = {...newContent}
   delete content.post
 
   return {
@@ -46,6 +46,15 @@ export const updateTitle = ({ newContent }, title) => ({
     title
   }
 })
+
+export const clearTitle = ({ newContent }) => {
+  let content = {...newContent}
+  delete content.title
+
+  return {
+    newContent: content
+  }
+}
 
 export const selectPost = ({ newContent, posts }, postId) => {
   const post = posts.find(p => p.id === postId)
