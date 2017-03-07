@@ -4,10 +4,13 @@ import styles from '../../styles/foundation.json'
 import {
   AngleDown,
   Close,
+  FileMultiple,
+  FilePlus,
   Menu,
   Paint,
   Plus,
-  Save, // eslint-disable-line
+  Save,
+  SaveCheck, // eslint-disable-line
   Tag,
   Trash,
   User
@@ -84,7 +87,15 @@ const EditorView = ({ model, selected }, children) => (
     <header>
       <ul>
         <li>
-          <button><Save /></button>
+          <button>
+            {
+              model.saved
+              ? <SaveCheck />
+              : <Save style={{
+                color: model.newContent ? '' : 'rgba(0, 0, 0, 0.05)'
+              }} />
+            }
+          </button>
         </li>
         <li>
           <input
@@ -146,18 +157,29 @@ export default (model, actions) =>
         <section>
           <div className='new-post'>
             <h3 style={{
-              background: /create/.test(model.router.match) ? '#fff' : ''
+              background: /create/.test(model.router.match) ? '#fff' : '',
+              color: /create/.test(model.router.match) ? 'rgba(0, 0, 0, 0.8)' : ''
             }}>
               <a href='/dashboard/create'>
-                <Plus height='1rem' />
+                <FilePlus height='1rem' />
                 New Post
               </a>
             </h3>
           </div>
           {
             [
-              { title: 'Recent Posts', href: 'posts', icon: <Menu height='1rem' />, items: model.posts },
-              { title: 'Categories', href: 'tags', icon: <Tag height='1rem' />, items: model.tags }
+              {
+                title: 'Recent Posts',
+                href: 'posts',
+                icon: <FileMultiple height='1rem' />,
+                items: model.posts
+              },
+              {
+                title: 'Categories',
+                href: 'tags',
+                icon: <Tag height='1rem' />,
+                items: model.tags
+              }
             ].map(i =>
               <div
                 className='menu-list'>
@@ -189,7 +211,6 @@ export default (model, actions) =>
                           color: model.router.params.id === item.id ? styles.accent : ''
                         }}
                         href={`/dashboard/${i.href}/id=${item.id}`}onclick={ev => {
-                          console.log(ev.target.pathname)
                           ev.preventDefault()
                           actions.router.go(ev.target.pathname)
                         }}>

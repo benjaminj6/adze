@@ -82,6 +82,15 @@ a {
     margin: 0;
     line-height: 2.5rem;
     padding: 0;
+    color: rgba(#000, 0.6);
+
+    &:hover {
+      color: rgba(#000, 0.8);
+    }
+
+    a {
+      color: inherit;
+    }
   }
 
   li {
@@ -166,7 +175,7 @@ main {
     width: 66%;
     padding: 0.5rem;
     position: fixed;
-    z-index: 0;
+    z-index: 20;
 
     ul {
       display: flex;

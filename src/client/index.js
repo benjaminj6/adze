@@ -53,7 +53,9 @@ const model = {
       color: 'red',
       id: '5'
     }
-  ]
+  ],
+  saved: false,
+  newContent: true
 }
 // end temporary
 
