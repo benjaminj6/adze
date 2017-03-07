@@ -99,9 +99,13 @@ a {
   }
 }
 
-.menu-list {
+.new-post, .menu-list {
   h3 {
-    text-transform: uppercase;
+    font-weight: lighter;
+  }
+
+  & + .menu-list {
+    border-top: 1px solid rgba(#000, 0.03)
   }
 
   .icon-toggle {

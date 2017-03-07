@@ -1,13 +1,10 @@
-/* eslint-disable */
 import { h } from 'hyperapp' // eslint-disable-line
 import styles from '../../styles/foundation.json'
 
 import {
   AngleDown,
   Close,
-  Calendar,
   Menu,
-  More,
   Paint,
   Plus,
   Save,
@@ -143,52 +140,60 @@ export default (model, actions) =>
             <User /><span>{model.email}</span>
           </button>
         </header>
-        <section>{
-          [
-            { title: 'Posts', items: model.posts },
-            { title: 'Tags', items: model.tags }
-          ].map(i =>
-            <div
-              className='menu-list'>
-              <input
-                hidden
-                checked
-                id={`${i.title}-toggler`}
-                type='checkbox'
-                name='menu-item-toggler' />
-              <h3>
-                <label htmlFor={`${i.title}-toggler`}>
-                  <i className='icon-toggle'>
-                    <AngleDown />
-                  </i>
-                  {i.title}
-                </label>
-              </h3>
-              <ul>
-                {i.items.map(item =>
-                  <li>
-                    <a
-                      style={{
-                        background: model.router.params.id === item.id ? '#fff' : '',
-                        borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : ''
-                      }}
-                      href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}onclick={ev => {
-                        console.log(ev.target.pathname)
-                        ev.preventDefault()
-                        actions.router.go(ev.target.pathname)
-                      }}>
-                      {item.title}
-                    </a>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )
-        }</section>
+        <section>
+          <div className='new-post'>
+            <h3><a href='/dashboard/create'><Plus />New Post</a></h3>
+          </div>
+          {
+            [
+              { title: 'Posts', items: model.posts },
+              { title: 'Tags', items: model.tags }
+            ].map(i =>
+              <div
+                className='menu-list'>
+                <input
+                  hidden
+                  checked
+                  id={`${i.title}-toggler`}
+                  type='checkbox'
+                  name='menu-item-toggler' />
+                <h3>
+                  <label htmlFor={`${i.title}-toggler`}>
+                    <i className='icon-toggle'>
+                      <AngleDown />
+                    </i>
+                    {i.title}
+                  </label>
+                </h3>
+                <ul>
+                  {i.items.map(item =>
+                    <li>
+                      <a
+                        style={{
+                          background: model.router.params.id === item.id ? '#fff' : '',
+                          borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : ''
+                        }}
+                        href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}onclick={ev => {
+                          console.log(ev.target.pathname)
+                          ev.preventDefault()
+                          actions.router.go(ev.target.pathname)
+                        }}>
+                        {item.title}
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )
+          }
+        </section>
       </div>
     </nav>
-    <EditorView
-      model={model}
-      selected={model.posts.find(p => p.id === model.router.params.id)}
-    />
+    {
+      /posts|create/.test(model.router.match)
+      ? <EditorView
+        model={model}
+        selected={model.posts.find(p => p.id === model.router.params.id)} />
+      : <PromptView model={model} />
+    }
   </div>
