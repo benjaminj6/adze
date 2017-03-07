@@ -2,31 +2,16 @@ import { h } from 'hyperapp' //eslint-disable-line
 
 const Svg = (props, children) => {
   if (props === null) { props = {} }
-  const defaults = {
-    id: '',
-    className: '',
-    fill: '#000',
-    size: 24
-  }
-  console.log(props, defaults)
-  props = {...props, ...defaults}
 
   return (<svg
-    id={props.id}
-    className={props.className}
-    fill={props.fill}
-    height={props.size}
-    width={props.size}
+    fill={props.fill || '#000'}
+    height={props.size || 24}
+    width={props.size || 24}
     viewBox='0 0 24 24'
     {...props}>
     {children}
   </svg>)
 }
-//
-// export const Document = props =>
-//   <Svg {...props}>
-//     <path d='M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z' />
-//   </Svg>
 
 export const AngleDown = props =>
   <Svg {...props}>
@@ -40,11 +25,36 @@ export const Calendar = props =>
     <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
 
+export const Check = props => (
+  <i className='check'>
+    <Svg {...props}>
+      <path
+        fill={props.color || '#000'}
+        d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
+      <path
+        fill={props.innerColor || '#fff'}
+        d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+    </Svg>
+  </i>
+)
+
 export const Close = props =>
   <Svg {...props}>
     <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' />
     <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
+
+export const FileMultiple = props => (
+  <Svg {...props}>
+    <path d='M15,7H20.5L15,1.5V7M8,0H16L22,6V18A2,2 0 0,1 20,20H8C6.89,20 6,19.1 6,18V2A2,2 0 0,1 8,0M4,4V22H20V24H4A2,2 0 0,1 2,22V4H4Z' />
+  </Svg>
+)
+
+export const FilePlus = props => (
+  <Svg {...props}>
+    <path d='M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M11,15V12H9V15H6V17H9V20H11V17H14V15H11Z' />
+  </Svg>
+)
 
 export const Logo = props =>
   <Svg {...props}>
@@ -81,6 +91,29 @@ export const Save = props =>
     <path d='M0 0h24v24H0z' fill='none' />
     <path d='M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z' />
   </Svg>
+
+export const SaveCheck = props => {
+  const innerSize = props ? props.size * 0.75 : 16
+  return (
+    <i
+      className='save-check'
+      style={{
+        position: 'relative'
+      }}>
+      <Save {...props} />
+      <Check
+        size={innerSize}
+        color='#fff'
+        innerColor='#0a0'
+        style={{
+          position: 'absolute',
+          bottom: `-${props ? props.size / 4 : 6}px`,
+          right: 0
+        }}
+      />
+    </i>
+  )
+}
 
 export const Tag = props =>
   <Svg {...props}>

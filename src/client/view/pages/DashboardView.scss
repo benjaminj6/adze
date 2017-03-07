@@ -11,11 +11,15 @@ button {
   }
 }
 
+a {
+  color: rgba(#000, 0.8)
+}
+
 #nav {
   float: left;
   height: 100%;
   position: relative;
-  width: 25%;
+  width: 33%;
   z-index: 5;
 }
 
@@ -32,9 +36,13 @@ button {
    & + main {
      left: 0;
 
-     #editor {
-       padding: 1rem 20%;
-     }
+    header {
+      width: 100%;
+    }
+
+    #editor {
+      padding: 1rem 20%;
+    }
    }
  }
 }
@@ -74,11 +82,19 @@ button {
     margin: 0;
     line-height: 2.5rem;
     padding: 0;
+    color: rgba(#000, 0.6);
+
+    &:hover {
+      color: rgba(#000, 0.8);
+    }
+
+    a {
+      color: inherit;
+    }
   }
 
   li {
     // padding-left: 1.5rem;
-
 
     a {
       line-height: 2rem;
@@ -96,15 +112,26 @@ button {
   }
 }
 
-.menu-list {
+.new-post, .menu-list {
   h3 {
-    text-transform: uppercase;
+    font-weight: lighter;
+  }
+
+  & + .menu-list {
+    border-top: 1px solid rgba(#000, 0.03)
   }
 
   .icon-toggle {
     padding: 0;
-    transform: rotate(-90deg);
-    display: inline-block;
+    float: right;
+
+    &.closed {
+      display: none;
+    }
+
+    &.open {
+      display: inline-block;
+    }
   }
 
   ul {
@@ -114,8 +141,16 @@ button {
   }
 
   input[name='menu-item-toggler']:checked {
-    & + h3 .icon-toggle {
-      transform: none;
+    & + h3 {
+      .icon-toggle {
+        &.closed {
+          display: inline-block;
+        }
+
+        &.open {
+          display: none;
+        }
+      }
     }
 
     & + h3 + ul {
@@ -126,7 +161,7 @@ button {
 
 main {
   height: 100%;
-  left: 25%;
+  left: 33%;
   bottom: 0;
   overflow-y: hidden;
   position: absolute;
@@ -134,16 +169,24 @@ main {
   top: 0;
   transition: left $transition;
 
-  header {
-    background: #fff;
+  > header {
+    // background: #fff;
     right: 0;
-    width: 75%;
+    width: 66%;
     padding: 0.5rem;
     position: fixed;
-    z-index: 0;
+    z-index: 20;
 
     ul {
       display: flex;
+
+      li {
+        position: relative;
+
+        button {
+          padding: 2px 0.25rem;
+        }
+      }
     }
   }
 }
@@ -181,14 +224,16 @@ main {
   }
 
   & + #info-toggler-btn + #info-menu {
-    display: flex;
-    right: 0.5rem;
     background: #fff;
-    position: absolute;
     border: 1px solid rgba(#000, 0.1);
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
     font-size: 0.75rem;
     line-height: 2;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+    width: 150px;
 
     i {
       margin-right: 0.25rem;
@@ -207,8 +252,6 @@ main {
 }
 
 .tags {
-  padding-left: 1.25rem;
-
   li {
     color: rgba(#fff, 0.8);
     opacity: 0.4;
@@ -216,7 +259,6 @@ main {
     border-radius: $bd-rad;
     padding: 0 0.25rem;
     line-height: 2;
-    width: 150px;
     transition: opacity $transition-short;
     display: flex;
     align-items: center;
@@ -230,6 +272,7 @@ main {
   button {
     color: inherit;
     margin: 0;
+    padding: 0;
 
     &:hover {
       color: inherit;
@@ -245,7 +288,6 @@ main {
   position: relative;
   display: flex;
   justify-content: flex-end;
-  margin-left: 1.25rem;
 
   input[name='title'] {
     border: 1px solid rgba(#000, 0.1);
@@ -287,41 +329,69 @@ main {
 
   button[type="submit"] {
     z-index: 10;
+    padding: 0;
   }
 }
 
 main section {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   height: 100%;
 
   &.editor-section {
-    padding-top: 40px;
+    padding: 3rem 5% 0.5rem;
+    box-sizing: border-box;
     overflow-y: visible;
     -webkit-scroll: none;
 
-    input[name='title'] {
-      position: absolute;
-      top: 0;
-      text-align: center;
-      height: 40px;
+    header {
+      display: block;
+      height: auto;
+      position: relative;
+
+      input[name='title'] {
+        text-align: center;
+        width: 100%;
+        padding: 0.5rem 0 1.75rem;
+        font-size: 1.25rem;
+        transition: border $transition-short;
+        border: 1px solid rgba(#000, 0.05);
+
+        &:focus {
+          border: 1px solid rgba($accent, 0.5);
+        }
+      }
+
+      h6 {
+        // display: none;
+        margin: 0;
+        position: absolute;
+        bottom: 0.5rem;
+        width: 100%;
+        text-align: center;
+        color: rgba(#000, 0.3);
+      }
     }
 
     textarea {
       resize: none;
-      width: 100%;
       box-sizing: content-box;
-      // max-width: 40rem;
       padding: 1rem 5%;
       overflow-y: scroll;
-      // position: absolute;
+      border: 1px solid rgba(#000, 0.05);
+      background: #fff;
+      transition: border $transition-short;
+
+      &:focus {
+        border: 1px solid rgba($accent, 0.5);
+      }
     }
   }
 
   &.prompt {
     flex-direction: column;
-
-    h1 {
+    justify-content: center;
+    h2 {
       color: rgba(#000, 0.3);
       text-align: center;
     }

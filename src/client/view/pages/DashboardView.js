@@ -1,22 +1,144 @@
-/* eslint-disable */
 import { h } from 'hyperapp' // eslint-disable-line
 import styles from '../../styles/foundation.json'
 
 import {
   AngleDown,
   Close,
-  Calendar,
+  FileMultiple,
+  FilePlus,
   Menu,
-  More,
   Paint,
   Plus,
   Save,
+  SaveCheck, // eslint-disable-line
   Tag,
   Trash,
   User
 } from '../components/Icons'
 
-export default model =>
+const Editor = ({ post }) => (
+  <section className='editor-section'>
+    <header>
+      <input
+        name='title'
+        placeholder='my new post'
+        value={post ? post.title : ''}
+        type='text' />
+      <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
+    </header>
+    <textarea
+      name='editor'
+      id='editor'
+      cols='50'
+      rows='30'
+      placeholder='start your post right here...'
+      value={
+        post ? post.md : ''
+      }
+      oncreate={el => {
+        const height = window.innerHeight - 40
+        el.rows = height / 16
+      }} />
+  </section>
+)
+
+const AddTagsMenu = ({ post }) => (
+  <div id='info-menu'>
+    <h3>Tags</h3>
+    <ul className='tags'>
+      {
+        post ? post.tags.map(t =>
+          <li
+            oncreate={el => { console.log(t) }}
+            style={{ background: t.color }}>
+            {t.title} <button><Close height='1em' /></button>
+          </li>
+        ) : ''
+      }
+    </ul>
+    <form
+      id='add-tag'
+      action=''>
+      <input
+        name='title'
+        placeholder='add a tag'
+        type='text' />
+      <input
+        id='color-picker'
+        type='color'
+        defaultValue='#eeeeee'
+        oninput={e => {
+          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
+        }} />
+      <label
+        id='color-picker-btn'
+        htmlFor='color-picker'>
+        <Paint height='1rem' width='1rem' />
+      </label>
+      <button type='submit'>
+        <Plus />
+      </button>
+    </form>
+  </div>
+)
+
+const EditorView = ({ model, selected }, children) => (
+  <main oncreate={el => { console.log(model) }}>
+    <header>
+      <ul>
+        <li>
+          <button>
+            {
+              model.saved
+              ? <SaveCheck />
+              : <Save style={{
+                color: model.newContent ? '' : 'rgba(0, 0, 0, 0.05)'
+              }} />
+            }
+          </button>
+        </li>
+        <li>
+          <input
+            hidden
+            id='info-toggler'
+            type='checkbox' />
+          <button id='info-toggler-btn'>
+            <label for='info-toggler'><Tag /></label>
+          </button>
+          <AddTagsMenu
+            oncreate={ev => { console.log(ev) }}
+            post={selected || ''} />
+        </li>
+        {selected
+          ? <li>
+            <button>
+              <Trash />
+            </button>
+          </li>
+          : ''
+        }
+      </ul>
+    </header>
+    <Editor post={selected} />
+  </main>
+)
+
+const PromptView = ({ model }) => (
+  <main>
+    <header>
+      <button><Plus /></button>
+    </header>
+    <section className='prompt'>
+      <h2>
+        Choose a post on the left to edit it.
+        <br />
+        Or you can start a <span>new one today</span>.
+      </h2>
+    </section>
+  </main>
+)
+
+export default (model, actions) =>
   <div id='app' className='dashboard-view'>
     <input
       hidden
@@ -32,149 +154,82 @@ export default model =>
             <User /><span>{model.email}</span>
           </button>
         </header>
-        <section>{
-          [
-            { title: 'Posts', items: model.posts },
-            { title: 'Tags', items: model.tags }
-          ].map(i =>
-            <div
-              className='menu-list'>
-              <input
-                hidden
-                checked
-                id={`${i.title}-toggler`}
-                type='checkbox'
-                name='menu-item-toggler' />
-              <h3>
-                <label htmlFor={`${i.title}-toggler`}>
-                  <i className='icon-toggle'>
-                    <AngleDown />
-                  </i>
-                  {i.title}
-                </label>
-              </h3>
-              <ul>
-                {i.items.map(item =>
-                  <li>
-                    <a
-                      oncreate={el => {
-                        console.log(window.location.href === el.href)
-                        if (el.href === window.location.href) {
-                          el.style.background = '#fff'
-                          el.style.borderLeft = `0.25rem solid ${styles.accent}`
-                        }
-                      }}
-                      href={`/dashboard/${i.title.toLowerCase()}/id=${item.id}`}>{item.title}</a>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )
-        }</section>
-      </div>
-    </nav>
-    {/* Separate into own module */}
-    <main>
-      <header>
-        {
-          model.writing
-          ? <ul>
-            <li>
-              <button><Save /></button>
-            </li>
-            <li>
-              <input
-                hidden
-                id='info-toggler'
-                type='checkbox' />
-              <button id='info-toggler-btn'>
-                <label for='info-toggler'><More /></label>
-              </button>
-              <div id='info-menu'>
+        <section>
+          <div className='new-post'>
+            <h3 style={{
+              background: /create/.test(model.router.match) ? '#fff' : '',
+              color: /create/.test(model.router.match) ? 'rgba(0, 0, 0, 0.8)' : ''
+            }}>
+              <a href='/dashboard/create'>
+                <FilePlus height='1rem' />
+                New Post
+              </a>
+            </h3>
+          </div>
+          {
+            [
+              {
+                title: 'Recent Posts',
+                href: 'posts',
+                icon: <FileMultiple height='1rem' />,
+                items: model.posts
+              },
+              {
+                title: 'Categories',
+                href: 'tags',
+                icon: <Tag height='1rem' />,
+                items: model.tags
+              }
+            ].map(i =>
+              <div
+                className='menu-list'>
+                <input
+                  hidden
+                  checked
+                  id={`${i.title.toLowerCase()}-toggler`}
+                  type='checkbox'
+                  name='menu-item-toggler' />
+                <h3>
+                  <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
+                    <i>{i.icon}</i>
+                    {i.title}
+                    <i className='icon-toggle open'>
+                      <AngleDown />
+                    </i>
+                    <i className='icon-toggle closed'>
+                      <Close height='1rem' />
+                    </i>
+                  </label>
+                </h3>
                 <ul>
-                  {
-                    model.current
-                    ? <li className='info-menu-item'>
-                      <h3><i><Calendar size='1rem' /></i>Created: {model.current.date}</h3>
-                    </li> : ''
-                  }
-                  <li className='info-menu-item'>
-                    <h3><i><Tag size='1rem' /></i>Tags</h3>
-                    <ul className='tags'>
-                      {
-                        model.current
-                        ? model.current.tags.map(t =>
-                          <li style={{ background: t.color }}>
-                            {t.title} <button><Close height='1em' /></button>
-                          </li>
-                        )
-                        : ''
-                      }
-                    </ul>
-                    <form
-                      id='add-tag'
-                      action=''>
-                      <input
-                        name='title'
-                        placeholder='add a tag'
-                        type='text' />
-                      <input
-                        id='color-picker'
-                        type='color'
-                        defaultValue='#eeeeee'
-                        oninput={e => {
-                          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
-                        }} />
-                      <label
-                        id='color-picker-btn'
-                        htmlFor='color-picker'>
-                        <Paint height='1rem' width='1rem' />
-                      </label>
-                      <button type='submit'>
-                        <Plus />
-                      </button>
-                    </form>
-                  </li>
-                  <li className='info-menu-item'>
-                    <button>
-                      <h3>
-                        <i><Trash size='1rem' /></i>Delete Post
-                      </h3>
-                    </button>
-                  </li>
+                  {i.items.map(item =>
+                    <li>
+                      <a
+                        style={{
+                          background: model.router.params.id === item.id ? '#fff' : '',
+                          borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
+                          color: model.router.params.id === item.id ? styles.accent : ''
+                        }}
+                        href={`/dashboard/${i.href}/id=${item.id}`}onclick={ev => {
+                          ev.preventDefault()
+                          actions.router.go(ev.target.pathname)
+                        }}>
+                        {item.title}
+                      </a>
+                    </li>
+                  )}
                 </ul>
               </div>
-            </li>
-          </ul> : <div><Plus /></div>
-        }
-      </header>
-      {model.writing
-        ? <section className='editor-section'>
-          <input
-            name='title'
-            placeholder='My post'
-            value={model.current.title || ''}
-            type='text' />
-          <textarea
-            name='editor'
-            id='editor'
-            cols='50'
-            rows='30'
-            placeholder='# your post goes here...'
-            value={
-              model.current.md || ''
-            }
-            oncreate={el => {
-              const height = window.innerHeight - 40
-              el.rows = height / 16
-            }} />
+            )
+          }
         </section>
-        : <section className='prompt'>
-          <h1>
-            Choose a post on the left to edit it.
-            <br />
-            Or you can start a <span>new one today</span>.
-          </h1>
-        </section>}
-    </main>
+      </div>
+    </nav>
+    {
+      /posts|create/.test(model.router.match)
+      ? <EditorView
+        model={model}
+        selected={model.posts.find(p => p.id === model.router.params.id)} />
+      : <PromptView model={model} />
+    }
   </div>
