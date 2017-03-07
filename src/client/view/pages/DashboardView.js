@@ -52,7 +52,7 @@ const Editor = ({ post, actions }) => (
   </section>
 )
 
-const AddTagsMenu = ({ post }) => (
+const AddTagsMenu = ({ post, actions }) => (
   <div id='info-menu'>
     <h3>Tags</h3>
     <ul className='tags'>
@@ -61,7 +61,23 @@ const AddTagsMenu = ({ post }) => (
           <li
             oncreate={el => { console.log(t) }}
             style={{ background: t.color }}>
-            {t.title} <button><Close height='1em' /></button>
+            <form
+              id={`tag-applied-${t.id}`}
+              action=''
+              onsubmit={ev => {
+                ev.preventDefault()
+                actions.removeTag(ev.target.querySelector('input').value)
+              }}>
+              <input
+                type='text'
+                hidden
+                disabled
+                value={t.id} />
+              {t.title}
+              <button type='submit'>
+                <Close height='1em' />
+              </button>
+            </form>
           </li>
         ) : ''
       }
@@ -118,6 +134,7 @@ const EditorView = ({ model, selected, actions }, children) => (
             <label for='info-toggler'><Tag /></label>
           </button>
           <AddTagsMenu
+            actions={actions}
             oncreate={ev => { console.log(ev) }}
             post={selected || ''} />
         </li>
@@ -155,7 +172,9 @@ export default (model, actions) =>
       id='nav-toggler'
       type='checkbox' />
     <nav id='nav'>
-      <button id='nav-toggler-btn' onclick={ev => { console.log(model.newContent) }}>
+      <button id='nav-toggler-btn' onclick={
+        ev => { console.log(model.newContent) }
+      }>
         <label for='nav-toggler'><Menu /></label>
       </button>
       <div id='sidebar'>
@@ -240,7 +259,7 @@ export default (model, actions) =>
       ? <EditorView
         model={model}
         actions={actions}
-        selected={model.posts.find(p => p.id === model.router.params.id)} />
+        selected={model.newContent} />
       : <PromptView model={model} />
     }
   </div>

@@ -260,12 +260,15 @@ main {
     padding: 0 0.25rem;
     line-height: 2;
     transition: opacity $transition-short;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     &:hover {
       opacity: 1;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 
