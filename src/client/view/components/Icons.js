@@ -2,31 +2,16 @@ import { h } from 'hyperapp' //eslint-disable-line
 
 const Svg = (props, children) => {
   if (props === null) { props = {} }
-  const defaults = {
-    id: '',
-    className: '',
-    fill: '#000',
-    size: 24
-  }
-
-  props = {...props, ...defaults}
 
   return (<svg
-    id={props.id}
-    className={props.className}
-    fill={props.fill}
-    height={props.size}
-    width={props.size}
+    fill={props.fill || '#000'}
+    height={props.size || 24}
+    width={props.size || 24}
     viewBox='0 0 24 24'
     {...props}>
     {children}
   </svg>)
 }
-//
-// export const Document = props =>
-//   <Svg {...props}>
-//     <path d='M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z' />
-//   </Svg>
 
 export const AngleDown = props =>
   <Svg {...props}>
@@ -39,6 +24,19 @@ export const Calendar = props =>
     <path d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z' />
     <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
+
+export const Check = props => (
+  <i className='check'>
+    <Svg {...props}>
+      <path
+        fill={props.color || '#000'}
+        d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
+      <path
+        fill={props.innerColor || '#fff'}
+        d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+    </Svg>
+  </i>
+)
 
 export const Close = props =>
   <Svg {...props}>
@@ -81,6 +79,29 @@ export const Save = props =>
     <path d='M0 0h24v24H0z' fill='none' />
     <path d='M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z' />
   </Svg>
+
+export const SaveCheck = props => {
+  const innerSize = props ? props.size * 0.75 : 16
+  return (
+    <i
+      className='save-check'
+      style={{
+        position: 'relative'
+      }}>
+      <Save {...props} />
+      <Check
+        size={innerSize}
+        color='#fff'
+        innerColor='#0a0'
+        style={{
+          position: 'absolute',
+          bottom: `-${props ? props.size / 4 : 6}px`,
+          right: 0
+        }}
+      />
+    </i>
+  )
+}
 
 export const Tag = props =>
   <Svg {...props}>

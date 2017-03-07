@@ -7,7 +7,7 @@ import {
   Menu,
   Paint,
   Plus,
-  Save,
+  Save, // eslint-disable-line
   Tag,
   Trash,
   User
