@@ -242,16 +242,6 @@ const SidebarMenuHeading = ({ isActive, toggleId }, children) => (
     background: isActive ? '#fff' : '',
     color: isActive ? 'rgba(0, 0, 0, 0.8)' : ''
   }}>
-    {
-      toggleId ? <label htmlFor={toggleId}>
-        <i className='icon-toggle open'>
-          <Plus height='1rem' />
-        </i>
-        <i className='icon-toggle closed'>
-          <Close height='1rem' />
-        </i>
-      </label> : ''
-    }
     {children}
   </h3>
 )
@@ -292,6 +282,16 @@ const SidebarMenuList = ({ actions, model, href }, items) => (
   </ul>
 )
 
+// {
+//   toggleId ? <label htmlFor={toggleId}>
+//     <i className='icon-toggle open'>
+//       <Plus height='1rem' />
+//     </i>
+//     <i className='icon-toggle closed'>
+//       <Close height='1rem' />
+//     </i> : ''
+// }
+
 const SidebarBody = ({ model, actions }) => (
   <section>
     <div className='new-post'>
@@ -313,15 +313,17 @@ const SidebarBody = ({ model, actions }) => (
           <input
             hidden
             checked
-            id={`${i.title.toLowerCase()}-toggler`}
+            id={`menu-${i.href.toLowerCase()}-toggler`}
             type='checkbox'
-            name='menu-item-toggler' />
-          <SidebarMenuHeading
-            hrefRegex={new RegExp(`/${i.href}$/`)}
-            currentUrl={model.router.match}
-            toggleId={`${i.title.toLowerCase()}-toggler`}>
-            {i.title}
-          </SidebarMenuHeading>
+            name='menu-item-toggler'
+            onclick={ev => { console.log('event') }} />
+          <label htmlFor={`menu-${i.href.toLowerCase()}-toggler`}>
+            <SidebarMenuHeading
+              hrefRegex={new RegExp(`/${i.href}$/`)}
+              currentUrl={model.router.match}>
+              {i.title}
+            </SidebarMenuHeading>
+          </label>
           <SidebarMenuList
             actions={actions}
             model={model}

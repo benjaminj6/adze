@@ -78,3 +78,5 @@ export const deletePost = ({ posts }, postId) => ({
   posts: posts.filter(p => p.id !== postId),
   newContent: defaultNewContent
 })
+
+// related to nav state

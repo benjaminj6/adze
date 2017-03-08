@@ -12,11 +12,13 @@ const model = {
   nav: [
     {
       title: 'Recent Posts',
-      href: 'posts'
+      href: 'posts',
+      open: false
     },
     {
       title: 'Categories',
-      href: 'tags'
+      href: 'tags',
+      open: false
     }
   ],
   posts: [

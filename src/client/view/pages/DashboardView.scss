@@ -140,7 +140,7 @@ a {
     margin: 0;
     line-height: 2.5rem;
     padding: 0;
-    padding-left: 1.5rem;
+    // padding-left: 1.5rem;
     color: rgba(#000, 0.6);
     font-weight: lighter;
 
@@ -187,7 +187,7 @@ a {
   }
 
   input[name='menu-item-toggler']:checked {
-    & + h3 {
+    & + label {
       &.selected {
         background: transparent;
       }
@@ -203,7 +203,7 @@ a {
       }
     }
 
-    & + h3 + ul {
+    & + label + ul {
       height: auto;
     }
   }
