@@ -25,12 +25,13 @@ a {
 
 // Handles open and closed states of menu
 #nav-toggler {
-  & + #nav {
+  & + .nav-toggle-content {
    transform: translateX(0);
+   height: 100%;
    transition: $transition;
   }
 
- &:checked + #nav {
+ &:checked + .nav-toggle-content {
    transform: translateX(-100%);
 
    & + main {

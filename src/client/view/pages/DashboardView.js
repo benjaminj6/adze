@@ -222,13 +222,13 @@ const PromptView = ({ model }) => (
   </main>
 )
 
-export default (model, actions) =>
-  <div id='app' className='dashboard-view'>
+const Sidebar = ({ model, actions }) =>
+  <nav id='nav'>
     <input
       hidden
       id='nav-toggler'
       type='checkbox' />
-    <nav id='nav'>
+    <div class='nav-toggle-content'>
       <button id='nav-toggler-btn' onclick={
         ev => { console.log(model) }
       }>
@@ -335,7 +335,14 @@ export default (model, actions) =>
           }
         </section>
       </div>
-    </nav>
+    </div>
+  </nav>
+
+export default (model, actions) =>
+  <div id='app' className='dashboard-view'>
+    <Sidebar
+      model={model}
+      actions={actions} />
     {
       /posts|create/.test(model.router.match)
       ? <EditorView
