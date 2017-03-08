@@ -43,11 +43,7 @@ export const selectPost = ({ newContent, posts }, postId) => {
   if (post) {
     return {
       saved: true,
-      newContent: {
-        md: post.md,
-        tags: post.tags,
-        title: post.title
-      }
+      newContent: post
     }
   }
 }

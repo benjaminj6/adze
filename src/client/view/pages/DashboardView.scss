@@ -114,7 +114,17 @@ a {
 
 .new-post, .menu-list {
   h3 {
+    transition: background $transition-short;
+
+    &.selected {
+      background: #fff;
+    }
+
     font-weight: lighter;
+
+    a {
+      display: block;
+    }
   }
 
   & + .menu-list {
@@ -142,6 +152,10 @@ a {
 
   input[name='menu-item-toggler']:checked {
     & + h3 {
+      &.selected {
+        background: transparent;
+      }
+
       .icon-toggle {
         &.closed {
           display: inline-block;

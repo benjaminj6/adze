@@ -247,7 +247,11 @@ export default (model, actions) =>
                   id={`${i.title.toLowerCase()}-toggler`}
                   type='checkbox'
                   name='menu-item-toggler' />
-                <h3>
+                <h3
+                  className={model.router.match.includes(i.href)
+                    ? 'selected '
+                    : ''
+                }>
                   <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
                     <i>{i.icon}</i>
                     {i.title}
@@ -268,9 +272,18 @@ export default (model, actions) =>
                           borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
                           color: model.router.params.id === item.id ? styles.accent : ''
                         }}
-                        href={`/dashboard/${i.href}/id=${item.id}`}onclick={ev => {
+                        href={`/dashboard/${i.href}/id=${item.id}`}
+                        onclick={ev => {
                           ev.preventDefault()
-                          actions.router.go(ev.target.pathname)
+                          const url = ev.target.pathname
+                          const id = url.split('id=')[1]
+                          console.log(id)
+
+                          if (/posts/.test(url)) {
+                            actions.selectPost(id)
+                          }
+
+                          actions.router.go(url)
                         }}>
                         {item.title}
                       </a>
