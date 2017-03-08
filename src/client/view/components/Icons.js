@@ -3,14 +3,20 @@ import { h } from 'hyperapp' //eslint-disable-line
 const Svg = (props, children) => {
   if (props === null) { props = {} }
 
-  return (<svg
-    fill={props.fill || '#000'}
-    height={props.size || 24}
-    width={props.size || 24}
-    viewBox='0 0 24 24'
-    {...props}>
-    {children}
-  </svg>)
+  return (
+    <i
+      className={props.className || ''}
+      id={props.id || ''}>
+      <svg
+        fill={props.fill || '#000'}
+        height={props.size || 24}
+        width={props.size || 24}
+        viewBox='0 0 24 24'
+        {...props}>
+        {children}
+      </svg>
+    </i>
+  )
 }
 
 export const AngleDown = props =>
@@ -25,18 +31,15 @@ export const Calendar = props =>
     <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
 
-export const Check = props => (
-  <i className='check'>
-    <Svg {...props}>
-      <path
-        fill={props.color || '#000'}
-        d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
-      <path
-        fill={props.innerColor || '#fff'}
-        d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
-    </Svg>
-  </i>
-)
+export const Check = props =>
+  <Svg className='check' {...props}>
+    <path
+      fill={props.color || '#000'}
+      d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
+    <path
+      fill={props.innerColor || '#fff'}
+      d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+  </Svg>
 
 export const Close = props =>
   <Svg {...props}>
@@ -50,11 +53,10 @@ export const FileMultiple = props => (
   </Svg>
 )
 
-export const FilePlus = props => (
+export const FilePlus = props =>
   <Svg {...props}>
     <path d='M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M11,15V12H9V15H6V17H9V20H11V17H14V15H11Z' />
   </Svg>
-)
 
 export const Logo = props =>
   <Svg {...props}>

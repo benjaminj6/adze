@@ -69,16 +69,22 @@ a {
   height: 100%;
 
   header {
-    display: block;
-    padding: 0;
+    padding: 0 0.25rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(#000, 0.6);
+    justify-content: flex-start;
+
+    .sidebar-user {
+      position: relative;
+    }
 
     label {
       height: 100%;
       width: 100%;
       display: flex;
-      padding: 0 0.25rem;
       align-items: center;
+      line-height: 1rem;
+      transition: color $transition-short;
     }
 
     span {
@@ -87,22 +93,28 @@ a {
 
     &:hover label, label:hover {
       cursor: pointer;
-      background: rgba(#000, 0.1);
+      color: rgba(0, 0, 0, 0.8);
     }
 
-    #user-menu-toggler + label + #user-menu {
+    #user-menu-toggler + label + #user-dropdown {
       height: 0;
       overflow-y: hidden;
       transition: height $transition-short;
+      background: #fff;
+      border: none;
+      position: absolute;
     }
 
     #user-menu-toggler:checked {
-      + label {
+      + label i {
         background: rgba(#000, 0.1);
       }
 
-      + label + #user-menu {
-
+      + label + #user-dropdown {
+        padding: 1rem 1.25rem;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 1px 2px rgba(#000, 0.2);
       }
     }
   }
@@ -211,7 +223,7 @@ main {
   > header {
     // background: #fff;
     right: 0;
-    width: 66%;
+    width: 67%;
     padding: 0.5rem;
     position: fixed;
     z-index: 20;

@@ -236,16 +236,18 @@ export default (model, actions) =>
       </button>
       <div id='sidebar'>
         <header>
-          <input
-            hidden
-            id='user-menu-toggler'
-            type='checkbox' />
-          <label htmlFor='user-menu-toggler'>
-            <AngleDown width='1rem' />
-            <span>{model.email}</span>
-          </label>
-          <div id='user-menu'>
-            <button><Logout size='1rem' />Logout</button>
+          <div className='sidebar-user'>
+            <input
+              hidden
+              id='user-menu-toggler'
+              type='checkbox' />
+            <label htmlFor='user-menu-toggler'>
+              <AngleDown />
+              <span>{model.email}</span>
+            </label>
+            <div id='user-dropdown'>
+              <button><Logout size='1rem' />Logout</button>
+            </div>
           </div>
         </header>
         <section>
