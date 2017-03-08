@@ -343,19 +343,21 @@ const Sidebar = ({ model, actions }) =>
     </div>
   </nav>
 
-export default (model, actions) =>
-  <div id='app' className='dashboard-view'>
-    <input
-      hidden
-      id='nav-toggler'
-      type='checkbox' />
-    <Sidebar model={model} actions={actions} />
-    {
-      /posts|create/.test(model.router.match)
-      ? <EditorView
-        model={model}
-        actions={actions}
-        selected={model.newContent} />
-      : <PromptView model={model} />
-    }
-  </div>
+export default (model, actions) => {
+  return (
+    <div id='app' className='dashboard-view'>
+      <input
+        hidden
+        id='nav-toggler'
+        type='checkbox' />
+      <Sidebar model={model} actions={actions} />
+      {
+        /posts|create/.test(model.router.match)
+        ? <EditorView model={model}
+          actions={actions}
+          selected={model.newContent} />
+        : <PromptView model={model} />
+      }
+    </div>
+  )
+}
