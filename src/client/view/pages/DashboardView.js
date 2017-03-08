@@ -193,7 +193,11 @@ const EditorView = ({ model, selected, actions }, children) => (
 
               actions.router.go('/dashboard')
             }}>
-              <Trash />
+              {
+                /create/.test(model.router.match)
+                  ? <Close />
+                  : <Trash />
+              }
             </button>
           </li>
           : ''
