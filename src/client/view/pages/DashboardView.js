@@ -237,30 +237,26 @@ const SidebarHeader = ({ model, actions }) =>
     </div>
   </header>
 
-const SidebarMenuHeading = (props, children) => {
-  const isActive = props.hrefRegex.test(props.currentUrl)
+const SidebarMenuHeading = ({ isActive, toggleId }, children) => (
+  <h3 style={{
+    background: isActive ? '#fff' : '',
+    color: isActive ? 'rgba(0, 0, 0, 0.8)' : ''
+  }}>
+    {
+      toggleId ? <label htmlFor={toggleId}>
+        <i className='icon-toggle open'>
+          <Plus height='1rem' />
+        </i>
+        <i className='icon-toggle closed'>
+          <Close height='1rem' />
+        </i>
+      </label> : ''
+    }
+    {children}
+  </h3>
+)
 
-  return (
-    <h3 style={{
-      background: isActive ? '#fff' : '',
-      color: isActive ? 'rgba(0, 0, 0, 0.8)' : ''
-    }}>
-      {
-        props.toggleId ? <label htmlFor={props.toggleId}>
-          <i className='icon-toggle open'>
-            <Plus height='1rem' />
-          </i>
-          <i className='icon-toggle closed'>
-            <Close height='1rem' />
-          </i>
-        </label> : ''
-      }
-      {children}
-    </h3>
-  )
-}
-
-const SidebarMenuNavListItem = ({ title, isActive, href }) => (
+const SidebarMenuListItem = ({ title, isActive, href }) => (
   <li>
     <a
       style={{
@@ -273,7 +269,7 @@ const SidebarMenuNavListItem = ({ title, isActive, href }) => (
   </li>
 )
 
-const SidebarMenuNavList = ({ actions, model, href }, children) =>
+const SidebarMenuList = ({ actions, model, href }, items) => (
   <ul onclick={ev => {
     ev.preventDefault()
     const url = ev.target.pathname
@@ -285,19 +281,21 @@ const SidebarMenuNavList = ({ actions, model, href }, children) =>
 
     actions.router.go(url)
   }}>
-    {children.map(item =>
-      <SidebarMenuNavListItem
-        title={item.title}
-        isActive={model.router.params.id === item.id}
-        href={`/dashboard/${href}/id=${item.id}`} />
-    )}
+    {
+      items.map(item =>
+        <SidebarMenuListItem
+          title={item.title}
+          isActive={model.router.params.id === item.id}
+          href={`/dashboard/${href}/id=${item.id}`} />
+      )
+    }
   </ul>
+)
 
-const SidebarBody = ({ model, actions }) =>
+const SidebarBody = ({ model, actions }) => (
   <section>
     <div className='new-post'>
-      <SidebarMenuHeading
-        hrefRegex={/create$/} currentUrl={model.router.match}>
+      <SidebarMenuHeading isActive={/create$/.test(model.router.match)}>
         <a
           href='/dashboard/create'
           onclick={ev => {
@@ -324,16 +322,17 @@ const SidebarBody = ({ model, actions }) =>
             toggleId={`${i.title.toLowerCase()}-toggler`}>
             {i.title}
           </SidebarMenuHeading>
-          <SidebarMenuNavList
+          <SidebarMenuList
             actions={actions}
             model={model}
             href={i.href}>
             {model[i.href]}
-          </SidebarMenuNavList>
+          </SidebarMenuList>
         </div>
       )
     }
   </section>
+)
 
 const Sidebar = ({ model, actions }) =>
   <nav id='nav'>
