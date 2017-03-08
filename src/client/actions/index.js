@@ -1,4 +1,5 @@
-export const addTag = (model, tag) => {
+// related to newContent / staging
+export const addStagedTag = (model, tag) => {
   const tags = model.newContent.tags || []
 
   return {
@@ -10,7 +11,7 @@ export const addTag = (model, tag) => {
   }
 }
 
-export const removeTag = ({ newContent }, tagId) => {
+export const removeStagedTag = ({ newContent }, tagId) => {
   if (newContent.tags) {
     return {
       saved: false,
@@ -22,7 +23,7 @@ export const removeTag = ({ newContent }, tagId) => {
   }
 }
 
-export const updatePost = ({ newContent }, post) => ({
+export const updateStagedPost = ({ newContent }, post) => ({
   saved: false,
   newContent: {
     ...newContent,
@@ -30,7 +31,7 @@ export const updatePost = ({ newContent }, post) => ({
   }
 })
 
-export const updateTitle = ({ newContent }, title) => ({
+export const updateStagedTitle = ({ newContent }, title) => ({
   saved: false,
   newContent: {
     ...newContent,
@@ -56,4 +57,9 @@ export const clearNewContent = ({ newContent }) => ({
     tags: [],
     date: new Date()
   }
+})
+
+// related to model.posts
+export const addPost = ({ posts }, post) => ({
+  posts: posts.push(post)
 })

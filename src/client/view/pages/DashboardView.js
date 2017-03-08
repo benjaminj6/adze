@@ -28,7 +28,7 @@ const Editor = ({ post, actions }) => (
         type='text'
         oninput={
           debounce(({ target }) => {
-            actions.updateTitle(target.value)
+            actions.updateStagedTitle(target.value)
           }, 500)
         } />
       <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
@@ -43,7 +43,7 @@ const Editor = ({ post, actions }) => (
         post ? post.md : ''
       }
       oninput={
-        debounce(({ target }) => { actions.updatePost(target.value) }, 500)
+        debounce(({ target }) => { actions.updateStagedPost(target.value) }, 500)
       }
       oncreate={el => {
         const height = window.innerHeight - 40
@@ -64,7 +64,7 @@ const AddTagsMenu = ({ post, actions }) => (
             console.log('got it')
             const id = ev.target.id.split(/tag-applied-/)[1]
             console.log(id)
-            actions.removeTag(id)
+            actions.removeStagedTag(id)
           }
         }
       }>
@@ -94,7 +94,7 @@ const AddTagsMenu = ({ post, actions }) => (
         const title = form.querySelector(`[name='title']`)
         const color = form.querySelector(`[name='color']`)
 
-        actions.addTag({
+        actions.addStagedTag({
           title: title.value,
           color: color.value,
           id: Date.now().toString()
