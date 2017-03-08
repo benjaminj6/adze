@@ -78,8 +78,3 @@ export const deletePost = ({ posts }, postId) => ({
   posts: posts.filter(p => p.id !== postId),
   newContent: defaultNewContent
 })
-
-// related to nav state
-export const toggleNavItem = ({ nav }, href) => ({
-  nav: nav.map(item => item.href === href ? {...item, open: !item.open} : item)
-})
