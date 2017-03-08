@@ -69,33 +69,91 @@ a {
   height: 100%;
 
   header {
-    justify-content: flex-start;
+    display: block;
     padding: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-    button {
-      padding: 0;
+    label {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      padding: 0 0.25rem;
+      align-items: center;
+    }
+
+    span {
+      margin-left: 0.25rem;
+    }
+
+    &:hover label, label:hover {
+      cursor: pointer;
+      background: rgba(#000, 0.1);
+    }
+
+    #user-menu-toggler + label + #user-menu {
+      height: 0;
+      overflow-y: hidden;
+      transition: height $transition-short;
+    }
+
+    #user-menu-toggler:checked {
+      + label {
+        background: rgba(#000, 0.1);
+      }
+
+      + label + #user-menu {
+
+      }
+    }
+  }
+
+  .menu-list {
+    border-top: 1px solid rgba(#000, 0.03)
+  }
+
+  .icon-toggle {
+    padding: 0;
+    float: left;
+
+    &.closed {
+      display: none;
+    }
+
+    &.open {
+      display: inline-block;
     }
   }
 
   h3 {
+    transition: background $transition-short;
     margin: 0;
     line-height: 2.5rem;
     padding: 0;
+    padding-left: 1.5rem;
     color: rgba(#000, 0.6);
+    font-weight: lighter;
+
+    &.selected {
+      background: #fff;
+    }
 
     &:hover {
       color: rgba(#000, 0.8);
     }
 
     a {
+      display: block;
       color: inherit;
     }
   }
 
-  li {
-    // padding-left: 1.5rem;
+  ul {
+    height: 0;
+    overflow-y: hidden;
+    margin: 0;
+  }
 
+  li {
     a {
       line-height: 2rem;
       border-left: 0.25rem solid transparent;
@@ -110,44 +168,11 @@ a {
       }
     }
   }
-}
 
-.new-post, .menu-list {
-  h3 {
-    transition: background $transition-short;
-
-    &.selected {
-      background: #fff;
+  input[name='menu-item-toggler'] {
+    + h3 {
+      padding-left: 0;
     }
-
-    font-weight: lighter;
-
-    a {
-      display: block;
-    }
-  }
-
-  & + .menu-list {
-    border-top: 1px solid rgba(#000, 0.03)
-  }
-
-  .icon-toggle {
-    padding: 0;
-    float: right;
-
-    &.closed {
-      display: none;
-    }
-
-    &.open {
-      display: inline-block;
-    }
-  }
-
-  ul {
-    height: 0;
-    overflow-y: hidden;
-    margin: 0;
   }
 
   input[name='menu-item-toggler']:checked {

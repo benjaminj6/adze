@@ -7,7 +7,8 @@ import {
   AngleDown,
   Close,
   FileMultiple,
-  FilePlus,
+  FilePlus, // eslint-disable-line
+  Logout,
   Menu,
   Paint,
   Plus,
@@ -15,7 +16,7 @@ import {
   SaveCheck, // eslint-disable-line
   Tag,
   Trash,
-  User
+  User // eslint-disable-line
 } from '../components/Icons'
 
 const Editor = ({ post, actions }) => (
@@ -235,9 +236,17 @@ export default (model, actions) =>
       </button>
       <div id='sidebar'>
         <header>
-          <button>
-            <User /><span>{model.email}</span>
-          </button>
+          <input
+            hidden
+            id='user-menu-toggler'
+            type='checkbox' />
+          <label htmlFor='user-menu-toggler'>
+            <AngleDown width='1rem' />
+            <span>{model.email}</span>
+          </label>
+          <div id='user-menu'>
+            <button><Logout size='1rem' />Logout</button>
+          </div>
         </header>
         <section>
           <div className='new-post'>
@@ -252,7 +261,6 @@ export default (model, actions) =>
                   actions.clearNewContent()
                   actions.router.go('/dashboard/create')
                 }}>
-                <FilePlus height='1rem' />
                 New Post
               </a>
             </h3>
@@ -272,8 +280,7 @@ export default (model, actions) =>
                 items: model.tags
               }
             ].map(i =>
-              <div
-                className='menu-list'>
+              <div className='menu-list'>
                 <input
                   hidden
                   checked
@@ -286,14 +293,13 @@ export default (model, actions) =>
                     : ''
                 }>
                   <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
-                    <i>{i.icon}</i>
-                    {i.title}
                     <i className='icon-toggle open'>
-                      <AngleDown />
+                      <Plus height='1rem' />
                     </i>
                     <i className='icon-toggle closed'>
                       <Close height='1rem' />
                     </i>
+                    {i.title}
                   </label>
                 </h3>
                 <ul onclick={ev => {
