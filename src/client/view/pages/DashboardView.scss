@@ -332,7 +332,8 @@ main {
     + #color-picker-btn {
       padding: 2px;
       opacity: 0.8;
-      transition: all $transition-short;
+      z-index: 20;
+      transition: opacity $transition-short;
 
       &:hover {
         opacity: 1;

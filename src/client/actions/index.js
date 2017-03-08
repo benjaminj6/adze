@@ -71,7 +71,7 @@ export const addPost = ({ posts }, post) => ({
 export const updatePost = ({ posts }, post) => ({
   saved: true,
   posts: posts.map(p => p.id === post.id ? post : p),
-  newContent: defaultNewContent
+  newContent: post
 })
 
 export const deletePost = ({ posts }, postId) => ({
