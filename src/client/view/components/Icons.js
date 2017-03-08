@@ -3,14 +3,20 @@ import { h } from 'hyperapp' //eslint-disable-line
 const Svg = (props, children) => {
   if (props === null) { props = {} }
 
-  return (<svg
-    fill={props.fill || '#000'}
-    height={props.size || 24}
-    width={props.size || 24}
-    viewBox='0 0 24 24'
-    {...props}>
-    {children}
-  </svg>)
+  return (
+    <i
+      className={props.className || ''}
+      id={props.id || ''}>
+      <svg
+        fill={props.fill || '#000'}
+        height={props.size || 24}
+        width={props.size || 24}
+        viewBox='0 0 24 24'
+        {...props}>
+        {children}
+      </svg>
+    </i>
+  )
 }
 
 export const AngleDown = props =>
@@ -25,18 +31,15 @@ export const Calendar = props =>
     <path d='M0 0h24v24H0z' fill='none' />
   </Svg>
 
-export const Check = props => (
-  <i className='check'>
-    <Svg {...props}>
-      <path
-        fill={props.color || '#000'}
-        d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
-      <path
-        fill={props.innerColor || '#fff'}
-        d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
-    </Svg>
-  </i>
-)
+export const Check = props =>
+  <Svg className='check' {...props}>
+    <path
+      fill={props.color || '#000'}
+      d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
+    <path
+      fill={props.innerColor || '#fff'}
+      d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+  </Svg>
 
 export const Close = props =>
   <Svg {...props}>
@@ -50,16 +53,21 @@ export const FileMultiple = props => (
   </Svg>
 )
 
-export const FilePlus = props => (
+export const FilePlus = props =>
   <Svg {...props}>
     <path d='M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M11,15V12H9V15H6V17H9V20H11V17H14V15H11Z' />
   </Svg>
-)
 
 export const Logo = props =>
   <Svg {...props}>
     <g><path d='M13.618 6.166c.237-.329.382-.729.382-1.166 0-1.102-.897-2-2-2-1.104 0-2 .898-2 2 0 .437.144.837.381 1.166-1.854.383-3.472 1.41-4.616 2.834h12.47c-1.145-1.424-2.763-2.451-4.617-2.834zm-1.618-.166c-.552 0-1-.447-1-1 0-.551.448-1 1-1 .551 0 1 .449 1 1 0 .553-.449 1-1 1zM20.5 9.5c-.751 0-2 .5-2 .5h-13.418c-.598 1.029-.969 2.201-1.055 3.453-1.153-.222-2.027-1.236-2.027-2.453v-1.5c0-.826-.673-1.5-1.5-1.5-.276 0-.5.225-.5.5 0 .276.224.5.5.5.275 0 .5.225.5.5v1.5c0 1.767 1.316 3.228 3.019 3.463.09 1.572.633 3.063 1.593 4.338.094.126.242.199.399.199h11.979c.157 0 .306-.073.399-.199.558-.741.971-1.556 1.241-2.415.283.073.573.114.869.114 1.93 0 3.5-1.568 3.5-3.5.001-1.93-1.569-3.5-3.499-3.5zm0 6c-.215 0-.424-.035-.629-.09.083-.462.129-.932.129-1.41 0-1.139-.244-2.222-.675-3.203.359-.194.759-.297 1.175-.297 1.378 0 2.5 1.122 2.5 2.5 0 1.379-1.122 2.5-2.5 2.5z' /></g>
   </Svg>
+
+export const Logout = props => (
+  <Svg {...props}>
+    <path d='M14.08,15.59L16.67,13H7V11H16.67L14.08,8.41L15.5,7L20.5,12L15.5,17L14.08,15.59M19,3A2,2 0 0,1 21,5V9.67L19,7.67V5H5V19H19V16.33L21,14.33V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19Z' />
+  </Svg>
+)
 
 export const Menu = props =>
   <Svg {...props}>

@@ -26,35 +26,34 @@ a {
 // Handles open and closed states of menu
 #nav-toggler {
   & + #nav {
-   transform: translateX(0);
-   transition: $transition;
+    transform: translateX(0);
+    height: 100%;
+    transition: $transition;
   }
 
  &:checked + #nav {
    transform: translateX(-100%);
 
    & + main {
-     left: 0;
+      left: 0;
 
-    header {
-      width: 100%;
-    }
+      header {
+        width: 100%;
+      }
 
-    #editor {
-      padding: 1rem 20%;
+      #editor {
+        padding: 1rem 20%;
+      }
     }
-   }
- }
+  }
 }
 
 #nav-toggler-btn {
   color: rgba(#000, 0.6);
-  line-height: 1.5rem;
-  padding: 0;
+  padding: 0.5rem 0;
   position: absolute;
   right: -1.75rem;
   top: 0;
-  height: 40px;
   transition: all $transition-short;
   z-index: 40;
 
@@ -69,33 +68,103 @@ a {
   height: 100%;
 
   header {
-    justify-content: flex-start;
-    padding: 0;
+    padding: 0 0.25rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(#000, 0.6);
+    justify-content: flex-start;
 
-    button {
-      padding: 0;
+    .sidebar-user {
+      position: relative;
+    }
+
+    label {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      line-height: 1rem;
+      transition: color $transition-short;
+    }
+
+    span {
+      margin-left: 0.25rem;
+    }
+
+    &:hover label, label:hover {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    #user-menu-toggler + label + #user-dropdown {
+      height: 0;
+      overflow-y: hidden;
+      transition: height $transition-short;
+      background: #fff;
+      border: none;
+      position: absolute;
+    }
+
+    #user-menu-toggler:checked {
+      + label i {
+        background: rgba(#000, 0.1);
+      }
+
+      + label + #user-dropdown {
+        padding: 1rem 1.25rem;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 1px 2px rgba(#000, 0.2);
+      }
+    }
+  }
+
+  .menu-list {
+    border-top: 1px solid rgba(#000, 0.03)
+  }
+
+  .icon-toggle {
+    padding: 0;
+    float: left;
+
+    &.closed {
+      display: none;
+    }
+
+    &.open {
+      display: inline-block;
     }
   }
 
   h3 {
+    transition: background $transition-short;
     margin: 0;
     line-height: 2.5rem;
     padding: 0;
+    padding-left: 1.5rem;
     color: rgba(#000, 0.6);
+    font-weight: lighter;
+
+    &.selected {
+      background: #fff;
+    }
 
     &:hover {
       color: rgba(#000, 0.8);
     }
 
     a {
+      display: block;
       color: inherit;
     }
   }
 
-  li {
-    // padding-left: 1.5rem;
+  ul {
+    height: 0;
+    overflow-y: hidden;
+    margin: 0;
+  }
 
+  li {
     a {
       line-height: 2rem;
       border-left: 0.25rem solid transparent;
@@ -110,44 +179,11 @@ a {
       }
     }
   }
-}
 
-.new-post, .menu-list {
-  h3 {
-    transition: background $transition-short;
-
-    &.selected {
-      background: #fff;
+  input[name='menu-item-toggler'] {
+    + h3 {
+      padding-left: 0;
     }
-
-    font-weight: lighter;
-
-    a {
-      display: block;
-    }
-  }
-
-  & + .menu-list {
-    border-top: 1px solid rgba(#000, 0.03)
-  }
-
-  .icon-toggle {
-    padding: 0;
-    float: right;
-
-    &.closed {
-      display: none;
-    }
-
-    &.open {
-      display: inline-block;
-    }
-  }
-
-  ul {
-    height: 0;
-    overflow-y: hidden;
-    margin: 0;
   }
 
   input[name='menu-item-toggler']:checked {
@@ -186,7 +222,7 @@ main {
   > header {
     // background: #fff;
     right: 0;
-    width: 66%;
+    width: 67%;
     padding: 0.5rem;
     position: fixed;
     z-index: 20;
@@ -332,7 +368,8 @@ main {
     + #color-picker-btn {
       padding: 2px;
       opacity: 0.8;
-      transition: all $transition-short;
+      z-index: 20;
+      transition: opacity $transition-short;
 
       &:hover {
         opacity: 1;

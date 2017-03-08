@@ -1,4 +1,12 @@
-export const addTag = (model, tag) => {
+// related to newContent / staging
+const defaultNewContent = {
+  title: '',
+  md: '',
+  tags: [],
+  date: new Date()
+}
+
+export const addStagedTag = (model, tag) => {
   const tags = model.newContent.tags || []
 
   return {
@@ -10,7 +18,7 @@ export const addTag = (model, tag) => {
   }
 }
 
-export const removeTag = ({ newContent }, tagId) => {
+export const removeStagedTag = ({ newContent }, tagId) => {
   if (newContent.tags) {
     return {
       saved: false,
@@ -22,15 +30,15 @@ export const removeTag = ({ newContent }, tagId) => {
   }
 }
 
-export const updatePost = ({ newContent }, post) => ({
+export const updateStagedPost = ({ newContent }, post) => ({
   saved: false,
   newContent: {
     ...newContent,
-    post
+    md: post
   }
 })
 
-export const updateTitle = ({ newContent }, title) => ({
+export const updateStagedTitle = ({ newContent }, title) => ({
   saved: false,
   newContent: {
     ...newContent,
@@ -48,12 +56,25 @@ export const selectPost = ({ newContent, posts }, postId) => {
   }
 }
 
-export const clearNewContent = ({ newContent }) => ({
+export const clearNewContent = () => ({
   saved: false,
-  newContent: {
-    title: '',
-    md: '',
-    tags: [],
-    date: new Date()
-  }
+  newContent: defaultNewContent
+})
+
+// related to model.posts
+export const addPost = ({ posts }, post) => ({
+  posts: posts.concat([post]),
+  newContent: post,
+  saved: true
+})
+
+export const updatePost = ({ posts }, post) => ({
+  saved: true,
+  posts: posts.map(p => p.id === post.id ? post : p),
+  newContent: post
+})
+
+export const deletePost = ({ posts }, postId) => ({
+  posts: posts.filter(p => p.id !== postId),
+  newContent: defaultNewContent
 })

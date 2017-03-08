@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { h, app, Router } from 'hyperapp' // eslint-disable-line
 
 import * as actions from './actions'
@@ -10,6 +9,16 @@ import './index.scss'
 // Will be removed
 const model = {
   email: 'test@test.com',
+  nav: [
+    {
+      title: 'Recent Posts',
+      href: 'posts'
+    },
+    {
+      title: 'Categories',
+      href: 'tags'
+    }
+  ],
   posts: [
     {
       title: 'foo',
