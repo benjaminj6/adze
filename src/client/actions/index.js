@@ -43,16 +43,17 @@ export const selectPost = ({ newContent, posts }, postId) => {
   if (post) {
     return {
       saved: true,
-      newContent: {
-        post: post.md,
-        tags: post.tags,
-        title: post.title
-      }
+      newContent: post
     }
   }
 }
 
 export const clearNewContent = ({ newContent }) => ({
   saved: false,
-  newContent: {}
+  newContent: {
+    title: '',
+    md: '',
+    tags: [],
+    date: new Date()
+  }
 })

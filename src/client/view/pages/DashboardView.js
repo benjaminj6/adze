@@ -1,4 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
+import debounce from 'lodash.debounce' // eslint-disable-line
+
 import styles from '../../styles/foundation.json'
 
 import {
@@ -16,14 +18,19 @@ import {
   User
 } from '../components/Icons'
 
-const Editor = ({ post }) => (
+const Editor = ({ post, actions }) => (
   <section className='editor-section'>
     <header>
       <input
         name='title'
         placeholder='my new post'
         value={post ? post.title : ''}
-        type='text' />
+        type='text'
+        oninput={
+          debounce(({ target }) => {
+            actions.updateTitle(target.value)
+          }, 500)
+        } />
       <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
     </header>
     <textarea
@@ -31,9 +38,12 @@ const Editor = ({ post }) => (
       id='editor'
       cols='50'
       rows='30'
-      placeholder='start your post right here...'
+      placeholder='your content here...'
       value={
         post ? post.md : ''
+      }
+      oninput={
+        debounce(({ target }) => { actions.updatePost(target.value) }, 500)
       }
       oncreate={el => {
         const height = window.innerHeight - 40
@@ -42,23 +52,59 @@ const Editor = ({ post }) => (
   </section>
 )
 
-const AddTagsMenu = ({ post }) => (
+const AddTagsMenu = ({ post, actions }) => (
   <div id='info-menu'>
     <h3>Tags</h3>
-    <ul className='tags'>
+    <ul
+      className='tags'
+      onsubmit={
+        ev => {
+          ev.preventDefault()
+          if (/tag-applied/.test(ev.target.id)) {
+            console.log('got it')
+            const id = ev.target.id.split(/tag-applied-/)[1]
+            console.log(id)
+            actions.removeTag(id)
+          }
+        }
+      }>
       {
         post ? post.tags.map(t =>
           <li
             oncreate={el => { console.log(t) }}
             style={{ background: t.color }}>
-            {t.title} <button><Close height='1em' /></button>
+            <form
+              id={`tag-applied-${t.id}`}
+              action=''>
+              <span>{t.title}</span>
+              <button type='submit'>
+                <Close height='1em' />
+              </button>
+            </form>
           </li>
         ) : ''
       }
     </ul>
     <form
       id='add-tag'
-      action=''>
+      action=''
+      onsubmit={ev => {
+        ev.preventDefault()
+        const form = ev.target
+        const title = form.querySelector(`[name='title']`)
+        const color = form.querySelector(`[name='color']`)
+
+        actions.addTag({
+          title: title.value,
+          color: color.value,
+          id: Date.now().toString()
+        })
+
+        title.value = ''
+        color.value = styles.accent
+        form.style.background = '#fff'
+        form.style.color = '#000'
+      }}>
       <input
         name='title'
         placeholder='add a tag'
@@ -66,9 +112,12 @@ const AddTagsMenu = ({ post }) => (
       <input
         id='color-picker'
         type='color'
-        defaultValue='#eeeeee'
+        name='color'
+        defaultValue={styles.accent}
         oninput={e => {
-          document.getElementById('color-picker-btn').querySelector('.bar').style.fill = e.target.value
+          const form = document.getElementById('add-tag')
+          form.style.background = e.target.value
+          form.style.color = '#fff'
         }} />
       <label
         id='color-picker-btn'
@@ -82,7 +131,7 @@ const AddTagsMenu = ({ post }) => (
   </div>
 )
 
-const EditorView = ({ model, selected }, children) => (
+const EditorView = ({ model, selected, actions }, children) => (
   <main>
     <header>
       <ul>
@@ -108,6 +157,7 @@ const EditorView = ({ model, selected }, children) => (
             <label for='info-toggler'><Tag /></label>
           </button>
           <AddTagsMenu
+            actions={actions}
             oncreate={ev => { console.log(ev) }}
             post={selected || ''} />
         </li>
@@ -121,7 +171,7 @@ const EditorView = ({ model, selected }, children) => (
         }
       </ul>
     </header>
-    <Editor post={selected} />
+    <Editor post={selected} actions={actions} />
   </main>
 )
 
@@ -145,7 +195,9 @@ export default (model, actions) =>
       id='nav-toggler'
       type='checkbox' />
     <nav id='nav'>
-      <button id='nav-toggler-btn' onclick={ev => { console.log(model.newContent) }}>
+      <button id='nav-toggler-btn' onclick={
+        ev => { console.log(model.newContent) }
+      }>
         <label for='nav-toggler'><Menu /></label>
       </button>
       <div id='sidebar'>
@@ -160,7 +212,13 @@ export default (model, actions) =>
               background: /create/.test(model.router.match) ? '#fff' : '',
               color: /create/.test(model.router.match) ? 'rgba(0, 0, 0, 0.8)' : ''
             }}>
-              <a href='/dashboard/create'>
+              <a
+                href='/dashboard/create'
+                onclick={ev => {
+                  ev.preventDefault()
+                  actions.clearNewContent()
+                  actions.router.go('/dashboard/create')
+                }}>
                 <FilePlus height='1rem' />
                 New Post
               </a>
@@ -189,7 +247,11 @@ export default (model, actions) =>
                   id={`${i.title.toLowerCase()}-toggler`}
                   type='checkbox'
                   name='menu-item-toggler' />
-                <h3>
+                <h3
+                  className={model.router.match.includes(i.href)
+                    ? 'selected '
+                    : ''
+                }>
                   <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
                     <i>{i.icon}</i>
                     {i.title}
@@ -210,9 +272,18 @@ export default (model, actions) =>
                           borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
                           color: model.router.params.id === item.id ? styles.accent : ''
                         }}
-                        href={`/dashboard/${i.href}/id=${item.id}`}onclick={ev => {
+                        href={`/dashboard/${i.href}/id=${item.id}`}
+                        onclick={ev => {
                           ev.preventDefault()
-                          actions.router.go(ev.target.pathname)
+                          const url = ev.target.pathname
+                          const id = url.split('id=')[1]
+                          console.log(id)
+
+                          if (/posts/.test(url)) {
+                            actions.selectPost(id)
+                          }
+
+                          actions.router.go(url)
                         }}>
                         {item.title}
                       </a>
@@ -229,7 +300,8 @@ export default (model, actions) =>
       /posts|create/.test(model.router.match)
       ? <EditorView
         model={model}
-        selected={model.posts.find(p => p.id === model.router.params.id)} />
+        actions={actions}
+        selected={model.newContent} />
       : <PromptView model={model} />
     }
   </div>
