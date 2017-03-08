@@ -221,26 +221,28 @@ const PromptView = ({ model }) => (
     </section>
   </main>
 )
+const SidebarHeader = ({ model, actions }) =>
+  <header>
+    <div className='sidebar-user'>
+      <input
+        hidden
+        id='user-menu-toggler'
+        type='checkbox' />
+      <label htmlFor='user-menu-toggler'>
+        <AngleDown />
+        <span>{model.email}</span>
+      </label>
+      <div id='user-dropdown'>
+        <button><Logout size='1rem' />Logout</button>
+      </div>
+    </div>
+  </header>
 
 const Sidebar = ({ model, actions }) =>
   <nav id='nav'>
     <label id='nav-toggler-btn' for='nav-toggler'><Menu /></label>
     <div id='sidebar'>
-      <header>
-        <div className='sidebar-user'>
-          <input
-            hidden
-            id='user-menu-toggler'
-            type='checkbox' />
-          <label htmlFor='user-menu-toggler'>
-            <AngleDown />
-            <span>{model.email}</span>
-          </label>
-          <div id='user-dropdown'>
-            <button><Logout size='1rem' />Logout</button>
-          </div>
-        </div>
-      </header>
+      <SidebarHeader model={model} />
       <section>
         <div className='new-post'>
           <h3 style={{
