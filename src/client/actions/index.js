@@ -27,7 +27,7 @@ export const updateStagedPost = ({ newContent }, post) => ({
   saved: false,
   newContent: {
     ...newContent,
-    post
+    md: post
   }
 })
 
@@ -49,7 +49,7 @@ export const selectPost = ({ newContent, posts }, postId) => {
   }
 }
 
-export const clearNewContent = ({ newContent }) => ({
+export const clearNewContent = () => ({
   saved: false,
   newContent: {
     title: '',
@@ -61,5 +61,22 @@ export const clearNewContent = ({ newContent }) => ({
 
 // related to model.posts
 export const addPost = ({ posts }, post) => ({
-  posts: posts.push(post)
+  posts: posts.concat([post]),
+  newContent: post,
+  saved: true
+})
+
+export const updatePost = ({ posts }, post) => ({
+  saved: true,
+  posts: posts.map(p => p.id === post.id ? post : p),
+  newcontent: {
+    title: '',
+    md: '',
+    tags: [],
+    date: new Date()
+  }
+})
+
+export const deletePost = ({ posts }, postId) => ({
+  posts
 })

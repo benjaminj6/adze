@@ -140,11 +140,35 @@ const EditorView = ({ model, selected, actions }, children) => (
             {
               model.saved
               ? <SaveCheck />
-              : <Save style={{
-                color: model.newContent.title && model.newContent.post
-                  ? ''
-                  : 'rgba(0, 0, 0, 0.05)'
-              }} />
+              : <Save
+                onclick={ev => {
+                  // TODO: This would make a great higher-level action
+                  if (model.newContent.title && model.newContent.md) {
+                    if (/create/.test(model.router.match)) {
+                      // TODO: DB calls
+                      console.log('this will write to db')
+
+                      // TODO: Dummy data added until DB calls are done
+                      const post = {
+                        ...model.newContent,
+                        id: Date.now().toString()
+                      }
+
+                      actions.addPost(post)
+                      console.log('default')
+                      actions.router.go(`/dashboard/posts/id=${post.id}`)
+                    }
+
+                    if (/posts/.test(model.router.match)) {
+                      actions.updatePost(model.newContent)
+                    }
+                  }
+                }}
+                style={{
+                  color: model.newContent.title && model.newContent.md
+                    ? ''
+                    : 'rgba(0, 0, 0, 0.05)'
+                }} />
             }
           </button>
         </li>
@@ -196,7 +220,7 @@ export default (model, actions) =>
       type='checkbox' />
     <nav id='nav'>
       <button id='nav-toggler-btn' onclick={
-        ev => { console.log(model.newContent) }
+        ev => { console.log(model) }
       }>
         <label for='nav-toggler'><Menu /></label>
       </button>
@@ -263,7 +287,18 @@ export default (model, actions) =>
                     </i>
                   </label>
                 </h3>
-                <ul>
+                <ul onclick={ev => {
+                  ev.preventDefault()
+                  const url = ev.target.pathname
+                  const id = url.split('id=')[1]
+                  console.log(id)
+
+                  if (/posts/.test(url)) {
+                    actions.selectPost(id)
+                  }
+
+                  actions.router.go(url)
+                }}>
                   {i.items.map(item =>
                     <li>
                       <a
@@ -272,19 +307,7 @@ export default (model, actions) =>
                           borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
                           color: model.router.params.id === item.id ? styles.accent : ''
                         }}
-                        href={`/dashboard/${i.href}/id=${item.id}`}
-                        onclick={ev => {
-                          ev.preventDefault()
-                          const url = ev.target.pathname
-                          const id = url.split('id=')[1]
-                          console.log(id)
-
-                          if (/posts/.test(url)) {
-                            actions.selectPost(id)
-                          }
-
-                          actions.router.go(url)
-                        }}>
+                        href={`/dashboard/${i.href}/id=${item.id}`}>
                         {item.title}
                       </a>
                     </li>
