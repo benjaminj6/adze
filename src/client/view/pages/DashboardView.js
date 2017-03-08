@@ -224,125 +224,117 @@ const PromptView = ({ model }) => (
 
 const Sidebar = ({ model, actions }) =>
   <nav id='nav'>
-    <input
-      hidden
-      id='nav-toggler'
-      type='checkbox' />
-    <div class='nav-toggle-content'>
-      <button id='nav-toggler-btn' onclick={
-        ev => { console.log(model) }
-      }>
-        <label for='nav-toggler'><Menu /></label>
-      </button>
-      <div id='sidebar'>
-        <header>
-          <div className='sidebar-user'>
-            <input
-              hidden
-              id='user-menu-toggler'
-              type='checkbox' />
-            <label htmlFor='user-menu-toggler'>
-              <AngleDown />
-              <span>{model.email}</span>
-            </label>
-            <div id='user-dropdown'>
-              <button><Logout size='1rem' />Logout</button>
+    <label id='nav-toggler-btn' for='nav-toggler'><Menu /></label>
+    <div id='sidebar'>
+      <header>
+        <div className='sidebar-user'>
+          <input
+            hidden
+            id='user-menu-toggler'
+            type='checkbox' />
+          <label htmlFor='user-menu-toggler'>
+            <AngleDown />
+            <span>{model.email}</span>
+          </label>
+          <div id='user-dropdown'>
+            <button><Logout size='1rem' />Logout</button>
+          </div>
+        </div>
+      </header>
+      <section>
+        <div className='new-post'>
+          <h3 style={{
+            background: /create/.test(model.router.match) ? '#fff' : '',
+            color: /create/.test(model.router.match) ? 'rgba(0, 0, 0, 0.8)' : ''
+          }}>
+            <a
+              href='/dashboard/create'
+              onclick={ev => {
+                ev.preventDefault()
+                actions.clearNewContent()
+                actions.router.go('/dashboard/create')
+              }}>
+              New Post
+            </a>
+          </h3>
+        </div>
+        {
+          [
+            {
+              title: 'Recent Posts',
+              href: 'posts',
+              icon: <FileMultiple height='1rem' />,
+              items: model.posts
+            },
+            {
+              title: 'Categories',
+              href: 'tags',
+              icon: <Tag height='1rem' />,
+              items: model.tags
+            }
+          ].map(i =>
+            <div className='menu-list'>
+              <input
+                hidden
+                checked
+                id={`${i.title.toLowerCase()}-toggler`}
+                type='checkbox'
+                name='menu-item-toggler' />
+              <h3
+                className={model.router.match.includes(i.href)
+                  ? 'selected '
+                  : ''
+              }>
+                <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
+                  <i className='icon-toggle open'>
+                    <Plus height='1rem' />
+                  </i>
+                  <i className='icon-toggle closed'>
+                    <Close height='1rem' />
+                  </i>
+                  {i.title}
+                </label>
+              </h3>
+              <ul onclick={ev => {
+                ev.preventDefault()
+                const url = ev.target.pathname
+                const id = url.split('id=')[1]
+                console.log(id)
+
+                if (/posts/.test(url)) {
+                  actions.selectPost(id)
+                }
+
+                actions.router.go(url)
+              }}>
+                {i.items.map(item =>
+                  <li>
+                    <a
+                      style={{
+                        background: model.router.params.id === item.id ? '#fff' : '',
+                        borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
+                        color: model.router.params.id === item.id ? styles.accent : ''
+                      }}
+                      href={`/dashboard/${i.href}/id=${item.id}`}>
+                      {item.title}
+                    </a>
+                  </li>
+                )}
+              </ul>
             </div>
-          </div>
-        </header>
-        <section>
-          <div className='new-post'>
-            <h3 style={{
-              background: /create/.test(model.router.match) ? '#fff' : '',
-              color: /create/.test(model.router.match) ? 'rgba(0, 0, 0, 0.8)' : ''
-            }}>
-              <a
-                href='/dashboard/create'
-                onclick={ev => {
-                  ev.preventDefault()
-                  actions.clearNewContent()
-                  actions.router.go('/dashboard/create')
-                }}>
-                New Post
-              </a>
-            </h3>
-          </div>
-          {
-            [
-              {
-                title: 'Recent Posts',
-                href: 'posts',
-                icon: <FileMultiple height='1rem' />,
-                items: model.posts
-              },
-              {
-                title: 'Categories',
-                href: 'tags',
-                icon: <Tag height='1rem' />,
-                items: model.tags
-              }
-            ].map(i =>
-              <div className='menu-list'>
-                <input
-                  hidden
-                  checked
-                  id={`${i.title.toLowerCase()}-toggler`}
-                  type='checkbox'
-                  name='menu-item-toggler' />
-                <h3
-                  className={model.router.match.includes(i.href)
-                    ? 'selected '
-                    : ''
-                }>
-                  <label htmlFor={`${i.title.toLowerCase()}-toggler`}>
-                    <i className='icon-toggle open'>
-                      <Plus height='1rem' />
-                    </i>
-                    <i className='icon-toggle closed'>
-                      <Close height='1rem' />
-                    </i>
-                    {i.title}
-                  </label>
-                </h3>
-                <ul onclick={ev => {
-                  ev.preventDefault()
-                  const url = ev.target.pathname
-                  const id = url.split('id=')[1]
-                  console.log(id)
-
-                  if (/posts/.test(url)) {
-                    actions.selectPost(id)
-                  }
-
-                  actions.router.go(url)
-                }}>
-                  {i.items.map(item =>
-                    <li>
-                      <a
-                        style={{
-                          background: model.router.params.id === item.id ? '#fff' : '',
-                          borderLeft: model.router.params.id === item.id ? `0.25rem solid ${styles.accent}` : '',
-                          color: model.router.params.id === item.id ? styles.accent : ''
-                        }}
-                        href={`/dashboard/${i.href}/id=${item.id}`}>
-                        {item.title}
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            )
-          }
-        </section>
-      </div>
+          )
+        }
+      </section>
     </div>
   </nav>
 
 export default (model, actions) =>
   <div id='app' className='dashboard-view'>
-    <Sidebar
-      model={model}
-      actions={actions} />
+    <input
+      hidden
+      id='nav-toggler'
+      type='checkbox' />
+    <Sidebar model={model} actions={actions} />
     {
       /posts|create/.test(model.router.match)
       ? <EditorView

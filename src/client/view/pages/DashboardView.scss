@@ -25,37 +25,35 @@ a {
 
 // Handles open and closed states of menu
 #nav-toggler {
-  & + .nav-toggle-content {
-   transform: translateX(0);
-   height: 100%;
-   transition: $transition;
+  & + #nav {
+    transform: translateX(0);
+    height: 100%;
+    transition: $transition;
   }
 
- &:checked + .nav-toggle-content {
+ &:checked + #nav {
    transform: translateX(-100%);
 
    & + main {
-     left: 0;
+      left: 0;
 
-    header {
-      width: 100%;
-    }
+      header {
+        width: 100%;
+      }
 
-    #editor {
-      padding: 1rem 20%;
+      #editor {
+        padding: 1rem 20%;
+      }
     }
-   }
- }
+  }
 }
 
 #nav-toggler-btn {
   color: rgba(#000, 0.6);
-  line-height: 1.5rem;
-  padding: 0;
+  padding: 0.5rem 0;
   position: absolute;
   right: -1.75rem;
   top: 0;
-  height: 40px;
   transition: all $transition-short;
   z-index: 40;
 
