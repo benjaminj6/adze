@@ -6,7 +6,6 @@ import styles from '../../styles/foundation.json'
 import {
   AngleDown,
   Close,
-  FileMultiple,
   FilePlus, // eslint-disable-line
   Logout,
   Menu,
@@ -311,20 +310,7 @@ const SidebarBody = ({ model, actions }) =>
       </SidebarMenuHeading>
     </div>
     {
-      [
-        {
-          title: 'Recent Posts',
-          href: 'posts',
-          icon: <FileMultiple height='1rem' />,
-          items: model.posts
-        },
-        {
-          title: 'Categories',
-          href: 'tags',
-          icon: <Tag height='1rem' />,
-          items: model.tags
-        }
-      ].map(i =>
+      model.nav.map(i =>
         <div className='menu-list'>
           <input
             hidden
@@ -342,7 +328,7 @@ const SidebarBody = ({ model, actions }) =>
             actions={actions}
             model={model}
             href={i.href}>
-            {i.items}
+            {model[i.href]}
           </SidebarMenuNavList>
         </div>
       )
