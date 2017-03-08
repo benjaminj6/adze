@@ -1,4 +1,11 @@
 // related to newContent / staging
+const defaultNewContent = {
+  title: '',
+  md: '',
+  tags: [],
+  date: new Date()
+}
+
 export const addStagedTag = (model, tag) => {
   const tags = model.newContent.tags || []
 
@@ -51,12 +58,7 @@ export const selectPost = ({ newContent, posts }, postId) => {
 
 export const clearNewContent = () => ({
   saved: false,
-  newContent: {
-    title: '',
-    md: '',
-    tags: [],
-    date: new Date()
-  }
+  newContent: defaultNewContent
 })
 
 // related to model.posts
@@ -69,14 +71,10 @@ export const addPost = ({ posts }, post) => ({
 export const updatePost = ({ posts }, post) => ({
   saved: true,
   posts: posts.map(p => p.id === post.id ? post : p),
-  newcontent: {
-    title: '',
-    md: '',
-    tags: [],
-    date: new Date()
-  }
+  newContent: defaultNewContent
 })
 
 export const deletePost = ({ posts }, postId) => ({
-  posts
+  posts: posts.filter(p => p.id !== postId),
+  newContent: defaultNewContent
 })

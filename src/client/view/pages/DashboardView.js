@@ -155,7 +155,6 @@ const EditorView = ({ model, selected, actions }, children) => (
                       }
 
                       actions.addPost(post)
-                      console.log('default')
                       actions.router.go(`/dashboard/posts/id=${post.id}`)
                     }
 
@@ -187,7 +186,13 @@ const EditorView = ({ model, selected, actions }, children) => (
         </li>
         {selected
           ? <li>
-            <button>
+            <button onclick={_ => {
+              if (model.newContent.id) {
+                actions.deletePost(model.newContent.id)
+              }
+
+              actions.router.go('/dashboard')
+            }}>
               <Trash />
             </button>
           </li>

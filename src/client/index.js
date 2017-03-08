@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { h, app, Router } from 'hyperapp' // eslint-disable-line
 
 import * as actions from './actions'
