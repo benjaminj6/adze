@@ -11,12 +11,18 @@ const model = {
   email: 'test@test.com',
   nav: [
     {
+      title: 'New Post',
+      href: 'create'
+    },
+    {
       title: 'Recent Posts',
-      href: 'posts'
+      href: 'posts',
+      children: 'posts'
     },
     {
       title: 'Categories',
-      href: 'tags'
+      href: 'tags',
+      children: 'tags'
     }
   ],
   posts: [
