@@ -212,7 +212,13 @@ export default (model, actions) =>
               background: /create/.test(model.router.match) ? '#fff' : '',
               color: /create/.test(model.router.match) ? 'rgba(0, 0, 0, 0.8)' : ''
             }}>
-              <a href='/dashboard/create'>
+              <a
+                href='/dashboard/create'
+                onclick={ev => {
+                  ev.preventDefault()
+                  actions.clearNewContent()
+                  actions.router.go('/dashboard/create')
+                }}>
                 <FilePlus height='1rem' />
                 New Post
               </a>
