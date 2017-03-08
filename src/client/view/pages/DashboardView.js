@@ -237,24 +237,25 @@ const SidebarHeader = ({ model, actions }) =>
     </div>
   </header>
 
-const SidebarMenuHeading = ({ isActive, toggleId }, children) => (
+const SidebarMenuHeading = (props, children) => (
   <h3 style={{
-    background: isActive ? '#fff' : '',
-    color: isActive ? 'rgba(0, 0, 0, 0.8)' : ''
+    background: props.isActive ? '#fff' : '',
+    color: props.isActive ? 'rgba(0, 0, 0, 0.8)' : '',
+    ...props.style
   }}>
     {children}
   </h3>
 )
 
-const SidebarMenuListItem = ({ title, isActive, href }) => (
+const SidebarMenuListItem = (props) => (
   <li>
     <a
       style={{
-        background: isActive ? '#fff' : '',
-        color: isActive ? styles.accent : ''
+        background: props.isActive ? '#fff' : '',
+        color: props.isActive ? styles.accent : ''
       }}
-      href={href}>
-      {title}
+      href={props.href}>
+      {props.title}
     </a>
   </li>
 )
@@ -282,20 +283,14 @@ const SidebarMenuList = ({ actions, model, href }, items) => (
   </ul>
 )
 
-// {
-//   toggleId ? <label htmlFor={toggleId}>
-//     <i className='icon-toggle open'>
-//       <Plus height='1rem' />
-//     </i>
-//     <i className='icon-toggle closed'>
-//       <Close height='1rem' />
-//     </i> : ''
-// }
-
 const SidebarBody = ({ model, actions }) => (
   <section>
     <div className='new-post'>
-      <SidebarMenuHeading isActive={/create$/.test(model.router.match)}>
+      <SidebarMenuHeading
+        isActive={/create$/.test(model.router.match)}
+        style={{
+          paddingLeft: '1.5rem'
+        }}>
         <a
           href='/dashboard/create'
           onclick={ev => {
@@ -321,6 +316,12 @@ const SidebarBody = ({ model, actions }) => (
             <SidebarMenuHeading
               hrefRegex={new RegExp(`/${i.href}$/`)}
               currentUrl={model.router.match}>
+              <i className='icon-toggle open'>
+                <Plus height='1rem' />
+              </i>
+              <i className='icon-toggle closed'>
+                <Close height='1rem' />
+              </i>
               {i.title}
             </SidebarMenuHeading>
           </label>
