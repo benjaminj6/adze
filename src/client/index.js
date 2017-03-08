@@ -13,14 +13,12 @@ const model = {
     {
       title: 'Recent Posts',
       href: 'posts',
-      children: 'posts',
-      open: true
+      children: 'posts'
     },
     {
       title: 'Categories',
       href: 'tags',
-      children: 'tags',
-      open: true
+      children: 'tags'
     }
   ],
   posts: [

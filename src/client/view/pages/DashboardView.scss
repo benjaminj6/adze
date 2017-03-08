@@ -144,8 +144,9 @@ a {
     color: rgba(#000, 0.6);
     font-weight: lighter;
 
-    &.selected {
+    &.active {
       background: #fff;
+      color: rgba(#000, 0.8);
     }
 
     &:hover {
@@ -181,15 +182,16 @@ a {
   }
 
   input[name='menu-item-toggler'] {
-    + h3 {
+    + label {
       padding-left: 0;
     }
   }
 
   input[name='menu-item-toggler']:checked {
     & + label {
-      &.selected {
+      .active {
         background: transparent;
+        color: rgba(#000, 0.8)
       }
 
       .icon-toggle {

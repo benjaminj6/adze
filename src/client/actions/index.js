@@ -80,3 +80,6 @@ export const deletePost = ({ posts }, postId) => ({
 })
 
 // related to nav state
+export const toggleNavItem = ({ nav }, href) => ({
+  nav: nav.map(item => item.href === href ? {...item, open: !item.open} : item)
+})

@@ -238,14 +238,9 @@ const SidebarHeader = ({ model, actions }) =>
   </header>
 
 const SidebarMenuHeading = (props, children) => {
-  console.log(children, props.isActive)
   return (<h3
     {...props}
-    style={{
-      background: props.isActive ? '#fff' : '',
-      color: props.isActive ? 'rgba(0, 0, 0, 0.8)' : '',
-      ...props.style
-    }}>
+    className={props.isActive ? 'active' : ''}>
     {children}
   </h3>)
 }
@@ -271,7 +266,9 @@ const MenuList = (props, children) => (
   <div className='menu-list'>
     <input
       hidden
-      checked
+      checked={
+        new RegExp(`${props.item.href}`).test(props.model.router.match)
+      }
       id={`menu-${props.item.href}-toggler`}
       type='checkbox'
       name='menu-item-toggler'
@@ -279,9 +276,8 @@ const MenuList = (props, children) => (
 
     <label htmlFor={`menu-${props.item.href}-toggler`}>
       <SidebarMenuHeading
-        onclick={() => { console.log(props.model.router) }}
         isActive={
-          new RegExp(`${props.item.href}`).test(props.model.router.match) && !props.item.open
+          new RegExp(`${props.item.href}`).test(props.model.router.match)
         }>
 
         <i className='icon-toggle open'>
@@ -382,41 +378,3 @@ export default (model, actions) => {
     </div>
   )
 }
-
-// <div className='menu-list'>
-//   <input
-//     hidden
-//     checked
-//     id={`menu-${i.href}-toggler`}
-//     type='checkbox'
-//     name='menu-item-toggler'
-//     onclick={ev => { console.log('event') }} />
-//
-//   <label htmlFor={`menu-${i.href}-toggler`}>
-//     <SidebarMenuHeading
-//       onclick={() => { console.log(model.router) }}
-//       isActive={
-//         new RegExp(`${i.href}`).test(model.router.match) && !i.open
-//       }>
-//
-//       <i className='icon-toggle open'>
-//         <Plus height='1rem' />
-//       </i>
-//       <i className='icon-toggle closed'>
-//         <Close height='1rem' />
-//       </i>
-//
-//       {i.title}
-//
-//     </SidebarMenuHeading>
-//   </label>
-//
-//   <SidebarMenuList
-//     actions={actions}
-//     model={model}
-//     href={i.href}>
-//
-//     {model[i.children]}
-//
-//   </SidebarMenuList>
-// </div>
