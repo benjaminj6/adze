@@ -220,6 +220,7 @@ const PromptView = ({ model }) => (
     </section>
   </main>
 )
+
 const SidebarHeader = ({ model, actions }) =>
   <header>
     <div className='sidebar-user'>
@@ -257,10 +258,6 @@ const SidebarMenuListItem = (props) => (
     </a>
   </li>
 )
-//
-// const SidebarMenuList = ({ actions, model, href }, items) => (
-//
-// )
 
 const MenuList = (props, children) => (
   <div className='menu-list'>
@@ -319,30 +316,31 @@ const MenuList = (props, children) => (
 
 const SidebarBody = ({ model, actions }) => (
   <section>
-    <div className='new-post'>
-      <SidebarMenuHeading
-        isActive={/create$/.test(model.router.match)}
-        style={{
-          paddingLeft: '1.5rem'
-        }}
-        onclick={ev => {
-          ev.preventDefault()
-          actions.clearNewContent()
-          actions.router.go('/dashboard/create')
-        }}>
-        <a
-          href='/dashboard/create'>
-          New Post
-        </a>
-      </SidebarMenuHeading>
-    </div>
     {
       model.nav.map(item =>
-        <MenuList model={model} item={item} actions={actions}>
+        item.children
+        ? <MenuList model={model} item={item} actions={actions}>
           {model[item.children]}
         </MenuList>
+        : <SidebarMenuHeading
+          isActive={
+            new RegExp(`${item.href}$`).test(model.router.match)
+          }
+          style={{ paddingLeft: '1.5rem' }}
+          onclick={ev => {
+            ev.preventDefault()
+            actions.clearNewContent()
+            actions.router.go(`/dashboard/${item.href}`)
+          }}>
+
+          <a href='/dashboard/create'>
+            New Post
+          </a>
+
+        </SidebarMenuHeading>
       )
     }
+
   </section>
 )
 
