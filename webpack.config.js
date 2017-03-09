@@ -4,8 +4,7 @@ const jsonImporter = require('node-sass-json-importer')
 const DotEnvPlugin = require('webpack-dotenv-plugin')
 
 const extractSass = new ExtractTextPlugin({
-  filename: 'bundle.css',
-  disable: process.env.NODE_ENV === 'development'
+  filename: 'bundle.css'
 })
 
 module.exports = {

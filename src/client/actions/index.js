@@ -95,9 +95,17 @@ export const addAllTags = ({ tags }, newTags) => ({
 // related to writing to DB
 export const savePost = ({ tags }, newPost, actions) => {
   console.log('saving...')
+  console.log(newPost)
   window.fetch('/api/posts', {
     method: 'POST',
-    body: newPost
+    body: JSON.stringify({
+      title: newPost.title,
+      post: newPost.md,
+      tags: newPost.tags
+    }),
+    headers: new window.Headers({
+      'Content-Type': 'application/json'
+    })
   })
   .then(res => {
     if (res.status !== 201) {

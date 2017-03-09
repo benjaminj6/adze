@@ -19,8 +19,6 @@ export default (model, actions) => (
         if (res.status !== 200) {
           throw new Error('Unauthorized')
         }
-
-        actions.router.go('/dashboard')
       }).catch(err => {
         console.log('there was a fatal error')
         console.log(err)
