@@ -2,10 +2,10 @@ export const loadData = (_, actions) => {
   console.log('loaded')
 }
 
-export const pingDB = (model, actions) => {
+export const fetchPosts = (model, actions) => {
   window.fetch('/api/posts', { mode: 'cors' })
     .then(res => res.json())
-    .then(json => console.log(json))
+    .then(json => { actions.addAllPosts(json) })
     .catch(err => console.error(err))
 }
 
@@ -19,4 +19,4 @@ export const getInitialNewContent = (model, actions) => {
   }
 }
 
-export default [getInitialNewContent, pingDB]
+export default [getInitialNewContent, fetchPosts]

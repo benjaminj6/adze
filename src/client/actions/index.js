@@ -68,9 +68,13 @@ export const addPost = ({ posts }, post) => ({
   saved: true
 })
 
+export const addAllPosts = ({ posts }, newPosts) => ({
+  posts: posts.concat(newPosts)
+})
+
 export const updatePost = ({ posts }, post) => ({
   saved: true,
-  posts: posts.map(p => p.id === post.id ? post : p),
+  posts: posts.map(p => p._id === post._id ? post : p),
   newContent: post
 })
 

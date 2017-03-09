@@ -74,7 +74,7 @@ const AddTagsMenu = ({ post, actions }) => (
             oncreate={el => { console.log(t) }}
             style={{ background: t.color }}>
             <form
-              id={`tag-applied-${t.id}`}
+              id={`tag-applied-${t._id}`}
               action=''>
               <span>{t.title}</span>
               <button type='submit'>
@@ -97,7 +97,7 @@ const AddTagsMenu = ({ post, actions }) => (
         actions.addStagedTag({
           title: title.value,
           color: color.value,
-          id: Date.now().toString()
+          _id: Date.now().toString()
         })
 
         title.value = ''
@@ -151,11 +151,11 @@ const EditorView = ({ model, selected, actions }, children) => (
                       // TODO: Dummy data added until DB calls are done
                       const post = {
                         ...model.newContent,
-                        id: Date.now().toString()
+                        _id: Date.now().toString()
                       }
 
                       actions.addPost(post)
-                      actions.router.go(`/dashboard/posts/id=${post.id}`)
+                      actions.router.go(`/dashboard/posts/id=${post._id}`)
                     }
 
                     if (/posts/.test(model.router.match)) {
@@ -187,8 +187,8 @@ const EditorView = ({ model, selected, actions }, children) => (
         {selected
           ? <li>
             <button onclick={_ => {
-              if (model.newContent.id) {
-                actions.deletePost(model.newContent.id)
+              if (model.newContent._id) {
+                actions.deletePost(model.newContent._id)
               }
 
               actions.router.go('/dashboard')
@@ -305,8 +305,8 @@ const MenuList = (props, children) => (
         children.map(child =>
           <SidebarMenuListItem
             title={child.title}
-            isActive={props.model.router.params.id === child.id}
-            href={`/dashboard/${props.item.href}/id=${child.id}`} />
+            isActive={props.model.router.params.id === child._id}
+            href={`/dashboard/${props.item.href}/id=${child._id}`} />
         )
       }
 
