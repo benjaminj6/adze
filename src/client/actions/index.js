@@ -47,7 +47,7 @@ export const updateStagedTitle = ({ newContent }, title) => ({
 })
 
 export const selectPost = ({ newContent, posts }, postId) => {
-  const post = posts.find(p => p.id === postId)
+  const post = posts.find(p => p._id === postId)
   if (post) {
     return {
       saved: true,

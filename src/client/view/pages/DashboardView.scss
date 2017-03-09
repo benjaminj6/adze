@@ -66,6 +66,7 @@ a {
 #sidebar {
   background: rgba(#000, 0.1);
   height: 100%;
+  overflow-y: scroll;
 
   header {
     padding: 0 0.25rem;

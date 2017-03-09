@@ -31,7 +31,7 @@ const Editor = ({ post, actions }) => (
             actions.updateStagedTitle(target.value)
           }, 500)
         } />
-      <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
+      <h6>({new Date(post.date || Date.now()).toDateString()})</h6>
     </header>
     <textarea
       name='editor'
@@ -76,7 +76,7 @@ const AddTagsMenu = ({ post, actions }) => (
             <form
               id={`tag-applied-${t._id}`}
               action=''>
-              <span>{t.title}</span>
+              <span>{t.name}</span>
               <button type='submit'>
                 <Close height='1em' />
               </button>
@@ -291,6 +291,7 @@ const MenuList = (props, children) => (
 
     <ul onclick={ev => {
       ev.preventDefault()
+      console.log(ev)
       const url = ev.target.pathname
       const id = url.split('id=')[1]
 
