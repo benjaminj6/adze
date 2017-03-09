@@ -8,12 +8,12 @@ const defaultNewContent = {
 
 export const addStagedTag = (model, tag) => {
   const tags = model.newContent.tags || []
-
+  console.log(tag)
   return {
     saved: false,
     newContent: {
       ...model.newContent,
-      tags: tags.slice().concat([tag])
+      tags: tags.concat([tag])
     }
   }
 }
@@ -24,7 +24,7 @@ export const removeStagedTag = ({ newContent }, tagId) => {
       saved: false,
       newContent: {
         ...newContent,
-        tags: newContent.tags.slice().filter(t => t.id !== tagId)
+        tags: newContent.tags.slice().filter(t => t._id !== tagId)
       }
     }
   }
@@ -85,7 +85,7 @@ export const deletePost = ({ posts }, postId) => ({
 
 // related to model.tags
 export const addTag = ({ tags }, tag) => ({
-  tags: tags.concat[tag]
+  tags: tags.concat([tag])
 })
 
 export const addAllTags = ({ tags }, newTags) => ({
@@ -114,7 +114,10 @@ export const saveNewPost = ({ posts }, newPost, actions) => {
 
     return res.json()
   })
-  .then(json => console.log(json))
+  .then(json => {
+    actions.addPost(json)
+    actions.router.go(`/dashboard/posts/id=${json._id}`)
+  })
   .catch(err => console.log(err))
 }
 
@@ -137,6 +140,6 @@ export const saveUpdatedPost = ({ posts }, updatedPost, actions) => {
 
     return res.json()
   })
-  .then(json => console.log(json))
+  .then(post => { console.log('updated') })
   .catch(err => console.log(err))
 }

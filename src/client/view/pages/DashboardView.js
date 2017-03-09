@@ -73,7 +73,7 @@ const AddTagsMenu = ({ post, actions }) => (
             <form
               id={`tag-applied-${t._id}`}
               action=''>
-              <span>{t.name}</span>
+              <span>{t.title}</span>
               <button type='submit'>
                 <Close height='1em' />
               </button>
@@ -142,15 +142,7 @@ const EditorView = ({ model, selected, actions }, children) => (
                   // TODO: This would make a great higher-level action
                   if (model.newContent.title && model.newContent.md) {
                     if (/create/.test(model.router.match)) {
-                      // TODO: DB calls
-                      // TODO: Dummy data added until DB calls are done
-                      const post = {
-                        ...model.newContent,
-                        _id: Date.now().toString()
-                      }
-                      actions.savePost(post)
-                      actions.addPost(post)
-                      // actions.router.go(`/dashboard/posts/id=${post._id}`)
+                      actions.saveNewPost({ ...model.newContent })
                     }
 
                     if (/posts/.test(model.router.match)) {
