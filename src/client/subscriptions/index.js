@@ -2,6 +2,13 @@ export const loadData = (_, actions) => {
   console.log('loaded')
 }
 
+export const pingDB = (model, actions) => {
+  window.fetch('/api/posts', { mode: 'cors' })
+    .then(res => res.json())
+    .then(json => console.log(json))
+    .catch(err => console.error(err))
+}
+
 export const getInitialNewContent = (model, actions) => {
   if (/create|tags/.test(model.router.match)) {
     actions.clearNewContent()
@@ -12,4 +19,4 @@ export const getInitialNewContent = (model, actions) => {
   }
 }
 
-export default [getInitialNewContent]
+export default [getInitialNewContent, pingDB]

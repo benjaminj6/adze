@@ -49,6 +49,7 @@ mongoose.connect(process.env.DB_URL)
         '.git',
         'node_modules/**',
         'helpers',
+        'src/client',
         '**/__tests__/**'
       ],
       script: path.resolve(__dirname, './dev-run-server')
