@@ -93,7 +93,7 @@ export const addAllTags = ({ tags }, newTags) => ({
 })
 
 // related to writing to DB
-export const savePost = ({ tags }, newPost, actions) => {
+export const saveNewPost = ({ posts }, newPost, actions) => {
   console.log('saving...')
   console.log(newPost)
   window.fetch('/api/posts', {
@@ -110,6 +110,29 @@ export const savePost = ({ tags }, newPost, actions) => {
   .then(res => {
     if (res.status !== 201) {
       throw new Error('Unauthorized')
+    }
+
+    return res.json()
+  })
+  .then(json => console.log(json))
+  .catch(err => console.log(err))
+}
+
+export const saveUpdatedPost = ({ posts }, updatedPost, actions) => {
+  console.log('saving...')
+  console.log('preDB', updatedPost)
+  window.fetch(`/api/posts/${updatedPost._id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      title: updatedPost.title,
+      post: updatedPost.md,
+      tags: updatedPost.tags
+    }),
+    headers: new window.Headers({ 'Content-Type': 'application/json' })
+  })
+  .then(res => {
+    if (res.status !== 200) {
+      throw new Error('Post failed to save')
     }
 
     return res.json()

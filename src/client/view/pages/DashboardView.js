@@ -154,6 +154,7 @@ const EditorView = ({ model, selected, actions }, children) => (
                     }
 
                     if (/posts/.test(model.router.match)) {
+                      actions.saveUpdatedPost(model.newContent)
                       actions.updatePost(model.newContent)
                     }
                   }

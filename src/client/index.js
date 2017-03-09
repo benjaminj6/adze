@@ -45,21 +45,9 @@ const model = {
   ],
   saved: false,
   newContent: {
-    title: 'bar',
-    md: 'aksdfjlkjas',
-    tags: [
-      {
-        title: 'bar',
-        color: 'blue',
-        id: '4'
-      },
-      {
-        title: 'baz',
-        color: 'red',
-        id: '5'
-      }
-    ],
-    date: new Date()
+    title: '',
+    md: '',
+    tags: []
   }
 }
 // end temporary

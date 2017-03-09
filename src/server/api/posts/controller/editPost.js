@@ -26,7 +26,9 @@ export default async (ctx, next) => {
       updates.tags = tags
     }
 
-    const updatedPost = await Post.findByIdAndUpdate(id, updates, opts).populate('tags').exec()
+    const updatedPost = await Post.findByIdAndUpdate(id, updates, opts)
+      .populate('tags')
+      .exec()
 
     ctx.status = 200
     ctx.body = updatedPost
