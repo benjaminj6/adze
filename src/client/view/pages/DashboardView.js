@@ -61,9 +61,7 @@ const AddTagsMenu = ({ post, actions }) => (
         ev => {
           ev.preventDefault()
           if (/tag-applied/.test(ev.target.id)) {
-            console.log('got it')
             const id = ev.target.id.split(/tag-applied-/)[1]
-            console.log(id)
             actions.removeStagedTag(id)
           }
         }
@@ -71,7 +69,6 @@ const AddTagsMenu = ({ post, actions }) => (
       {
         post ? post.tags.map(t =>
           <li
-            oncreate={el => { console.log(t) }}
             style={{ background: t.color }}>
             <form
               id={`tag-applied-${t._id}`}
@@ -146,16 +143,14 @@ const EditorView = ({ model, selected, actions }, children) => (
                   if (model.newContent.title && model.newContent.md) {
                     if (/create/.test(model.router.match)) {
                       // TODO: DB calls
-                      console.log('this will write to db')
-
                       // TODO: Dummy data added until DB calls are done
                       const post = {
                         ...model.newContent,
                         _id: Date.now().toString()
                       }
-
+                      actions.savePost(post)
                       actions.addPost(post)
-                      actions.router.go(`/dashboard/posts/id=${post._id}`)
+                      // actions.router.go(`/dashboard/posts/id=${post._id}`)
                     }
 
                     if (/posts/.test(model.router.match)) {
@@ -181,7 +176,6 @@ const EditorView = ({ model, selected, actions }, children) => (
           </button>
           <AddTagsMenu
             actions={actions}
-            oncreate={ev => { console.log(ev) }}
             post={selected || ''} />
         </li>
         {selected
@@ -208,14 +202,19 @@ const EditorView = ({ model, selected, actions }, children) => (
   </main>
 )
 
-const PromptView = ({ model }) => (
+const PromptView = ({ model, actions }) => (
   <main>
     <header />
     <section className='prompt'>
       <h2>
         You can select posts and categories on the left.
         <br />
-        Or you can start a <a href='/dashboard/create'>new one today</a>.
+        Or you can start a <a
+          href='/dashboard/create'
+          onclick={ev => {
+            ev.preventDefault()
+            actions.router.go('/dashboard/create')
+          }}>new one today</a>.
       </h2>
     </section>
   </main>
@@ -268,8 +267,7 @@ const MenuList = (props, children) => (
       }
       id={`menu-${props.item.href}-toggler`}
       type='checkbox'
-      name='menu-item-toggler'
-      onclick={ev => { console.log('event') }} />
+      name='menu-item-toggler' />
 
     <label htmlFor={`menu-${props.item.href}-toggler`}>
       <SidebarMenuHeading
@@ -291,7 +289,6 @@ const MenuList = (props, children) => (
 
     <ul onclick={ev => {
       ev.preventDefault()
-      console.log(ev)
       const url = ev.target.pathname
       const id = url.split('id=')[1]
 
@@ -305,7 +302,7 @@ const MenuList = (props, children) => (
       {
         children.map(child =>
           <SidebarMenuListItem
-            title={child.title}
+            title={child.title || child.name}
             isActive={props.model.router.params.id === child._id}
             href={`/dashboard/${props.item.href}/id=${child._id}`} />
         )
@@ -372,7 +369,7 @@ export default (model, actions) => {
         ? <EditorView model={model}
           actions={actions}
           selected={model.newContent} />
-        : <PromptView model={model} />
+        : <PromptView model={model} actions={actions} />
       }
     </div>
   )

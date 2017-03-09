@@ -69,7 +69,7 @@ export const addPost = ({ posts }, post) => ({
 })
 
 export const addAllPosts = ({ posts }, newPosts) => ({
-  posts: posts.concat(newPosts)
+  posts: newPosts
 })
 
 export const updatePost = ({ posts }, post) => ({
@@ -82,3 +82,30 @@ export const deletePost = ({ posts }, postId) => ({
   posts: posts.filter(p => p.id !== postId),
   newContent: defaultNewContent
 })
+
+// related to model.tags
+export const addTag = ({ tags }, tag) => ({
+  tags: tags.concat[tag]
+})
+
+export const addAllTags = ({ tags }, newTags) => ({
+  tags: newTags
+})
+
+// related to writing to DB
+export const savePost = ({ tags }, newPost, actions) => {
+  console.log('saving...')
+  window.fetch('/api/posts', {
+    method: 'POST',
+    body: newPost
+  })
+  .then(res => {
+    if (res.status !== 201) {
+      throw new Error('Unauthorized')
+    }
+
+    return res.json()
+  })
+  .then(json => console.log(json))
+  .catch(err => console.log(err))
+}
