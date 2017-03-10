@@ -47,7 +47,7 @@ export default (model, actions) => (
       <button type='submit'>Log in</button>
       {
         process.env.DEMO
-        ? <span>See the demo</span>
+        ? <a href='/dashboard'>See the demo</a>
         : ''
       }
     </form>
