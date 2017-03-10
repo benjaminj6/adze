@@ -176,6 +176,8 @@ const EditorView = ({ model, selected, actions }, children) => (
             <button onclick={_ => {
               if (model.newContent._id) {
                 actions.deletePost(model.newContent._id)
+              } else {
+                actions.router.go('/dashboard')
               }
             }}>
               {
