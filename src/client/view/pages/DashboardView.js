@@ -177,8 +177,6 @@ const EditorView = ({ model, selected, actions }, children) => (
               if (model.newContent._id) {
                 actions.deletePost(model.newContent._id)
               }
-
-              actions.router.go('/dashboard')
             }}>
               {
                 /create/.test(model.router.match)

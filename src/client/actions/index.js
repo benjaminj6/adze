@@ -81,8 +81,8 @@ export const updatePost = ({ posts }, post) => ({
   newContent: post
 })
 
-export const deletePost = ({ posts }, postId) => ({
-  posts: posts.filter(p => p.id !== postId),
+export const deletePostFromModel = ({ posts }, postId) => ({
+  posts: posts.filter(p => p._id !== postId),
   newContent: defaultNewContent
 })
 
@@ -144,5 +144,22 @@ export const saveUpdatedPost = ({ posts }, updatedPost, actions) => {
     return res.json()
   })
   .then(post => { console.log('updated') })
+  .catch(err => console.log(err))
+}
+
+export const deletePost = ({ posts }, postId, actions) => {
+  console.log('deleting...')
+  console.log('postId', postId)
+  window.fetch(`/api/posts/${postId}`, {
+    method: 'DELETE'
+  })
+  .then(res => {
+    if (res.status !== 200) {
+      throw new Error('Post failed to delete')
+    }
+
+    actions.deletePostFromModel(postId)
+    actions.router.go('/dashboard')
+  })
   .catch(err => console.log(err))
 }
