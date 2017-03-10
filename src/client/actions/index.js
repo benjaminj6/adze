@@ -143,7 +143,9 @@ export const saveUpdatedPost = ({ posts }, updatedPost, actions) => {
 
     return res.json()
   })
-  .then(post => { console.log('updated') })
+  .then(json => {
+    actions.updatePost(json)
+  })
   .catch(err => console.log(err))
 }
 

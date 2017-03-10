@@ -1,6 +1,9 @@
 import marked from 'marked'
 import { Post } from '~/server/models'
 import { validateTagArray } from '~/server/utils'
+import { createNewTags } from './utils'
+
+import { log } from '~/server/config'
 
 export default async (ctx, next) => {
   try {
@@ -23,7 +26,11 @@ export default async (ctx, next) => {
     }
 
     if (validateTagArray(tags)) {
-      updates.tags = tags
+      log.debug(tags)
+
+      updates.tags = await createNewTags(tags)
+
+      log.debug('updates tags', updates.tags)
     }
 
     const updatedPost = await Post.findByIdAndUpdate(id, updates, opts)
