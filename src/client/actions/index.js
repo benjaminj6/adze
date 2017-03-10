@@ -6,14 +6,17 @@ const defaultNewContent = {
   date: new Date()
 }
 
-export const addStagedTag = (model, tag) => {
-  const tags = model.newContent.tags || []
-  console.log(tag)
+export const addStagedTag = ({ tags, newContent }, tag) => {
+  const stagedTags = newContent.tags || []
+  console.log()
+  console.log(tags.find(t => t.name === tag.name))
   return {
     saved: false,
     newContent: {
-      ...model.newContent,
-      tags: tags.concat([tag])
+      ...newContent,
+      tags: stagedTags.concat([
+        tags.find(t => t.name === tag.name) || tag
+      ])
     }
   }
 }
@@ -63,7 +66,7 @@ export const clearNewContent = () => ({
 
 // related to model.posts
 export const addPost = ({ posts }, post) => ({
-  posts: posts.concat([post]),
+  posts: [post].concat(posts),
   newContent: post,
   saved: true
 })
@@ -85,7 +88,7 @@ export const deletePost = ({ posts }, postId) => ({
 
 // related to model.tags
 export const addTag = ({ tags }, tag) => ({
-  tags: tags.concat([tag])
+  tags: [tag].concat(tags)
 })
 
 export const addAllTags = ({ tags }, newTags) => ({

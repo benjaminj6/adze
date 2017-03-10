@@ -73,7 +73,7 @@ const AddTagsMenu = ({ post, actions }) => (
             <form
               id={`tag-applied-${t._id}`}
               action=''>
-              <span>{t.title}</span>
+              <span>{t.name}</span>
               <button type='submit'>
                 <Close height='1em' />
               </button>
@@ -88,22 +88,22 @@ const AddTagsMenu = ({ post, actions }) => (
       onsubmit={ev => {
         ev.preventDefault()
         const form = ev.target
-        const title = form.querySelector(`[name='title']`)
+        const name = form.querySelector(`[name='name']`)
         const color = form.querySelector(`[name='color']`)
 
         actions.addStagedTag({
-          title: title.value,
+          name: name.value,
           color: color.value,
           _id: Date.now().toString()
         })
 
-        title.value = ''
+        name.value = ''
         color.value = styles.accent
         form.style.background = '#fff'
         form.style.color = '#000'
       }}>
       <input
-        name='title'
+        name='name'
         placeholder='add a tag'
         type='text' />
       <input
