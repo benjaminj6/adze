@@ -44,7 +44,12 @@ export default (model, actions) => (
         name='password'
         placeholder='password'
        />
-      <button type='submit'>Submit</button>
+      <button type='submit'>Log in</button>
+      {
+        process.env.DEMO
+        ? <span>See the demo</span>
+        : ''
+      }
     </form>
   </div>
 )
