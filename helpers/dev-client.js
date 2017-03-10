@@ -45,6 +45,9 @@ fs.createReadStream(path.resolve(__dirname, '../src/client/index.html'))
 const server = new WebpackDevServer(compiler, {
   contentBase: path.join(__dirname, '../dist'),
   historyApiFallback: true,
+  proxy: {
+    '/api': { target: 'http://localhost:3001' }
+  },
   hot: true,
   quiet: false,
   noInfo: true,

@@ -31,7 +31,7 @@ const Editor = ({ post, actions }) => (
             actions.updateStagedTitle(target.value)
           }, 500)
         } />
-      <h6>({post ? post.date.toDateString() : new Date().toDateString()})</h6>
+      <h6>({new Date(post.date || Date.now()).toDateString()})</h6>
     </header>
     <textarea
       name='editor'
@@ -61,9 +61,7 @@ const AddTagsMenu = ({ post, actions }) => (
         ev => {
           ev.preventDefault()
           if (/tag-applied/.test(ev.target.id)) {
-            console.log('got it')
             const id = ev.target.id.split(/tag-applied-/)[1]
-            console.log(id)
             actions.removeStagedTag(id)
           }
         }
@@ -71,12 +69,11 @@ const AddTagsMenu = ({ post, actions }) => (
       {
         post ? post.tags.map(t =>
           <li
-            oncreate={el => { console.log(t) }}
             style={{ background: t.color }}>
             <form
-              id={`tag-applied-${t.id}`}
+              id={`tag-applied-${t._id}`}
               action=''>
-              <span>{t.title}</span>
+              <span>{t.name}</span>
               <button type='submit'>
                 <Close height='1em' />
               </button>
@@ -91,22 +88,22 @@ const AddTagsMenu = ({ post, actions }) => (
       onsubmit={ev => {
         ev.preventDefault()
         const form = ev.target
-        const title = form.querySelector(`[name='title']`)
+        const name = form.querySelector(`[name='name']`)
         const color = form.querySelector(`[name='color']`)
 
         actions.addStagedTag({
-          title: title.value,
+          name: name.value,
           color: color.value,
-          id: Date.now().toString()
+          _id: Date.now().toString()
         })
 
-        title.value = ''
+        name.value = ''
         color.value = styles.accent
         form.style.background = '#fff'
         form.style.color = '#000'
       }}>
       <input
-        name='title'
+        name='name'
         placeholder='add a tag'
         type='text' />
       <input
@@ -145,20 +142,11 @@ const EditorView = ({ model, selected, actions }, children) => (
                   // TODO: This would make a great higher-level action
                   if (model.newContent.title && model.newContent.md) {
                     if (/create/.test(model.router.match)) {
-                      // TODO: DB calls
-                      console.log('this will write to db')
-
-                      // TODO: Dummy data added until DB calls are done
-                      const post = {
-                        ...model.newContent,
-                        id: Date.now().toString()
-                      }
-
-                      actions.addPost(post)
-                      actions.router.go(`/dashboard/posts/id=${post.id}`)
+                      actions.saveNewPost({ ...model.newContent })
                     }
 
                     if (/posts/.test(model.router.match)) {
+                      actions.saveUpdatedPost(model.newContent)
                       actions.updatePost(model.newContent)
                     }
                   }
@@ -181,17 +169,16 @@ const EditorView = ({ model, selected, actions }, children) => (
           </button>
           <AddTagsMenu
             actions={actions}
-            oncreate={ev => { console.log(ev) }}
             post={selected || ''} />
         </li>
         {selected
           ? <li>
             <button onclick={_ => {
-              if (model.newContent.id) {
-                actions.deletePost(model.newContent.id)
+              if (model.newContent._id) {
+                actions.deletePost(model.newContent._id)
+              } else {
+                actions.router.go('/dashboard')
               }
-
-              actions.router.go('/dashboard')
             }}>
               {
                 /create/.test(model.router.match)
@@ -208,14 +195,19 @@ const EditorView = ({ model, selected, actions }, children) => (
   </main>
 )
 
-const PromptView = ({ model }) => (
+const PromptView = ({ model, actions }) => (
   <main>
     <header />
     <section className='prompt'>
       <h2>
         You can select posts and categories on the left.
         <br />
-        Or you can start a <a href='/dashboard/create'>new one today</a>.
+        Or you can start a <a
+          href='/dashboard/create'
+          onclick={ev => {
+            ev.preventDefault()
+            actions.router.go('/dashboard/create')
+          }}>new one today</a>.
       </h2>
     </section>
   </main>
@@ -268,8 +260,7 @@ const MenuList = (props, children) => (
       }
       id={`menu-${props.item.href}-toggler`}
       type='checkbox'
-      name='menu-item-toggler'
-      onclick={ev => { console.log('event') }} />
+      name='menu-item-toggler' />
 
     <label htmlFor={`menu-${props.item.href}-toggler`}>
       <SidebarMenuHeading
@@ -304,9 +295,9 @@ const MenuList = (props, children) => (
       {
         children.map(child =>
           <SidebarMenuListItem
-            title={child.title}
-            isActive={props.model.router.params.id === child.id}
-            href={`/dashboard/${props.item.href}/id=${child.id}`} />
+            title={child.title || child.name}
+            isActive={props.model.router.params.id === child._id}
+            href={`/dashboard/${props.item.href}/id=${child._id}`} />
         )
       }
 
@@ -371,7 +362,7 @@ export default (model, actions) => {
         ? <EditorView model={model}
           actions={actions}
           selected={model.newContent} />
-        : <PromptView model={model} />
+        : <PromptView model={model} actions={actions} />
       }
     </div>
   )
