@@ -15,6 +15,16 @@ export default app => {
   app.use(koaLogger(log))
   app.use(requestLogger)
 
+  // Rendering engine
+  const pathToDist = '../../../dist'
+  // Serve static assets
+  app.use(mount(
+    '/statics',
+    serve(path.join(__dirname, `${pathToDist}/statics`))
+  ))
+
+  app.use(views(path.join(__dirname, pathToDist)))
+
   app.use(body({ enableTypes: ['json', 'form', 'text'] }))
 
   app.keys = [ 'secret' ]
@@ -23,14 +33,4 @@ export default app => {
   auth(passport)
   app.use(passport.initialize())
   app.use(passport.session())
-
-  // Rendering engine
-  const pathToDist = '../../../dist'
-  app.use(views(path.join(__dirname, pathToDist)))
-
-  // Serve static assets
-  app.use(mount(
-    '/statics',
-    serve(path.join(__dirname, `${pathToDist}/statics`))
-  ))
 }

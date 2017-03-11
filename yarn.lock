@@ -1504,12 +1504,6 @@ co-body@^4.2.0:
     raw-body "~2.1.2"
     type-is "~1.6.6"
 
-co-request@^0.2.0:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/co-request/-/co-request-0.2.1.tgz#6428c002ad4229b3eda6725022aeccf273bee3fb"
-  dependencies:
-    request "*"
-
 co-with-promise@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co-with-promise/-/co-with-promise-4.6.0.tgz#413e7db6f5893a60b942cf492c4bec93db415ab7"
@@ -3092,10 +3086,6 @@ iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
 
-iconv-lite@^0.2.11:
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.2.11.tgz#1ce60a3a57864a292d1321ff4609ca4bb965adc8"
-
 icss-replace-symbols@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/icss-replace-symbols/-/icss-replace-symbols-1.0.2.tgz#cb0b6054eb3af6edc9ab1d62d01933e2d4c8bfa5"
@@ -3668,10 +3658,6 @@ koa-bunyan-logger@2.0.0-pre1:
     node-uuid "~1.4.1"
     on-finished "~2.1.1"
 
-koa-compose@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-2.5.1.tgz#726cfb17694de5cb9fbf03c0adf172303f83f156"
-
 koa-compose@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-3.2.1.tgz#a85ccb40b7d986d8e5a345b3a1ace8eabcf54de7"
@@ -3712,19 +3698,6 @@ koa-passport@next:
   dependencies:
     passport "^0.3.0"
 
-koa-proxies@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/koa-proxies/-/koa-proxies-0.3.0.tgz#2a0c4a1a6d1d64513a635e679b19d258e4613490"
-  dependencies:
-    http-proxy "^1.16.2"
-
-koa-proxy@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/koa-proxy/-/koa-proxy-0.8.0.tgz#c8e832d27d5ea866ce176252584341853cc37b10"
-  dependencies:
-    co-request "^0.2.0"
-    iconv-lite "^0.2.11"
-
 koa-router-static@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/koa-router-static/-/koa-router-static-1.2.0.tgz#ebabdc64e5afbacaf8d4381bc02dd3218ed58ce0"
@@ -3750,15 +3723,6 @@ koa-send@^3.1.0, koa-send@^3.2.0, koa-send@^3.3.0:
     mz "^2.3.1"
     resolve-path "^1.3.1"
 
-koa-send@~3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/koa-send/-/koa-send-3.2.0.tgz#a4063c2631b7ebed9f9fc2a77568799ba606449b"
-  dependencies:
-    co "^4.6.0"
-    debug "*"
-    mz "^2.3.1"
-    resolve-path "^1.3.1"
-
 koa-session-minimal@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/koa-session-minimal/-/koa-session-minimal-3.0.3.tgz#4b71b54a5c20345e3deb30b74a1fc69b470245f5"
@@ -3766,12 +3730,6 @@ koa-session-minimal@^3.0.3:
     co "^4.6.0"
     deep-equal "^1.0.1"
     uid-safe "^2.1.2"
-
-koa-static-server@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/koa-static-server/-/koa-static-server-1.0.0.tgz#cf35af257a681c28a9a8701b89f55f75ab0ac269"
-  dependencies:
-    koa-send "~3.2.0"
 
 koa-static@^3.0.0:
   version "3.0.0"
@@ -4838,7 +4796,7 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
-path-to-regexp@^1.1.1, path-to-regexp@^1.7.0:
+path-to-regexp@^1.1.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
   dependencies:
@@ -5519,7 +5477,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@*, request@2, request@^2.61.0, request@^2.79.0:
+request@2, request@^2.61.0, request@^2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
