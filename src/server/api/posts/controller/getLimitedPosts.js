@@ -18,7 +18,6 @@ export default async (ctx, next) => {
 
     ctx.status = 200
     ctx.body = posts
-    next()
   } catch (err) {
     ctx.app.emit('error', err, ctx)
   }

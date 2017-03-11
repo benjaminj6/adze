@@ -2,6 +2,8 @@ import Koa from 'koa'
 import mongoose from 'mongoose'
 mongoose.Promise = global.Promise
 
+import Router from 'koa-router'
+
 import api from './api'
 import { log, middleware } from './config'
 
@@ -15,8 +17,16 @@ function setupApp (devMiddleware) {
   app.use(api.routes())
 
   // render views
-  api.get('/*', async (ctx, next) => {
-    await ctx.render('index.html')
+  // const files = new Router()
+  // files.get('/*', async (ctx, next) => {
+  //   ctx.status = 200
+  //   ctx.render('index.html')
+  // })
+
+  app.use((ctx, next) => {
+    console.log('this went here?')
+    ctx.status = 200
+    ctx.render('index.html')
   })
 
   // error handling
