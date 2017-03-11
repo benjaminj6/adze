@@ -1,6 +1,7 @@
 import { Post } from '~/server/models'
 
 export default async (ctx, next) => {
+  console.log('here')
   try {
     const posts = await Post.find().sort('-date').populate('tags')
     ctx.status = 200

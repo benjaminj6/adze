@@ -11,12 +11,9 @@ const app = new Koa()
 middleware(app)
 app.use(api.routes())
 
-// Error handling
-app.on('error', (err, ctx) => {
-  err.message = `[ERR] ${err.message}`
-  log.error(err)
-  ctx.status = err.status || 500
-  ctx.body = err
+// render views
+api.get('/*', async (ctx, next) => {
+  await ctx.render('index.html')
 })
 
 // Database
