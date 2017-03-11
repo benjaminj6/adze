@@ -1,0 +1,38 @@
+#app.not-found-view {
+  color: rgba(#000, 0.3);
+  text-align: center;
+
+  section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 100%;
+    justify-content: center;
+    overflow-wrap: break-word;
+  }
+
+  h1 {
+    font-size: 4rem;
+    margin: 0;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  span {
+    color: rgba($accent, 0.6);
+  }
+
+  a {
+    color: inherit;
+    font-weight: bold;
+    color: rgba($accent, 0.6);
+    transition: color $transition-short;
+
+    &:hover {
+      color: rgba($accent, 0.8);
+    }
+  }
+}
