@@ -12,7 +12,6 @@ export default async (ctx, next) => {
 
     ctx.status = 200
     ctx.body = 'Post removed successfully'
-    next()
   } catch (err) {
     err.status = err.status
     ctx.app.emit('error', err, ctx)

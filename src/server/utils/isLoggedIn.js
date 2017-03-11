@@ -5,13 +5,9 @@ export default (ctx, next) => {
   // console.log('pp', ctx.passport)
   // console.log('authenticated?', ctx.state)
   // console.log('ctx', ctx)
-  // if (ctx.passport.user) {
-  //   return next()
-  // } else {
-  //   console.log('why?')
-  //   throw createError(401, 'Unauthorized')
-  // }
+  if (ctx.passport.user) {
+    return next()
+  }
 
-  console.log(ctx.passport)
-  return next()
+  throw createError(401, 'Unauthorized')
 }
