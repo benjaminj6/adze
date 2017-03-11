@@ -18,6 +18,20 @@ function setupApp (devMiddleware) {
   api.get('/*', async (ctx, next) => {
     await ctx.render('index.html')
   })
+
+  // error handling
+  app.on('error', (err, ctx) => {
+    err.message = `[ERR] ${err.message}`
+    log.error(err)
+
+    if (err.status === 401) {
+      console.log('yay we can handle unauthorized stuffs')
+      ctx.status = 301
+      ctx.redirect('/')
+    }
+    ctx.status = err.status || 500
+    ctx.body = err
+  })
 }
 
 // Database

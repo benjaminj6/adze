@@ -108,7 +108,8 @@ export const saveNewPost = ({ posts }, newPost, actions) => {
     }),
     headers: new window.Headers({
       'Content-Type': 'application/json'
-    })
+    }),
+    credentials: 'include'
   })
   .then(res => {
     if (res.status !== 201) {
@@ -134,9 +135,14 @@ export const saveUpdatedPost = ({ posts }, updatedPost, actions) => {
       post: updatedPost.md,
       tags: updatedPost.tags
     }),
-    headers: new window.Headers({ 'Content-Type': 'application/json' })
+    headers: new window.Headers({ 'Content-Type': 'application/json' }),
+    credentials: 'include'
   })
   .then(res => {
+    if (res.status === 401) {
+      actions.router.go('/')
+    }
+
     if (res.status !== 200) {
       throw new Error('Post failed to save')
     }
@@ -144,16 +150,20 @@ export const saveUpdatedPost = ({ posts }, updatedPost, actions) => {
     return res.json()
   })
   .then(json => {
+    console.log(json)
     actions.updatePost(json)
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+  })
 }
 
 export const deletePost = ({ posts }, postId, actions) => {
   console.log('deleting...')
   console.log('postId', postId)
   window.fetch(`/api/posts/${postId}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    credentials: 'include'
   })
   .then(res => {
     if (res.status !== 200) {

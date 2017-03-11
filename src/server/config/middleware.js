@@ -17,13 +17,12 @@ export default app => {
 
   // Rendering engine
   const pathToDist = '../../../dist'
+  app.use(views(path.join(__dirname, pathToDist)))
   // Serve static assets
   app.use(mount(
     '/statics',
     serve(path.join(__dirname, `${pathToDist}/statics`))
   ))
-
-  app.use(views(path.join(__dirname, pathToDist)))
 
   app.use(body({ enableTypes: ['json', 'form', 'text'] }))
 

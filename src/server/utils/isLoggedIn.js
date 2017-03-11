@@ -1,14 +1,17 @@
 import createError from './errorGenerator' // eslint-disable-line
 
 export default (ctx, next) => {
-  // work around authentication for dev until figure how to proxy the session
-  if (process.env.NODE_ENV === 'development') {
-    return next()
-  }
+  // console.log('req', ctx.request)
+  // console.log('pp', ctx.passport)
+  // console.log('authenticated?', ctx.state)
+  // console.log('ctx', ctx)
+  // if (ctx.passport.user) {
+  //   return next()
+  // } else {
+  //   console.log('why?')
+  //   throw createError(401, 'Unauthorized')
+  // }
 
-  if (ctx.passport.user) {
-    return next()
-  } else {
-    throw createError(401, 'Unauthorized')
-  }
+  console.log(ctx.passport)
+  return next()
 }
