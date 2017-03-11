@@ -8,17 +8,22 @@ import { log, middleware } from './config'
 // Setup app instance
 const app = new Koa()
 
-middleware(app)
-app.use(api.routes())
+function setupApp (devMiddleware) {
+  if (devMiddleware) app.use(devMiddleware)
 
-// render views
-api.get('/*', async (ctx, next) => {
-  await ctx.render('index.html')
-})
+  middleware(app)
+  app.use(api.routes())
+
+  // render views
+  api.get('/*', async (ctx, next) => {
+    await ctx.render('index.html')
+  })
+}
 
 // Database
-export async function start () {
+export async function start (dev) {
   try {
+    setupApp(dev)
     log.info('Starting server')
     await mongoose.connect(process.env.DB_URL)
     log.info(`Connected to the database ${process.env.DB_URL}`)
