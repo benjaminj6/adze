@@ -27,8 +27,8 @@ export default (model, actions) => (
         ? <a
           href='/dashboard'
           onclick={login({
-            email: process.env.ADMIN_EMAIL,
-            password: process.env.PASSWORD
+            email: 'test@test.com',
+            password: 'test'
           }, actions)}>See the demo</a>
         : ''
       }
