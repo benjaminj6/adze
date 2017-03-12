@@ -8,20 +8,38 @@ import { log, middleware } from './config'
 // Setup app instance
 const app = new Koa()
 
-middleware(app)
-app.use(api.routes())
+function setupApp (devMiddleware) {
+  if (devMiddleware) app.use(devMiddleware)
 
-// Error handling
-app.on('error', (err, ctx) => {
-  err.message = `[ERR] ${err.message}`
-  log.error(err)
-  ctx.status = err.status || 500
-  ctx.body = err
-})
+  middleware(app)
+  app.use(api.routes())
+
+  // Catch all sends index.html
+  app.use((ctx, next) => {
+    console.log('this went here?')
+    ctx.status = 200
+    ctx.render('index.html')
+  })
+
+  // error handling
+  app.on('error', (err, ctx) => {
+    err.message = `[ERR] ${err.message}`
+    log.error(err)
+
+    if (err.status === 401) {
+      console.log('yay we can handle unauthorized stuffs')
+      ctx.status = 301
+      ctx.redirect('/')
+    }
+    ctx.status = err.status || 500
+    ctx.body = err
+  })
+}
 
 // Database
-export async function start () {
+export async function start (dev) {
   try {
+    setupApp(dev)
     log.info('Starting server')
     await mongoose.connect(process.env.DB_URL)
     log.info(`Connected to the database ${process.env.DB_URL}`)

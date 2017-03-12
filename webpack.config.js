@@ -10,7 +10,7 @@ const extractSass = new ExtractTextPlugin({
 module.exports = {
   entry: './src/client',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/statics'),
     filename: 'bundle.js'
   },
   devtool: 'source-map',

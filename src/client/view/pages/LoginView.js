@@ -49,7 +49,8 @@ function login (data = {}, actions) {
       }),
       headers: new window.Headers({
         'Content-Type': 'application/json'
-      })
+      }),
+      credentials: 'include'
     }).then(res => {
       console.log(res)
       if (res.status !== 200) {

@@ -31,8 +31,8 @@ test.serial('deletePost() -- should return the deleted item', async t => {
 
   await deletePost(ctx, next)
   t.is(ctx.status, 200)
+  t.false(next.calledOnce)
   t.is(ctx.body, 'Post removed successfully')
-  t.true(next.calledOnce)
 })
 
 test.serial('deletePost() -- should propagate err if query returns nothing', async t => {

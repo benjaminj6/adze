@@ -4,7 +4,10 @@ export const loadData = (_, actions) => {
 
 export const getPosts = (model, actions) => {
   window.fetch('/api/posts')
-    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      return res.json()
+    })
     .then(json => { actions.addAllPosts(json) })
     .catch(err => console.error(err))
 }

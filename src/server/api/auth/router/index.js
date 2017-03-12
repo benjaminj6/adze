@@ -5,10 +5,6 @@ const auth = new Router()
 
 auth
   .post('/login',
-  (ctx, next) => {
-    console.log(ctx)
-    return next()
-  },
   passport.authenticate('local', {
     successRedirect: '/api/posts/',
     failureRedirect: '/api/auth/unauthorized' // Will give anything right now...no file served from here
