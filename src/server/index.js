@@ -15,10 +15,10 @@ function setupApp (devMiddleware) {
   app.use(api.routes())
 
   // Catch all sends index.html
-  app.use((ctx, next) => {
-    console.log('this went here?')
+  api.get('/*', async (ctx, next) => {
+    console.log(ctx)
     ctx.status = 200
-    ctx.render('index.html')
+    await ctx.render('index.html')
   })
 
   // error handling

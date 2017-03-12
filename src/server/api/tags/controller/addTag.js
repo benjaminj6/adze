@@ -14,7 +14,6 @@ export default async (ctx, next) => {
 
     ctx.status = 201
     ctx.body = created
-    next()
   } catch (err) {
     err.status = err.status || 400
     ctx.app.emit('error', err, ctx)

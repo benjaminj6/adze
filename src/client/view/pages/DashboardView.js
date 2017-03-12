@@ -194,6 +194,13 @@ const EditorView = ({ model, selected, actions }, children) => (
   </main>
 )
 
+const TagsView = ({ model, actions }) => ( // eslint-disable-line
+  <main>
+    HEY THERE
+  </main>
+
+)
+
 const PromptView = ({ model, actions }) => (
   <main>
     <header />
@@ -361,7 +368,9 @@ export default (model, actions) => {
         ? <EditorView model={model}
           actions={actions}
           selected={model.newContent} />
-        : <PromptView model={model} actions={actions} />
+        : /tags/.test(window.location.pathname)
+          ? <PromptView model={model} actions={actions} />
+          : <main>YAY</main>
       }
     </div>
   )

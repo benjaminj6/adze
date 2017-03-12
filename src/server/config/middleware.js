@@ -15,9 +15,8 @@ export default app => {
   app.use(koaLogger(log))
   app.use(requestLogger)
 
-  // Rendering engine
   const pathToDist = '../../../dist'
-  app.use(views(path.join(__dirname, pathToDist)))
+
   // Serve static assets
   app.use(mount(
     '/statics',
@@ -32,4 +31,7 @@ export default app => {
   auth(passport)
   app.use(passport.initialize())
   app.use(passport.session())
+
+  // Rendering engine
+  app.use(views(path.join(__dirname, pathToDist)))
 }
