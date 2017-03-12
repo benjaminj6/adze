@@ -2,7 +2,7 @@ require('dotenv').config({ path: '.env-test' })
 require('babel-register')
 require('babel-polyfill')
 
-const { User } = require('../src/models')
+const { User } = require('../src/server/models')
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
