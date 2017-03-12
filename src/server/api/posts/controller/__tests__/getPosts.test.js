@@ -33,7 +33,7 @@ test.serial('getPosts() -- should return posts from db by most recent (200)', as
 
   t.is(ctx.status, 200)
   t.true(ctx.body.length === 5)
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
 })
 
 test.serial('getPosts() -- should propagate error (404)', async t => {

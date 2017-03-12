@@ -40,7 +40,7 @@ test.serial('should return the edited tag', async t => {
     .resolves(createTags(1))
 
   await editTag(ctx, next)
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
   t.is(ctx.status, 200)
 })

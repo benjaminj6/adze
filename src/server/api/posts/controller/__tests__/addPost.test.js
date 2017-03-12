@@ -2,11 +2,18 @@ import test from 'ava'
 import sinon from 'sinon'
 import 'sinon-mongoose'
 import 'sinon-as-promised'
+import proxyquire from 'proxyquire'
 
 import { Post } from '~/server/models'
 import { createPosts } from '~/server/utils/test-utils'
-import { addPost } from '..'
 import { createError } from '~/server/utils'
+
+// imports addPost and stubs its dependencies
+const { default: addPost } = proxyquire('../addPost', {
+  './utils': {
+    createNewTags: sinon.stub().resolves([ '12345' ])
+  }
+})
 
 test.beforeEach(t => {
   t.context.create = sinon.mock(Post).expects('create')
@@ -43,7 +50,7 @@ test.serial('addPost() -- should return the newly created post (201)', async t =
   await addPost(ctx, next)
   t.is(ctx.status, 201)
   t.is(ctx.body.md, 'test-0')
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
 })
 
@@ -63,11 +70,11 @@ test.serial('should return newly created Posts with tags if tags provided', asyn
 
   await addPost(ctx, next)
   t.is(ctx.status, 201)
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
 })
 
-test.serial('addPost() -- should propagate err if invalid JSON (400)', async t => {
+test.serial('should propagate err if invalid JSON (400)', async t => {
   const { ctx, next, emitter } = t.context
   ctx.request = { body: 'test string' }
 
@@ -81,7 +88,7 @@ test.serial('addPost() -- should propagate err if invalid JSON (400)', async t =
   t.regex(err.message, /undefined/)
 })
 
-test.serial('addTest() -- should propagate err if post not created', async t => {
+test.serial('should propagate err if post not created', async t => {
   const { ctx, create, next, emitter } = t.context
   ctx.request = { body: { title: 'test', post: 'test' } }
   create

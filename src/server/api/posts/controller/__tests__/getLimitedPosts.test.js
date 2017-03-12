@@ -29,7 +29,7 @@ test('getLimitedPosts() -- should return number of posts requested', async t => 
   await getLimitedPosts(ctx, next)
   t.is(ctx.status, 200)
   t.is(ctx.body.length, 3)
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
 })
 
 test('getLimitedPosts() -- should propagate error if no ctx.params.number', async t => {

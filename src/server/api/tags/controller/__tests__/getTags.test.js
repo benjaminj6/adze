@@ -33,7 +33,7 @@ test.serial('should return tags', async t => {
   query.resolves(createTags(3))
 
   await getTags(ctx, next)
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
 })
 

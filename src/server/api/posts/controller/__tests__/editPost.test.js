@@ -2,11 +2,18 @@ import test from 'ava'
 import sinon from 'sinon'
 import 'sinon-mongoose'
 import 'sinon-as-promised'
+import proxyquire from 'proxyquire'
 
-import { editPost } from '..'
 import { Post } from '~/server/models'
 import { createPosts } from '~/server/utils/test-utils'
 import { createError } from '~/server/utils'
+
+// imports addPost and stubs its dependencies
+const { default: editPost } = proxyquire('../editPost', {
+  './utils': {
+    createNewTags: sinon.stub().resolves([ '12345' ])
+  }
+})
 
 test.beforeEach(t => {
   t.context.query = sinon.mock(Post).expects('findByIdAndUpdate')
@@ -43,7 +50,7 @@ test.serial('editPost() -- should return the edited post (200)', async t => {
   t.is(ctx.body.title, 'test-0') // Mock returns from the utility function ... NOT from request
   t.is(ctx.body.md, 'test-0')
   t.is(ctx.body.html, '<p>test-0</p>')
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
 })
 

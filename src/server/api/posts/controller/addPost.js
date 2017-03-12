@@ -1,7 +1,7 @@
 import marked from 'marked'
-import { Post, Tag } from '~/server/models'
+import { Post } from '~/server/models'
 import { validateTagArray } from '~/server/utils'
-import { isMongoId } from 'validator'
+import { createNewTags } from './utils'
 
 import { log } from '~/server/config'
 
@@ -18,19 +18,7 @@ export default async (ctx, next) => {
     }
 
     if (validateTagArray(tags)) {
-      log.debug('tags', tags)
-      const newTags = tags.filter(t => !isMongoId(t._id))
-      log.debug('newTags', newTags)
-      const promises = newTags.map(({ name, color }) => Tag.create({
-        name,
-        color
-      }))
-
-      const savedNewTags = await Promise.all(promises)
-      log.debug('savedNewTags', savedNewTags)
-      newPost.tags = tags.filter(t => isMongoId(t._id))
-        .concat(savedNewTags)
-        .map(t => t._id)
+      newPost.tags = await createNewTags(tags)
     }
 
     const created = await Post.create(newPost)

@@ -17,7 +17,7 @@ test.beforeEach(t => {
   t.context.emitter = sinon.spy(t.context.ctx.app, 'emit')
 })
 
-test.afterEach(t => {
+test.afterEach.always(t => {
   Tag.findByIdAndRemove.restore()
   t.context.ctx.app.emit.restore()
   t.context.emitter.reset()
@@ -33,7 +33,7 @@ test.serial('should return the deleted item and status 200', async t => {
     .resolves(tag)
 
   await deleteTag(ctx, next)
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
   t.is(ctx.status, 200)
   t.is(ctx.body, tag)
