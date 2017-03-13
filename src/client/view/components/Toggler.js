@@ -1,12 +1,12 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 export default (props, children) => (
-  <div className='toggler'>
+  <div className={`toggler ${props.className || ''}`}>
     <input
       hidden
       id={props.id}
-      checked={props.checked || false}
-      name={props.name || ''}
+      checked={props.checked || ''}
+      name={props.name || false}
       type='checkbox' />
     <label
       htmlFor={props.id}

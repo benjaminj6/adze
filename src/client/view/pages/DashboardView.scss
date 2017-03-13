@@ -261,6 +261,10 @@ main {
 }
 
 #info-toggler {
+  & + #info-toggler-btn {
+    display: block;
+  }
+
   & + #info-toggler-btn + #info-menu {
     display: none;
 

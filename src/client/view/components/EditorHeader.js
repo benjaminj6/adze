@@ -34,7 +34,9 @@ export default ({ model, actions, selected }) => (
         </button>
       </li>
       <li>
-        <Toggler id='info-toggler'>
+        <Toggler
+          id='info-toggler'
+          className='add-tags-toggler'>
           <Tag />
           <AddTagsMenu
             actions={actions}
