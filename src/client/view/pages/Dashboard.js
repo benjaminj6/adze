@@ -5,30 +5,40 @@ import Prompt from '../components/Prompt'
 import TagsView from '../components/TagsView'
 import Sidebar from '../components/Sidebar'
 
-export default (model, actions) => {
+const getDashboardView = (model, actions) => {
+  if (/posts|create/.test(window.location.pathname)) {
+    return (
+      <Editor model={model}
+        actions={actions}
+        selected={model.newContent} />
+    )
+  }
+
+  if (/tags/.test(window.location.pathname)) {
+    return (
+      <TagsView
+        model={model}
+        actions={actions}
+        tag={
+          model.tags.find(t => t._id === model.router.params.id)
+        } />
+    )
+  }
+
   return (
-    <div id='app' className='dashboard-view'>
-      <input
-        hidden
-        id='nav-toggler'
-        type='checkbox' />
-      <Sidebar model={model} actions={actions} />
-      {
-        /posts|create/.test(model.router.match)
-        ? <Editor model={model}
-          actions={actions}
-          selected={model.newContent} />
-        : /tags/.test(window.location.pathname)
-          ? <TagsView
-            model={model}
-            actions={actions}
-            tag={
-              model.tags.find(t => t._id === model.router.params.id)
-            } />
-          : <Prompt
-            model={model}
-            actions={actions} />
-      }
-    </div>
+    <Prompt
+      model={model}
+      actions={actions} />
   )
 }
+
+export default (model, actions) => (
+  <div id='app' className='dashboard-view'>
+    <input
+      hidden
+      id='nav-toggler'
+      type='checkbox' />
+    <Sidebar model={model} actions={actions} />
+    {getDashboardView(model, actions)}
+  </div>
+)
