@@ -3,10 +3,8 @@
 @import 'styles/base';
 
 @import 'view/components/Header';
-@import 'view/components/Login';
 
-// Views (overrides of UI components per view)
-@import 'view/pages/index';
+@import 'view/index';
 
 html {
   font-size: 16px;
