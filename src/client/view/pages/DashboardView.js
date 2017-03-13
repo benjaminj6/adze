@@ -17,7 +17,8 @@ import {
 } from '../components/Icons'
 
 import Editor from '../components/Editor'
-import AddTagsMenu from '../components/AddTagsMenu.js'
+import AddTagsMenu from '../components/AddTagsMenu'
+import PostCard from '../components/PostCard'
 
 const EditorView = ({ model, selected, actions }, children) => (
   <main>
@@ -85,27 +86,11 @@ const EditorView = ({ model, selected, actions }, children) => (
   </main>
 )
 
-const PostCard = ({ post, actions }) => (
-  <li className='post-card'>
-    <a
-      href={`/dashboard/posts/id=${post._id}`}
-      onclick={ev => {
-        ev.preventDefault()
-        actions.selectPost(post._id)
-        actions.router.go(`/dashboard/posts/id=${post._id}`)
-      }}>
-      <h4>{post.title}</h4>
-      <h6>({new Date(post.date).toDateString()})</h6>
-    </a>
-  </li>
-)
-
 const TagsView = ({ model, actions, tag }) => {
   const posts = model.posts.filter(p => {
     return p.tags.find(t => t._id === tag._id)
   })
 
-  console.log(posts)
   return (
     <main>
       <section className='tags-section' style={{
