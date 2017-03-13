@@ -4,57 +4,55 @@ import { Plus, Close } from '../Icons'
 import SidebarMenuHeading from './SidebarMenuHeading'
 import SidebarMenuListItem from './SidebarMenuListItem'
 
-export default (props, children) => (
-  <div className='menu-list'>
-    <input
-      hidden
-      checked={
-        new RegExp(`${props.item.href}`).test(props.model.router.match)
-      }
-      id={`menu-${props.item.href}-toggler`}
-      type='checkbox'
-      name='menu-item-toggler' />
+import Toggler from '../Toggler'
 
-    <label htmlFor={`menu-${props.item.href}-toggler`}>
-      <SidebarMenuHeading
-        isActive={
-          new RegExp(`${props.item.href}`).test(props.model.router.match)
-        }>
+export default ({ actions, item, model }, children) => {
+  const isActive = new RegExp(`${item.href}`).test(model.router.match)
 
-        <i className='icon-toggle open'>
-          <Plus height='1rem' />
-        </i>
-        <i className='icon-toggle closed'>
-          <Close height='1rem' />
-        </i>
+  return (
+    <div className='menu-list'>
+      <Toggler
+        checked={isActive}
+        id={`menu-${item.href}-toggler`}
+        name='menu-item-toggler'>
 
-        {props.item.title}
+        <SidebarMenuHeading
+          isActive={isActive}>
 
-      </SidebarMenuHeading>
-    </label>
+          <i className='icon-toggle open'>
+            <Plus height='1rem' />
+          </i>
+          <i className='icon-toggle closed'>
+            <Close height='1rem' />
+          </i>
 
-    <ul onclick={ev => {
-      // TODO: Move into a function / action
-      ev.preventDefault()
-      const url = ev.target.pathname
-      const id = url.split('id=')[1]
+          {item.title}
+        </SidebarMenuHeading>
 
-      if (/posts/.test(url)) {
-        props.actions.selectPost(id)
-      }
+        <ul onclick={ev => {
+         // TODO: Move into a function / action
+          ev.preventDefault()
+          const url = ev.target.pathname
+          const id = url.split('id=')[1]
 
-      props.actions.router.go(url)
-    }}>
+          if (/posts/.test(url)) {
+            actions.selectPost(id)
+          }
 
-      {
-        children.map(child =>
-          <SidebarMenuListItem
-            title={child.title || child.name}
-            isActive={props.model.router.params.id === child._id}
-            href={`/dashboard/${props.item.href}/id=${child._id}`} />
-        )
-      }
+          actions.router.go(url)
+        }}>
 
-    </ul>
-  </div>
-)
+          {
+            children.map(child =>
+              <SidebarMenuListItem
+                title={child.title || child.name}
+                isActive={model.router.params.id === child._id}
+                href={`/dashboard/${item.href}/id=${child._id}`} />
+            )
+          }
+        </ul>
+
+      </Toggler>
+    </div>
+  )
+}
