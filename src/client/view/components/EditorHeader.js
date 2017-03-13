@@ -4,6 +4,18 @@ import { Close, Save, SaveCheck, Tag, Trash } from './Icons'
 import AddTagsMenu from './AddTagsMenu'
 import Toggler from './Toggler'
 
+const CancelButton = ({ actions }) => (
+  <button onclick={_ => actions.router.go('/dashboard')}>
+    <Close />
+  </button>
+)
+
+const DeleteButton = ({ id, actions }) => (
+  <button onclick={_ => actions.deletePost(id)}>
+    <Trash />
+  </button>
+)
+
 export default ({ model, actions, selected }) => (
   <header>
     <ul>
@@ -45,23 +57,14 @@ export default ({ model, actions, selected }) => (
       </li>
       {selected
         ? <li>
-          <button onclick={_ => {
-            if (model.newContent._id) {
-              actions.deletePost(model.newContent._id)
-            } else {
-              actions.router.go('/dashboard')
-            }
-          }}>
-            {
-              /create/.test(model.router.match)
-                ? <Close />
-                : <Trash />
-            }
-          </button>
+          {
+            /create/.test(model.router.match)
+            ? <CancelButton actions={actions} />
+            : <DeleteButton actions={actions} id={model.newContent._id} />
+          }
         </li>
         : ''
       }
     </ul>
   </header>
-
 )
