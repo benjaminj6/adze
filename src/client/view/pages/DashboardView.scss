@@ -168,11 +168,11 @@ a {
 
   li {
     a {
-      line-height: 2rem;
       border-left: 0.25rem solid transparent;
-      padding-left: 1.5rem;
       transition: all $transition-short;
       display: block;
+      padding: 0.25rem 1.5rem;
+      overflow-wrap: break-word;
 
       &:hover {
         cursor: pointer;
@@ -475,6 +475,8 @@ main section {
     .post-card {
       border: 1px solid rgba(#000, 0.05);
       padding: 1rem;
+      margin: 0.25rem;
+      transition: box-shadow $transition-short;
 
       h4 {
         margin: 0;
@@ -484,6 +486,14 @@ main section {
       h6 {
         margin: 0;
         color: rgba(#000, 0.3);
+      }
+
+      &:hover {
+        box-shadow: 0 1px 3px rgba(#000, 0.15);
+      }
+
+      &:active {
+        border-color: lighten($accent, 20%);
       }
     }
   }
