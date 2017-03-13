@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import PostCard from './PostCard'
-import InputHeader from './InputHeader'
+import InputHeader from '../InputHeader'
 
 export default ({ model, actions, tag }) => {
   const posts = model.posts.filter(p => {

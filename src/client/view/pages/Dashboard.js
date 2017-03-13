@@ -2,7 +2,7 @@ import { h } from 'hyperapp' // eslint-disable-line
 
 import Editor from '../components/Editor'
 import Prompt from '../components/Prompt'
-import TagsView from '../components/TagsView'
+import Tags from '../components/Tags'
 import Sidebar from '../components/Sidebar'
 
 const getDashboardView = (model, actions) => {
@@ -16,7 +16,7 @@ const getDashboardView = (model, actions) => {
 
   if (/tags/.test(window.location.pathname)) {
     return (
-      <TagsView
+      <Tags
         model={model}
         actions={actions}
         tag={
