@@ -6,9 +6,11 @@ export default (props, children) => (
       hidden
       id={props.id}
       checked={props.checked || false}
-      name={props.name}
+      name={props.name || ''}
       type='checkbox' />
-    <label htmlFor={props.id}>
+    <label
+      htmlFor={props.id}
+      id={`${props.id}-btn`}>
       {children[0]}
     </label>
     {children[1]}

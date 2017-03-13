@@ -2,6 +2,7 @@ import { h } from 'hyperapp' // eslint-disable-line
 
 import { Close, Save, SaveCheck, Tag, Trash } from './Icons'
 import AddTagsMenu from './AddTagsMenu'
+import Toggler from './Toggler'
 
 export default ({ model, actions, selected }) => (
   <header>
@@ -33,16 +34,12 @@ export default ({ model, actions, selected }) => (
         </button>
       </li>
       <li>
-        <input
-          hidden
-          id='info-toggler'
-          type='checkbox' />
-        <button id='info-toggler-btn'>
-          <label for='info-toggler'><Tag /></label>
-        </button>
-        <AddTagsMenu
-          actions={actions}
-          post={selected || ''} />
+        <Toggler id='info-toggler'>
+          <Tag />
+          <AddTagsMenu
+            actions={actions}
+            post={selected || ''} />
+        </Toggler>
       </li>
       {selected
         ? <li>
