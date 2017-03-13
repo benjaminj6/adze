@@ -1,9 +1,9 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import Editor from './components/Editor'
-import Prompt from './components/Prompt'
-import Tags from './components/Tags'
-import Sidebar from './components/Sidebar'
+import Editor from './Editor'
+import Prompt from './Prompt'
+import Tags from './Tags'
+import Sidebar from './Sidebar'
 
 const getDashboardView = (model, actions) => {
   if (/posts|create/.test(window.location.pathname)) {
