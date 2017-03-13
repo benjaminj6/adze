@@ -19,12 +19,12 @@ export default ({ actions, item, model }, children) => {
         <SidebarMenuHeading
           isActive={isActive}>
 
-          <i className='icon-toggle open'>
-            <Plus height='1rem' />
-          </i>
-          <i className='icon-toggle closed'>
-            <Close height='1rem' />
-          </i>
+          <Plus
+            className='icon-toggle open'
+            height='1rem' />
+          <Close
+            className='icon-toggle closed'
+            height='1rem' />
 
           {item.title}
         </SidebarMenuHeading>
