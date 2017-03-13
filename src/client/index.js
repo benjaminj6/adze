@@ -3,7 +3,7 @@ import { h, app, Router } from 'hyperapp' // eslint-disable-line
 import * as actions from './actions'
 import subscriptions from './subscriptions'
 
-import { DashboardView, LoginView, NotFoundView } from './view' // eslint-disable-line
+import { Dashboard, LoginView, NotFoundView } from './view' // eslint-disable-line
 import './index.scss'
 
 // Will be removed
@@ -59,10 +59,10 @@ app({
   view: {
     '*': NotFoundView,
     '/': LoginView,
-    '/dashboard': DashboardView,
-    '/dashboard/tags/id=:id': DashboardView,
-    '/dashboard/create': DashboardView,
-    '/dashboard/posts/id=:id': DashboardView
+    '/dashboard': Dashboard,
+    '/dashboard/tags/id=:id': Dashboard,
+    '/dashboard/create': Dashboard,
+    '/dashboard/posts/id=:id': Dashboard
   },
   plugins: [Router],
   hooks: {
