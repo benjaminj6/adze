@@ -15,6 +15,16 @@ a {
   color: rgba(#000, 0.8)
 }
 
+// default header styles
+header {
+  color: $text-default-color;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: $header-height;
+  z-index: 2;
+}
+
 main {
   height: 100%;
   left: 33%;

@@ -4,27 +4,20 @@
   padding: 0.5rem;
   position: fixed;
   z-index: 20;
+  color: rgba(#000, 0.6);
 
   ul {
     display: flex;
 
     li {
       position: relative;
+      padding: 2px 0.25rem;
+      color: rgba(#000, 0.6);
 
-      button {
-        padding: 2px 0.25rem;
+      &:hover {
+        color: #000;
       }
     }
-  }
-}
-
-#delete-post {
-  border: 1px solid red;
-  margin-top: 0.5rem;
-  line-height: 2;
-  text-align: center;
-  button {
-    color: red;
   }
 }
 
