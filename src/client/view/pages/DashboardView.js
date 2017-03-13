@@ -1,24 +1,17 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import styles from '../../styles/foundation.json'
-
 import {
-  AngleDown,
   Close,
-  FilePlus, // eslint-disable-line
-  Logout,
-  Menu,
-  Plus,
   Save,
-  SaveCheck, // eslint-disable-line
+  SaveCheck,
   Tag,
-  Trash,
-  User // eslint-disable-line
+  Trash
 } from '../components/Icons'
 
 import Editor from '../components/Editor'
 import AddTagsMenu from '../components/AddTagsMenu'
 import PostCard from '../components/PostCard'
+import Sidebar from '../components/Sidebar'
 
 const EditorView = ({ model, selected, actions }, children) => (
   <main>
@@ -137,142 +130,6 @@ const PromptView = ({ model, actions }) => (
     </section>
   </main>
 )
-
-const SidebarHeader = ({ model, actions }) =>
-  <header>
-    <div className='sidebar-user'>
-      <input
-        hidden
-        id='user-menu-toggler'
-        type='checkbox' />
-      <label htmlFor='user-menu-toggler'>
-        <AngleDown />
-        <span>{model.email}</span>
-      </label>
-      <div id='user-dropdown'>
-        <button><Logout size='1rem' />Logout</button>
-      </div>
-    </div>
-  </header>
-
-const SidebarMenuHeading = (props, children) => {
-  return (<h3
-    {...props}
-    className={props.isActive ? 'active' : ''}>
-    {children}
-  </h3>)
-}
-
-const SidebarMenuListItem = (props) => (
-  <li>
-    <a
-      style={{
-        background: props.isActive ? '#fff' : '',
-        color: props.isActive ? styles.accent : ''
-      }}
-      href={props.href}>
-      {props.title}
-    </a>
-  </li>
-)
-
-const MenuList = (props, children) => (
-  <div className='menu-list'>
-    <input
-      hidden
-      checked={
-        new RegExp(`${props.item.href}`).test(props.model.router.match)
-      }
-      id={`menu-${props.item.href}-toggler`}
-      type='checkbox'
-      name='menu-item-toggler' />
-
-    <label htmlFor={`menu-${props.item.href}-toggler`}>
-      <SidebarMenuHeading
-        isActive={
-          new RegExp(`${props.item.href}`).test(props.model.router.match)
-        }>
-
-        <i className='icon-toggle open'>
-          <Plus height='1rem' />
-        </i>
-        <i className='icon-toggle closed'>
-          <Close height='1rem' />
-        </i>
-
-        {props.item.title}
-
-      </SidebarMenuHeading>
-    </label>
-
-    <ul onclick={ev => {
-      ev.preventDefault()
-      const url = ev.target.pathname
-      const id = url.split('id=')[1]
-
-      if (/posts/.test(url)) {
-        props.actions.selectPost(id)
-      }
-
-      props.actions.router.go(url)
-    }}>
-
-      {
-        children.map(child =>
-          <SidebarMenuListItem
-            title={child.title || child.name}
-            isActive={props.model.router.params.id === child._id}
-            href={`/dashboard/${props.item.href}/id=${child._id}`} />
-        )
-      }
-
-    </ul>
-  </div>
-)
-
-const SidebarBody = ({ model, actions }) => (
-  <section>
-    {
-      model.nav.map(item =>
-        item.children
-        ? <MenuList model={model} item={item} actions={actions}>
-          {model[item.children]}
-        </MenuList>
-        : <SidebarMenuHeading
-          isActive={
-            new RegExp(`${item.href}$`).test(model.router.match)
-          }
-          style={{ paddingLeft: '1.5rem' }}
-          onclick={ev => {
-            ev.preventDefault()
-            actions.clearNewContent()
-            actions.router.go(`/dashboard/${item.href}`)
-          }}>
-
-          <a href='/dashboard/create'>
-            New Post
-          </a>
-
-        </SidebarMenuHeading>
-      )
-    }
-
-  </section>
-)
-
-const Sidebar = ({ model, actions }) =>
-  <nav id='nav'>
-    <label
-      id='nav-toggler-btn'
-      for='nav-toggler'
-      onclick={ev => { console.log(model) }}>
-      <Menu />
-    </label>
-    <div id='sidebar'>
-      <SidebarHeader model={model} />
-      <SidebarBody model={model} actions={actions} />
-    </div>
-  </nav>
 
 export default (model, actions) => {
   return (
