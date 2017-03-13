@@ -2,7 +2,6 @@ import { h } from 'hyperapp' // eslint-disable-line
 
 export default ({ model, actions }) => (
   <main>
-    <header />
     <section className='prompt'>
       <h2>
         You can select posts and categories on the left.

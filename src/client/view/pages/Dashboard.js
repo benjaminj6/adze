@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import EditorView from '../components/Editor'
-import PromptView from '../components/PromptView'
+import Editor from '../components/Editor'
+import Prompt from '../components/Prompt'
 import TagsView from '../components/TagsView'
 import Sidebar from '../components/Sidebar'
 
@@ -15,7 +15,7 @@ export default (model, actions) => {
       <Sidebar model={model} actions={actions} />
       {
         /posts|create/.test(model.router.match)
-        ? <EditorView model={model}
+        ? <Editor model={model}
           actions={actions}
           selected={model.newContent} />
         : /tags/.test(window.location.pathname)
@@ -25,7 +25,7 @@ export default (model, actions) => {
             tag={
               model.tags.find(t => t._id === model.router.params.id)
             } />
-          : <PromptView
+          : <Prompt
             model={model}
             actions={actions} />
       }
