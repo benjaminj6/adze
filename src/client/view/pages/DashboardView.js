@@ -194,12 +194,55 @@ const EditorView = ({ model, selected, actions }, children) => (
   </main>
 )
 
-const TagsView = ({ model, actions }) => ( // eslint-disable-line
-  <main>
-    HEY THERE
-  </main>
-
+const PostCard = ({ post, actions }) => (
+  <li className='post-card'>
+    <a
+      href={`/dashboard/posts/id=${post._id}`}
+      onclick={ev => {
+        ev.preventDefault()
+        actions.selectPost(post._id)
+        actions.router.go(`/dashboard/posts/id=${post._id}`)
+      }}>
+      <h4>{post.title}</h4>
+      <h6>({new Date(post.date).toDateString()})</h6>
+    </a>
+  </li>
 )
+
+const TagsView = ({ model, actions, tag }) => {
+  const posts = model.posts.filter(p => {
+    return p.tags.find(t => t._id === tag._id)
+  })
+
+  console.log(posts)
+  return (
+    <main>
+      <section className='tags-section' style={{
+        padding: '3rem 5%'
+      }}>
+        <header>
+          {/* TODO: Move this into 'input-header' component */}
+          <input
+            className='input-header'
+            name='name'
+            placeholder='tag name'
+            value={tag ? tag.name : ''}
+            type='text' />
+          <h6>({
+            posts.length === 1
+            ? `${posts.length} post`
+            : `${posts.length} posts`
+          })</h6>
+        </header>
+        <section className='posts'>
+          <ul>
+            {posts.map(p => <PostCard post={p} actions={actions} />)}
+          </ul>
+        </section>
+      </section>
+    </main>
+  )
+}
 
 const PromptView = ({ model, actions }) => (
   <main>
@@ -369,8 +412,15 @@ export default (model, actions) => {
           actions={actions}
           selected={model.newContent} />
         : /tags/.test(window.location.pathname)
-          ? <PromptView model={model} actions={actions} />
-          : <main>YAY</main>
+          ? <TagsView
+            model={model}
+            actions={actions}
+            tag={
+              model.tags.find(t => t._id === model.router.params.id)
+            } />
+          : <PromptView
+            model={model}
+            actions={actions} />
       }
     </div>
   )

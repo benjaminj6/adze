@@ -402,7 +402,7 @@ main section {
   flex-direction: column;
   height: 100%;
 
-  &.editor-section {
+  &.editor-section, &.tags-section {
     padding: 3rem 5% 0.5rem;
     box-sizing: border-box;
     overflow-y: visible;
@@ -413,7 +413,7 @@ main section {
       height: auto;
       position: relative;
 
-      input[name='title'] {
+      input, .input-header {
         text-align: center;
         width: 100%;
         padding: 0.5rem 0 1.75rem;
@@ -467,6 +467,23 @@ main section {
 
       &:hover {
         color: rgba(#000, 0.5);
+      }
+    }
+  }
+
+  &.tags-section {
+    .post-card {
+      border: 1px solid rgba(#000, 0.05);
+      padding: 1rem;
+
+      h4 {
+        margin: 0;
+        color: rgba(#000, 0.7);
+      }
+
+      h6 {
+        margin: 0;
+        color: rgba(#000, 0.3);
       }
     }
   }

@@ -65,5 +65,8 @@ app({
     '/dashboard/posts/id=:id': DashboardView
   },
   plugins: [Router],
+  hooks: {
+    onAction: action => console.log(action)
+  },
   root: document.getElementById('root')
 })
