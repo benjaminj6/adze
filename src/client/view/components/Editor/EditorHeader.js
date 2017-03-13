@@ -1,8 +1,8 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { Close, Save, SaveCheck, Tag, Trash } from './Icons'
+import { Close, Save, SaveCheck, Tag, Trash } from '../Icons'
 import AddTagsMenu from './AddTagsMenu'
-import Toggler from './Toggler'
+import Toggler from '../Toggler'
 
 const createSaveClickHandler = (newContent, actions) => {
   const savable = newContent.title && newContent.md
@@ -71,14 +71,17 @@ const getCurrentHeaderButtons = (model, actions, selected) => {
   ]
 
   if (/create/.test(window.location.pathname)) {
-    return buttons.concat([<CancelButton actions={actions} />])
+    buttons.push(<CancelButton actions={actions} />)
+    return buttons
   }
 
-  return buttons.concat([
+  buttons.push(
     <DeleteButton
       actions={actions}
       id={model.newContent._id} />
-  ])
+  )
+
+  return buttons
 }
 
 export default ({ model, actions, selected }) => {

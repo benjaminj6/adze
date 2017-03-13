@@ -1,6 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import EditorView from '../components/EditorView'
+import EditorView from '../components/Editor'
 import PromptView from '../components/PromptView'
 import TagsView from '../components/TagsView'
 import Sidebar from '../components/Sidebar'

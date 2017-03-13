@@ -1,12 +1,12 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import Editor from './Editor'
+import PostEditor from './PostEditor'
 import EditorHeader from './EditorHeader'
 
 export default (props, children) => (
   <main>
     <EditorHeader {...props} />
-    <Editor
+    <PostEditor
       post={props.selected}
       actions={props.actions} />
   </main>
