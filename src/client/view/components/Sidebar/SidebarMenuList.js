@@ -9,6 +9,18 @@ import Toggler from '../Toggler'
 export default ({ actions, item, model }, children) => {
   const isActive = new RegExp(`${item.href}`).test(model.router.match)
 
+  const menuAnchorHandler = ev => {
+    ev.preventDefault()
+    const url = ev.target.pathname
+    const id = url.split('id=')[1]
+
+    if (/posts/.test(url)) {
+      actions.selectPost(id)
+    }
+
+    actions.router.go(url)
+  }
+
   return (
     <div className='menu-list'>
       <Toggler
@@ -29,19 +41,7 @@ export default ({ actions, item, model }, children) => {
           {item.title}
         </SidebarMenuHeading>
 
-        <ul onclick={ev => {
-         // TODO: Move into a function / action
-          ev.preventDefault()
-          const url = ev.target.pathname
-          const id = url.split('id=')[1]
-
-          if (/posts/.test(url)) {
-            actions.selectPost(id)
-          }
-
-          actions.router.go(url)
-        }}>
-
+        <ul onclick={menuAnchorHandler}>
           {
             children.map(child =>
               <SidebarMenuListItem
