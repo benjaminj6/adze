@@ -41,7 +41,7 @@ test.serial('should return the newly created tag', async t => {
   t.is(ctx.status, 201)
   t.is(ctx.body.name, 'test-0')
   t.is(ctx.body.color, '#000')
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
 })
 
@@ -57,7 +57,7 @@ test.serial('should return the newly created tag if no color given', async t => 
   await addTag(ctx, next)
   t.is(ctx.status, 201)
   t.is(ctx.body.name, 'test-0') // comes from the createTags util rather than actual input
-  t.true(next.calledOnce)
+  t.false(next.calledOnce)
   t.false(emitter.calledOnce)
 })
 

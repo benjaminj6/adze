@@ -15,10 +15,13 @@ test.beforeEach(t => {
     app: { emit: () => {} }
   }
   t.context.emitter = sinon.spy(t.context.ctx.app, 'emit')
+
+  sinon.stub(Tag, 'removePostsRelatedToId').resolves()
 })
 
 test.afterEach.always(t => {
   Tag.findByIdAndRemove.restore()
+  Tag.removePostsRelatedToId.restore()
   t.context.ctx.app.emit.restore()
   t.context.emitter.reset()
   t.context.next.reset()
