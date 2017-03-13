@@ -83,7 +83,6 @@ const getCurrentHeaderButtons = (model, actions, selected) => {
 
 export default ({ model, actions, selected }) => {
   const buttons = getCurrentHeaderButtons(model, actions, selected)
-  console.log(buttons)
 
   return (
     <header>
