@@ -4,26 +4,31 @@ import { Close, Save, SaveCheck, Tag, Trash } from './Icons'
 import AddTagsMenu from './AddTagsMenu'
 import Toggler from './Toggler'
 
-const SaveButton = ({ model, actions }) => (
+const createSaveClickHandler = (newContent, actions) => {
+  const savable = newContent.title && newContent.md
+  const isNewPost = /create/.test(window.location.pathname)
+  const isUpdatedPost = /posts/.test(window.location.pathname)
+
+  return ev => {
+    if (savable && isNewPost) {
+      actions.saveNewPost({ ...newContent })
+    }
+
+    if (savable && isUpdatedPost) {
+      actions.saveUpdatedPost(newContent)
+    }
+  }
+}
+
+const SaveButton = ({ saved, newContent, actions }) => (
   <button>
     {
-      model.saved
+      saved
       ? <SaveCheck />
       : <Save
-        onclick={ev => {
-          // TODO: This would make a great higher-level action
-          if (model.newContent.title && model.newContent.md) {
-            if (/create/.test(model.router.match)) {
-              actions.saveNewPost({ ...model.newContent })
-            }
-
-            if (/posts/.test(model.router.match)) {
-              actions.saveUpdatedPost(model.newContent)
-            }
-          }
-        }}
+        onclick={createSaveClickHandler(newContent, actions)}
         style={{
-          color: model.newContent.title && model.newContent.md
+          color: newContent.title && newContent.md
             ? ''
             : 'rgba(0, 0, 0, 0.05)'
         }} />
@@ -58,7 +63,8 @@ const getCurrentHeaderButtons = (model, actions, selected) => {
   const buttons = [
     <SaveButton
       actions={actions}
-      model={model} />,
+      newContent={model.newContent}
+      saved={model.saved} />,
     <AddTagsToggler
       actions={actions}
       selected={selected} />
