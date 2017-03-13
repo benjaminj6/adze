@@ -1,6 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import PostCard from './PostCard'
+import InputHeader from './InputHeader'
 
 export default ({ model, actions, tag }) => {
   const posts = model.posts.filter(p => {
@@ -14,13 +15,11 @@ export default ({ model, actions, tag }) => {
         padding: '3rem 5%'
       }}>
         <header>
-          {/* TODO: Move this into 'input-header' component */}
-          <input
-            className='input-header'
+          <InputHeader
+            className='tag-header'
             name='name'
             placeholder='tag name'
-            value={tag ? tag.name : ''}
-            type='text' />
+            value={tag ? tag.name : ''} />
           <h6>({
             posts.length === 1
             ? `${posts.length} post`

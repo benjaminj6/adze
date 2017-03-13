@@ -1,14 +1,15 @@
 import { h } from 'hyperapp' // eslint-disable-line
 import debounce from 'lodash.debounce'
 
+import InputHeader from '../InputHeader'
+
 export default ({ post, actions }) => (
   <section className='editor-section'>
     <header>
-      <input
+      <InputHeader
         name='title'
         placeholder='my new post'
         value={post ? post.title : ''}
-        type='text'
         oninput={
           debounce(({ target }) => {
             actions.updateStagedTitle(target.value)
