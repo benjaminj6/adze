@@ -3,6 +3,7 @@ import { createError } from '~/server/utils'
 
 export default async (ctx, next) => {
   try {
+    await Tag.removePostsRelatedToId(ctx.params.id)
     const deletedTag = await Tag.findByIdAndRemove(ctx.params.id)
 
     if (!deletedTag) {
