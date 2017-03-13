@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import { Close, Paint, Plus } from '../Icons'
-import styles from '../../../styles/foundation.json'
+import styles from '../../styles/foundation.json'
 
 export default ({ post, actions }) => (
   <div id='info-menu'>
