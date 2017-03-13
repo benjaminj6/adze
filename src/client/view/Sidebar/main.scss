@@ -1,0 +1,200 @@
+// SIDEBAR
+
+#nav {
+  float: left;
+  height: 100%;
+  position: relative;
+  width: 33%;
+  z-index: 40;
+}
+
+// Handles open and closed states of menu
+#nav-toggler {
+  + #nav {
+    transform: translateX(0);
+    height: 100%;
+    transition: $transition;
+  }
+
+ &:checked {
+   + #nav {
+     transform: translateX(-100%);
+   }
+
+    + #nav + main {
+      left: 0;
+
+      // TODO: check the widdths on these
+      header {
+        width: 100%;
+      }
+
+      #editor {
+         padding: 1rem 20%;
+      }
+    }
+  }
+}
+
+#nav-toggler-btn {
+  color: rgba(#000, 0.6);
+  padding: 0.5rem 0;
+  position: absolute;
+  right: -1.75rem;
+  top: 0;
+  transition: all $transition-short;
+  z-index: 40;
+
+  &:hover, &:focus {
+    color: #000;
+    cursor: pointer;
+  }
+}
+
+#sidebar {
+  background: rgba(#000, 0.1);
+  height: 100%;
+  overflow-y: scroll;
+
+  header {
+    padding: 0 0.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(#000, 0.6);
+    justify-content: flex-start;
+  }
+
+  .sidebar-user {
+    position: relative;
+
+    label {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      line-height: 1rem;
+      transition: color $transition-short;
+    }
+
+    span {
+      margin-left: 0.25rem;
+    }
+
+    &:hover label, label:hover {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  #user-menu-toggler + label + #user-dropdown {
+    height: 0;
+    overflow-y: hidden;
+    transition: height $transition-short;
+    background: #fff;
+    border: none;
+    position: absolute;
+  }
+
+  #user-menu-toggler:checked {
+    + label i {
+      background: rgba(#000, 0.1);
+    }
+
+    + label + #user-dropdown {
+      padding: 1rem 1.25rem;
+      width: 100%;
+      height: auto;
+      box-shadow: 0 1px 2px rgba(#000, 0.2);
+    }
+  }
+
+  .menu-list {
+    border-top: 1px solid rgba(#000, 0.03)
+  }
+
+  .icon-toggle {
+    padding: 0;
+    float: left;
+
+    &.closed {
+      display: none;
+    }
+
+    &.open {
+      display: inline-block;
+    }
+  }
+
+  h3 {
+    transition: background $transition-short;
+    margin: 0;
+    line-height: 2.5rem;
+    padding: 0;
+    color: rgba(#000, 0.6);
+    font-weight: lighter;
+
+    &.active {
+      background: #fff;
+      color: rgba(#000, 0.8);
+    }
+
+    &:hover {
+      color: rgba(#000, 0.8);
+    }
+
+    a {
+      display: block;
+      color: inherit;
+    }
+  }
+
+  ul {
+    height: 0;
+    overflow-y: hidden;
+    margin: 0;
+  }
+
+  li {
+    a {
+      border-left: 0.25rem solid transparent;
+      transition: all $transition-short;
+      display: block;
+      padding: 0.25rem 1.5rem;
+      overflow-wrap: break-word;
+
+      &:hover {
+        cursor: pointer;
+        border-left: 0.25rem solid rgba($accent, 0.3);
+        background: rgba(#fff, 0.4);
+      }
+    }
+  }
+
+  input[name='menu-item-toggler'] {
+    + label {
+      padding-left: 0;
+    }
+  }
+
+  input[name='menu-item-toggler']:checked {
+    & + label {
+      .active {
+        background: transparent;
+        color: rgba(#000, 0.8)
+      }
+
+      .icon-toggle {
+        &.closed {
+          display: inline-block;
+        }
+
+        &.open {
+          display: none;
+        }
+      }
+    }
+
+    & + label + ul {
+      height: auto;
+    }
+  }
+}

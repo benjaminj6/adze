@@ -1,0 +1,176 @@
+.editor-header {
+  right: 0;
+  width: 67%;
+  padding: 0.5rem;
+  position: fixed;
+  z-index: 20;
+
+  ul {
+    display: flex;
+
+    li {
+      position: relative;
+
+      button {
+        padding: 2px 0.25rem;
+      }
+    }
+  }
+}
+
+#delete-post {
+  border: 1px solid red;
+  margin-top: 0.5rem;
+  line-height: 2;
+  text-align: center;
+  button {
+    color: red;
+  }
+}
+
+#info-toggler {
+  & + #info-toggler-btn {
+    display: block;
+    color: rgba(#000, 0.6);
+
+    &:hover {
+      color: rgba(#000, 1);
+      cursor: pointer;
+    }
+  }
+
+  & + #info-toggler-btn + #info-menu {
+    display: none;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+#info-toggler:checked {
+  & + #info-toggler-btn {
+    background: rgba(#000, 0.1);
+  }
+
+  & + #info-toggler-btn + #info-menu {
+    background: #fff;
+    border: 1px solid rgba(#000, 0.1);
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    line-height: 2;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+    width: 150px;
+
+    i {
+      margin-right: 0.25rem;
+    }
+
+    .info-menu-item + .info-menu-item {
+      margin-top: 0.25rem;
+    }
+
+
+    h3 {
+      color: rgba(#000, 0.6);
+      margin: 0;
+    }
+  }
+}
+
+.tags {
+  li {
+    color: rgba(#fff, 0.8);
+    opacity: 0.4;
+    margin: 1px;
+    border-radius: $bd-rad;
+    padding: 0 0.25rem;
+    line-height: 2;
+    transition: opacity $transition-short;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  button {
+    color: inherit;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+#add-tag {
+  margin-top: 1px;
+  line-height: 2;
+  padding: 0 0.25rem;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+
+  input[name='name'] {
+    border: 1px solid rgba(#000, 0.1);
+    background: rgba(#fff, 0.6);
+    border-radius: $bd-rad;
+    bottom: 0;
+    left: 0;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem + (1.5rem * 2);
+    position: absolute;
+    top: 0;
+    transition: border $transition-short;
+    width: 100%;
+
+    &:focus {
+      border: 1px solid rgba($accent, 0.4);
+    }
+  }
+
+  #color-picker {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+
+    + #color-picker-btn {
+      padding: 2px;
+      opacity: 0.8;
+      z-index: 20;
+      transition: opacity $transition-short;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+
+    &:focus + #color-picker-btn {
+      border: 1px dotted rgba(#000, 0.3);
+    }
+  }
+
+  button[type="submit"] {
+    z-index: 10;
+    opacity: 0.8;
+    padding: 0;
+    color: inherit;
+
+    &:focus {
+      opacity: 1;
+    }
+  }
+}
