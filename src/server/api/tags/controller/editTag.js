@@ -17,7 +17,7 @@ export default async (ctx, next) => {
     }
 
     const updatedTag = await Tag.findByIdAndUpdate(id, updates, opts).exec()
-
+    console.log(updatedTag)
     ctx.status = 200
     ctx.body = updatedTag
   } catch (err) {

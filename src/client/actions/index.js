@@ -210,11 +210,45 @@ export const selectTag = ({ tags }, tagId) => ({
   newTagData: tags.find(t => t._id === tagId)
 })
 
-export const updateSavedTag = ({ newTagData }, tag) => ({
+export const updateSavedTag = ({ tags, newTagData }, tag) => ({
+  tags: tags.map(t => t._id === tag._id ? tag : t),
   newTagData: tag,
   newTagDataSaved: true
 })
 
 export const saveTag = (model, newTagData, actions) => {
-  actions.updateSavedTag({ name: 'ben', color: 'purple' })
+  console.log(newTagData._id)
+  window.fetch(`/api/tags/${newTagData._id}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    body: JSON.stringify({
+      name: newTagData.name,
+      color: newTagData.color
+    }),
+    headers: new window.Headers({ 'Content-Type': 'application/json' })
+  }).then(res => res.json())
+  .then(json => actions.updateSavedTag(json))
+}
+
+export const removeTagFromModel = ({ tags }, tagId) => ({
+  tags: tags.filter(t => t._id !== tagId)
+})
+
+export const deleteTag = (_, tagId, actions) => {
+  window.fetch(`/api/tags/${tagId}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  })
+  .then(res => {
+    if (res.status !== 200) {
+      throw new Error('Failed to delete')
+    }
+
+    return res.json()
+  })
+  .then(json => {
+    actions.removeTagFromModel(json._id)
+    actions.router.go('/dashboard')
+  })
+  .catch(err => console.log(err))
 }

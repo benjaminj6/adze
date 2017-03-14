@@ -18,6 +18,10 @@ export default ({ actions, item, model }, children) => {
       actions.selectPost(id)
     }
 
+    if (/tags/.test(url)) {
+      actions.selectTag(id)
+    }
+
     actions.router.go(url)
   }
 

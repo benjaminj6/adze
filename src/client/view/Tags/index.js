@@ -7,9 +7,9 @@ import HeaderButtons from '../HeaderButtons'
 
 import { Trash, Save, SaveCheck, Paint } from '../Icons'
 
-const getTagHeaderButtons = ({ newTagData, newTagDataSaved }, actions) => {
-  const savable = newTagData.name && newTagData.color
-  const saveButton = (savable && newTagDataSaved)
+const getTagHeaderButtons = (model, actions) => {
+  const savable = model.newTagData.name
+  const saveButton = (savable && model.newTagDataSaved)
     ? <SaveCheck />
     : <Save
       style={{
@@ -19,7 +19,7 @@ const getTagHeaderButtons = ({ newTagData, newTagDataSaved }, actions) => {
   return [
     <label htmlFor='edit-tag-submit'>{saveButton}</label>,
     <label htmlFor='edit-tag-color'><Paint /></label>,
-    <Trash />
+    <Trash onclick={ev => actions.deleteTag(model.router.params.id)} />
   ]
 }
 
@@ -49,7 +49,8 @@ export default ({ model, actions, tag }) => {
             onsubmit={ev => {
               ev.preventDefault()
               if (!model.newTagDataSaved) {
-                actions.saveTag(model.newTagData)
+                console.log(model.newTagData)
+                actions.saveTag({ ...model.newTagData })
               }
             }}>
             <InputHeader

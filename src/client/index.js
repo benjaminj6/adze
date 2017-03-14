@@ -73,6 +73,7 @@ app({
   hooks: {
     onAction: action => console.log(action),
     onUpdate: (oldData, newData, data) => {
+      console.log('history', window.history)
       console.log('Previous model', oldData)
       console.log('added data', newData)
     }
