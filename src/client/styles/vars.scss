@@ -15,7 +15,8 @@ $header-width: 100%;
 
 // nav
 $nav-width-sm: 80%;
-$nav-width-md: 33%;
+$nav-width-md: 40%;
+$nav-width-lg: 25%;
 
 // main
 $main-height: 100%;
@@ -25,6 +26,7 @@ $main-section-height: calc(100% - #{$header-height});
 
 $main-width-sm: 100% - $nav-width-sm;
 $main-width-md: 100% - $nav-width-md;
+$main-width-lg: 100% - $nav-width-lg;
 
 // media
 $bp-sm: 400px;
