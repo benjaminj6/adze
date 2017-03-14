@@ -8,8 +8,8 @@ import HeaderButtons from '../HeaderButtons'
 import { Trash, Save, SaveCheck, Paint } from '../Icons'
 
 const getTagHeaderButtons = ({ newTagData, newTagDataSaved }, actions) => {
-  const savable = !newTagDataSaved && (newTagData.name || newTagData.color)
-  const saveButton = newTagDataSaved
+  const savable = newTagData.name && newTagData.color
+  const saveButton = (savable && newTagDataSaved)
     ? <SaveCheck />
     : <Save
       style={{
@@ -24,9 +24,13 @@ const getTagHeaderButtons = ({ newTagData, newTagDataSaved }, actions) => {
 }
 
 export default ({ model, actions, tag }) => {
-  const posts = model.posts.filter(p => {
-    return p.tags.find(t => t._id === tag._id)
-  })
+  let posts = []
+
+  if (tag) {
+    posts = model.posts.filter(p => {
+      return p.tags.find(t => t._id === tag._id)
+    })
+  }
 
   const buttons = getTagHeaderButtons(model, actions)
 

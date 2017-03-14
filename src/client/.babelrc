@@ -6,6 +6,7 @@
       {
         "pragma": "h"
       }
-    ]
+    ],
+    "transform-async-to-generator"
   ]
 }

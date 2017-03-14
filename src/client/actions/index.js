@@ -205,12 +205,16 @@ export const clearStagedTag = ({ newTagData }) => ({
   }
 })
 
+export const selectTag = ({ tags }, tagId) => ({
+  newTagDataSaved: true,
+  newTagData: tags.find(t => t._id === tagId)
+})
+
 export const updateSavedTag = ({ newTagData }, tag) => ({
   newTagData: tag,
   newTagDataSaved: true
 })
 
 export const saveTag = (model, newTagData, actions) => {
-  console.log('this will save the tag, and then clear the newTagData')
   actions.updateSavedTag({ name: 'ben', color: 'purple' })
 }
