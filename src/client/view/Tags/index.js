@@ -7,13 +7,23 @@ import HeaderButtons from '../HeaderButtons'
 
 import { Trash, Save, SaveCheck, Paint } from '../Icons'
 
-const getTagHeaderButtons = newTagData => {
-  const savable = newTagData.name || newTagData.color
-  const saveButton = savable ? <Save /> : <SaveCheck />
+const getTagHeaderButtons = ({ newTagData, newTagDataSaved }, actions) => {
+  const savable = !newTagDataSaved && (newTagData.name || newTagData.color)
+  const saveButton = newTagDataSaved
+    ? <SaveCheck />
+    : <Save
+      onclick={ev => {
+        if (savable) {
+          actions.saveTag(newTagData)
+        }
+      }}
+      style={{
+        color: !savable ? 'rgba(0, 0, 0, 0.1)' : ''
+      }} />
 
   return [
-    saveButton,
-    <Paint />,
+    <label htmlFor='edit-tag-submit'>{saveButton}</label>,
+    <label htmlFor='edit-tag-color'><Paint /></label>,
     <Trash />
   ]
 }
@@ -23,7 +33,7 @@ export default ({ model, actions, tag }) => {
     return p.tags.find(t => t._id === tag._id)
   })
 
-  const buttons = getTagHeaderButtons(model.newTagData)
+  const buttons = getTagHeaderButtons(model, actions)
 
   return (
     <main>
@@ -35,16 +45,27 @@ export default ({ model, actions, tag }) => {
         padding: '3rem 5%'
       }}>
         <header>
-          <InputHeader
-            className='tag-input-header'
-            name='name'
-            placeholder='tag name'
-            value={tag ? tag.name : ''}
-            oninput={
-              debounce(({ target }) => {
-                actions.stageTagName(target.value)
-              }, 300)
-            } />
+          <form id='edit-tag'>
+            <InputHeader
+              className='tag-input-header'
+              name='name'
+              placeholder='tag name'
+              value={tag ? tag.name : ''}
+              oninput={
+                debounce(({ target }) => {
+                  actions.stageTagName(target.value)
+                }, 300)
+              } />
+          </form>
+          <input
+            hidden
+            id='edit-tag-color'
+            name='color'
+            type='color' />
+          <input
+            hidden
+            id='edit-tag-submit'
+            type='submit' />
           <h6>({
             posts.length === 1
             ? `${posts.length} post`

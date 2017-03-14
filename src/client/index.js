@@ -43,12 +43,13 @@ const model = {
       _id: '5'
     }
   ],
-  saved: false,
+  newContentSaved: false,
   newContent: {
     title: '',
     md: '',
     tags: []
   },
+  newTagDataSaved: false,
   newTagData: {
     name: '',
     color: ''
