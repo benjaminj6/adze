@@ -226,8 +226,15 @@ export const saveTag = (model, newTagData, actions) => {
       color: newTagData.color
     }),
     headers: new window.Headers({ 'Content-Type': 'application/json' })
-  }).then(res => res.json())
+  }).then(res => {
+    if (res.status !== 200) {
+      throw new Error('Post failed to update')
+    }
+
+    return res.json()
+  })
   .then(json => actions.updateSavedTag(json))
+  .catch(err => console.log('ERR!', err))
 }
 
 export const removeTagFromModel = ({ tags }, tagId) => ({
