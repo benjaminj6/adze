@@ -5,6 +5,9 @@ import Prompt from '../Prompt'
 import Tags from '../Tags'
 import Sidebar from '../Sidebar'
 
+import Toggler from '../Toggler'
+import { Menu } from '../Icons'
+
 const getDashboardView = (model, actions) => {
   if (/posts|create/.test(window.location.pathname)) {
     return (
@@ -34,11 +37,12 @@ const getDashboardView = (model, actions) => {
 
 export default (model, actions) => (
   <div id='app' className='dashboard-view'>
-    <input
-      hidden
-      id='nav-toggler'
-      type='checkbox' />
-    <Sidebar model={model} actions={actions} />
-    {getDashboardView(model, actions)}
+    <Toggler id='nav-toggler'>
+      <Menu />
+      <div id='nav-toggler-content'>
+        <Sidebar model={model} actions={actions} />
+        {getDashboardView(model, actions)}
+      </div>
+    </Toggler>
   </div>
 )

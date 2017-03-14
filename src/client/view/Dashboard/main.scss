@@ -31,9 +31,15 @@ main {
   bottom: 0;
   overflow-y: hidden;
   position: absolute;
+  left: 0;
   right: 0;
   top: 0;
-  transition: left $transition;
+  transition: $transition;
+
+  @media (min-width: $bp-md) {
+    transform: translateX(0);
+    left: $nav-width-lg;
+  }
 }
 
 main section {
@@ -46,6 +52,8 @@ main section {
     box-sizing: border-box;
     overflow-y: visible;
     -webkit-scroll: none;
+    max-width: 700px;
+    margin: 0 auto;
 
     header {
       display: block;

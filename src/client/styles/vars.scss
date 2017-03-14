@@ -13,20 +13,21 @@ $transition-short: 0.25s ease-in;
 $header-height: 2.5 * $base;
 $header-width: 100%;
 
+// nav
+$nav-width-sm: 80%;
+$nav-width-md: 40%;
+$nav-width-lg: 25%;
+
 // main
 $main-height: 100%;
 $main-children-pad: 0.5 * $base;
 
 $main-section-height: calc(100% - #{$header-height});
 
-// sidebar
-// $sidebar-border: 1px solid blue;
-// $sidebar-height: 100%;
-// $sidebar-width: 33%;
-// $sidebar-bg: darken($bg-default, 10%);
+$main-width-sm: 100% - $nav-width-sm;
+$main-width-md: 100% - $nav-width-md;
+$main-width-lg: 100% - $nav-width-lg;
 
-// $sb-parent-pad: 0.5 * $base;
-// $sb-icon-margin: 0.25 * $base;
-// $sb-icon-w: 1.5 * $base;
-// $sb-child-bd: 0.25 * $base;
-// $sb-child-pad: $sb-parent-pad + $sb-icon-w + $sb-icon-margin - $sb-child-bd;
+// media
+$bp-sm: 400px;
+$bp-md: 680px;

@@ -22,17 +22,13 @@
   }
 
   span {
-    color: rgba($accent, 0.6);
+    font-weight: bold;
   }
 
   a {
     color: inherit;
-    font-weight: bold;
-    color: rgba($accent, 0.6);
+    font-weight: bolder;
+    text-decoration: underline;
     transition: color $transition-short;
-
-    &:hover {
-      color: rgba($accent, 0.8);
-    }
   }
 }
