@@ -14,7 +14,10 @@ export default ({ model, actions }) =>
         <span>{model.email}</span>
       </label>
       <div id='user-dropdown'>
-        <button><Logout size='1rem' />Logout</button>
+        <button onclick={_ => actions.logout()}>
+          <Logout size='1rem' />
+          <span>Logout</span>
+        </button>
       </div>
     </div>
   </header>

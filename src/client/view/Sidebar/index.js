@@ -5,7 +5,7 @@ import SidebarBody from './SidebarBody'
 
 export default ({ model, actions }) => (
   <nav id='nav'>
-    <SidebarHeader model={model} />
+    <SidebarHeader model={model} actions={actions} />
     <SidebarBody model={model} actions={actions} />
   </nav>
 )
