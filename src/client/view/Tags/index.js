@@ -12,11 +12,6 @@ const getTagHeaderButtons = ({ newTagData, newTagDataSaved }, actions) => {
   const saveButton = newTagDataSaved
     ? <SaveCheck />
     : <Save
-      onclick={ev => {
-        if (savable) {
-          actions.saveTag(newTagData)
-        }
-      }}
       style={{
         color: !savable ? 'rgba(0, 0, 0, 0.1)' : ''
       }} />
@@ -45,7 +40,14 @@ export default ({ model, actions, tag }) => {
         padding: '3rem 5%'
       }}>
         <header>
-          <form id='edit-tag'>
+          <form
+            id='edit-tag'
+            onsubmit={ev => {
+              ev.preventDefault()
+              if (!model.newTagDataSaved) {
+                actions.saveTag(model.newTagData)
+              }
+            }}>
             <InputHeader
               className='tag-input-header'
               name='name'
@@ -56,16 +58,16 @@ export default ({ model, actions, tag }) => {
                   actions.stageTagName(target.value)
                 }, 300)
               } />
+            <input
+              hidden
+              id='edit-tag-color'
+              name='color'
+              type='color' />
+            <input
+              hidden
+              id='edit-tag-submit'
+              type='submit' />
           </form>
-          <input
-            hidden
-            id='edit-tag-color'
-            name='color'
-            type='color' />
-          <input
-            hidden
-            id='edit-tag-submit'
-            type='submit' />
           <h6>({
             posts.length === 1
             ? `${posts.length} post`
