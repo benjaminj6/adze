@@ -62,7 +62,7 @@
 }
 
 #nav {
-  background: rgba(#000, 0.1);
+  background: $accent;
   height: 100%;
   height: 100%;
   left: -$nav-width-sm;
@@ -81,12 +81,11 @@
     width: $nav-width-lg;
   }
 
-
   header {
-    padding: 0 0.25rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    color: rgba(#000, 0.6);
+    border-bottom: 1px solid rgba($color-default, 0.1);
+    color: rgba($color-secondary, 0.9);
     justify-content: flex-start;
+    padding: 0 0.25rem;
   }
 
   .sidebar-user {
@@ -107,7 +106,7 @@
 
     &:hover label, label:hover {
       cursor: pointer;
-      color: rgba(0, 0, 0, 0.8);
+      color: $color-secondary;
     }
   }
 
@@ -115,26 +114,31 @@
     height: 0;
     overflow-y: hidden;
     transition: height $transition-short;
-    background: #fff;
+    background: $color-secondary;
+    color: rgba($color-default, 0.6);
     border: none;
     position: absolute;
   }
 
   #user-menu-toggler:checked {
+    + label {
+      color: $color-secondary;
+    }
+
     + label i {
-      background: rgba(#000, 0.1);
+      background: rgba($color-default, 0.2);
     }
 
     + label + #user-dropdown {
       padding: 1rem 1.25rem;
       width: 100%;
       height: auto;
-      box-shadow: 0 1px 2px rgba(#000, 0.2);
+      box-shadow: 0 1px 4px rgba($color-default, 0.5);
     }
   }
 
   .menu-list {
-    border-top: 1px solid rgba(#000, 0.03)
+    border-top: 1px solid rgba($color-default, 0.05)
   }
 
   .icon-toggle {
@@ -151,20 +155,26 @@
   }
 
   h3 {
-    transition: background $transition-short;
+    transition: background $transition-short, color $transition-short;
     margin: 0;
     line-height: 2.5rem;
     padding: 0;
-    color: rgba(#000, 0.6);
+    color: rgba($color-secondary, 0.6);
     font-weight: lighter;
 
     &.active {
-      background: #fff;
-      color: rgba(#000, 0.8);
+      color: rgba($color-default, 0.6);
+      background: $color-secondary;
+
+      &:hover {
+        color: rgba($color-default, 0.8);
+        background: $color-secondary;
+      }
     }
 
     &:hover {
-      color: rgba(#000, 0.8);
+      color: rgba($color-secondary, 0.8);
+      background: rgba($color-default, 0.1);
     }
 
     a {
@@ -181,16 +191,15 @@
 
   li {
     a {
-      border-left: 0.25rem solid transparent;
       transition: all $transition-short;
       display: block;
-      padding: 0.25rem 1.5rem;
+      padding: 0.25rem 1.75rem;
       overflow-wrap: break-word;
+      color: rgba($color-secondary, 0.6);
 
       &:hover {
         cursor: pointer;
-        border-left: 0.25rem solid rgba($accent, 0.3);
-        background: rgba(#fff, 0.4);
+        background: rgba(#000, 0.1);
       }
     }
   }
@@ -203,9 +212,9 @@
 
   input[name='menu-item-toggler']:checked {
     & + label {
-      .active {
+      h3.active {
         background: transparent;
-        color: rgba(#000, 0.8)
+        color: rgba($color-secondary, 0.8);
       }
 
       .icon-toggle {

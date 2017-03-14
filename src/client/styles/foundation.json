@@ -1,6 +1,8 @@
 {
   "text-default-color": "#222",
   "text-accent-bg": "#fff",
+  "color-default": "#333",
+  "color-secondary": "#fff",
   "bg-default": "#fff",
   "accent": "#009688",
   "base": "16px",
