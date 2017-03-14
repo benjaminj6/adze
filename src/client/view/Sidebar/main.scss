@@ -1,48 +1,51 @@
 // SIDEBAR
 
-#nav {
-  float: left;
-  height: 100%;
-  position: relative;
-  width: 33%;
-  z-index: 40;
-}
-
-// Handles open and closed states of menu
+// Handles open state of menu
 #nav-toggler {
-  + #nav {
-    transform: translateX(0);
-    height: 100%;
-    transition: $transition;
-  }
+  position: relative;
 
- &:checked {
-   + #nav {
-     transform: translateX(-100%);
-   }
+  &:checked {
+    + #nav-toggler-btn {
+      left: $nav-width-sm;
+    }
 
-    + #nav + main {
-      left: 0;
-
-      // TODO: check the widdths on these
-      header {
-        width: 100%;
+    + #nav-toggler-btn + #nav-toggler-content {
+      #nav {
+        left: 0;
       }
 
-      #editor {
-         padding: 1rem 20%;
+      main {
+        transform: translateX($nav-width-sm);
       }
     }
+
+
+    //  + #nav {
+    //    transform: translateX(-100%);
+    //  }
+    //
+    //   + #nav + main {
+    //     left: 0;
+    //
+    //     // TODO: check the widdths on these
+    //     header {
+    //       width: 100%;
+    //     }
+    //
+    //     #editor {
+    //        padding: 1rem 20%;
+    //     }
+    //   }
   }
 }
 
 #nav-toggler-btn {
   color: rgba(#000, 0.6);
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   position: absolute;
-  right: -1.75rem;
+  left: 0;
   top: 0;
-  transition: all $transition-short;
+  transition: $transition;
   z-index: 40;
 
   &:hover, &:focus {
@@ -51,10 +54,21 @@
   }
 }
 
-#sidebar {
+#nav {
   background: rgba(#000, 0.1);
   height: 100%;
   overflow-y: scroll;
+  // float: left;
+  // height: 100%;
+  position: absolute;
+  // top: 0;
+  left: -$nav-width-sm;
+  // bottom: 0;
+  width: $nav-width-sm;
+  // z-index: 40;
+  // transform: translateX(0);
+  height: 100%;
+  transition: $transition;
 
   header {
     padding: 0 0.25rem;

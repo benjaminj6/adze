@@ -13,11 +13,18 @@ $transition-short: 0.25s ease-in;
 $header-height: 2.5 * $base;
 $header-width: 100%;
 
+// nav
+$nav-width-sm: 80%;
+$nav-width-md: 33%;
+
 // main
 $main-height: 100%;
 $main-children-pad: 0.5 * $base;
 
 $main-section-height: calc(100% - #{$header-height});
+
+$main-width-sm: 100% - $nav-width-sm;
+$main-width-md: 100% - $nav-width-md;
 
 // media
 $bp-md: 680px;
