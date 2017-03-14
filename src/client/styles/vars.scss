@@ -19,14 +19,6 @@ $main-children-pad: 0.5 * $base;
 
 $main-section-height: calc(100% - #{$header-height});
 
-// sidebar
-// $sidebar-border: 1px solid blue;
-// $sidebar-height: 100%;
-// $sidebar-width: 33%;
-// $sidebar-bg: darken($bg-default, 10%);
-
-// $sb-parent-pad: 0.5 * $base;
-// $sb-icon-margin: 0.25 * $base;
-// $sb-icon-w: 1.5 * $base;
-// $sb-child-bd: 0.25 * $base;
-// $sb-child-pad: $sb-parent-pad + $sb-icon-w + $sb-icon-margin - $sb-child-bd;
+// media
+$bp-md: 680px;
+$bp-s: 400px;
