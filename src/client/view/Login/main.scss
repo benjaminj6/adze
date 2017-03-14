@@ -61,7 +61,7 @@
     }
 
     button {
-      height: 2rem;
+      height: 2.5rem;
       color: rgba(#fff, 0.6);
       background: lighten($accent, 10%);
       margin: 1rem 0;
@@ -72,6 +72,10 @@
       &:hover {
         background: lighten($accent, 15%);
         color: rgba(#fff, 0.8);
+      }
+
+      @media (min-width: $bp-sm) {
+        height: 3rem;
       }
     }
 
