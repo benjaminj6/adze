@@ -1,4 +1,5 @@
 import { h } from 'hyperapp' //eslint-disable-line
+import styles from '../styles/foundation.json'
 
 const Svg = (props, children) => {
   if (props === null) { props = {} }
@@ -154,7 +155,7 @@ export const SaveCheck = props => {
       <Check
         size={innerSize}
         color='#fff'
-        innerColor='#0a0'
+        innerColor={styles.accent}
         style={{
           position: 'absolute',
           bottom: `-${props ? props.size / 4 : 6}px`,
