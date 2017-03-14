@@ -195,7 +195,7 @@
       display: block;
       padding: 0.25rem 1.75rem;
       overflow-wrap: break-word;
-      color: rgba($color-secondary, 0.6);
+      color: rgba($color-default, 0.6);
 
       &:hover {
         cursor: pointer;
@@ -230,6 +230,10 @@
 
     & + label + ul {
       height: auto;
+
+      li a {
+        color: rgba($color-secondary, 0.6);
+      }
     }
   }
 }
