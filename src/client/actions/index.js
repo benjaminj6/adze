@@ -180,3 +180,21 @@ export const logout = (model, data, actions) => {
   window.fetch('/api/auth/logout')
   .then(res => actions.router.go('/'))
 }
+
+export const stageTagName = ({ newTagData }, name) => ({
+  newTagData: {
+    ...newTagData,
+    name
+  }
+})
+
+export const stageTagColor = ({ newTagData }, color) => ({
+  newTagData: {
+    ...newTagData,
+    color
+  }
+})
+
+export const saveTag = (model, newTagData, actions) => {
+
+}
