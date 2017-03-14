@@ -87,10 +87,8 @@
   },
   "scripts": {
     "pretest": "node helpers/test-config.js",
-    "dev": "concurrently \" npm run dev-server\" \"npm run dev-client\" \"wait\"",
-    "dev-server": "node helpers/dev-server.js | bunyan -o short",
+    "dev": "node helpers/dev-server.js | bunyan -o short",
     "test": "ava",
-    "cov": "nyc --all npm test",
-    "dev-client": "node helpers/dev-client.js"
+    "cov": "nyc --all npm test"
   }
 }
