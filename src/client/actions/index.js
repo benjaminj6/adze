@@ -175,3 +175,8 @@ export const deletePost = ({ posts }, postId, actions) => {
   })
   .catch(err => console.log(err))
 }
+
+export const logout = (model, data, actions) => {
+  window.fetch('/api/auth/logout')
+  .then(res => actions.router.go('/'))
+}
