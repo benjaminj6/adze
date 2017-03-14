@@ -7,6 +7,10 @@
   &:checked {
     + #nav-toggler-btn {
       left: $nav-width-sm;
+
+      @media (min-width: $bp-sm) {
+        left: $nav-width-md;
+      }
     }
 
     + #nav-toggler-btn + #nav-toggler-content {
@@ -16,26 +20,13 @@
 
       main {
         transform: translateX($nav-width-sm);
+
+        @media (min-width: $bp-sm) {
+          transform: translateX(0);
+          left: $nav-width-md;
+        }
       }
     }
-
-
-    //  + #nav {
-    //    transform: translateX(-100%);
-    //  }
-    //
-    //   + #nav + main {
-    //     left: 0;
-    //
-    //     // TODO: check the widdths on these
-    //     header {
-    //       width: 100%;
-    //     }
-    //
-    //     #editor {
-    //        padding: 1rem 20%;
-    //     }
-    //   }
   }
 }
 
@@ -57,18 +48,17 @@
 #nav {
   background: rgba(#000, 0.1);
   height: 100%;
-  overflow-y: scroll;
-  // float: left;
-  // height: 100%;
-  position: absolute;
-  // top: 0;
-  left: -$nav-width-sm;
-  // bottom: 0;
-  width: $nav-width-sm;
-  // z-index: 40;
-  // transform: translateX(0);
   height: 100%;
+  left: -$nav-width-sm;
+  overflow-y: scroll;
+  position: absolute;
   transition: $transition;
+  width: $nav-width-sm;
+
+  @media (min-width: $bp-sm) {
+    left: -$nav-width-md;
+    width: $nav-width-md;
+  }
 
   header {
     padding: 0 0.25rem;

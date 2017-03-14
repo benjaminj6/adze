@@ -47,6 +47,8 @@ main section {
     box-sizing: border-box;
     overflow-y: visible;
     -webkit-scroll: none;
+    max-width: 500px;
+    margin: 0 auto;
 
     header {
       display: block;
