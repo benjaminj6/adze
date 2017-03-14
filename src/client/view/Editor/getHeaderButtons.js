@@ -64,7 +64,7 @@ export default (model, actions, selected) => {
     <SaveButton
       actions={actions}
       newContent={model.newContent}
-      saved={model.saved} />,
+      saved={model.newContentSaved} />,
     <AddTagsToggler
       actions={actions}
       selected={selected} />

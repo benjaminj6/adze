@@ -43,11 +43,16 @@ const model = {
       _id: '5'
     }
   ],
-  saved: false,
+  newContentSaved: false,
   newContent: {
     title: '',
     md: '',
     tags: []
+  },
+  newTagDataSaved: false,
+  newTagData: {
+    name: '',
+    color: ''
   }
 }
 // end temporary
@@ -66,7 +71,12 @@ app({
   },
   plugins: [Router],
   hooks: {
-    onAction: action => console.log(action)
+    onAction: action => console.log(action),
+    onUpdate: (oldData, newData, data) => {
+      console.log('history', window.history)
+      console.log('Previous model', oldData)
+      console.log('added data', newData)
+    }
   },
   root: document.getElementById('root')
 })

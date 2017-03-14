@@ -1,15 +1,13 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
 import getHeaderButtons from './getHeaderButtons'
-
+import HeaderButtons from '../HeaderButtons'
 export default ({ model, actions, selected }) => {
   const buttons = getHeaderButtons(model, actions, selected)
 
   return (
     <header className='editor-header'>
-      <ul>
-        {buttons.map(b => <li>{b}</li>)}
-      </ul>
+      <HeaderButtons buttons={buttons} />
     </header>
   )
 }

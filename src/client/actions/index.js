@@ -11,7 +11,7 @@ export const addStagedTag = ({ tags, newContent }, tag) => {
   console.log()
   console.log(tags.find(t => t.name === tag.name))
   return {
-    saved: false,
+    newContentSaved: false,
     newContent: {
       ...newContent,
       tags: stagedTags.concat([
@@ -24,7 +24,7 @@ export const addStagedTag = ({ tags, newContent }, tag) => {
 export const removeStagedTag = ({ newContent }, tagId) => {
   if (newContent.tags) {
     return {
-      saved: false,
+      newContentSaved: false,
       newContent: {
         ...newContent,
         tags: newContent.tags.slice().filter(t => t._id !== tagId)
@@ -34,7 +34,7 @@ export const removeStagedTag = ({ newContent }, tagId) => {
 }
 
 export const updateStagedPost = ({ newContent }, post) => ({
-  saved: false,
+  newContentSaved: false,
   newContent: {
     ...newContent,
     md: post
@@ -42,7 +42,7 @@ export const updateStagedPost = ({ newContent }, post) => ({
 })
 
 export const updateStagedTitle = ({ newContent }, title) => ({
-  saved: false,
+  newContentSaved: false,
   newContent: {
     ...newContent,
     title
@@ -53,14 +53,14 @@ export const selectPost = ({ newContent, posts }, postId) => {
   const post = posts.find(p => p._id === postId)
   if (post) {
     return {
-      saved: true,
+      newContentSaved: true,
       newContent: post
     }
   }
 }
 
 export const clearNewContent = () => ({
-  saved: false,
+  newContentSaved: false,
   newContent: defaultNewContent
 })
 
@@ -68,7 +68,7 @@ export const clearNewContent = () => ({
 export const addPost = ({ posts }, post) => ({
   posts: [post].concat(posts),
   newContent: post,
-  saved: true
+  newContentSaved: true
 })
 
 export const addAllPosts = ({ posts }, newPosts) => ({
@@ -76,7 +76,7 @@ export const addAllPosts = ({ posts }, newPosts) => ({
 })
 
 export const updatePost = ({ posts }, post) => ({
-  saved: true,
+  newContentSaved: true,
   posts: posts.map(p => p._id === post._id ? post : p),
   newContent: post
 })
@@ -179,4 +179,83 @@ export const deletePost = ({ posts }, postId, actions) => {
 export const logout = (model, data, actions) => {
   window.fetch('/api/auth/logout')
   .then(res => actions.router.go('/'))
+}
+
+export const stageTagName = ({ newTagData, tag }, name) => ({
+  newTagDataSaved: false,
+  newTagData: {
+    ...newTagData,
+    name
+  }
+})
+
+export const stageTagColor = ({ newTagData }, color) => ({
+  newTagDataSaved: false,
+  newTagData: {
+    ...newTagData,
+    color
+  }
+})
+
+export const clearStagedTag = ({ newTagData }) => ({
+  newTagDataSaved: false,
+  newTagData: {
+    name: '',
+    color: ''
+  }
+})
+
+export const selectTag = ({ tags }, tagId) => ({
+  newTagDataSaved: true,
+  newTagData: tags.find(t => t._id === tagId)
+})
+
+export const updateSavedTag = ({ tags, newTagData }, tag) => ({
+  tags: tags.map(t => t._id === tag._id ? tag : t),
+  newTagData: tag,
+  newTagDataSaved: true
+})
+
+export const saveTag = (model, newTagData, actions) => {
+  console.log(newTagData._id)
+  window.fetch(`/api/tags/${newTagData._id}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    body: JSON.stringify({
+      name: newTagData.name,
+      color: newTagData.color
+    }),
+    headers: new window.Headers({ 'Content-Type': 'application/json' })
+  }).then(res => {
+    if (res.status !== 200) {
+      throw new Error('Post failed to update')
+    }
+
+    return res.json()
+  })
+  .then(json => actions.updateSavedTag(json))
+  .catch(err => console.log('ERR!', err))
+}
+
+export const removeTagFromModel = ({ tags }, tagId) => ({
+  tags: tags.filter(t => t._id !== tagId)
+})
+
+export const deleteTag = (_, tagId, actions) => {
+  window.fetch(`/api/tags/${tagId}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  })
+  .then(res => {
+    if (res.status !== 200) {
+      throw new Error('Failed to delete')
+    }
+
+    return res.json()
+  })
+  .then(json => {
+    actions.removeTagFromModel(json._id)
+    actions.router.go('/dashboard')
+  })
+  .catch(err => console.log(err))
 }
