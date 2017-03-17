@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Benjamin Johnson <benjamin.d.johnson@icloud.com>",
   "license": "MIT",
+  "engines": {
+    "node": "7.7.3"
+  },
   "devDependencies": {
     "ava": "^0.18.2",
     "babel-cli": "^6.23.0",
