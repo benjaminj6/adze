@@ -1,4 +1,7 @@
 require('dotenv').config()
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+
 const { start } = require('../prod')
 const { User } = require('../prod/models')
 
@@ -18,10 +21,10 @@ mongoose.connect(process.env.DB_URL)
           })
         })
     }
-    .then(() => {
-      return mongoose.disconnect()
-    })
-    .then(() => {
-      start()
-    })
+  })
+  .then(() => {
+    return mongoose.disconnect()
+  })
+  .then(() => {
+    start()
   })
