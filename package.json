@@ -86,7 +86,9 @@
     }
   },
   "scripts": {
+    "start": "NODE_ENV=production node helpers/prod | bunyan -o short",
     "pretest": "node helpers/test-config.js",
+    "build:prod": "babel src/server -d prod && webpack",
     "dev": "node helpers/dev-server.js | bunyan -o short",
     "test": "ava",
     "cov": "nyc --all npm test"

@@ -15,7 +15,11 @@ export default app => {
   app.use(koaLogger(log))
   app.use(requestLogger)
 
-  const pathToDist = '../../../dist'
+  let pathToDist = '../../../dist'
+
+  if (process.env.NODE_ENV === 'production') {
+    pathToDist = '../../dist'
+  }
 
   // Serve static assets
   app.use(mount(
