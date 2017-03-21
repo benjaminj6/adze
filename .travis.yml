@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - "node"
-services:
-  - mongodb
-before_script:
-  - sleep 15
-  - mongo ci_test --eval 'db.addUser("travis", "test");'

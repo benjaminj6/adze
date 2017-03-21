@@ -1,0 +1,17 @@
+@import 'sanitize';
+@import 'vars';
+
+body {
+  margin: 0;
+}
+
+.banner {
+  $overlay-color: rgba($black, 0.6);
+  $img-overlay: linear-gradient($overlay-color, $overlay-color);
+
+  background: $img-overlay, url('img/banner.jpg');
+  color: $white;
+  display: flex;
+  min-height: 80vh;
+  background-attachment: fixed;
+}

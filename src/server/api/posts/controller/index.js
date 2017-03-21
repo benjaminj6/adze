@@ -1,5 +1,0 @@
-export { default as addPost } from './addPost'
-export { default as getPosts } from './getPosts'
-export { default as getLimitedPosts } from './getLimitedPosts'
-export { default as deletePost } from './deletePost'
-export { default as editPost } from './editPost'
