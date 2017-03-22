@@ -4,80 +4,153 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Blogg</title>
+  <title>Adze</title>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:700|PT+Sans" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
     <symbol viewBox="0 0 24 24" id="flask-outline">
-      <path fill="#000000" d="M5,19A1,1 0 0,0 6,20H18A1,1 0 0,0 19,19C19,18.79 18.93,18.59 18.82,18.43L13,8.35V4H11V8.35L5.18,18.43C5.07,18.59 5,18.79 5,19M6,22A3,3 0 0,1 3,19C3,18.4 3.18,17.84 3.5,17.37L9,7.81V6A1,1 0 0,1 8,5V4A2,2 0 0,1 10,2H14A2,2 0 0,1 16,4V5A1,1 0 0,1 15,6V7.81L20.5,17.37C20.82,17.84 21,18.4 21,19A3,3 0 0,1 18,22H6M13,16L14.34,14.66L16.27,18H7.73L10.39,13.39L13,16M12.5,12A0.5,0.5 0 0,1 13,12.5A0.5,0.5 0 0,1 12.5,13A0.5,0.5 0 0,1 12,12.5A0.5,0.5 0 0,1 12.5,12Z" />
+      <path d="M5,19A1,1 0 0,0 6,20H18A1,1 0 0,0 19,19C19,18.79 18.93,18.59 18.82,18.43L13,8.35V4H11V8.35L5.18,18.43C5.07,18.59 5,18.79 5,19M6,22A3,3 0 0,1 3,19C3,18.4 3.18,17.84 3.5,17.37L9,7.81V6A1,1 0 0,1 8,5V4A2,2 0 0,1 10,2H14A2,2 0 0,1 16,4V5A1,1 0 0,1 15,6V7.81L20.5,17.37C20.82,17.84 21,18.4 21,19A3,3 0 0,1 18,22H6M13,16L14.34,14.66L16.27,18H7.73L10.39,13.39L13,16M12.5,12A0.5,0.5 0 0,1 13,12.5A0.5,0.5 0 0,1 12.5,13A0.5,0.5 0 0,1 12,12.5A0.5,0.5 0 0,1 12.5,12Z" />
     </symbol>
     <symbol viewBox="0 0 24 24" id="magic">
-      <path fill="#000000" d="M7.5,5.6L5,7L6.4,4.5L5,2L7.5,3.4L10,2L8.6,4.5L10,7L7.5,5.6M19.5,15.4L22,14L20.6,16.5L22,19L19.5,17.6L17,19L18.4,16.5L17,14L19.5,15.4M22,2L20.6,4.5L22,7L19.5,5.6L17,7L18.4,4.5L17,2L19.5,3.4L22,2M13.34,12.78L15.78,10.34L13.66,8.22L11.22,10.66L13.34,12.78M14.37,7.29L16.71,9.63C17.1,10 17.1,10.65 16.71,11.04L5.04,22.71C4.65,23.1 4,23.1 3.63,22.71L1.29,20.37C0.9,20 0.9,19.35 1.29,18.96L12.96,7.29C13.35,6.9 14,6.9 14.37,7.29Z" />
+      <path d="M7.5,5.6L5,7L6.4,4.5L5,2L7.5,3.4L10,2L8.6,4.5L10,7L7.5,5.6M19.5,15.4L22,14L20.6,16.5L22,19L19.5,17.6L17,19L18.4,16.5L17,14L19.5,15.4M22,2L20.6,4.5L22,7L19.5,5.6L17,7L18.4,4.5L17,2L19.5,3.4L22,2M13.34,12.78L15.78,10.34L13.66,8.22L11.22,10.66L13.34,12.78M14.37,7.29L16.71,9.63C17.1,10 17.1,10.65 16.71,11.04L5.04,22.71C4.65,23.1 4,23.1 3.63,22.71L1.29,20.37C0.9,20 0.9,19.35 1.29,18.96L12.96,7.29C13.35,6.9 14,6.9 14.37,7.29Z" />
     </symbol>
+    <symbol viewBox="0 0 24 24" id="pen">
+      <path d="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z" />
+    </symbol>
+    <symbol viewBox="0 0 24 24" id="tag">
+      <path d="M5.5,7A1.5,1.5 0 0,0 7,5.5A1.5,1.5 0 0,0 5.5,4A1.5,1.5 0 0,0 4,5.5A1.5,1.5 0 0,0 5.5,7M21.41,11.58C21.77,11.94 22,12.44 22,13C22,13.55 21.78,14.05 21.41,14.41L14.41,21.41C14.05,21.77 13.55,22 13,22C12.45,22 11.95,21.77 11.58,21.41L2.59,12.41C2.22,12.05 2,11.55 2,11V4C2,2.89 2.89,2 4,2H11C11.55,2 12.05,2.22 12.41,2.58L21.41,11.58M13,20L20,13L11.5,4.5L4.5,11.5L13,20M10.09,8.91L11.5,7.5L17,13L15.59,14.41L10.09,8.91M7.59,11.41L9,10L13,14L11.59,15.41L7.59,11.41Z" />
+    </symbol>
+    <symbol viewBox="0 0 24 24" id="beer">
+      <path d="M4,2H19L17,22H6L4,2M6.2,4L7.8,20H8.8L7.43,6.34C8.5,6 9.89,5.89 11,7C12.56,8.56 15.33,7.69 16.5,7.23L16.8,4H6.2Z" />
+    </symbol>
+    <symbol viewBox="0 0 24 24" id="git-fork">
+      <path d="M13,14C9.64,14 8.54,15.35 8.18,16.24C9.25,16.7 10,17.76 10,19A3,3 0 0,1 7,22A3,3 0 0,1 4,19C4,17.69 4.83,16.58 6,16.17V7.83C4.83,7.42 4,6.31 4,5A3,3 0 0,1 7,2A3,3 0 0,1 10,5C10,6.31 9.17,7.42 8,7.83V13.12C8.88,12.47 10.16,12 12,12C14.67,12 15.56,10.66 15.85,9.77C14.77,9.32 14,8.25 14,7A3,3 0 0,1 17,4A3,3 0 0,1 20,7C20,8.34 19.12,9.5 17.91,9.86C17.65,11.29 16.68,14 13,14M7,18A1,1 0 0,0 6,19A1,1 0 0,0 7,20A1,1 0 0,0 8,19A1,1 0 0,0 7,18M7,4A1,1 0 0,0 6,5A1,1 0 0,0 7,6A1,1 0 0,0 8,5A1,1 0 0,0 7,4M17,6A1,1 0 0,0 16,7A1,1 0 0,0 17,8A1,1 0 0,0 18,7A1,1 0 0,0 17,6Z" />
+    </symbol>
+    <symbol viewBox="0 0 24 24" id="lightning">
+      <path d="M7,2V13H10V22L17,10H13L17,2H7Z" />
+    </symbol>
+    <symbol viewBox="0 0 24 24" id="cloud">
+      <path d="M19,18H6A4,4 0 0,1 2,14A4,4 0 0,1 6,10H6.71C7.37,7.69 9.5,6 12,6A5.5,5.5 0 0,1 17.5,11.5V12H19A3,3 0 0,1 22,15A3,3 0 0,1 19,18M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z" />
+    </symbol>
+    <svg viewBox="0 0 24 24" id="settings">
+      <path d="M5,3V12H3V14H5V21H7V14H9V12H7V3M11,3V8H9V10H11V21H13V10H15V8H13V3M17,3V14H15V16H17V21H19V16H21V14H19V3" />
+    </svg>
   </svg>
 </head>
 <body>
   <main class="banner">
-    <h1>Blogg</h1>
-    <h3>CMS made simple.</h3>
+    <div class="section-content">
+      <h1>Adze</h1>
+      <h3>CMS made simple.</h3>
+    </div>
   </main>
   <section class="description">
-    <svg class="icon-circle">
-      <use xlink:href="#flask-outline" />
-    </svg>
-    <h2>Barebones. Nothing more, nothing less</h2>
-    <p>If you're looking for something to manage how your page looks, or create a theme, <em>Blogg isn't for you.</em> Blogg focuses on letting you view and edit your blog posts, rather than bloating the CMS experience.</p>
+    <div class="section-content">
+      <svg class="icon-circle">
+        <use xlink:href="#flask-outline" />
+      </svg>
+      <h2>Barebones. Nothing more, nothing less</h2>
+      <p>If you're looking for something to manage how your page looks, or create a theme, <em>Adze isn't for you.</em> Adze focuses on letting you view and edit your blog posts, rather than bloating the CMS experience.</p>
+    </div>
   </section>
   <section class="why">
-    <h2>Why Another Blogging CMS?</h2>
-    <p>Blogg is a simple CMS &mdash; write your posts, categorize, and view them. No fluff. It's also completely decoupled from your web page's hosting, freeing you to integrate with preexisting projects or statically hosted sites.</p>
+    <div class="section-content">
+      <h2>Why Another Blogging CMS?</h2>
+      <p>Adze is a simple CMS &mdash; write your posts, categorize, and view them. No fluff. It's also completely decoupled from your web page's hosting, freeing you to integrate with preexisting projects or statically hosted sites.</p>
+    </div>
   </section>
   <section class="how-it-works">
-    <svg class="icon-circle">
-      <use xlink:href="#magic" />
-    </svg>
-    <h2>How It Works</h2>
-    <ul class="steps">
-      <li class="step">
-        <h3>Write a Post</h3>
-      </li>
-      <li class="step">
-        <h3>Add Categories</h3>
-      </li>
-      <li class="step">
-        <h3>Publish</h3>
-      </li>
-      <li class="step">
-        <h3>Enjoy!</h3>
-      </li>
-    </ul>
+    <div class="section-content">
+      <svg class="icon-circle">
+        <use xlink:href="#magic" />
+      </svg>
+      <h2>How It Works</h2>
+      <ul class="steps">
+        <li class="step">
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#pen"></use>
+            </svg>
+            <h3>Write a Post</h3>
+          </div>
+          <p>Use Markdown to write and edit your content!</p>
+        </li>
+        <li class="step">
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#tag"></use>
+            </svg>
+            <h3>Add Categories</h3>
+          </div>
+          <p>Tag your posts to keep them organized</p>
+        </li>
+        <li class="step">
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#beer"></use>
+            </svg>
+            <h3>Enjoy!</h3>
+          </div>
+          <p>Once your posts are published, access them from anywhere simply via a <code>GET</code> request</p>
+        </li>
+      </ul>
+    </div>
   </section>
   <section class="installation">
-    <h2>Ok, so I want to use Blogg...how do I install it?</h2>
-    <ul class="steps">
-      <li class="step">
-        <h3>1. Clone the repo</h3>
-        <pre>
-          <code>$ git clone https://github.com/benjaminj6/blog-api.git</code>
-        </pre>
-      </li>
-      <li class="step">
-        <h3>2. Install Dependencies</h3>
-        <pre>
-          <code># Using npm <br />$ npm i <br /><br /># Using yarn <br />$ yarn</code>
-        </pre>
-      </li>
-      <li class="step">
-        <h3>3. Set up environment variables</h3>
-        <p>This will vary depending on where you host your deployment of <em>Blogg</em>. If you are doing a local installation, please see the <a href="">development instructions</a></p>
-      </li>
-      <li>
-        <h3>4. Deploy!</h3>
-        <p>Consult your host's documentation regarding how to deploy. Blogg will run automatically via <code>npm start</code>, setting up the user and password that you have specified in your environment variables.</p>
-      </li>
-    </ul>
+    <div class="section-content">
+      <h2>Ok, I want to use Adze... <br />How do I install it?</h2>
+      <ul class="steps">
+        <li class="step">
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#git-fork"></use>
+            </svg>
+            <h3>Clone the repo</h3>
+          </div>
+          <pre>
+            <code>$ git clone https://github.com/benjaminj6/blog-api.git</code>
+          </pre>
+        </li>
+        <li class="step">
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#lightning"></use>
+            </svg>
+            <h3>Install Dependencies</h3>
+          </div>
+          <pre>
+            <code># Using npm <br />$ npm i <br /><br /># Using yarn <br />$ yarn</code>
+          </pre>
+        </li>
+        <li class="step">
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#settings"></use>
+            </svg>
+            <h3>Set up environment</h3>
+          </div>
+          <p>This will vary depending on where you host your deployment of <em>Adze</em>. If you are doing a local installation, please see the <a href="">development instructions</a></p>
+        </li>
+        <li>
+          <div class="step-heading">
+            <svg class="icon-circle">
+              <use xlink:href="#cloud"></use>
+            </svg>
+            <h3>Deploy!</h3>
+          </div>
+          <p>Consult your host's documentation regarding how to deploy. Adze will run automatically via <code>npm start</code>, setting up the user and password that you have specified in your environment variables.</p>
+        </li>
+      </ul>
+    </div>
   </section>
-  <section class="Demo">
-    <h2>View the Demo</h2>
+  <section class="demo">
+    <div class="section-content">
+      <h2>Try it out today.</h2>
+      <button><a href="">View the demo!</a></button>
+    </div>
   </section>
+  <footer class="footer">
+    <h6>Made with ❤️  by <a href="https://github.com/benjaminj6" target="_blank">Benjamin Johnson</a></h6>
+  </footer>
 </body>
 </html>
