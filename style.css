@@ -549,7 +549,7 @@ ul {
   line-height: 1rem; }
 
 .section-content {
-  max-width: 400px;
+  max-width: 550px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
