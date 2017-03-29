@@ -28,4 +28,3 @@ export async function validate (email, password, done) {
     done(err)
   }
 }
-
