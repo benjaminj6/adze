@@ -555,6 +555,9 @@ ul {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start; }
+  @media (min-width: 550px) {
+    .section-content {
+      padding: 2rem 0; } }
 
 .steps {
   width: 100%; }

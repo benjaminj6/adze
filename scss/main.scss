@@ -90,7 +90,11 @@ ul {
   max-width: 550px;
   margin: 0 auto;
 
-  @include flex(column)
+  @include flex(column);
+
+  @media (min-width: $bp-md) {
+    padding: 2rem 0;
+  }
 }
 
 .steps {
