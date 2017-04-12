@@ -5,8 +5,8 @@ export default (model, actions) => (
     id='app'
     className='login-view'
     oncreate={() => {
+      console.log('Redirecting to login?', document.referrer === 'https://benjaminj6.github.io/adze/')
       if (document.referrer === 'https://benjaminj6.github.io/adze/') {
-        console.log('Redirecting to login')
         login({
           email: 'test@test.com',
           password: 'test'
