@@ -3,7 +3,16 @@ import { h } from 'hyperapp' // eslint-disable-line
 export default (model, actions) => (
   <div
     id='app'
-    className='login-view'>
+    className='login-view'
+    oncreate={() => {
+      if (window.referrer === 'https://benjaminj6.github.io/adze/') {
+        console.log('Redirecting to login')
+        login({
+          email: 'test@test.com',
+          password: 'test'
+        }, actions)
+      }
+    }}>
     <form
       action='/api/auth/login'
       method='POST'

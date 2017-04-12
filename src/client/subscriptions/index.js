@@ -41,13 +41,13 @@ export const loadRemoteData = (model, actions) => {
     .then(_ => getInitialNewContent(model, actions))
 }
 
-export const loginIfFromLandingPage = (model, actions) => {
-  if (document.referrer = 'https://benjaminj6.github.io/adze') {
-    login({ 
-      email: 'test@test.com',
-      password: 'test'
-    }, actions)
-  }
-}
+// export const loginIfFromLandingPage = (model, actions) => {
+//   if (document.referrer = 'https://benjaminj6.github.io/adze') {
+//     login({ 
+//       email: 'test@test.com',
+//       password: 'test'
+//     }, actions)
+//   }
+// }
 
-export default [loadRemoteData, loginIfFromLandingPage]
+export default [loadRemoteData]
