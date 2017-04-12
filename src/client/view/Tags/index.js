@@ -47,10 +47,15 @@ export default ({ model, actions, tag }) => {
         <header>
           <form
             id='edit-tag'
+            oncreate={el => {
+              console.log('created')
+            }}
+            onremove={el => {
+              console.log('removed')
+            }}
             onsubmit={ev => {
               ev.preventDefault()
               if (!model.newTagDataSaved) {
-                console.log(model.newTagData)
                 actions.saveTag({ ...model.newTagData })
               }
             }}>
@@ -61,6 +66,7 @@ export default ({ model, actions, tag }) => {
               value={tag ? tag.name : ''}
               oninput={
                 debounce(({ target }) => {
+                  console.log('this runs')
                   actions.stageTagName(target.value)
                 }, 300)
               } />
