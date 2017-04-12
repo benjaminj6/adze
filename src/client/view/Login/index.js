@@ -36,7 +36,7 @@ export default (model, actions) => (
   </div>
 )
 
-function login (data = {}, actions) {
+export function login (data = {}, actions) {
   return ev => {
     ev.preventDefault()
     console.log(ev)

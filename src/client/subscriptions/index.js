@@ -1,3 +1,5 @@
+import { login } from '../view/Login'
+
 /* eslint-disable */
 export const getPosts = (model, actions) => {
   return window.fetch('/api/posts')
@@ -39,4 +41,13 @@ export const loadRemoteData = (model, actions) => {
     .then(_ => getInitialNewContent(model, actions))
 }
 
-export default [loadRemoteData]
+export const loginIfFromLandingPage = (model, actions) => {
+  if (document.referrer = 'https://benjaminj6.github.io/adze') {
+    login({ 
+      email: 'test@test.com',
+      password: 'test'
+    }, actions)
+  }
+}
+
+export default [loadRemoteData, loginIfFromLandingPage]
