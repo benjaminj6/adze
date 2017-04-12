@@ -6,6 +6,7 @@ import InputHeader from '../InputHeader'
 import HeaderButtons from '../HeaderButtons'
 
 import { Trash, Save, SaveCheck, Paint } from '../Icons'
+import styles from '../../styles/foundation.json'
 
 const getTagHeaderButtons = (model, actions) => {
   const savable = model.newTagData.name
@@ -67,6 +68,7 @@ export default ({ model, actions, tag }) => {
               hidden
               id='edit-tag-color'
               name='color'
+              defaultValue={styles['accent-lighter']}
               type='color' />
             <input
               hidden
