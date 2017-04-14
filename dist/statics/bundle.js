@@ -471,8 +471,8 @@ exports.default = function (model, actions) {
       id: 'app',
       className: 'login-view',
       oncreate: function oncreate() {
+        console.log('Redirecting to login?', document.referrer === 'https://benjaminj6.github.io/adze/');
         if (document.referrer === 'https://benjaminj6.github.io/adze/') {
-          console.log('Redirecting to login');
           login({
             email: 'test@test.com',
             password: 'test'
@@ -507,7 +507,7 @@ exports.default = function (model, actions) {
         { type: 'submit' },
         'Log in'
       ),
-      __webpack_require__.i({"ADMIN_EMAIL":"test@test.com","PASSWORD":"test","NAME":"adze","PORT":"3000","DB_URL":"mongodb://localhost/blog-api"}).DEMO ? (0, _hyperapp.h)(
+       true ? (0, _hyperapp.h)(
         'a',
         {
           href: '/dashboard',
