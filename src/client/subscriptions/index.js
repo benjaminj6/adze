@@ -1,12 +1,12 @@
+import { login } from '../view/Login'
+
 /* eslint-disable */
 export const getPosts = (model, actions) => {
   return window.fetch('/api/posts')
     .then(res => {
-      console.log(res)
       return res.json()
     })
     .then(json => {
-      console.log('now here', json)
       actions.addAllPosts(json)
     })
     .catch(err => console.error('this handler', err))
@@ -22,13 +22,11 @@ export const getTags = (model, actions) => {
 }
 
 const getInitialNewContent = (model, actions) => {
-  console.log('model', model)
   if (/create|tags/.test(model.router.match)) {
     actions.clearNewContent()
   }
 
   if (/tags/.test(model.router.match)) {
-    console.log('made it here too', model.router.params.id)
     actions.selectTag(model.router.params.id)
   }
 
@@ -42,5 +40,14 @@ export const loadRemoteData = (model, actions) => {
     .then(_ => getTags(model, actions))
     .then(_ => getInitialNewContent(model, actions))
 }
+
+// export const loginIfFromLandingPage = (model, actions) => {
+//   if (document.referrer = 'https://benjaminj6.github.io/adze') {
+//     login({ 
+//       email: 'test@test.com',
+//       password: 'test'
+//     }, actions)
+//   }
+// }
 
 export default [loadRemoteData]

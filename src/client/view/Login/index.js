@@ -3,11 +3,25 @@ import { h } from 'hyperapp' // eslint-disable-line
 export default (model, actions) => (
   <div
     id='app'
-    className='login-view'>
+    className='login-view'
+    oncreate={() => {
+      if (document.referrer === 'https://benjaminj6.github.io/adze/') {
+        login({
+          email: 'test@test.com',
+          password: 'test'
+        }, actions)
+      }
+    }}>
     <form
       action='/api/auth/login'
       method='POST'
-      onsubmit={login(undefined, actions)}>
+      onsubmit={ev => {
+        ev.preventDefault()
+        login({
+          email: ev.target.querySelector('[name=email]').value,
+          password: ev.target.querySelector('[name=password]').value
+        }, actions)
+      }}>
       <h2 style={{
         margin: '1rem 0'
       }}>{process.env.NAME}</h2>
@@ -26,41 +40,39 @@ export default (model, actions) => (
         process.env.DEMO
         ? <a
           href='/dashboard'
-          onclick={login({
-            email: 'test@test.com',
-            password: 'test'
-          }, actions)}>See the demo</a>
+          onclick={ev => {
+            ev.preventDefault()
+            login({
+              email: 'test@test.com',
+              password: 'test'
+            }, actions)
+          }}>See the demo</a>
         : ''
       }
     </form>
   </div>
 )
 
-function login (data = {}, actions) {
-  return ev => {
-    ev.preventDefault()
-    console.log(ev)
-    console.log(ev.target.email, ev.target.password)
-    window.fetch('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: data.email || ev.target.querySelector('[name=email]').value,
-        password: data.password || ev.target.querySelector('[name=password]').value
-      }),
-      headers: new window.Headers({
-        'Content-Type': 'application/json'
-      }),
-      credentials: 'include'
-    }).then(res => {
-      console.log(res)
-      if (res.status !== 200) {
-        throw new Error('Unauthorized')
-      }
+export function login (data = {}, actions) {
+  window.fetch('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({
+      email: data.email,
+      password: data.password
+    }),
+    headers: new window.Headers({
+      'Content-Type': 'application/json'
+    }),
+    credentials: 'include'
+  }).then(res => {
+    console.log(res)
+    if (res.status !== 200) {
+      throw new Error('Unauthorized')
+    }
 
-      actions.router.go('/dashboard')
-    }).catch(err => {
-      console.log('there was a fatal error')
-      console.log(err)
-    })
-  }
+    actions.router.go('/dashboard')
+  }).catch(err => {
+    console.log('there was a fatal error')
+    console.log(err)
+  })
 }

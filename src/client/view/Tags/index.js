@@ -6,6 +6,7 @@ import InputHeader from '../InputHeader'
 import HeaderButtons from '../HeaderButtons'
 
 import { Trash, Save, SaveCheck, Paint } from '../Icons'
+import styles from '../../styles/foundation.json'
 
 const getTagHeaderButtons = (model, actions) => {
   const savable = model.newTagData.name
@@ -46,10 +47,15 @@ export default ({ model, actions, tag }) => {
         <header>
           <form
             id='edit-tag'
+            oncreate={el => {
+              console.log('created')
+            }}
+            onremove={el => {
+              console.log('removed')
+            }}
             onsubmit={ev => {
               ev.preventDefault()
               if (!model.newTagDataSaved) {
-                console.log(model.newTagData)
                 actions.saveTag({ ...model.newTagData })
               }
             }}>
@@ -60,6 +66,7 @@ export default ({ model, actions, tag }) => {
               value={tag ? tag.name : ''}
               oninput={
                 debounce(({ target }) => {
+                  console.log('this runs')
                   actions.stageTagName(target.value)
                 }, 300)
               } />
@@ -67,6 +74,7 @@ export default ({ model, actions, tag }) => {
               hidden
               id='edit-tag-color'
               name='color'
+              defaultValue={styles['accent-lighter']}
               type='color' />
             <input
               hidden

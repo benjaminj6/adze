@@ -217,7 +217,6 @@ export const updateSavedTag = ({ tags, newTagData }, tag) => ({
 })
 
 export const saveTag = (model, newTagData, actions) => {
-  console.log(newTagData._id)
   window.fetch(`/api/tags/${newTagData._id}`, {
     method: 'PATCH',
     credentials: 'include',
