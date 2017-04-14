@@ -484,7 +484,13 @@ exports.default = function (model, actions) {
       {
         action: '/api/auth/login',
         method: 'POST',
-        onsubmit: login(undefined, actions) },
+        onsubmit: function onsubmit(ev) {
+          ev.preventDefault();
+          login({
+            email: ev.target.querySelector('[name=email]').value,
+            password: ev.target.querySelector('[name=password]').value
+          }, actions);
+        } },
       (0, _hyperapp.h)(
         'h2',
         { style: {
@@ -531,8 +537,8 @@ function login() {
   window.fetch('/api/auth/login', {
     method: 'POST',
     body: JSON.stringify({
-      email: data.email || ev.target.querySelector('[name=email]').value,
-      password: data.password || ev.target.querySelector('[name=password]').value
+      email: data.email,
+      password: data.password
     }),
     headers: new window.Headers({
       'Content-Type': 'application/json'
