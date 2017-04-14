@@ -5,6 +5,7 @@
   "color-secondary": "#fff",
   "bg-default": "#fff",
   "accent": "#009688",
+  "accent-lighter": "#1EEDD0",
   "base": "16px",
   "bd-rad": "2px"
 }

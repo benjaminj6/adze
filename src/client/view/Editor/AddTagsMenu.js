@@ -49,7 +49,7 @@ export default ({ post, actions }) => (
         })
 
         name.value = ''
-        color.value = styles.accent
+        color.value = styles['accent-lighter']
         form.style.background = '#fff'
         form.style.color = '#000'
       }}>
@@ -61,7 +61,7 @@ export default ({ post, actions }) => (
         id='color-picker'
         type='color'
         name='color'
-        defaultValue={styles.accent}
+        defaultValue={styles['accent-lighter']}
         oninput={e => {
           const form = document.getElementById('add-tag')
           form.style.background = e.target.value
