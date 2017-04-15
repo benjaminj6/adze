@@ -12,6 +12,7 @@ import auth from './auth'
 import log, { requestLogger } from './logger'
 
 export default app => {
+  // Logger middleware
   app.use(koaLogger(log))
   app.use(requestLogger)
 
@@ -27,11 +28,13 @@ export default app => {
     serve(path.join(__dirname, `${pathToDist}/statics`))
   ))
 
+  // Bodyparsing middleware
   app.use(body({ enableTypes: ['json', 'form', 'text'] }))
 
   app.keys = [ 'secret' ]
   app.use(session())
 
+  // Authentication middleware
   auth(passport)
   app.use(passport.initialize())
   app.use(passport.session())
