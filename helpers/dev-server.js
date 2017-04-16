@@ -31,7 +31,6 @@ mongoose.connect(process.env.DB_URL)
         })
         .then(user => {
           log('gray', 'db', 'Successfully created an admin user based off of your config files!', 'mongoose')
-          return
         })
     } else {
       log('gray', 'db', 'Using the admin from your previous configuration...', 'mongoose')
