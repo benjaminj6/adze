@@ -41,4 +41,3 @@ export default ({ post, actions }) => {
     </section>
   )
 }
-
