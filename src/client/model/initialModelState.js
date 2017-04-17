@@ -1,5 +1,6 @@
 export default {
   email: process.env.ADMIN_EMAIL || 'test@test.com',
+  // Menu navigation
   nav: [
     {
       title: 'New Post',

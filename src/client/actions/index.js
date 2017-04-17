@@ -1,10 +1,4 @@
-// related to newContent / staging
-const defaultNewContent = {
-  title: '',
-  md: '',
-  tags: [],
-  date: new Date()
-}
+import defaultNewContent from './defaultNewContent'
 
 export const addStagedTag = ({ tags, newContent }, tag) => {
   const stagedTags = newContent.tags || []
