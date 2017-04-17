@@ -9,25 +9,27 @@ import Toggler from '../general/Toggler'
 import { Menu } from '../general/Icons'
 
 const getDashboardView = (model, actions) => {
+  // Url paths that render the Editor view
   if (/posts|create/.test(window.location.pathname)) {
     return (
-      <Editor model={model}
+      <Editor
         actions={actions}
+        model={model}
         selected={model.newContent} />
     )
   }
 
+  // Url paths that render the Tags view
   if (/tags/.test(window.location.pathname)) {
     return (
       <Tags
-        model={model}
         actions={actions}
-        tag={
-          model.tags.find(t => t._id === model.router.params.id)
-        } />
+        model={model}
+        tag={model.tags.find(t => t._id === model.router.params.id)} />
     )
   }
 
+  // Default returns the Prompt view
   return (
     <Prompt
       model={model}
@@ -36,7 +38,9 @@ const getDashboardView = (model, actions) => {
 }
 
 export default (model, actions) => (
-  <div id='app' className='dashboard-view'>
+  <div
+    id='app'
+    className='dashboard-view'>
     <Toggler id='nav-toggler'>
       <Menu />
       <div id='nav-toggler-content'>
