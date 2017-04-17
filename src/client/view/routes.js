@@ -5,6 +5,7 @@ import Login from './Login'
 export default {
   '*': NotFound,
   '/': Login,
+  '/dashboard': Dashboard,
   '/dashboard/*': Dashboard,
   '/dashboard/tags/id=:id': Dashboard,
   '/dashboard/create': Dashboard,
