@@ -5,7 +5,7 @@ import Prompt from '../Prompt'
 import Tags from '../Tags'
 import Sidebar from '../Sidebar'
 
-import Toggler from '../Toggler'
+import Toggler from '../general/Toggler'
 import { Menu } from '../general/Icons'
 
 const getDashboardView = (model, actions) => {

@@ -2,7 +2,7 @@ import { h } from 'hyperapp' // eslint-disable-line
 
 import { Close, Save, SaveCheck, Tag, Trash } from '../general/Icons'
 import AddTagsMenu from './AddTagsMenu'
-import Toggler from '../Toggler'
+import Toggler from '../general/Toggler'
 
 const createSaveClickHandler = (newContent, actions) => {
   const savable = newContent.title && newContent.md

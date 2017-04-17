@@ -4,7 +4,7 @@ import { Plus, Close } from '../general/Icons'
 import SidebarMenuHeading from './SidebarMenuHeading'
 import SidebarMenuListItem from './SidebarMenuListItem'
 
-import Toggler from '../Toggler'
+import Toggler from '../general/Toggler'
 
 export default ({ actions, item, model }, children) => {
   const isActive = new RegExp(`${item.href}`).test(model.router.match)
