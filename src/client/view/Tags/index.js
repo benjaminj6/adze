@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce'
 
 import PostCard from './PostCard'
 import InputHeader from '../InputHeader'
-import HeaderButtons from '../HeaderButtons'
+import HeaderButtons from '../components/HeaderButtons'
 
 import { Trash, Save, SaveCheck, Paint } from '../Icons'
 import styles from '../../styles/foundation.json'
