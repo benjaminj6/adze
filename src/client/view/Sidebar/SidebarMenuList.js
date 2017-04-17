@@ -1,6 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { Plus, Close } from '../Icons'
+import { Plus, Close } from '../general/Icons'
 import SidebarMenuHeading from './SidebarMenuHeading'
 import SidebarMenuListItem from './SidebarMenuListItem'
 

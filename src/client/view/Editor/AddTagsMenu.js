@@ -1,6 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { Close, Paint, Plus } from '../Icons'
+import { Close, Paint, Plus } from '../general/Icons'
 import styles from '../../styles/foundation.json'
 
 export default ({ post, actions }) => (

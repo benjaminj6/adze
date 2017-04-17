@@ -6,7 +6,7 @@ import Tags from '../Tags'
 import Sidebar from '../Sidebar'
 
 import Toggler from '../Toggler'
-import { Menu } from '../Icons'
+import { Menu } from '../general/Icons'
 
 const getDashboardView = (model, actions) => {
   if (/posts|create/.test(window.location.pathname)) {

@@ -1,6 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { Close, Save, SaveCheck, Tag, Trash } from '../Icons'
+import { Close, Save, SaveCheck, Tag, Trash } from '../general/Icons'
 import AddTagsMenu from './AddTagsMenu'
 import Toggler from '../Toggler'
 

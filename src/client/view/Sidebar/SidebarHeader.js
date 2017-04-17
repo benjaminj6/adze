@@ -1,6 +1,6 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
-import { AngleDown, Logout } from '../Icons'
+import { AngleDown, Logout } from '../general/Icons'
 
 export default ({ model, actions }) =>
   <header>

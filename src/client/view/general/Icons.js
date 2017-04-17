@@ -1,5 +1,5 @@
 import { h } from 'hyperapp' //eslint-disable-line
-import styles from '../styles/foundation.json'
+import styles from '../../styles/foundation.json'
 
 const Svg = (props, children) => {
   if (props === null) { props = {} }

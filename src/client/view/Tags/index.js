@@ -3,9 +3,9 @@ import debounce from 'lodash.debounce'
 
 import PostCard from './PostCard'
 import InputHeader from '../InputHeader'
-import HeaderButtons from '../components/HeaderButtons'
+import HeaderButtons from '../general/HeaderButtons'
 
-import { Trash, Save, SaveCheck, Paint } from '../Icons'
+import { Trash, Save, SaveCheck, Paint } from '../general/Icons'
 import styles from '../../styles/foundation.json'
 
 const getTagHeaderButtons = (model, actions) => {
