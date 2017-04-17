@@ -1,78 +1,57 @@
 import { h } from 'hyperapp' // eslint-disable-line
 
+import login from './loginHandler'
+
+const createLoginHandler = ({ email, password, actions }) => ev => {
+  ev.preventDefault()
+
+  login({
+    email: email || ev.target.querySelector('[name=email]').value,
+    password: password || ev.target.querySelector('[name=password]').value
+  }, actions)
+}
+
+const createAutomaticLogin = ({ email, password, actions }) => () => {
+  if (document.referrer === process.env.LANDING_PAGE) {
+    login({ email, password }, actions)
+  }
+}
+
 export default (model, actions) => (
   <div
-    id='app'
     className='login-view'
-    oncreate={() => {
-      if (document.referrer === 'https://benjaminj6.github.io/adze/') {
-        login({
-          email: 'test@test.com',
-          password: 'test'
-        }, actions)
-      }
-    }}>
+    id='app'
+    oncreate={createAutomaticLogin({ email: process.env.ADMIN_EMAIL, password: process.env.PASSWORD, actions })}>
     <form
       action='/api/auth/login'
       method='POST'
-      onsubmit={ev => {
-        ev.preventDefault()
-        login({
-          email: ev.target.querySelector('[name=email]').value,
-          password: ev.target.querySelector('[name=password]').value
-        }, actions)
-      }}>
-      <h2 style={{
-        margin: '1rem 0'
-      }}>{process.env.NAME}</h2>
+      onsubmit={createLoginHandler({ actions })}>
+      <h2>{process.env.NAME}</h2>
+
       <input
-        type='email'
-        name='email'
         id='login-username'
-        placeholder='email' />
+        name='email'
+        placeholder='email'
+        type='email' />
+
       <input
-        type='password'
         name='password'
         placeholder='password'
-       />
+        type='password' />
+
       <button type='submit'>Log in</button>
+
       {
+        // Create demo link if demo option enabled, otherwise nothing
         process.env.DEMO
-        ? <a
-          href='/dashboard'
-          onclick={ev => {
-            ev.preventDefault()
-            login({
-              email: 'test@test.com',
-              password: 'test'
-            }, actions)
-          }}>See the demo</a>
-        : ''
+          ? <a
+            href='/dashboard'
+            onclick={createLoginHandler({ email: process.env.ADMIN_EMAIL, password: process.env.PASSWORD, actions })}>
+              See the demo
+            </a>
+          : ''
       }
+
     </form>
   </div>
 )
-
-export function login (data = {}, actions) {
-  window.fetch('/api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({
-      email: data.email,
-      password: data.password
-    }),
-    headers: new window.Headers({
-      'Content-Type': 'application/json'
-    }),
-    credentials: 'include'
-  }).then(res => {
-    console.log(res)
-    if (res.status !== 200) {
-      throw new Error('Unauthorized')
-    }
-
-    actions.router.go('/dashboard')
-  }).catch(err => {
-    console.log('there was a fatal error')
-    console.log(err)
-  })
-}
