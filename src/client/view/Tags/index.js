@@ -2,7 +2,7 @@ import { h } from 'hyperapp' // eslint-disable-line
 import debounce from 'lodash.debounce'
 
 import PostCard from './PostCard'
-import InputHeader from '../InputHeader'
+import InputHeader from '../general/InputHeader'
 import HeaderButtons from '../general/HeaderButtons'
 
 import { Trash, Save, SaveCheck, Paint } from '../general/Icons'

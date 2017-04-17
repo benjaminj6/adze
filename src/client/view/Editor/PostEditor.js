@@ -1,7 +1,7 @@
 import { h } from 'hyperapp' // eslint-disable-line
 import debounce from 'lodash.debounce'
 
-import InputHeader from '../InputHeader'
+import InputHeader from '../general/InputHeader'
 
 export default ({ post, actions }) => (
   <section className='editor-section'>
