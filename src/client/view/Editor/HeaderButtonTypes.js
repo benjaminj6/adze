@@ -1,3 +1,5 @@
+import { h } from 'hyperapp'
+
 import { Close, Save, SaveCheck, Tag, Trash } from '../general/Icons'
 import AddTagsMenu from './AddTagsMenu'
 import Toggler from '../general/Toggler'
