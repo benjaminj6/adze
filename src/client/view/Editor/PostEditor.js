@@ -8,30 +8,30 @@ export default ({ post, actions }) => {
     <header>
       <InputHeader
         name='title'
-        placeholder='my new post'
-        value={post ? post.title : ''}
         oninput={
           debounce(({ target }) => {
             actions.updateStagedTitle(target.value)
           }, 500)
-        } />
+        }
+        placeholder='my new post'
+        value={post ? post.title : ''} />
       <h6>({new Date(post.date || Date.now()).toDateString()})</h6>
     </header>
   )
 
   const TextArea = () => (
     <textarea
-      name='editor'
-      id='editor'
       cols='50'
-      rows='30'
-      placeholder='your content here...'
-      value={post ? post.md : ''}
-      oninput={debounce(({ target }) => { actions.updateStagedPost(target.value) }, 500)}
+      id='editor'
+      name='editor'
       oncreate={el => {
         const height = window.innerHeight - 40
         el.rows = height / 16
-      }} />
+      }}
+      oninput={debounce(({ target }) => { actions.updateStagedPost(target.value) }, 500)}
+      placeholder='your content here...'
+      rows='30'
+      value={post ? post.md : ''} />
   )
 
   return (
